@@ -45,14 +45,14 @@ jobs:
           path: lambda_function.zip
           retention-days: 5
 
-      - name: Grab Artifact
-        uses: actions/download-artifact@master
-        with:
-          name: my-artifact
-          path: lambda_function.zip
+      # - name: Grab Artifact
+      #   uses: actions/download-artifact@master
+      #   with:
+      #     name: my-artifact
+      #     path: lambda_function.zip
 
       - name: Deploy to S3
         env:
           aws_bucket: ${{ secrets.AWS_BUCKET }}
         run: |
-          aws s3 sync my-artifact s3://$aws_bucket/
+          aws s3 sync lambda_function.zip s3://$aws_bucket/
