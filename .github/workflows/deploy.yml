@@ -57,4 +57,4 @@ jobs:
         run: |
           ls .
           pwd
-          aws s3 sync lambda_function.zip s3://$aws_bucket/
+          aws s3 sync ./lambda_function.zip s3://$aws_bucket/
