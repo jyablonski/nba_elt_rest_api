@@ -31,7 +31,12 @@ jobs:
     
       - name: Zip Files
         run: |
+          make install-packages-r
+          pwd
+          ls .
           make zip
+          pwd
+          ls
 
       - name: Deploy to S3
         env:
