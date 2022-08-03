@@ -29,7 +29,9 @@ jobs:
           role-session-name: samplerolesession
           aws-region: ${{ env.AWS_REGION }}
     
-      - name: Zip Files
+      - name: Zip Files & Deploy to S3
+        env:
+          aws_bucket: ${{ secrets.AWS_BUCKET }}
         run: |
           make install-packages-r
           pwd
@@ -37,9 +39,4 @@ jobs:
           make zip
           pwd
           ls
-
-      - name: Deploy to S3
-        env:
-          aws_bucket: ${{ secrets.AWS_BUCKET }}
-        run: |
           aws s3 sync lambda_function.zip s3://$aws_bucket/
