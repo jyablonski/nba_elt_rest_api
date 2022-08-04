@@ -29,6 +29,11 @@ jobs:
           role-session-name: samplerolesession
           aws-region: ${{ env.AWS_REGION }}
     
+      - name: Install Python 3.9
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.9
+
       - name: Zip Files
         run: |
           make install-packages-r
