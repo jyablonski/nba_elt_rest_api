@@ -47,6 +47,4 @@ jobs:
         env:
           aws_bucket: ${{ secrets.AWS_BUCKET }}
         run: |
-          ls .
-          pwd
           aws s3 cp lambda_function.zip s3://$aws_bucket/
