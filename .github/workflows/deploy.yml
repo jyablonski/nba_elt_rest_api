@@ -16,7 +16,7 @@ permissions:
       contents: read    # This is required for actions/checkout
 
 jobs:
-  S3PackageUpload:
+  S3_Upload:
     runs-on: ubuntu-latest
     steps:
       - name: Git clone the repository
@@ -29,14 +29,17 @@ jobs:
           role-session-name: samplerolesession
           aws-region: ${{ env.AWS_REGION }}
     
-      - name: Zip Files & Deploy to S3
+      - name: Install Python 3.9
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.9
+
+      - name: Zip Files
         run: |
           make install-packages-r
-          pwd
-          ls .
           make zip
-          pwd
-          ls
+
+      # stores it to the repo as an artifact you can download
       # - name: Grab Artifact
       #   uses: actions/download-artifact@master
       #   with:
