@@ -10,9 +10,16 @@ pydantic = "*"
 psycopg2-binary = "*"
 mangum = "*"
 jinja2 = "*"
+opentelemetry-instrumentation-fastapi = ""
+opentelemetry-exporter-otlp = "*"
+opentelemetry-api = "*"
+opentelemetry-sdk = "*"
+protobuf = "==3.20.0"
 
 [dev-packages]
-black = "*"
 
 [requires]
 python_version = "3.9"
+
+[pipenv]
+allow_prereleases = true
