@@ -1,5 +1,6 @@
 import os
 
+from opentelemetry.instrumentation.sqlalchemy import SQLAlchemyInstrumentor
 from sqlalchemy import create_engine, exc
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
@@ -33,6 +34,7 @@ def sql_connection(rds_schema: str):
 
 
 engine = sql_connection(rds_schema=os.environ.get("RDS_SCHEMA"))
+SQLAlchemyInstrumentor().instrument(engine=engine)
 
 # separate database sessions for different users essentially.
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine, future=True)
