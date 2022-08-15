@@ -50,4 +50,4 @@ jobs:
         env:
           aws_bucket: ${{ secrets.AWS_BUCKET }}
         run: |
-          aws s3 cp lambda_function.zip s3://$aws_bucket/
+          aws s3 cp lambda_function.zip s3://$aws_bucket/rest-api/
