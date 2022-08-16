@@ -107,16 +107,16 @@ class Injuries(Base):
     __tablename__ = "prod_injuries"
     __table_args__ = (PrimaryKeyConstraint("player", "injury", "description"),)
 
-    player: str = Column(String, nullable=False)
-    team_acronym: str = Column(String, nullable=False)
-    team: str = Column(String, nullable=False)
-    date: str = Column(String, nullable=False)
-    status: str = Column(String, nullable=False)
-    injury: str = Column(String, nullable=False)
-    description: str = Column(String, nullable=False)
-    total_injuries: int = Column(Integer, nullable=False)
-    team_active_injuries: int = Column(Integer, nullable=False)
-    team_active_protocols: int = Column(Integer, nullable=False)
+    player: str = Column(String, nullable=True)
+    team_acronym: str = Column(String, nullable=True)
+    team: str = Column(String, nullable=True)
+    date: str = Column(String, nullable=True)
+    status: str = Column(String, nullable=True)
+    injury: str = Column(String, nullable=True)
+    description: str = Column(String, nullable=True)
+    total_injuries: int = Column(Integer, nullable=True)
+    team_active_injuries: int = Column(Integer, nullable=True)
+    team_active_protocols: int = Column(Integer, nullable=True)
 
 
 class Game_Types(Base):
