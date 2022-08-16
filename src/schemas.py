@@ -93,16 +93,16 @@ class RedditBase(BaseModel):
 
 
 class InjuriesBase(BaseModel):
-    player: str
-    team_acronym: str
-    team: str
-    date: str
-    status: str
-    injury: str
-    description: str
-    total_injuries: int
-    team_active_injuries: int
-    team_active_protocols: int
+    player: Optional[str] = None
+    team_acronym: Optional[str] = None
+    team: Optional[str] = None
+    date: Optional[str] = None
+    status: Optional[str] = None
+    injury: Optional[str] = None
+    description: Optional[str] = None
+    total_injuries: Optional[int] = None
+    team_active_injuries: Optional[int] = None
+    team_active_protocols: Optional[int] = None
 
     class Config:
         orm_mode = True

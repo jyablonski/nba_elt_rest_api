@@ -30,6 +30,40 @@ FastAPIInstrumentor.instrument_app(app)
 RequestsInstrumentor().instrument()
 handler = Mangum(app)
 
+team_acronyms = [
+    "ATL",
+    "BKN",
+    "BOS",
+    "CHA",
+    "CHI",
+    "CLE",
+    "DAL",
+    "DEN",
+    "DET",
+    "GSW",
+    "HOU",
+    "IND",
+    "LAC",
+    "LAL",
+    "MEM",
+    "MIA",
+    "MIN",
+    "MIL",
+    "NOP",
+    "NYK",
+    "OKC",
+    "ORL",
+    "PHI",
+    "PHX",
+    "POR",
+    "SAC",
+    "SAS",
+    "TOR",
+    "UTA",
+    "WAS",
+]
+
+
 def get_db():
     db = SessionLocal()
     try:
@@ -41,7 +75,6 @@ def get_db():
 @app.get("/", response_class=HTMLResponse)
 def hello_world(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
-
 
 
 @app.get("/standings", response_model=List[schemas.StandingsBase])
@@ -64,12 +97,16 @@ def read_team_ratings(db: Session = Depends(get_db)):
 
 @app.get("/team_ratings/{team}", response_model=schemas.TeamRatingsBase)
 def read_team_ratings_team(team: str, db: Session = Depends(get_db)):
-    team_ratings_team = crud.get_team_ratings_by_team(db, team=team)
-    if team_ratings_team is None:
+    team_ratings_team = crud.get_team_ratings_by_team(db, team=team.upper())
+    if team not in team_acronyms:
         raise HTTPException(
-            status_code=404, detail="Team not found; please use a Team Acronym (in all Caps)"
+            status_code=404,
+            detail=f"Team not found; please use a Team Acronym: {team_acronyms}",
         )
-    return team_ratings_team
+    elif team_ratings_team is None:
+        raise HTTPException(status_code=200, detail=f"No Team Ratings Data for {team}")
+    else:
+        return team_ratings_team
 
 
 @app.get("/twitter_comments", response_model=List[schemas.TwitterBase])
@@ -96,12 +133,17 @@ def read_injuries(skip: int = 0, limit: int = 250, db: Session = Depends(get_db)
 
 @app.get("/injuries/{team}", response_model=schemas.InjuriesBase)
 def read_team_ratings_team(team: str, db: Session = Depends(get_db)):
-    injuries_team = crud.get_injuries_by_team(db, team=team)
-    if injuries_team is None:
+    injuries_team = crud.get_injuries_by_team(db, team=team.upper())
+
+    if team.upper() not in team_acronyms:
         raise HTTPException(
-            status_code=404, detail="Team not found; please use a Team Acronym (in all Caps)"
+            status_code=404,
+            detail=f"Team not found; please use a Team Acronym: {team_acronyms}",
         )
-    return injuries_team
+    elif injuries_team is None:
+        raise HTTPException(status_code=200, detail=f"No Injury Data for {team}")
+    else:
+        return injuries_team
 
 
 @app.get("/game_types", response_model=List[schemas.GameTypesBase])
