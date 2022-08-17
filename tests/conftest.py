@@ -4,7 +4,6 @@ import os
 import pytest
 import pytest_mock
 
-
 @pytest.fixture()
 def standings_fixture():
     """Fixture that returns static Standings Data """
@@ -15,7 +14,6 @@ def standings_fixture():
         df = json.load(openfile)
 
     return df
-
 
 @pytest.fixture()
 def game_types_fixture():
@@ -28,7 +26,6 @@ def game_types_fixture():
 
     return df
 
-
 @pytest.fixture()
 def injuries_fixture():
     """Fixture that returns static Injuries Data """
@@ -39,7 +36,6 @@ def injuries_fixture():
         df = json.load(openfile)
 
     return df
-
 
 @pytest.fixture()
 def injuries_team_fixture():
@@ -52,7 +48,6 @@ def injuries_team_fixture():
 
     return df
 
-
 @pytest.fixture()
 def reddit_comments_fixture():
     """Fixture that returns static Reddit Comments Data """
@@ -63,7 +58,6 @@ def reddit_comments_fixture():
         df = json.load(openfile)
 
     return df
-
 
 @pytest.fixture()
 def scorers_fixture():
@@ -76,7 +70,6 @@ def scorers_fixture():
 
     return df
 
-
 @pytest.fixture()
 def team_ratings_fixture():
     """Fixture that returns static Team Ratings Data """
@@ -88,7 +81,6 @@ def team_ratings_fixture():
 
     return df
 
-
 @pytest.fixture()
 def team_ratings_team_fixture():
     """Fixture that returns static Team Ratings Team Data """
@@ -99,7 +91,6 @@ def team_ratings_team_fixture():
         df = json.load(openfile)
 
     return df
-
 
 @pytest.fixture()
 def twitter_comments_fixture():
