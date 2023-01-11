@@ -1,3 +1,5 @@
+from datetime import datetime, timezone
+from fastapi import Form
 from sqlalchemy.orm import Session
 
 from . import models, schemas
@@ -43,3 +45,13 @@ def get_injuries_by_team(db: Session, team: str):
 
 def get_game_types(db: Session):
     return db.query(models.Game_Types).all()
+
+def send_feedback(db: Session, user_feedback: Form(...)):
+    record = models.Feedback(
+        feedback=user_feedback,
+        time=datetime.now(timezone.utc)
+    )
+    db.add(record)
+    db.commit()
+    db.refresh(record)
+    return record

@@ -1,6 +1,6 @@
 from typing import List
 
-from fastapi import Depends, FastAPI, HTTPException, Request
+from fastapi import Depends, FastAPI, HTTPException, Request, Form
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
@@ -150,3 +150,14 @@ def read_team_ratings_team(team: str, db: Session = Depends(get_db)):
 def read_game_types(db: Session = Depends(get_db)):
     game_types = crud.get_game_types(db)
     return game_types
+
+@app.get("/feedback", response_class=HTMLResponse)
+def form_get():
+    return '''<form method="post"> 
+    <input type="text" style="font-size: 18pt; height: 50px; width:1000px;" name="user_feedback" value=""/> 
+    <input type="submit" style="font-size: 12pt; height: 50px;"/> 
+    </form>'''
+
+@app.post("/feedback", response_model = schemas.FeedbackBase)
+def post_feedback(user_feedback: str = Form(...), db: Session = Depends(get_db)):
+    return crud.send_feedback(db, user_feedback)
