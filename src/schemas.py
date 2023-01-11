@@ -1,4 +1,4 @@
-from datetime import date, datetime
+from datetime import date, datetime, timezone
 from typing import Optional, Union
 
 from pydantic import BaseModel
@@ -131,6 +131,13 @@ class TeamOriginalBase(BaseModel):
     name: str
     color: str
     players: str
+
+    class Config:
+        orm_mode = True
+
+class FeedbackBase(BaseModel):
+    feedback: str
+    time: datetime
 
     class Config:
         orm_mode = True

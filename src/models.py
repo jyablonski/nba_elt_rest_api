@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date, datetime
 
 # from psycopg2 import Date
 from sqlalchemy import (
@@ -127,3 +127,11 @@ class Game_Types(Base):
     type: str = Column(String, nullable=False)
     n: int = Column(Integer, nullable=False)
     explanation: str = Column(String, nullable=False)
+
+class Feedback(Base):
+    __tablename__ = "prod_feedback"
+    __table_args__ = (PrimaryKeyConstraint("id"),)
+
+    id: int = Column(Integer, nullable=False, autoincrement=True)
+    feedback: str = Column(String, nullable=False)
+    time: datetime = Column(TIMESTAMP, nullable=False)
