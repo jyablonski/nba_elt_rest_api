@@ -135,12 +135,14 @@ class TeamOriginalBase(BaseModel):
     class Config:
         orm_mode = True
 
+
 class FeedbackBase(BaseModel):
     feedback: str
     time: datetime
 
     class Config:
         orm_mode = True
+
 
 class ScheduleBase(BaseModel):
     date: date
@@ -154,6 +156,7 @@ class ScheduleBase(BaseModel):
 
     class Config:
         orm_mode = True
+
 
 class PredictionsBase(BaseModel):
     proper_date: str

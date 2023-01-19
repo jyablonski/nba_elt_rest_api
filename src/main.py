@@ -151,21 +151,25 @@ def read_game_types(db: Session = Depends(get_db)):
     game_types = crud.get_game_types(db)
     return game_types
 
+
 @app.get("/feedback", response_class=HTMLResponse)
 def form_get():
-    return '''<form method="post"> 
+    return """<form method="post"> 
     <input type="text" style="font-size: 18pt; height: 50px; width:1000px;" name="user_feedback" value=""/> 
     <input type="submit" style="font-size: 12pt; height: 50px;"/> 
-    </form>'''
+    </form>"""
 
-@app.post("/feedback", response_model = schemas.FeedbackBase)
+
+@app.post("/feedback", response_model=schemas.FeedbackBase)
 def post_feedback(user_feedback: str = Form(...), db: Session = Depends(get_db)):
     return crud.send_feedback(db, user_feedback)
+
 
 @app.get("/schedule", response_model=List[schemas.ScheduleBase])
 def read_schedule(db: Session = Depends(get_db)):
     schedule = crud.get_schedule(db)
     return schedule
+
 
 @app.get("/predictions", response_model=List[schemas.PredictionsBase])
 def read_predictions(db: Session = Depends(get_db)):
