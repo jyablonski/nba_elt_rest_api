@@ -128,6 +128,7 @@ class Game_Types(Base):
     n: int = Column(Integer, nullable=False)
     explanation: str = Column(String, nullable=False)
 
+
 class Feedback(Base):
     __tablename__ = "prod_feedback"
     __table_args__ = (PrimaryKeyConstraint("id"),)
@@ -135,3 +136,28 @@ class Feedback(Base):
     id: int = Column(Integer, nullable=False, autoincrement=True)
     feedback: str = Column(String, nullable=False)
     time: datetime = Column(TIMESTAMP, nullable=False)
+
+
+class Schedule(Base):
+    __tablename__ = "prod_schedule"
+    __table_args__ = (PrimaryKeyConstraint("home_team", "date", "away_team"),)
+
+    date: date = Column(Date, nullable=True)
+    day: str = Column(String, nullable=True)
+    start_time: str = Column(String, nullable=True)
+    avg_team_rank: int = Column(Integer, nullable=True)
+    home_team: str = Column(String, nullable=True)
+    home_moneyline_raw: int = Column(Integer, nullable=True)
+    away_team: str = Column(String, nullable=True)
+    away_moneyline_raw: int = Column(Integer, nullable=True)
+
+
+class Predictions(Base):
+    __tablename__ = "nba_predictions"
+    __table_args__ = (PrimaryKeyConstraint("home_team"),)
+
+    proper_date: str = Column(String, nullable=True)
+    home_team: str = Column(String, nullable=False)
+    home_team_predicted_win_pct: float = Column(Float, nullable=True)
+    away_team: str = Column(String, nullable=True)
+    away_team_predicted_win_pct: float = Column(Float, nullable=True)
