@@ -55,3 +55,18 @@ def send_feedback(db: Session, user_feedback: Form(...)):
     db.commit()
     db.refresh(record)
     return record
+
+def get_schedule(db: Session):
+    return db.query(
+        models.Schedule.date,
+        models.Schedule.day,
+        models.Schedule.start_time,
+        models.Schedule.avg_team_rank,
+        models.Schedule.home_team,
+        models.Schedule.home_moneyline_raw,
+        models.Schedule.away_team,
+        models.Schedule.away_moneyline_raw,
+        ).filter(models.Schedule.date == datetime.now().date()).all()
+
+def get_predictions(db: Session):
+    return db.query(models.Predictions).filter(models.Predictions.proper_date == str(datetime.now().date())).all()

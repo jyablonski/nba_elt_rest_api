@@ -161,3 +161,13 @@ def form_get():
 @app.post("/feedback", response_model = schemas.FeedbackBase)
 def post_feedback(user_feedback: str = Form(...), db: Session = Depends(get_db)):
     return crud.send_feedback(db, user_feedback)
+
+@app.get("/schedule", response_model=List[schemas.ScheduleBase])
+def read_schedule(db: Session = Depends(get_db)):
+    schedule = crud.get_schedule(db)
+    return schedule
+
+@app.get("/predictions", response_model=List[schemas.PredictionsBase])
+def read_predictions(db: Session = Depends(get_db)):
+    predictions = crud.get_predictions(db)
+    return predictions

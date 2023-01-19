@@ -141,3 +141,26 @@ class FeedbackBase(BaseModel):
 
     class Config:
         orm_mode = True
+
+class ScheduleBase(BaseModel):
+    date: date
+    day: str
+    start_time: str
+    avg_team_rank: int
+    home_team: str
+    home_moneyline_raw: Optional[int] = None
+    away_team: str
+    away_moneyline_raw: Optional[int] = None
+
+    class Config:
+        orm_mode = True
+
+class PredictionsBase(BaseModel):
+    proper_date: str
+    home_team: str
+    home_team_predicted_win_pct: float
+    away_team: str
+    away_team_predicted_win_pct: float
+
+    class Config:
+        orm_mode = True
