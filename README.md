@@ -1,2 +1,2 @@
 # REST API for NBA ELT Project
-version: 0.1.1
+version: 0.1.3
