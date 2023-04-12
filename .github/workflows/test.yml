@@ -47,7 +47,6 @@ jobs:
 
       - name: Run Tests
         run: |
-          pipenv shell
           pipenv run pytest -v
 
       - name: Stop Postgres
