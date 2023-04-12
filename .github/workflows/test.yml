@@ -3,6 +3,13 @@ name: REST API Testing
 on:
   pull_request:
 
+env:
+  IP: localhost
+  RDS_USER: postgres
+  RDS_PW: postgres
+  RDS_DB: postgres
+  RDS_SCHEMA: nba_prod
+
 jobs:
   deploy:
     name: Run Tests
