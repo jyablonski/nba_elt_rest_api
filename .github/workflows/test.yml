@@ -35,5 +35,11 @@ jobs:
         if: steps.pipenv-cache.outputs.cache-hit != 'true'
         run: pipenv install --dev
 
+      - name: Start Postgres
+        run: make start-postgres
+
       - name: Run Tests
         run: pipenv run pytest -v
+
+      - name: Stop Postgres
+        run: make stop-postgres
