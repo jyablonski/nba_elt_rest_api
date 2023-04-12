@@ -39,7 +39,9 @@ jobs:
         run: make start-postgres
 
       - name: Run Tests
-        run: pipenv run pytest -v
+        run: |
+        pipenv shell
+        pipenv run pytest -v
 
       - name: Stop Postgres
         run: make stop-postgres
