@@ -1,8 +1,13 @@
 import json
 import os
 
+from fastapi.testclient import TestClient
 import pytest
 import pytest_mock
+
+from src.main import app
+
+client = TestClient(app)
 
 
 @pytest.fixture()

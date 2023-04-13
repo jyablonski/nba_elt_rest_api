@@ -3,9 +3,16 @@ name: REST API Testing
 on:
   pull_request:
 
+env:
+  IP: localhost
+  RDS_USER: postgres
+  RDS_PW: postgres
+  RDS_DB: postgres
+  RDS_SCHEMA: nba_prod
+
 jobs:
   deploy:
-    name: Run Tests
+    name: Test Pipeline
     runs-on: ubuntu-latest
 
     steps:
@@ -35,5 +42,12 @@ jobs:
         if: steps.pipenv-cache.outputs.cache-hit != 'true'
         run: pipenv install --dev
 
+      - name: Start Postgres
+        run: make start-postgres
+
       - name: Run Tests
-        run: pipenv run pytest -v
+        run: |
+          pipenv run pytest -v
+
+      - name: Stop Postgres
+        run: make stop-postgres

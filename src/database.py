@@ -6,34 +6,46 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
 
-def sql_connection(rds_schema: str):
+def sql_connection(user: str, password: str, host: str, database: str, schema: str):
     """
     SQL Connection function connecting to my postgres db with a specific schema
     For GraphQL Project use `nba_prod` for schema
+
     Args:
-        rds_schema (str): The Schema in the DB to connect to.
+        user (str): Database User
+
+        password (str): Database password
+
+        host (str): Database Host IP
+
+        database (str): Database to connect to
+
+        schema (str): The Schema in the DB to connect to.
+
     Returns:
-        SQL Connection variable to a specified schema in my PostgreSQL DB
+        SQL Engine variable to a specified schema in the DB
     """
-    RDS_USER = os.environ.get("RDS_USER")
-    RDS_PW = os.environ.get("RDS_PW")
-    RDS_IP = os.environ.get("IP")
-    RDS_DB = os.environ.get("RDS_DB")
     try:
         connection = create_engine(
-            f"postgresql+psycopg2://{RDS_USER}:{RDS_PW}@{RDS_IP}:5432/{RDS_DB}",
-            connect_args={"options": f"-csearch_path={rds_schema}"},
+            f"postgresql+psycopg2://{user}:{password}@{host}:5432/{database}",
+            connect_args={"options": f"-csearch_path={schema}"},
             # defining schema to connect to
             echo=False,
         )
-        print(f"SQL Connection to schema: {rds_schema} Successful")
+        print(f"SQL Engine created for {schema}")
         return connection
     except exc.SQLAlchemyError as e:
-        print(f"SQL Connection to schema: {rds_schema} Failed, Error: {e}")
+        print(f"SQL Engine failed to create for {schema}, Error: {e}")
         return e
 
 
-engine = sql_connection(rds_schema=os.environ.get("RDS_SCHEMA"))
+engine = sql_connection(
+    user=os.environ.get("RDS_USER"),
+    password=os.environ.get("RDS_PW"),
+    host=os.environ.get("IP"),
+    database=os.environ.get("RDS_DB"),
+    schema=os.environ.get("RDS_SCHEMA"),
+)
 SQLAlchemyInstrumentor().instrument(engine=engine)
 
 # separate database sessions for different users essentially.

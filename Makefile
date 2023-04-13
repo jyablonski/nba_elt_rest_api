@@ -33,3 +33,15 @@ bump-major:
 	@bump2version major
 	@git push --tags
 	@git push
+
+.PHONY: start-postgres
+start-postgres:
+	@docker-compose -f docker/docker-compose.yml up -d
+
+.PHONY: stop-postgres
+stop-postgres:
+	@docker-compose -f docker/docker-compose.yml down
+
+.PHONY: test
+test:
+	@pytest -v
