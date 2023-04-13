@@ -12,7 +12,7 @@ env:
 
 jobs:
   deploy:
-    name: Run Tests
+    name: Test Pipeline
     runs-on: ubuntu-latest
 
     steps:

@@ -72,6 +72,48 @@ def test_team_ratings():
     ]
 
 
+def test_team_ratings_individual():
+    team = "BOS"
+
+    response = client.get(f"/team_ratings/{team}")
+    data = response.json()
+
+    assert response.status_code == 200
+    assert data["team"] == "Boston Celtics"
+    assert list(data.keys()) == [
+        "team",
+        "team_acronym",
+        "w",
+        "l",
+        "ortg",
+        "drtg",
+        "nrtg",
+        "team_logo",
+        "nrtg_rank",
+        "drtg_rank",
+        "ortg_rank",
+    ]
+
+
+def test_team_ratings_individual_fail():
+    team = "JACOBS_FAKE_TEAM"
+
+    response = client.get(f"/team_ratings/{team}")
+    data = response.json()
+
+    assert response.status_code == 404
+    assert response.reason == "Not Found"
+    assert "Team not found; please use a Team Acronym:" in data["detail"]
+
+    #
+    # assert (
+    #     data["detail"]
+    #     == "Team not found; please use a Team Acronym: ['ATL', 'BKN', 'BOS', 'CHA', 'CHI', 'CLE', 'DAL', 'DEN',
+    #        'DET', 'GSW', 'HOU', 'IND', 'LAC', 'LAL', 'MEM', 'MIA', 'MIN', 'MIL', 'NOP', 'NYK', 'OKC', 'ORL',
+    #        'PHI', 'PHX', 'POR', 'SAC', 'SAS', 'TOR', 'UTA', 'WAS']"
+    # )
+
+
 def test_twitter_comments():
     response = client.get("/twitter_comments")
     data = response.json()
@@ -134,6 +176,45 @@ def test_injuries():
         "team_active_protocols",
     ]
 
+
+def test_injuries_team():
+    team = "IND"
+
+    response = client.get(f"/injuries/{team}")
+    data = response.json()
+
+    assert response.status_code == 200
+    assert data["player"] == "Myles Turner"
+    assert list(data.keys()) == [
+        "player",
+        "team_acronym",
+        "team",
+        "date",
+        "status",
+        "injury",
+        "description",
+        "total_injuries",
+        "team_active_injuries",
+        "team_active_protocols",
+    ]
+
+def test_injuries_team_fail():
+    team = "JACOBS_FAKE_TEAM"
+
+    response = client.get(f"/injuries/{team}")
+    data = response.json()
+
+    assert response.status_code == 404
+    assert response.reason == "Not Found"
+    assert "Team not found; please use a Team Acronym:" in data["detail"]
+
+    #
+    # assert (
+    #     data["detail"]
+    #     == "Team not found; please use a Team Acronym: ['ATL', 'BKN', 'BOS', 'CHA', 'CHI', 'CLE', 'DAL', 'DEN',
+    #        'DET', 'GSW', 'HOU', 'IND', 'LAC', 'LAL', 'MEM', 'MIA', 'MIN', 'MIL', 'NOP', 'NYK', 'OKC', 'ORL',
+    #        'PHI', 'PHX', 'POR', 'SAC', 'SAS', 'TOR', 'UTA', 'WAS']"
+    # )
 
 def test_game_types():
     response = client.get("/game_types")
