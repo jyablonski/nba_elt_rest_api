@@ -72,40 +72,40 @@ def test_team_ratings():
     ]
 
 
-# def test_team_ratings_individual():
-#     team = "BOS"
+def test_team_ratings_individual():
+    team = "BOS"
 
-#     response = client.get(f"/team_ratings/{team}")
-#     data = response.json()
+    response = client.get(f"/team_ratings/{team}")
+    data = response.json()
 
-#     assert response.status_code == 200
-#     assert data["team"] == "Boston Celtics"
-#     assert list(data.keys()) == [
-#         "team",
-#         "team_acronym",
-#         "w",
-#         "l",
-#         "ortg",
-#         "drtg",
-#         "nrtg",
-#         "team_logo",
-#         "nrtg_rank",
-#         "drtg_rank",
-#         "ortg_rank",
-#     ]
+    assert response.status_code == 200
+    assert data["team"] == "Boston Celtics"
+    assert list(data.keys()) == [
+        "team",
+        "team_acronym",
+        "w",
+        "l",
+        "ortg",
+        "drtg",
+        "nrtg",
+        "team_logo",
+        "nrtg_rank",
+        "drtg_rank",
+        "ortg_rank",
+    ]
 
 
-# def test_team_ratings_individual_fail():
-#     team = "JACOBS_FAKE_TEAM"
+def test_team_ratings_individual_fail():
+    team = "JACOBS_FAKE_TEAM"
 
-#     response = client.get(f"/team_ratings/{team}")
-#     data = response.json()
+    response = client.get(f"/team_ratings/{team}")
+    data = response.json()
 
-#     assert response.status_code == 404
-#     assert response.reason == "Not Found"
-#     assert "Team not found; please use a Team Acronym:" in data["detail"]
+    assert response.status_code == 404
+    assert response.reason == "Not Found"
+    assert "Team not found; please use a Team Acronym:" in data["detail"]
 
-    #
+    
     # assert (
     #     data["detail"]
     #     == "Team not found; please use a Team Acronym: ['ATL', 'BKN', 'BOS', 'CHA', 'CHI', 'CLE', 'DAL', 'DEN',
