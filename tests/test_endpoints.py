@@ -105,7 +105,7 @@ def test_team_ratings():
 #     assert response.reason == "Not Found"
 #     assert "Team not found; please use a Team Acronym:" in data["detail"]
 
-    
+    #
     # assert (
     #     data["detail"]
     #     == "Team not found; please use a Team Acronym: ['ATL', 'BKN', 'BOS', 'CHA', 'CHI', 'CLE', 'DAL', 'DEN',
@@ -272,3 +272,4 @@ def test_feedback():
     data = response.json()
 
     assert response.status_code == 422
+    
