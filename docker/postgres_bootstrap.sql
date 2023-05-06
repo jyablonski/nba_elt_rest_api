@@ -148,7 +148,7 @@ VALUES ('20 pt Game', 'Regular Season', 356, 'between 11 and 20 points'),
 
 DROP TABLE IF EXISTS prod_feedback;
 CREATE TABLE prod_feedback(
-    id integer,
+    id serial primary key,
     feedback character varying,
     time timestamp without time zone
 );
@@ -181,3 +181,14 @@ CREATE TABLE nba_predictions(
 INSERT INTO nba_predictions (proper_date, home_team, home_team_predicted_win_pct, away_team, away_team_predicted_win_pct)
 VALUES (current_date, 'Indiana Pacers', 0.247, 'San Antonio Spurs', 0.753),
        (current_date, 'Houston Rockets', 0.194, 'Memphis Grizzlies', 0.806);
+
+DROP TABLE IF EXISTS prod_transactions;
+CREATE TABLE IF NOT EXISTS prod_transactions
+(
+    date date,
+    transaction text COLLATE pg_catalog."default"
+);
+
+INSERT INTO prod_transactions(date, transaction)
+VALUES (current_date, 'The Portland Trail Blazers signed Skylar Mays.'),
+       (current_date, 'The Toronto Raptors fired Nick Nurse as Head Coach.');

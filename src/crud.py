@@ -2,7 +2,7 @@ from datetime import datetime, timezone
 from fastapi import Form
 from sqlalchemy.orm import Session
 
-from . import models, schemas
+from . import models
 
 
 def get_standings(db: Session):
@@ -78,3 +78,7 @@ def get_predictions(db: Session):
         .filter(models.Predictions.proper_date == str(datetime.now().date()))
         .all()
     )
+
+
+def get_transactions(db: Session):
+    return db.query(models.Transactions).all()

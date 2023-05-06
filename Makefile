@@ -36,11 +36,19 @@ bump-major:
 
 .PHONY: start-postgres
 start-postgres:
-	@docker-compose -f docker/docker-compose.yml up -d
+	@docker-compose -f docker/docker-compose-postgres.yml up -d
 
 .PHONY: stop-postgres
 stop-postgres:
-	@docker-compose -f docker/docker-compose.yml down
+	@docker-compose -f docker/docker-compose-postgres.yml down
+
+.PHONY: docker-build-local
+docker-build-local:
+	@docker-compose -f docker/docker-compose-local.yml build
+
+.PHONY: docker-run-local
+docker-run-local:
+	@docker-compose -f docker/docker-compose-local.yml up
 
 .PHONY: test
 test:

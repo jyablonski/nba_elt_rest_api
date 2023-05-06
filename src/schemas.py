@@ -1,6 +1,7 @@
 from datetime import date, datetime
 from typing import Optional
 
+
 from pydantic import BaseModel
 
 # Pydantic models use the normal name: str schema for data types
@@ -164,6 +165,14 @@ class PredictionsBase(BaseModel):
     home_team_predicted_win_pct: float
     away_team: str
     away_team_predicted_win_pct: float
+
+    class Config:
+        orm_mode = True
+
+
+class TransactionsBase(BaseModel):
+    date: date
+    transaction: str
 
     class Config:
         orm_mode = True

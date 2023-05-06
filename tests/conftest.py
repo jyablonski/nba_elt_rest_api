@@ -7,7 +7,14 @@ import pytest_mock
 
 from src.main import app
 
-client = TestClient(app)
+# client = TestClient(app)
+
+
+@pytest.fixture()
+def client_fixture():
+    client = TestClient(app)
+
+    yield client
 
 
 @pytest.fixture()

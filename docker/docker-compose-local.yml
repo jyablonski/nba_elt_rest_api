@@ -1,0 +1,42 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:14-alpine
+    container_name: postgres
+    ports:
+     - 5432:5432
+    environment:
+     - POSTGRES_USER=postgres
+     - POSTGRES_PASSWORD=postgres
+     - POSTGRES_DB=postgres
+    volumes:
+      - ${PWD}/docker/postgres_bootstrap.sql:/docker-entrypoint-initdb.d/z99_dump.sql
+    networks: 
+      - api_network
+
+  rest_api:
+    build:
+        context: ../
+        dockerfile: docker/Dockerfile
+    image: nba_elt_rest_api_local
+    environment:
+      - IP=postgres
+      - RDS_USER=postgres
+      - RDS_PW=postgres
+      - RDS_DB=postgres
+      - RDS_SCHEMA=nba_prod
+      - OTEL_EXPORTER_OTLP_ENDPOINT=https://api.honeycomb.io
+      - OTEL_EXPORTER_OTLP_HEADERS=x-honeycomb-team=bababooiee
+      - OTEL_SERVICE_NAME=rest-api-dev
+    restart: on-failure
+    ports:
+      - 8080:8080
+    depends_on:
+      - postgres
+    networks: 
+      - api_network
+    links:
+      - postgres:postgres
+
+networks:
+  api_network:
