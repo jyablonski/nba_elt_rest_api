@@ -4,7 +4,7 @@ on:
   pull_request:
 
 env:
-  IP: localhost
+  IP: postgres
   RDS_USER: postgres
   RDS_PW: postgres
   RDS_DB: postgres
