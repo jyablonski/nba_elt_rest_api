@@ -1,8 +1,5 @@
-from tests.conftest import client
-
-
-def test_standings():
-    response = client.get("/standings")
+def test_standings(client_fixture):
+    response = client_fixture.get("/standings")
     data = response.json()
 
     assert response.status_code == 200
@@ -23,8 +20,8 @@ def test_standings():
     ]
 
 
-def test_scorers():
-    response = client.get("/scorers")
+def test_scorers(client_fixture):
+    response = client_fixture.get("/scorers")
     data = response.json()
 
     assert response.status_code == 200
@@ -50,8 +47,8 @@ def test_scorers():
     ]
 
 
-def test_team_ratings():
-    response = client.get("/team_ratings")
+def test_team_ratings(client_fixture):
+    response = client_fixture.get("/team_ratings")
     data = response.json()
 
     assert response.status_code == 200
@@ -72,10 +69,10 @@ def test_team_ratings():
     ]
 
 
-def test_team_ratings_individual():
+def test_team_ratings_individual(client_fixture):
     team = "BOS"
 
-    response = client.get(f"/team_ratings/{team}")
+    response = client_fixture.get(f"/team_ratings/{team}")
     data = response.json()
 
     assert response.status_code == 200
@@ -95,10 +92,10 @@ def test_team_ratings_individual():
     ]
 
 
-def test_team_ratings_individual_fail():
+def test_team_ratings_individual_fail(client_fixture):
     team = "JACOBS_FAKE_TEAM"
 
-    response = client.get(f"/team_ratings/{team}")
+    response = client_fixture.get(f"/team_ratings/{team}")
     data = response.json()
 
     assert response.status_code == 404
@@ -114,8 +111,8 @@ def test_team_ratings_individual_fail():
     # )
 
 
-def test_twitter_comments():
-    response = client.get("/twitter_comments")
+def test_twitter_comments(client_fixture):
+    response = client_fixture.get("/twitter_comments")
     data = response.json()
 
     assert response.status_code == 200
@@ -135,8 +132,8 @@ def test_twitter_comments():
     ]
 
 
-def test_reddit_comments():
-    response = client.get("/reddit_comments")
+def test_reddit_comments(client_fixture):
+    response = client_fixture.get("/reddit_comments")
     data = response.json()
 
     assert response.status_code == 200
@@ -156,8 +153,8 @@ def test_reddit_comments():
     ]
 
 
-def test_injuries():
-    response = client.get("/injuries")
+def test_injuries(client_fixture):
+    response = client_fixture.get("/injuries")
     data = response.json()
 
     assert response.status_code == 200
@@ -177,10 +174,10 @@ def test_injuries():
     ]
 
 
-def test_injuries_team():
+def test_injuries_team(client_fixture):
     team = "IND"
 
-    response = client.get(f"/injuries/{team}")
+    response = client_fixture.get(f"/injuries/{team}")
     data = response.json()
 
     assert response.status_code == 200
@@ -198,17 +195,17 @@ def test_injuries_team():
         "team_active_protocols",
     ]
 
-def test_injuries_team_fail():
+
+def test_injuries_team_fail(client_fixture):
     team = "JACOBS_FAKE_TEAM"
 
-    response = client.get(f"/injuries/{team}")
+    response = client_fixture.get(f"/injuries/{team}")
     data = response.json()
 
     assert response.status_code == 404
     assert response.reason == "Not Found"
     assert "Team not found; please use a Team Acronym:" in data["detail"]
 
-    
     # assert (
     #     data["detail"]
     #     == "Team not found; please use a Team Acronym: ['ATL', 'BKN', 'BOS', 'CHA', 'CHI', 'CLE', 'DAL', 'DEN',
@@ -216,8 +213,9 @@ def test_injuries_team_fail():
     #        'PHI', 'PHX', 'POR', 'SAC', 'SAS', 'TOR', 'UTA', 'WAS']"
     # )
 
-def test_game_types():
-    response = client.get("/game_types")
+
+def test_game_types(client_fixture):
+    response = client_fixture.get("/game_types")
     data = response.json()
 
     assert response.status_code == 200
@@ -231,8 +229,8 @@ def test_game_types():
     ]
 
 
-def test_schedule():
-    response = client.get("/schedule")
+def test_schedule(client_fixture):
+    response = client_fixture.get("/schedule")
     data = response.json()
 
     assert response.status_code == 200
@@ -250,8 +248,8 @@ def test_schedule():
     ]
 
 
-def test_predictions():
-    response = client.get("/predictions")
+def test_predictions(client_fixture):
+    response = client_fixture.get("/predictions")
     data = response.json()
 
     assert response.status_code == 200
@@ -267,8 +265,21 @@ def test_predictions():
 
 
 # didnt get this workin
-def test_feedback():
-    response = client.post("/feedback", data='{"user_feedback": "hello world"}')
+def test_feedback(client_fixture):
+    response = client_fixture.post("/feedback", data='{"user_feedback": "hello world"}')
     data = response.json()
 
     assert response.status_code == 422
+
+
+def test_transactions(client_fixture):
+    response = client_fixture.get("/transactions")
+    data = response.json()
+
+    assert response.status_code == 200
+    assert len(data) == 2
+    assert data[0]["transaction"] == "The Portland Trail Blazers signed Skylar Mays."
+    assert list(data[0].keys()) == [
+        "date",
+        "transaction",
+    ]

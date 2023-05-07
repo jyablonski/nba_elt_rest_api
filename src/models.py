@@ -6,14 +6,10 @@ from sqlalchemy import (
     Integer,
     String,
     Float,
-    ForeignKey,
-    select,
     Date,
     PrimaryKeyConstraint,
     TIMESTAMP,
 )
-from sqlalchemy.orm import relationship, joinedload
-from sqlalchemy.orm import Session
 
 from .database import Base
 
@@ -161,3 +157,11 @@ class Predictions(Base):
     home_team_predicted_win_pct: float = Column(Float, nullable=True)
     away_team: str = Column(String, nullable=True)
     away_team_predicted_win_pct: float = Column(Float, nullable=True)
+
+
+class Transactions(Base):
+    __tablename__ = "prod_transactions"
+    __table_args__ = (PrimaryKeyConstraint("date", "transaction"),)
+
+    date: date = Column(Date, nullable=False)
+    transaction: str = Column(String, nullable=False)

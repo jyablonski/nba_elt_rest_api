@@ -2,7 +2,6 @@ from typing import List
 
 from fastapi import Depends, FastAPI, HTTPException, Request, Form
 from fastapi.responses import HTMLResponse
-from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from mangum import Mangum
 from opentelemetry import trace
@@ -175,3 +174,9 @@ def read_schedule(db: Session = Depends(get_db)):
 def read_predictions(db: Session = Depends(get_db)):
     predictions = crud.get_predictions(db)
     return predictions
+
+
+@app.get("/transactions", response_model=List[schemas.TransactionsBase])
+def read_transactions(db: Session = Depends(get_db)):
+    transactions = crud.get_transactions(db)
+    return transactions

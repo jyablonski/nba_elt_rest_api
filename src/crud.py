@@ -2,7 +2,7 @@ from datetime import datetime, timezone
 from fastapi import Form
 from sqlalchemy.orm import Session
 
-from . import models, schemas
+from . import models
 
 
 def get_standings(db: Session):
@@ -67,7 +67,7 @@ def get_schedule(db: Session):
             models.Schedule.away_team,
             models.Schedule.away_moneyline_raw,
         )
-        .filter(models.Schedule.date == datetime.now().date())
+        .filter(models.Schedule.date == datetime.utcnow().date())
         .all()
     )
 
@@ -75,6 +75,10 @@ def get_schedule(db: Session):
 def get_predictions(db: Session):
     return (
         db.query(models.Predictions)
-        .filter(models.Predictions.proper_date == str(datetime.now().date()))
+        .filter(models.Predictions.proper_date == str(datetime.utcnow().date()))
         .all()
     )
+
+
+def get_transactions(db: Session):
+    return db.query(models.Transactions).all()
