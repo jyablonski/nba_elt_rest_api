@@ -17,7 +17,7 @@ jobs:
 
     steps:
       - name: Checkout the Repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
 
       - name: Install Python 3.9
         uses: actions/setup-python@v1
@@ -46,12 +46,6 @@ jobs:
         run: make start-postgres
 
       - name: Run Tests
-        env:
-          RDS_USER: postgres
-          RDS_PW: postgres
-          IP: localhost
-          RDS_DB: postgres
-          RDS_SCHEMA: nba_prod
         run: |
           pipenv run pytest -v
 
