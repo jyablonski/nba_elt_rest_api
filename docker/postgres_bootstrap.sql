@@ -192,3 +192,13 @@ CREATE TABLE IF NOT EXISTS prod_transactions
 INSERT INTO prod_transactions(date, transaction)
 VALUES (current_date, 'The Portland Trail Blazers signed Skylar Mays.'),
        (current_date, 'The Toronto Raptors fired Nick Nurse as Head Coach.');
+
+
+DROP TABLE IF EXISTS rest_api_users;
+CREATE TABLE IF NOT EXISTS rest_api_users
+(
+    id serial primary key,
+    username text not null,
+    email text,
+    created_at timestamp default now()
+);

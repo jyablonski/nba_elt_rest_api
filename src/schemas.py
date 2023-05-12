@@ -1,10 +1,19 @@
-from datetime import date, datetime
+from datetime import date, datetime, timezone
 from typing import Optional
 
 
 from pydantic import BaseModel
 
 # Pydantic models use the normal name: str schema for data types
+
+
+class Authentication(BaseModel):
+    api_key: str
+
+    class Config:
+        orm_mode = True
+
+
 class StandingsBase(BaseModel):
     rank: str
     team: str
@@ -176,3 +185,16 @@ class TransactionsBase(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+class UserBase(BaseModel):
+    username: str
+    email: Optional[str]
+    created_at: datetime = datetime.now(timezone.utc)
+
+    class Config:
+        orm_mode = True
+
+
+class UserCreate(UserBase):
+    pass

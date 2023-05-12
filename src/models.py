@@ -165,3 +165,13 @@ class Transactions(Base):
 
     date: date = Column(Date, nullable=False)
     transaction: str = Column(String, nullable=False)
+
+
+class Users(Base):
+    __tablename__ = "rest_api_users"
+    __table_args__ = (PrimaryKeyConstraint("id"),)
+
+    id: int = Column(Integer, nullable=False, autoincrement=True)
+    username: date = Column(String, nullable=False)
+    email: str = Column(String, nullable=True)
+    created_at: datetime = Column(TIMESTAMP, nullable=False)

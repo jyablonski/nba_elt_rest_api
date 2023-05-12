@@ -1,8 +1,10 @@
 from datetime import datetime, timezone
 from fastapi import Form
+from fastapi.encoders import jsonable_encoder
 from sqlalchemy.orm import Session
 
 from . import models
+from .schemas import UserBase, UserCreate
 
 
 def get_standings(db: Session):
@@ -82,3 +84,29 @@ def get_predictions(db: Session):
 
 def get_transactions(db: Session):
     return db.query(models.Transactions).all()
+
+
+def create_user(db: Session, user: UserCreate):
+    record = models.Users(
+        username=user.username, email=user.email, created_at=user.created_at
+    )
+    db.add(record)
+    db.commit()
+    db.refresh(record)
+    return record
+
+
+def update_user(db: Session, user_record: UserBase, update_user_request: UserBase):
+    update_user_encoded = jsonable_encoder(update_user_request)
+    user_record.username = update_user_encoded["username"]
+    user_record.email = update_user_encoded["email"]
+
+    updated_user = db.merge(user_record)
+    db.commit()
+    return updated_user
+
+
+def delete_user(db: Session, user_record: UserBase):
+    db.delete(user_record)
+    db.commit()
+    return f"Username {user_record.username} Successfully deleted!"

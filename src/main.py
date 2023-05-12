@@ -1,4 +1,5 @@
-from typing import List
+import os
+from typing import List, Union
 
 from fastapi import Depends, FastAPI, HTTPException, Request, Form
 from fastapi.responses import HTMLResponse
@@ -13,7 +14,8 @@ from opentelemetry.sdk.trace.export import BatchSpanProcessor
 from sqlalchemy.orm import Session
 
 from . import crud, models, schemas
-from .database import SessionLocal, engine
+from .database import engine, get_db
+from .utils import team_acronyms
 
 provider = TracerProvider()
 processor = BatchSpanProcessor(OTLPSpanExporter())
@@ -28,47 +30,6 @@ app = FastAPI()
 FastAPIInstrumentor.instrument_app(app)
 RequestsInstrumentor().instrument()
 handler = Mangum(app)
-
-team_acronyms = [
-    "ATL",
-    "BKN",
-    "BOS",
-    "CHA",
-    "CHI",
-    "CLE",
-    "DAL",
-    "DEN",
-    "DET",
-    "GSW",
-    "HOU",
-    "IND",
-    "LAC",
-    "LAL",
-    "MEM",
-    "MIA",
-    "MIN",
-    "MIL",
-    "NOP",
-    "NYK",
-    "OKC",
-    "ORL",
-    "PHI",
-    "PHX",
-    "POR",
-    "SAC",
-    "SAS",
-    "TOR",
-    "UTA",
-    "WAS",
-]
-
-
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
 
 
 @app.get("/", response_class=HTMLResponse)
@@ -180,3 +141,69 @@ def read_predictions(db: Session = Depends(get_db)):
 def read_transactions(db: Session = Depends(get_db)):
     transactions = crud.get_transactions(db)
     return transactions
+
+
+@app.post("/users", response_model=schemas.UserBase, status_code=201)
+async def create_users(
+    create_user_request: schemas.UserCreate, db: Session = Depends(get_db)
+):
+    record_check = (
+        db.query(models.Users)
+        .filter(models.Users.username == create_user_request.username)
+        .first()
+    )
+
+    if record_check:
+        raise HTTPException(
+            status_code=400,
+            detail="Username already exists!  Please select another username.",
+        )
+
+    return crud.create_user(db, create_user_request)
+
+
+@app.put("/users/{username}", response_model=schemas.UserBase)
+async def update_user(
+    update_user_request: schemas.UserBase, username: str, db: Session = Depends(get_db)
+):
+    user_record = (
+        db.query(models.Users).filter(models.Users.username == username).first()
+    )
+
+    if not user_record:
+        raise HTTPException(
+            status_code=400,
+            detail="Username doesn't exist!  Please select another username.",
+        )
+
+    return crud.update_user(db, user_record, update_user_request)
+
+
+@app.delete("/users/{username}")
+async def delete_user(
+    delete_user_request: schemas.Authentication,
+    username: str,
+    db: Session = Depends(get_db),
+):
+    if not delete_user_request.api_key:
+        raise HTTPException(
+            status_code=401,
+            detail="You need a valid API Key to perform this operation.",
+        )
+
+    if delete_user_request.api_key != os.environ.get("API_KEY"):
+        raise HTTPException(
+            status_code=403, detail="nuh uh you got the wrong auth mfer"
+        )
+
+    user_record = (
+        db.query(models.Users).filter(models.Users.username == username).first()
+    )
+
+    if not user_record:
+        raise HTTPException(
+            status_code=400,
+            detail="Username doesn't exist!  Please select another username.",
+        )
+
+    return crud.delete_user(db, user_record)

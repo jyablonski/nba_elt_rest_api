@@ -39,6 +39,14 @@ def sql_connection(user: str, password: str, host: str, database: str, schema: s
         return e
 
 
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+
+
 engine = sql_connection(
     user=os.environ.get("RDS_USER"),
     password=os.environ.get("RDS_PW"),
