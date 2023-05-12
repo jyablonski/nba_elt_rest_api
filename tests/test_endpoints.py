@@ -286,32 +286,47 @@ def test_transactions(client_fixture):
 
 
 def test_create_user(client_fixture):
-    response = client_fixture.post("/users", json = {"username": "my_fake_user", "email": "fake@user.net"})
+    response = client_fixture.post(
+        "/users", json={"username": "my_fake_user", "email": "fake@user.net"}
+    )
 
     assert response.status_code == 201
 
+
 def test_update_user(client_fixture):
-    response = client_fixture.put(f"/users/my_fake_user", json = {"username": "jacobs_fake_user", "email": "yooo@gmail.com"})
+    response = client_fixture.put(
+        f"/users/my_fake_user",
+        json={"username": "jacobs_fake_user", "email": "yooo@gmail.com"},
+    )
 
     assert response.status_code == 200
+
 
 def test_delete_user(client_fixture):
-    response = client_fixture.delete(f"/users/jacobs_fake_user", json = {"api_key": "aaaa"})
+    response = client_fixture.delete(
+        f"/users/jacobs_fake_user", json={"api_key": "aaaa"}
+    )
 
     assert response.status_code == 200
+
 
 def test_delete_user_bad_request(client_fixture):
     response = client_fixture.delete(f"/users/jacobs_fake_user")
 
     assert response.status_code == 422
 
+
 def test_delete_user_bad_api_key(client_fixture):
-    response = client_fixture.delete(f"/users/jacobs_fake_user", json = {"api_key": "bbbb"})
+    response = client_fixture.delete(
+        f"/users/jacobs_fake_user", json={"api_key": "bbbb"}
+    )
 
     assert response.status_code == 403
 
 
 def test_create_user_bad_request(client_fixture):
-    response = client_fixture.post("/users", json = {"username_fake": "jyablonski", "email": "jacob@yablonski.net"})
+    response = client_fixture.post(
+        "/users", json={"username_fake": "jyablonski", "email": "jacob@yablonski.net"}
+    )
 
     assert response.status_code == 422

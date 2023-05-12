@@ -12,6 +12,7 @@ from src.main import app
 
 @pytest.fixture()
 def client_fixture():
+    os.environ["API_KEY"] = "aaaa"
     client = TestClient(app)
 
     yield client
