@@ -155,13 +155,66 @@ async def read_transactions(db: Session = Depends(get_db)):
     transactions = crud.get_transactions(db)
     return transactions
 
-@app.get("/users", response_class=HTMLResponse)
-def hello_world(request: Request):
-    return templates.TemplateResponse("users.html", {"request": request})
+@app.get("/users/login", response_class=HTMLResponse)
+def user_login(request: Request):
+    return templates.TemplateResponse("user_login.html", {"request": request})
+
+@app.post("/users/login", response_class=HTMLResponse)
+def user_login(
+    request: Request,
+    username: str = Form(...),
+    password: Optional[str] = Form(...),
+    db: Session = Depends(get_db)
+):
+    errors = []
+    username_check = (
+        db.query(models.Users)
+        .filter(models.Users.username == username)
+        .first()
+    )
+
+    if not username_check:
+        errors.append(f"That Username does not exist")
+
+        return templates.TemplateResponse(
+            "user_login.html",
+            {
+                "request": request,
+                "username": username,
+                "errors": errors,
+            },
+        )
+
+    username_check = (
+        db.query(models.Users)
+        .filter(models.Users.username == username)
+        .filter(models.Users.password == password)
+        .first()
+    )
+
+    if not username_check:
+        errors.append(f"Wrong Password!")
+        return templates.TemplateResponse(
+            "user_login.html",
+            {
+                "request": request,
+                "username": username,
+                "errors": errors,
+            },
+        )
+
+    return templates.TemplateResponse(
+        "user_page.html",
+        {
+            "request": request,
+            "username": username,
+            "errors": errors,
+        },
+    )
 
 
 @app.get("/users/create", response_class=HTMLResponse)
-def hello_world(request: Request):
+def user_create(request: Request):
     return templates.TemplateResponse("create_user.html", {"request": request})
 
 
@@ -183,7 +236,10 @@ def create_users_from_form(
         )
 
     record = models.Users(
-        username=username, password=password, email=email, created_at=datetime.utcnow(),
+        username=username,
+        password=password,
+        email=email,
+        created_at=datetime.utcnow(),
     )
 
     return crud.create_user(db, record)
@@ -239,7 +295,8 @@ async def update_user(
 
 @app.delete("/users/{username}", dependencies=[Depends(api_key_auth)])
 async def delete_user(
-    username: str, db: Session = Depends(get_db),
+    username: str,
+    db: Session = Depends(get_db),
 ):
     user_record = (
         db.query(models.Users).filter(models.Users.username == username).first()

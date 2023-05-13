@@ -2,9 +2,16 @@
 
 {% block content %}
 
-<form name="create_user_form" action="/users/create" method="post" enctype="multipart/form-data">
+<form name="user_logic_form" action="/users/login" method="post" enctype="multipart/form-data">
     <center>
-        <h1> Please Create a User</h1>
+        <h1> Please Login</h1>
+        <br>
+        <div class="text-danger font-weight-bold">
+            {% for error in errors %}
+              <li>{{error}}</li>
+            {% endfor %}
+        </div>
+        <br>
         <br>
         <table>
             <tr>
@@ -15,14 +22,11 @@
                 <td> Password: </td>
                 <td> <input type="text" name="password" password=””> </td>
             </tr>
-            <tr>
-                <td> Email Address (Optional): </td>
-                <td> <input type=”text” name="email" email=””> </td>
-            </tr>
             <!-- </select> -->
         </table>
         <br>
         <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+<h4> Don't have an account?  <a href="/users/create">Create One</a></h1>
 </center>
 {% endblock %}

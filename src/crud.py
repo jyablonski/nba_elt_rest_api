@@ -94,6 +94,7 @@ def create_user(db: Session, user: UserCreate):
         email=user.email,
         created_at=user.created_at,
     )
+
     db.add(record)
     db.commit()
     db.refresh(record)
