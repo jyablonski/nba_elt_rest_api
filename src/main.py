@@ -1,10 +1,8 @@
 from datetime import datetime
-import os
 from typing import List, Optional
 
-from fastapi import Depends, FastAPI, Form, HTTPException, Request, status
+from fastapi import Depends, FastAPI, Form, HTTPException, Request
 from fastapi.responses import HTMLResponse
-from fastapi.security import OAuth2PasswordBearer
 from fastapi.templating import Jinja2Templates
 from mangum import Mangum
 from opentelemetry import trace
@@ -18,6 +16,7 @@ from sqlalchemy.orm import Session
 from . import crud, models, schemas
 from .database import engine, get_db
 from .utils import team_acronyms
+from .security import api_key_auth
 
 provider = TracerProvider()
 processor = BatchSpanProcessor(OTLPSpanExporter())
@@ -27,22 +26,11 @@ tracer = trace.get_tracer(__name__)
 
 templates = Jinja2Templates(directory="static")
 models.Base.metadata.create_all(bind=engine)
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 app = FastAPI()
 FastAPIInstrumentor.instrument_app(app)
 RequestsInstrumentor().instrument()
 handler = Mangum(app)
-
-
-def api_key_auth(
-    api_key: str = Depends(oauth2_scheme),
-    api_keys: str = os.environ.get("API_KEY", "a"),
-):
-    if api_key not in api_keys:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED, detail="Forbidden"
-        )
 
 
 @app.get("/", response_class=HTMLResponse)
