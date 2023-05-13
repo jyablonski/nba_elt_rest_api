@@ -204,9 +204,15 @@ CREATE TABLE IF NOT EXISTS rest_api_users
     created_at timestamp default now()
 );
 
+INSERT INTO rest_api_users(username, password, email)
+VALUES ('jyablonski', 'password', 'j@yablonski.com'),
+       ('test', 'password', 'test@nobody.com');
+
+
 CREATE TABLE IF NOT EXISTS user_predictions
 (
     id serial primary key,
+    username text,
     game_date date,
     home_team text COLLATE pg_catalog."default",
     home_team_predicted_win_pct double precision,

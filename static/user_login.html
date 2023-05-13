@@ -6,12 +6,14 @@
     <center>
         <h1> Please Login</h1>
         <br>
-        <div class="text-danger font-weight-bold">
+        <!-- <div class="text-danger font-weight-bold"> -->
+            <span style = color:#dc3545!important>
             {% for error in errors %}
+            <!-- <span style = color:#dc3545!important> -->
               <li>{{error}}</li>
             {% endfor %}
+            </span>
         </div>
-        <br>
         <br>
         <table>
             <tr>

@@ -11,8 +11,10 @@
          <div class="col col-lg-11 col-xl-12">
             <div class="card rounded-3">
                <div class="card-body p-4">
+                  <h4 class="text-center my-3 pb-3">{{ username }}</h4>
+                  <br>
                   <h4 class="text-center my-3 pb-3">NBA Betting</h4>
-                  <form name="selected_team_winner" action="/bets" method="post" enctype="multipart/form-data">
+                  <form name="selected_team_winner" action="/users/{{username}}/bets" method="post" enctype="multipart/form-data">
                      <table class="table mb-4">
                         <thead>
                            <tr>
@@ -48,7 +50,7 @@
                      </table>
                      <center>
                         <div class="col-6">
-                           {% if jacobs_predictions > 0 %}
+                           {% if is_games_left == 0 %}
                            <p class="btn btn-primary">No Games to Predict</p>
                            {% else %}
                            <button type="submit" class="btn btn-primary">Save</button>

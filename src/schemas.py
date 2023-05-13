@@ -173,6 +173,7 @@ class PredictionsBase(BaseModel):
 
 
 class UserPredictions(BaseModel):
+    username: str
     game_date: str
     home_team: str
     home_team_predicted_win_pct: float

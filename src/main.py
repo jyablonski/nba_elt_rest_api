@@ -143,22 +143,22 @@ async def read_transactions(db: Session = Depends(get_db)):
     transactions = crud.get_transactions(db)
     return transactions
 
+
 @app.get("/users/login", response_class=HTMLResponse)
 def user_login(request: Request):
     return templates.TemplateResponse("user_login.html", {"request": request})
+
 
 @app.post("/users/login", response_class=HTMLResponse)
 def user_login(
     request: Request,
     username: str = Form(...),
     password: Optional[str] = Form(...),
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
 ):
     errors = []
     username_check = (
-        db.query(models.Users)
-        .filter(models.Users.username == username)
-        .first()
+        db.query(models.Users).filter(models.Users.username == username).first()
     )
 
     if not username_check:
@@ -347,3 +347,83 @@ def store_bets_predictions_from_ui(
         predictions_list.append(result)
 
     return crud.store_bet_predictions(db, predictions_list)
+
+
+#####
+@app.get("/users/{username}/bets", response_class=HTMLResponse)
+def get_user_bets_page(request: Request, username: str, db: Session = Depends(get_db)):
+    username_check = (
+        db.query(models.Users).filter(models.Users.username == username)
+    ).first()
+
+    if username_check is None:
+        return templates.TemplateResponse(
+            "404.html",
+            {
+                "request": request,
+            },
+        )
+
+    # this logic checks if every game from today has already been selected or not
+    # by the user, and then stores it as a cte for use in a query later
+    user_predictions = (
+        db.query(models.UserPredictions)
+        .filter(models.UserPredictions.username == username)
+        .filter(models.UserPredictions.game_date == datetime.utcnow().date())
+    )
+    user_predictions_count = user_predictions.count()
+    user_predictions_results = user_predictions.cte("user_predictions")
+
+    games_today_count = (
+        db.query(models.Predictions).filter(
+            models.Predictions.proper_date == datetime.utcnow().date()
+        )
+    ).count()
+
+    # variable to populate element of the UI
+    if user_predictions_count == games_today_count:
+        is_games_left = 0
+    else:
+        is_games_left = 1
+
+    # this logic returns only the unselected games from today's date for this user
+    check_todays_predictions = (
+        db.query(models.Predictions)
+        .filter(models.Predictions.proper_date == datetime.utcnow().date())
+        .join(
+            user_predictions_results,
+            (models.Predictions.home_team == user_predictions_results.c.home_team),
+            isouter=True,
+        )
+        .filter(user_predictions_results.c.game_date == None)
+    )
+
+    return templates.TemplateResponse(
+        "bets.html",
+        {
+            "request": request,
+            "games_today": check_todays_predictions,
+            "is_games_left": is_games_left,
+            "username": username,
+        },
+    )
+
+
+@app.post("/users/{username}/bets")
+def store_user_bets_predictions_from_ui(
+    username: str, bet_predictions: List[str] = Form(...), db: Session = Depends(get_db)
+):
+    predictions_list = []
+    for prediction in bet_predictions:
+        result = (
+            db.query(models.Predictions)
+            .filter(
+                (models.Predictions.home_team == prediction)
+                | (models.Predictions.away_team == prediction)
+            )
+            .first()
+        )
+        result.selected_winner = prediction
+        predictions_list.append(result)
+
+    return crud.store_bet_predictions(db, username, predictions_list)

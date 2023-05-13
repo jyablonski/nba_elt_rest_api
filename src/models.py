@@ -164,6 +164,7 @@ class UserPredictions(Base):
     __table_args__ = (PrimaryKeyConstraint("id"),)
 
     id: int = Column(Integer, nullable=False, autoincrement=True)
+    username: str = Column(String, nullable=False)
     game_date: date = Column(Date, nullable=True)
     home_team: str = Column(String, nullable=False)
     home_team_predicted_win_pct: float = Column(Float, nullable=True)
