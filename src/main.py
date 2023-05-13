@@ -36,7 +36,7 @@ handler = Mangum(app)
 
 
 def api_key_auth(
-    api_key: str = Depends(oauth2_scheme), api_keys: str = os.environ.get("API_KEY")
+    api_key: str = Depends(oauth2_scheme), api_keys: str = os.environ.get("API_KEY", "a")
 ):
     if api_key not in api_keys:
         raise HTTPException(
