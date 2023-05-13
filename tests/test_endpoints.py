@@ -299,6 +299,14 @@ def test_create_user(client_fixture):
 
     assert response.status_code == 201
 
+def test_create_user_bad_request(client_fixture):
+    response = client_fixture.post(
+        "/users", json={"username_fake": "jyablonski", "email": "jacob@yablonski.net"}
+    )
+
+    assert response.status_code == 422
+
+
 
 def test_update_user(client_fixture):
     response = client_fixture.put(
@@ -343,11 +351,3 @@ def test_delete_user(client_fixture_no_auth):
 
     assert response.json() == f"Username {username} Successfully deleted!"
     assert response.status_code == 200
-
-
-def test_create_user_bad_request(client_fixture):
-    response = client_fixture.post(
-        "/users", json={"username_fake": "jyablonski", "email": "jacob@yablonski.net"}
-    )
-
-    assert response.status_code == 422
