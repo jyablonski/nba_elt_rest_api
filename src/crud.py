@@ -2,6 +2,7 @@ from datetime import datetime, timezone
 from fastapi import Form
 from fastapi.encoders import jsonable_encoder
 from sqlalchemy.orm import Session
+from typing import List
 
 from . import models
 from .schemas import UserBase, UserCreate
@@ -110,3 +111,23 @@ def delete_user(db: Session, user_record: UserBase):
     db.delete(user_record)
     db.commit()
     return f"Username {user_record.username} Successfully deleted!"
+
+
+def store_bet_predictions(db: Session, bet_predictions: List[models.JacobsPredictions]):
+    # this is so all records in this batch get the same timestamp
+    created_at = datetime.now(timezone.utc)
+
+    for prediction in bet_predictions:
+        record = models.JacobsPredictions(
+            game_date=prediction.proper_date,
+            home_team=prediction.home_team,
+            home_team_predicted_win_pct=prediction.home_team_predicted_win_pct,
+            away_team=prediction.away_team,
+            away_team_predicted_win_pct=prediction.away_team_predicted_win_pct,
+            selected_winner=prediction.selected_winner,
+            created_at=created_at,
+        )
+        db.add(record)
+        db.commit()
+        db.refresh(record)
+    return record

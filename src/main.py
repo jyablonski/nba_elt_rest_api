@@ -1,3 +1,4 @@
+from datetime import datetime
 import os
 from typing import List, Union
 
@@ -207,3 +208,77 @@ async def delete_user(
         )
 
     return crud.delete_user(db, user_record)
+
+
+@app.get("/bets", response_class=HTMLResponse)
+def get_bets_page(request: Request, db: Session = Depends(get_db)):
+    jacobs_predictions = (
+        db.query(models.JacobsPredictions)
+        .filter(models.JacobsPredictions.game_date == datetime.utcnow().date())
+        .count()
+    )
+
+    check_todays_predictions = (
+        db.query(models.Predictions)
+        .filter(models.Predictions.proper_date == datetime.utcnow().date())
+        .outerjoin(
+            models.JacobsPredictions,
+            models.Predictions.home_team == models.JacobsPredictions.home_team,
+        )
+        .filter(models.JacobsPredictions.home_team == None)
+    )
+
+    # check_todays_predictions = (
+    #     db.query(models.JacobsPredictions)
+    #     .filter(models.JacobsPredictions.game_date == datetime.utcnow().date())
+    #     .outerjoin(
+    #         models.Predictions,
+    #         models.JacobsPredictions.home_team == models.Predictions.home_team,
+    #     )
+    #     .filter(models.Predictions.home_team == None)
+    # )
+    print(check_todays_predictions)
+
+    print(jacobs_predictions)
+    return templates.TemplateResponse(
+        "bets.html",
+        {
+            "request": request,
+            "games_today": check_todays_predictions,  # [0]
+            "jacobs_predictions": jacobs_predictions,
+        },
+    )
+
+
+@app.post("/bets")
+def store_bets_predictions_from_ui(
+    bet_predictions: List[str] = Form(...), db: Session = Depends(get_db)
+):
+
+    # # check if the records already got recorded or not
+    # records_current_date = (
+    #     db.query(models.JacobsPredictions)
+    #     .filter(models.JacobsPredictions.game_date == datetime.utcnow().date())
+    #     .first()
+    # )
+
+    # if records_current_date:
+    #     raise HTTPException(
+    #         status_code=400, detail="You've already built predictions for this date!"
+    #     )
+
+    # loop through the user input list of predicted winners to grab their records
+    predictions_list = []
+    for prediction in bet_predictions:
+        result = (
+            db.query(models.Predictions)
+            .filter(
+                (models.Predictions.home_team == prediction)
+                | (models.Predictions.away_team == prediction)
+            )
+            .first()
+        )
+        result.selected_winner = prediction
+        predictions_list.append(result)
+
+    return crud.store_bet_predictions(db, predictions_list)

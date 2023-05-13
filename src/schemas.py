@@ -169,11 +169,24 @@ class ScheduleBase(BaseModel):
 
 
 class PredictionsBase(BaseModel):
-    proper_date: str
+    proper_date: date
     home_team: str
     home_team_predicted_win_pct: float
     away_team: str
     away_team_predicted_win_pct: float
+
+    class Config:
+        orm_mode = True
+
+
+class JacobsPredictions(BaseModel):
+    game_date: str
+    home_team: str
+    home_team_predicted_win_pct: float
+    away_team: str
+    away_team_predicted_win_pct: float
+    selected_winner: str
+    created_at: datetime = datetime.now(timezone.utc)
 
     class Config:
         orm_mode = True

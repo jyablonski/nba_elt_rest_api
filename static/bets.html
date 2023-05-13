@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NBA Betting</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+</head>
+
+<body style="background-color:rgba(56, 63, 78, 0.699);">
+
+    <section class="vh-100">
+        <div class="container py-5 h-100">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col col-lg-11 col-xl-12">
+              <div class="card rounded-3">
+                <div class="card-body p-4">
+       
+                  <h4 class="text-center my-3 pb-3">NBA Betting</h4>
+       
+                  <form name="selected_team_winner" action="/bets" method="post" enctype="multipart/form-data">
+                  <table class="table mb-4">
+                      <thead>
+                          <tr>
+                            <th scope="col">Game Date</th>
+                            <th scope="col">Home Team</th>
+                            <th scope="col">Home Predicted Win %</th>
+                            <th scope="col">Away Team</th>
+                            <th scope="col">Away Predicted Win %</th>
+                            <th scope="col">Selected Winner</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                        <!-- <select name="bet_predictions"> -->
+                          {% for game in games_today %}
+                          <tr>
+                            <th scope="row">{{game.proper_date }}</th>
+                            <td>{{ game.home_team }}</td>
+                            <td>{{ game.home_team_predicted_win_pct }}</td>
+                            <td>{{ game.away_team }}</td>
+                            <td>{{ game.away_team_predicted_win_pct }}</td>
+                            <td>
+                                {% set teams = [game.home_team, game.away_team] %}
+                                <select name="bet_predictions">
+                                {% for team in teams %}
+                                    <option value="{{ team }}"> {{ team }} </option>
+                                {% endfor %}
+
+                                </select>
+                            </td>
+                          </tr>
+                          {% endfor %}
+                        <!-- </select> -->
+                      </tbody>
+                      
+                  </table>
+                  <center><div class="col-6">
+                    {% if jacobs_predictions > 0 %}
+                      <p class="btn btn-primary">No Games to Predict</p>
+                    {% else %}
+                      <button type="submit" class="btn btn-primary">Save</button>
+                    {% endif %}
+                  </div>
+                </form>
+                  </center>
+                  <!-- <center> <a class="btn btn-success text-align-center" href="/bets">Save</a> </center> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    <nav class="navfoot">
+        <div style="text-align:center;">
+          &copy; 2023 | <a href="https://jyablonski.dev">Website</a> | Version: 0.3.1
+        </div>
+      </nav>

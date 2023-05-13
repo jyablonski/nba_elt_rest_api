@@ -171,7 +171,7 @@ VALUES (current_date, 'Monday', 16, '7:00 PM', 'Indiana Pacers', 'New York Knick
 
 DROP TABLE IF EXISTS nba_predictions;
 CREATE TABLE nba_predictions(
-    proper_date text,
+    proper_date date,
     home_team text,
     home_team_predicted_win_pct numeric,
     away_team text,
@@ -201,4 +201,16 @@ CREATE TABLE IF NOT EXISTS rest_api_users
     username text not null,
     email text,
     created_at timestamp default now()
+);
+
+CREATE TABLE IF NOT EXISTS jacobs_predictions
+(
+    id serial primary key,
+    game_date date,
+    home_team text COLLATE pg_catalog."default",
+    home_team_predicted_win_pct double precision,
+    away_team text COLLATE pg_catalog."default",
+    away_team_predicted_win_pct double precision,
+    selected_winner text COLLATE pg_catalog."default",
+    created_at timestamp without time zone DEFAULT now()
 );

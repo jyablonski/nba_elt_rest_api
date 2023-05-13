@@ -1,5 +1,6 @@
 import os
 
+from envyaml import EnvYAML
 from opentelemetry.instrumentation.sqlalchemy import SQLAlchemyInstrumentor
 from sqlalchemy import create_engine, exc
 from sqlalchemy.ext.declarative import declarative_base
@@ -47,12 +48,14 @@ def get_db():
         db.close()
 
 
+env = EnvYAML("config.yaml")[os.environ.get("ENV_TYPE")]
+
 engine = sql_connection(
-    user=os.environ.get("RDS_USER"),
-    password=os.environ.get("RDS_PW"),
-    host=os.environ.get("IP"),
-    database=os.environ.get("RDS_DB"),
-    schema=os.environ.get("RDS_SCHEMA"),
+    user=env["user"],
+    password=env["pass"],
+    host=env["host"],
+    database=env["database"],
+    schema=env["schema"],
 )
 SQLAlchemyInstrumentor().instrument(engine=engine)
 
