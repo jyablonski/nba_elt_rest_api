@@ -2,8 +2,9 @@ from datetime import datetime
 import os
 from typing import List
 
-from fastapi import Depends, FastAPI, HTTPException, Request, Form
+from fastapi import Depends, FastAPI, Form, HTTPException, Request, status
 from fastapi.responses import HTMLResponse
+from fastapi.security import OAuth2PasswordBearer
 from fastapi.templating import Jinja2Templates
 from mangum import Mangum
 from opentelemetry import trace
@@ -26,11 +27,21 @@ tracer = trace.get_tracer(__name__)
 
 templates = Jinja2Templates(directory="static")
 models.Base.metadata.create_all(bind=engine)
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 app = FastAPI()
 FastAPIInstrumentor.instrument_app(app)
 RequestsInstrumentor().instrument()
 handler = Mangum(app)
+
+
+def api_key_auth(
+    api_key: str = Depends(oauth2_scheme), api_keys: str = os.environ.get("API_KEY")
+):
+    if api_key not in api_keys:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED, detail="Forbidden"
+        )
 
 
 @app.get("/", response_class=HTMLResponse)
@@ -139,7 +150,7 @@ def read_predictions(db: Session = Depends(get_db)):
 
 
 @app.get("/transactions", response_model=List[schemas.TransactionsBase])
-def read_transactions(db: Session = Depends(get_db)):
+async def read_transactions(db: Session = Depends(get_db)):
     transactions = crud.get_transactions(db)
     return transactions
 
@@ -156,7 +167,7 @@ async def create_users(
 
     if record_check:
         raise HTTPException(
-            status_code=400,
+            status_code=403,
             detail="Username already exists!  Please select another username.",
         )
 
@@ -167,36 +178,35 @@ async def create_users(
 async def update_user(
     update_user_request: schemas.UserBase, username: str, db: Session = Depends(get_db)
 ):
-    user_record = (
+    existing_user_record = (
         db.query(models.Users).filter(models.Users.username == username).first()
     )
 
-    if not user_record:
+    if not existing_user_record:
         raise HTTPException(
             status_code=400,
-            detail="Username doesn't exist!  Please select another username.",
+            detail="That old Username doesn't exist!  Please select another username.",
         )
 
-    return crud.update_user(db, user_record, update_user_request)
+    new_record_check = (
+        db.query(models.Users)
+        .filter(models.Users.username == update_user_request.username)
+        .first()
+    )
+
+    if new_record_check:
+        raise HTTPException(
+            status_code=403,
+            detail="The new requested Username already exists!  Please select another username.",
+        )
+
+    return crud.update_user(db, existing_user_record, update_user_request)
 
 
-@app.delete("/users/{username}")
+@app.delete("/users/{username}", dependencies=[Depends(api_key_auth)])
 async def delete_user(
-    delete_user_request: schemas.Authentication,
-    username: str,
-    db: Session = Depends(get_db),
+    username: str, db: Session = Depends(get_db),
 ):
-    if not delete_user_request.api_key:
-        raise HTTPException(
-            status_code=401,
-            detail="You need a valid API Key to perform this operation.",
-        )
-
-    if delete_user_request.api_key != os.environ.get("API_KEY"):
-        raise HTTPException(
-            status_code=403, detail="nuh uh you got the wrong auth mfer"
-        )
-
     user_record = (
         db.query(models.Users).filter(models.Users.username == username).first()
     )
@@ -214,8 +224,8 @@ async def delete_user(
 def get_bets_page(request: Request, db: Session = Depends(get_db)):
     # this logic checks if every game from today has already been acted upon or not
     jacobs_predictions = (
-        db.query(models.JacobsPredictions)
-        .filter(models.JacobsPredictions.game_date == datetime.utcnow().date())
+        db.query(models.UserPredictions)
+        .filter(models.UserPredictions.game_date == datetime.utcnow().date())
         .count()
     )
 
@@ -224,10 +234,10 @@ def get_bets_page(request: Request, db: Session = Depends(get_db)):
         db.query(models.Predictions)
         .filter(models.Predictions.proper_date == datetime.utcnow().date())
         .outerjoin(
-            models.JacobsPredictions,
-            models.Predictions.home_team == models.JacobsPredictions.home_team,
+            models.UserPredictions,
+            models.Predictions.home_team == models.UserPredictions.home_team,
         )
-        .filter(models.JacobsPredictions.home_team == None)
+        .filter(models.UserPredictions.home_team == None)
     )
 
     return templates.TemplateResponse(

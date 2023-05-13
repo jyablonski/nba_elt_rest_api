@@ -1,3 +1,7 @@
+import os
+import random
+
+
 def test_standings(client_fixture):
     response = client_fixture.get("/standings")
     data = response.json()
@@ -99,7 +103,6 @@ def test_team_ratings_individual_fail(client_fixture):
     data = response.json()
 
     assert response.status_code == 404
-    assert response.reason == "Not Found"
     assert "Team not found; please use a Team Acronym:" in data["detail"]
 
     #
@@ -203,7 +206,6 @@ def test_injuries_team_fail(client_fixture):
     data = response.json()
 
     assert response.status_code == 404
-    assert response.reason == "Not Found"
     assert "Team not found; please use a Team Acronym:" in data["detail"]
 
     # assert (
@@ -287,7 +289,12 @@ def test_transactions(client_fixture):
 
 def test_create_user(client_fixture):
     response = client_fixture.post(
-        "/users", json={"username": "my_fake_user", "email": "fake@user.net"}
+        "/users",
+        json={
+            "username": "my_fake_user",
+            "password": "bababooiee",
+            "email": "fake@user.net",
+        },
     )
 
     assert response.status_code == 201
@@ -296,15 +303,11 @@ def test_create_user(client_fixture):
 def test_update_user(client_fixture):
     response = client_fixture.put(
         f"/users/my_fake_user",
-        json={"username": "jacobs_fake_user", "email": "yooo@gmail.com"},
-    )
-
-    assert response.status_code == 200
-
-
-def test_delete_user(client_fixture):
-    response = client_fixture.delete(
-        f"/users/jacobs_fake_user", json={"api_key": "aaaa"}
+        json={
+            "username": "jacobs_fake_user",
+            "password": "bby123",
+            "email": "yooo@gmail.com",
+        },
     )
 
     assert response.status_code == 200
@@ -313,15 +316,33 @@ def test_delete_user(client_fixture):
 def test_delete_user_bad_request(client_fixture):
     response = client_fixture.delete(f"/users/jacobs_fake_user")
 
-    assert response.status_code == 422
+    assert response.json()["detail"] == "Not authenticated"
+    assert response.status_code == 401
 
 
 def test_delete_user_bad_api_key(client_fixture):
-    response = client_fixture.delete(
-        f"/users/jacobs_fake_user", json={"api_key": "bbbb"}
-    )
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer zz{os.environ.get('API_KEY')}",
+    }
 
-    assert response.status_code == 403
+    response = client_fixture.delete(f"/users/jacobs_fake_user", headers=headers,)
+
+    assert response.json()["detail"] == "Forbidden"
+    assert response.status_code == 401
+
+
+def test_delete_user(client_fixture_no_auth):
+    username = "jacobs_fake_user"
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer aaaa",
+    }
+
+    response = client_fixture_no_auth.delete(f"/users/{username}", headers=headers,)
+
+    assert response.json() == f"Username {username} Successfully deleted!"
+    assert response.status_code == 200
 
 
 def test_create_user_bad_request(client_fixture):

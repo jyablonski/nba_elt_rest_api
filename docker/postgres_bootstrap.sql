@@ -199,11 +199,12 @@ CREATE TABLE IF NOT EXISTS rest_api_users
 (
     id serial primary key,
     username text not null,
+    password text not null,
     email text,
     created_at timestamp default now()
 );
 
-CREATE TABLE IF NOT EXISTS jacobs_predictions
+CREATE TABLE IF NOT EXISTS user_predictions
 (
     id serial primary key,
     game_date date,

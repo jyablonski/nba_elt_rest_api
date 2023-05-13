@@ -7,13 +7,6 @@ from pydantic import BaseModel
 # Pydantic models use the normal name: str schema for data types
 
 
-class Authentication(BaseModel):
-    api_key: str
-
-    class Config:
-        orm_mode = True
-
-
 class StandingsBase(BaseModel):
     rank: str
     team: str
@@ -179,7 +172,7 @@ class PredictionsBase(BaseModel):
         orm_mode = True
 
 
-class JacobsPredictions(BaseModel):
+class UserPredictions(BaseModel):
     game_date: str
     home_team: str
     home_team_predicted_win_pct: float
@@ -202,6 +195,7 @@ class TransactionsBase(BaseModel):
 
 class UserBase(BaseModel):
     username: str
+    password: str
     email: Optional[str]
     created_at: datetime = datetime.now(timezone.utc)
 

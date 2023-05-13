@@ -159,8 +159,8 @@ class Predictions(Base):
     away_team_predicted_win_pct: float = Column(Float, nullable=True)
 
 
-class JacobsPredictions(Base):
-    __tablename__ = "jacobs_predictions"
+class UserPredictions(Base):
+    __tablename__ = "user_predictions"
     __table_args__ = (PrimaryKeyConstraint("id"),)
 
     id: int = Column(Integer, nullable=False, autoincrement=True)
@@ -186,6 +186,7 @@ class Users(Base):
     __table_args__ = (PrimaryKeyConstraint("id"),)
 
     id: int = Column(Integer, nullable=False, autoincrement=True)
-    username: date = Column(String, nullable=False)
+    username: str = Column(String, nullable=False)
+    password: str = Column(String, nullable=False)
     email: str = Column(String, nullable=True)
     created_at: datetime = Column(TIMESTAMP, nullable=False)

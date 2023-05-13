@@ -89,7 +89,10 @@ def get_transactions(db: Session):
 
 def create_user(db: Session, user: UserCreate):
     record = models.Users(
-        username=user.username, email=user.email, created_at=user.created_at
+        username=user.username,
+        password=user.password,
+        email=user.email,
+        created_at=user.created_at,
     )
     db.add(record)
     db.commit()
@@ -100,6 +103,7 @@ def create_user(db: Session, user: UserCreate):
 def update_user(db: Session, user_record: UserBase, update_user_request: UserBase):
     update_user_encoded = jsonable_encoder(update_user_request)
     user_record.username = update_user_encoded["username"]
+    user_record.password = update_user_encoded["password"]
     user_record.email = update_user_encoded["email"]
 
     updated_user = db.merge(user_record)
@@ -113,12 +117,12 @@ def delete_user(db: Session, user_record: UserBase):
     return f"Username {user_record.username} Successfully deleted!"
 
 
-def store_bet_predictions(db: Session, bet_predictions: List[models.JacobsPredictions]):
+def store_bet_predictions(db: Session, bet_predictions: List[models.UserPredictions]):
     # this is so all records in this batch get the same timestamp
     created_at = datetime.now(timezone.utc)
 
     for prediction in bet_predictions:
-        record = models.JacobsPredictions(
+        record = models.UserPredictions(
             game_date=prediction.proper_date,
             home_team=prediction.home_team,
             home_team_predicted_win_pct=prediction.home_team_predicted_win_pct,
