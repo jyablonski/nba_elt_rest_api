@@ -1,6 +1,6 @@
 from datetime import datetime
 import os
-from typing import List, Union
+from typing import List
 
 from fastapi import Depends, FastAPI, HTTPException, Request, Form
 from fastapi.responses import HTMLResponse
