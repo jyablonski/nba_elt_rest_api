@@ -48,7 +48,7 @@ def get_db():
         db.close()
 
 
-env = EnvYAML("config.yaml")[os.environ.get("ENV_TYPE", "dev")]
+env = EnvYAML("config.yaml")[os.environ.get("ENV_TYPE")]
 
 engine = sql_connection(
     user=env["user"],
