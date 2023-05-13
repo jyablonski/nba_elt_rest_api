@@ -1,6 +1,6 @@
 from datetime import datetime
 import os
-from typing import List
+from typing import List, Optional
 
 from fastapi import Depends, FastAPI, Form, HTTPException, Request, status
 from fastapi.responses import HTMLResponse
@@ -36,7 +36,8 @@ handler = Mangum(app)
 
 
 def api_key_auth(
-    api_key: str = Depends(oauth2_scheme), api_keys: str = os.environ.get("API_KEY", "a")
+    api_key: str = Depends(oauth2_scheme),
+    api_keys: str = os.environ.get("API_KEY", "a"),
 ):
     if api_key not in api_keys:
         raise HTTPException(
@@ -153,6 +154,39 @@ def read_predictions(db: Session = Depends(get_db)):
 async def read_transactions(db: Session = Depends(get_db)):
     transactions = crud.get_transactions(db)
     return transactions
+
+@app.get("/users", response_class=HTMLResponse)
+def hello_world(request: Request):
+    return templates.TemplateResponse("users.html", {"request": request})
+
+
+@app.get("/users/create", response_class=HTMLResponse)
+def hello_world(request: Request):
+    return templates.TemplateResponse("create_user.html", {"request": request})
+
+
+@app.post("/users/create", response_model=schemas.UserCreate)
+def create_users_from_form(
+    username: str = Form(...),
+    password: str = Form(...),
+    email: Optional[str] = Form(...),
+    db: Session = Depends(get_db),
+):
+    record_check = (
+        db.query(models.Users).filter(models.Users.username == username).first()
+    )
+
+    if record_check:
+        raise HTTPException(
+            status_code=403,
+            detail="Username already exists!  Please select another username.",
+        )
+
+    record = models.Users(
+        username=username, password=password, email=email, created_at=datetime.utcnow(),
+    )
+
+    return crud.create_user(db, record)
 
 
 @app.post("/users", response_model=schemas.UserBase, status_code=201)
