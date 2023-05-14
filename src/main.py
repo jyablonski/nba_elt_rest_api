@@ -308,7 +308,7 @@ def get_user_bets_page(request: Request, username: str, db: Session = Depends(ge
     ).count()
 
     # variable to populate element of the UI
-    if user_predictions_count == games_today_count:
+    if user_predictions_count >= games_today_count:
         is_games_left = 0
     else:
         is_games_left = 1
@@ -350,17 +350,54 @@ def store_user_bets_predictions_from_ui(
             detail="This User does not exist.",
         )
     
+    # this logic checks if every game from today has already been selected or not
+    # by the user, and then stores it as a cte for use in a query later
+    user_predictions = (
+        db.query(models.UserPredictions)
+        .filter(models.UserPredictions.username == username)
+        .filter(models.UserPredictions.game_date == datetime.utcnow().date())
+    )
+    user_predictions_count = user_predictions.count()
+    user_predictions_results = user_predictions.cte("user_predictions")
+
+    games_today_count = (
+        db.query(models.Predictions).filter(
+            models.Predictions.proper_date == datetime.utcnow().date()
+        )
+    ).count()
+
+    if user_predictions_count >= games_today_count:
+        raise HTTPException(
+            status_code=403,
+            detail="All Games for Today have been predicted already by this user!",
+        )
+    
+    check_todays_predictions = (
+        db.query(models.Predictions)
+        .filter(models.Predictions.proper_date == datetime.utcnow().date())
+        .join(
+            user_predictions_results,
+            (models.Predictions.home_team == user_predictions_results.c.home_team),
+            isouter=True,
+        )
+        .filter(user_predictions_results.c.game_date == None)
+    ).cte("user_remaining_games")
+
+    
     predictions_list = []
     for prediction in bet_predictions:
         result = (
-            db.query(models.Predictions)
+            db.query(check_todays_predictions)
             .filter(
-                (models.Predictions.home_team == prediction)
-                | (models.Predictions.away_team == prediction)
+                (check_todays_predictions.c.home_team == prediction)
+                | (check_todays_predictions.c.away_team == prediction)
             )
             .first()
         )
-        result.selected_winner = prediction
-        predictions_list.append(result)
+        if result is not None:
+            result = result._asdict()
+            result['selected_winner'] = prediction
+            result['username'] = username
+            predictions_list.append(result)
 
-    return crud.store_bet_predictions(db, username, predictions_list)
+    return crud.store_bet_predictions(db, predictions_list)

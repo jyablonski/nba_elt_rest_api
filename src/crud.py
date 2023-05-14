@@ -119,23 +119,24 @@ def delete_user(db: Session, user_record: UserBase):
 
 
 def store_bet_predictions(
-    db: Session, username: str, bet_predictions: List[models.UserPredictions]
+    db: Session, bet_predictions: List[models.UserPredictions]
 ):
     # this is so all records in this batch get the same timestamp
     created_at = datetime.now(timezone.utc)
-
+    
     for prediction in bet_predictions:
         record = models.UserPredictions(
-            username=username,
-            game_date=prediction.proper_date,
-            home_team=prediction.home_team,
-            home_team_predicted_win_pct=prediction.home_team_predicted_win_pct,
-            away_team=prediction.away_team,
-            away_team_predicted_win_pct=prediction.away_team_predicted_win_pct,
-            selected_winner=prediction.selected_winner,
+            username=prediction['username'],
+            game_date=prediction['proper_date'],
+            home_team=prediction['home_team'],
+            home_team_predicted_win_pct=prediction['home_team_predicted_win_pct'],
+            away_team=prediction['away_team'],
+            away_team_predicted_win_pct=prediction['away_team_predicted_win_pct'],
+            selected_winner=prediction['selected_winner'],
             created_at=created_at,
         )
         db.add(record)
         db.commit()
         db.refresh(record)
+
     return record
