@@ -118,7 +118,9 @@ def delete_user(db: Session, user_record: UserBase):
     return f"Username {user_record.username} Successfully deleted!"
 
 
-def store_bet_predictions(db: Session, username: str, bet_predictions: List[models.UserPredictions]):
+def store_bet_predictions(
+    db: Session, username: str, bet_predictions: List[models.UserPredictions]
+):
     # this is so all records in this batch get the same timestamp
     created_at = datetime.now(timezone.utc)
 

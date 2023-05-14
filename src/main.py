@@ -166,11 +166,7 @@ def user_login(
 
         return templates.TemplateResponse(
             "user_login.html",
-            {
-                "request": request,
-                "username": username,
-                "errors": errors,
-            },
+            {"request": request, "username": username, "errors": errors,},
         )
 
     username_check = (
@@ -184,20 +180,11 @@ def user_login(
         errors.append(f"Wrong Password!")
         return templates.TemplateResponse(
             "user_login.html",
-            {
-                "request": request,
-                "username": username,
-                "errors": errors,
-            },
+            {"request": request, "username": username, "errors": errors,},
         )
 
     return templates.TemplateResponse(
-        "user_page.html",
-        {
-            "request": request,
-            "username": username,
-            "errors": errors,
-        },
+        "user_page.html", {"request": request, "username": username, "errors": errors,},
     )
 
 
@@ -224,10 +211,7 @@ def create_users_from_form(
         )
 
     record = models.Users(
-        username=username,
-        password=password,
-        email=email,
-        created_at=datetime.utcnow(),
+        username=username, password=password, email=email, created_at=datetime.utcnow(),
     )
 
     return crud.create_user(db, record)
@@ -283,8 +267,7 @@ async def update_user(
 
 @app.delete("/users/{username}", dependencies=[Depends(api_key_auth)])
 async def delete_user(
-    username: str,
-    db: Session = Depends(get_db),
+    username: str, db: Session = Depends(get_db),
 ):
     user_record = (
         db.query(models.Users).filter(models.Users.username == username).first()
@@ -299,57 +282,6 @@ async def delete_user(
     return crud.delete_user(db, user_record)
 
 
-@app.get("/bets", response_class=HTMLResponse)
-def get_bets_page(request: Request, db: Session = Depends(get_db)):
-    # this logic checks if every game from today has already been acted upon or not
-    jacobs_predictions = (
-        db.query(models.UserPredictions)
-        .filter(models.UserPredictions.game_date == datetime.utcnow().date())
-        .count()
-    )
-
-    # this logic returns only the unselected games from today's date
-    check_todays_predictions = (
-        db.query(models.Predictions)
-        .filter(models.Predictions.proper_date == datetime.utcnow().date())
-        .outerjoin(
-            models.UserPredictions,
-            models.Predictions.home_team == models.UserPredictions.home_team,
-        )
-        .filter(models.UserPredictions.home_team == None)
-    )
-
-    return templates.TemplateResponse(
-        "bets.html",
-        {
-            "request": request,
-            "games_today": check_todays_predictions,  # [0]
-            "jacobs_predictions": jacobs_predictions,
-        },
-    )
-
-
-@app.post("/bets")
-def store_bets_predictions_from_ui(
-    bet_predictions: List[str] = Form(...), db: Session = Depends(get_db)
-):
-    predictions_list = []
-    for prediction in bet_predictions:
-        result = (
-            db.query(models.Predictions)
-            .filter(
-                (models.Predictions.home_team == prediction)
-                | (models.Predictions.away_team == prediction)
-            )
-            .first()
-        )
-        result.selected_winner = prediction
-        predictions_list.append(result)
-
-    return crud.store_bet_predictions(db, predictions_list)
-
-
-#####
 @app.get("/users/{username}/bets", response_class=HTMLResponse)
 def get_user_bets_page(request: Request, username: str, db: Session = Depends(get_db)):
     username_check = (
@@ -357,12 +289,7 @@ def get_user_bets_page(request: Request, username: str, db: Session = Depends(ge
     ).first()
 
     if username_check is None:
-        return templates.TemplateResponse(
-            "404.html",
-            {
-                "request": request,
-            },
-        )
+        return templates.TemplateResponse("404.html", {"request": request,},)
 
     # this logic checks if every game from today has already been selected or not
     # by the user, and then stores it as a cte for use in a query later

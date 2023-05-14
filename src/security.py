@@ -5,6 +5,7 @@ from fastapi.security import OAuth2PasswordBearer
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
+
 def api_key_auth(
     api_key: str = Depends(oauth2_scheme),
     api_keys: str = os.environ.get("API_KEY", "a"),
