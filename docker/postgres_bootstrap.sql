@@ -209,6 +209,7 @@ VALUES ('jyablonski', 'password', 'j@yablonski.com'),
        ('test', 'password', 'test@nobody.com');
 
 
+DROP TABLE IF EXISTS user_predictions;
 CREATE TABLE IF NOT EXISTS user_predictions
 (
     id serial primary key,
