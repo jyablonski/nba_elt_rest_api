@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form name="create_user_form" action="/users/create" method="post" enctype="multipart/form-data">
+    <center>
+        <h1> Please Create a User</h1>
+        <br>
+        <table>
+            <tr>
+                <td> Username: </td>
+                <td> <input type=”text” name="username" username=””> </td>
+            </tr>
+            <tr>
+                <td> Password: </td>
+                <td> <input type="text" name="password" password=””> </td>
+            </tr>
+            <tr>
+                <td> Email Address (Optional): </td>
+                <td> <input type=”text” name="email" email=””> </td>
+            </tr>
+            <!-- </select> -->
+        </table>
+        <br>
+        <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+</center>
+{% endblock %}

@@ -1,22 +1,12 @@
-<!doctype html>
-<html>
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="utf-8">
-    <meta name="author" content="jyablonski">
-    <meta name="description" content="REST API">
-
-    <title>jyablonski REST API</title>
-
-
-</head>
-<body style="background-color:rgba(56, 63, 78, 0.699);">
+{% block content %}
 
 <h3 class="post-title"><b>REST API Serving Data for NBA ELT Pipeline Project</b></h3>
 <p>
   <br>
   <br>
-  <h2> Endpoints </h4>
+  <h2> GET Endpoints </h4>
     <h4> <a href="/game_types">Game Types</a> </h1>
     <h4> <a href="/injuries">Injuries (All)</a> </h1>
     <h4> <a href="/injuries/GSW">Injuries (Team Specific)</a> </h1>
@@ -29,18 +19,10 @@
     <h4> <a href="/team_ratings/GSW">Team Ratings (Team Specific)</a> </h1>
     <h4> <a href="/transactions">Transactions</a> </h1>
     <h4> <a href="/twitter_comments">Twitter Comments</a> </h1>
+    <h4> <a href="/feedback">Feedback</a> </h1>
+    <h4> <a href="/users/login">Users</a> </h1>
     <br>
     <br>
-    <h4 align="center"> <a href="/feedback">Feedback</a> </h1>
 </p>
 
-        </main>
-    </div>
-    <nav class="navfoot">
-      <div style="text-align:center;">
-        &copy; 2023 | <a href="https://jyablonski.dev">Website</a> | Version: 0.3.1
-      </div>
-    </nav>
-</body>
-
-</html>
+{% endblock %}

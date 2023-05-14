@@ -1,10 +1,12 @@
-from datetime import date, datetime
+from datetime import date, datetime, timezone
 from typing import Optional
 
 
 from pydantic import BaseModel
 
 # Pydantic models use the normal name: str schema for data types
+
+
 class StandingsBase(BaseModel):
     rank: str
     team: str
@@ -160,11 +162,25 @@ class ScheduleBase(BaseModel):
 
 
 class PredictionsBase(BaseModel):
-    proper_date: str
+    proper_date: date
     home_team: str
     home_team_predicted_win_pct: float
     away_team: str
     away_team_predicted_win_pct: float
+
+    class Config:
+        orm_mode = True
+
+
+class UserPredictions(BaseModel):
+    username: str
+    game_date: str
+    home_team: str
+    home_team_predicted_win_pct: float
+    away_team: str
+    away_team_predicted_win_pct: float
+    selected_winner: str
+    created_at: datetime = datetime.now(timezone.utc)
 
     class Config:
         orm_mode = True
@@ -176,3 +192,17 @@ class TransactionsBase(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+class UserBase(BaseModel):
+    username: str
+    password: str
+    email: Optional[str]
+    created_at: datetime = datetime.now(timezone.utc)
+
+    class Config:
+        orm_mode = True
+
+
+class UserCreate(UserBase):
+    pass

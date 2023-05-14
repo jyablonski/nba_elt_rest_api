@@ -171,7 +171,7 @@ VALUES (current_date, 'Monday', 16, '7:00 PM', 'Indiana Pacers', 'New York Knick
 
 DROP TABLE IF EXISTS nba_predictions;
 CREATE TABLE nba_predictions(
-    proper_date text,
+    proper_date date,
     home_team text,
     home_team_predicted_win_pct numeric,
     away_team text,
@@ -192,3 +192,33 @@ CREATE TABLE IF NOT EXISTS prod_transactions
 INSERT INTO prod_transactions(date, transaction)
 VALUES (current_date, 'The Portland Trail Blazers signed Skylar Mays.'),
        (current_date, 'The Toronto Raptors fired Nick Nurse as Head Coach.');
+
+
+DROP TABLE IF EXISTS rest_api_users;
+CREATE TABLE IF NOT EXISTS rest_api_users
+(
+    id serial primary key,
+    username text not null,
+    password text not null,
+    email text,
+    created_at timestamp default now()
+);
+
+INSERT INTO rest_api_users(username, password, email)
+VALUES ('jyablonski', 'password', 'j@yablonski.com'),
+       ('test', 'password', 'test@nobody.com');
+
+
+DROP TABLE IF EXISTS user_predictions;
+CREATE TABLE IF NOT EXISTS user_predictions
+(
+    id serial primary key,
+    username text,
+    game_date date,
+    home_team text COLLATE pg_catalog."default",
+    home_team_predicted_win_pct double precision,
+    away_team text COLLATE pg_catalog."default",
+    away_team_predicted_win_pct double precision,
+    selected_winner text COLLATE pg_catalog."default",
+    created_at timestamp without time zone DEFAULT now()
+);

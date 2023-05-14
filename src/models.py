@@ -152,11 +152,26 @@ class Predictions(Base):
     __tablename__ = "nba_predictions"
     __table_args__ = (PrimaryKeyConstraint("home_team"),)
 
-    proper_date: str = Column(String, nullable=True)
+    proper_date: date = Column(Date, nullable=True)
     home_team: str = Column(String, nullable=False)
     home_team_predicted_win_pct: float = Column(Float, nullable=True)
     away_team: str = Column(String, nullable=True)
     away_team_predicted_win_pct: float = Column(Float, nullable=True)
+
+
+class UserPredictions(Base):
+    __tablename__ = "user_predictions"
+    __table_args__ = (PrimaryKeyConstraint("id"),)
+
+    id: int = Column(Integer, nullable=False, autoincrement=True)
+    username: str = Column(String, nullable=False)
+    game_date: date = Column(Date, nullable=True)
+    home_team: str = Column(String, nullable=False)
+    home_team_predicted_win_pct: float = Column(Float, nullable=True)
+    away_team: str = Column(String, nullable=True)
+    away_team_predicted_win_pct: float = Column(Float, nullable=True)
+    selected_winner: str = Column(String, nullable=False)
+    created_at: datetime = Column(TIMESTAMP, nullable=False)
 
 
 class Transactions(Base):
@@ -165,3 +180,14 @@ class Transactions(Base):
 
     date: date = Column(Date, nullable=False)
     transaction: str = Column(String, nullable=False)
+
+
+class Users(Base):
+    __tablename__ = "rest_api_users"
+    __table_args__ = (PrimaryKeyConstraint("id"),)
+
+    id: int = Column(Integer, nullable=False, autoincrement=True)
+    username: str = Column(String, nullable=False)
+    password: str = Column(String, nullable=False)
+    email: str = Column(String, nullable=True)
+    created_at: datetime = Column(TIMESTAMP, nullable=False)
