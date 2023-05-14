@@ -346,10 +346,9 @@ def store_user_bets_predictions_from_ui(
 
     if username_check is None:
         raise HTTPException(
-            status_code=403,
-            detail="This User does not exist.",
+            status_code=403, detail="This User does not exist.",
         )
-    
+
     # this logic checks if every game from today has already been selected or not
     # by the user, and then stores it as a cte for use in a query later
     user_predictions = (
@@ -371,7 +370,7 @@ def store_user_bets_predictions_from_ui(
             status_code=403,
             detail="All Games for Today have been predicted already by this user!",
         )
-    
+
     check_todays_predictions = (
         db.query(models.Predictions)
         .filter(models.Predictions.proper_date == datetime.utcnow().date())
@@ -383,7 +382,6 @@ def store_user_bets_predictions_from_ui(
         .filter(user_predictions_results.c.game_date == None)
     ).cte("user_remaining_games")
 
-    
     predictions_list = []
     for prediction in bet_predictions:
         result = (
@@ -396,8 +394,8 @@ def store_user_bets_predictions_from_ui(
         )
         if result is not None:
             result = result._asdict()
-            result['selected_winner'] = prediction
-            result['username'] = username
+            result["selected_winner"] = prediction
+            result["username"] = username
             predictions_list.append(result)
 
     return crud.store_bet_predictions(db, predictions_list)
