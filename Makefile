@@ -15,6 +15,7 @@ zip:
 	@(cd lib; zip ../lambda_function.zip -r .)
 	@(zip lambda_function.zip -r src/)
 	@(zip lambda_function.zip -r static/)
+	@(zip lambda_function.zip -r config.yaml)
 
 .PHONY: bump-patch
 bump-patch:
