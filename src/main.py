@@ -340,6 +340,16 @@ def get_user_bets_page(request: Request, username: str, db: Session = Depends(ge
 def store_user_bets_predictions_from_ui(
     username: str, bet_predictions: List[str] = Form(...), db: Session = Depends(get_db)
 ):
+    username_check = (
+        db.query(models.Users).filter(models.Users.username == username)
+    ).first()
+
+    if username_check is None:
+        raise HTTPException(
+            status_code=403,
+            detail="This User does not exist.",
+        )
+    
     predictions_list = []
     for prediction in bet_predictions:
         result = (
