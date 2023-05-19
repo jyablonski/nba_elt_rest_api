@@ -3,6 +3,7 @@ from typing import List, Optional
 
 from fastapi import Depends, FastAPI, Form, HTTPException, Request
 from fastapi.responses import HTMLResponse
+from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from mangum import Mangum
 from opentelemetry import trace
@@ -24,10 +25,11 @@ provider.add_span_processor(processor)
 trace.set_tracer_provider(provider)
 tracer = trace.get_tracer(__name__)
 
-templates = Jinja2Templates(directory="static")
+templates = Jinja2Templates(directory="templates")
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
+app.mount("/static", StaticFiles(directory="static"), name="static")
 FastAPIInstrumentor.instrument_app(app)
 RequestsInstrumentor().instrument()
 handler = Mangum(app)
@@ -197,7 +199,7 @@ def user_create(request: Request):
 def create_users_from_form(
     username: str = Form(...),
     password: str = Form(...),
-    email: Optional[str] = Form(...),
+    email: Optional[str] = Form(None),
     db: Session = Depends(get_db),
 ):
     record_check = (
@@ -399,3 +401,8 @@ def store_user_bets_predictions_from_ui(
             predictions_list.append(result)
 
     return crud.store_bet_predictions(db, predictions_list)
+
+
+@app.get("/test", response_class=HTMLResponse)
+def hello_world(request: Request):
+    return templates.TemplateResponse("test.html", {"request": request})

@@ -7,12 +7,10 @@
         <h1> Please Login</h1>
         <br>
         <!-- <div class="text-danger font-weight-bold"> -->
-            <span style = color:#dc3545!important>
             {% for error in errors %}
             <!-- <span style = color:#dc3545!important> -->
-              <li>{{error}}</li>
+                <div class="error"><li>{{error}}</li></div>
             {% endfor %}
-            </span>
         </div>
         <br>
         <table>
