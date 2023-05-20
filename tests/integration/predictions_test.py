@@ -8,7 +8,9 @@ def test_predictions(client_fixture):
     assert list(data[0].keys()) == [
         "proper_date",
         "home_team",
+        "home_team_odds",
         "home_team_predicted_win_pct",
         "away_team",
+        "away_team_odds",
         "away_team_predicted_win_pct",
     ]
