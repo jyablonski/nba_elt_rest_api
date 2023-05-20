@@ -15,7 +15,7 @@ from .database import Base
 
 # SqlAlchemy models use name = Column(String)
 class Standings(Base):
-    __tablename__ = "prod_standings"
+    __tablename__ = "standings"
 
     rank: str = Column(String, unique=True, nullable=False)
     team: str = Column(String, unique=True, primary_key=True, nullable=False)
@@ -31,7 +31,7 @@ class Standings(Base):
 
 
 class Scorers(Base):
-    __tablename__ = "prod_scorers"
+    __tablename__ = "scorers"
 
     player: str = Column(String, unique=True, primary_key=True, nullable=False)
     team: str = Column(String, unique=True, nullable=False)
@@ -52,7 +52,7 @@ class Scorers(Base):
 
 
 class Team_Ratings(Base):
-    __tablename__ = "prod_team_ratings"
+    __tablename__ = "team_ratings"
 
     team: str = Column(String, unique=True, primary_key=True, nullable=False)
     team_acronym: str = Column(String, unique=True, nullable=False)
@@ -68,7 +68,7 @@ class Team_Ratings(Base):
 
 
 class Twitter_Comments(Base):
-    __tablename__ = "prod_twitter_comments"
+    __tablename__ = "twitter_comments"
     __table_args__ = (PrimaryKeyConstraint("scrape_ts", "username", "tweet"),)
 
     scrape_ts: date = Column(TIMESTAMP, nullable=False)
@@ -84,7 +84,7 @@ class Twitter_Comments(Base):
 
 
 class Reddit_Comments(Base):
-    __tablename__ = "prod_reddit_comments"
+    __tablename__ = "reddit_comments"
     __table_args__ = (PrimaryKeyConstraint("scrape_date", "author", "comment"),)
 
     scrape_date: date = Column(Date, nullable=False)
@@ -100,7 +100,7 @@ class Reddit_Comments(Base):
 
 
 class Injuries(Base):
-    __tablename__ = "prod_injuries"
+    __tablename__ = "injuries"
     __table_args__ = (PrimaryKeyConstraint("player", "injury", "description"),)
 
     player: str = Column(String, nullable=True)
@@ -116,7 +116,7 @@ class Injuries(Base):
 
 
 class Game_Types(Base):
-    __tablename__ = "prod_game_types"
+    __tablename__ = "game_types"
     __table_args__ = (PrimaryKeyConstraint("game_type", "type"),)
 
     game_type: str = Column(String, nullable=False)
@@ -126,7 +126,7 @@ class Game_Types(Base):
 
 
 class Feedback(Base):
-    __tablename__ = "prod_feedback"
+    __tablename__ = "feedback"
     __table_args__ = (PrimaryKeyConstraint("id"),)
 
     id: int = Column(Integer, nullable=False, autoincrement=True)
@@ -135,7 +135,7 @@ class Feedback(Base):
 
 
 class Schedule(Base):
-    __tablename__ = "prod_schedule"
+    __tablename__ = "schedule"
     __table_args__ = (PrimaryKeyConstraint("home_team", "date", "away_team"),)
 
     date: date = Column(Date, nullable=True)
@@ -175,7 +175,7 @@ class UserPredictions(Base):
 
 
 class Transactions(Base):
-    __tablename__ = "prod_transactions"
+    __tablename__ = "transactions"
     __table_args__ = (PrimaryKeyConstraint("date", "transaction"),)
 
     date: date = Column(Date, nullable=False)
