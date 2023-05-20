@@ -3,6 +3,7 @@ from typing import List, Optional
 
 from fastapi import Depends, FastAPI, Form, HTTPException, Request
 from fastapi.responses import HTMLResponse
+from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from mangum import Mangum
 from opentelemetry import trace
@@ -24,10 +25,11 @@ provider.add_span_processor(processor)
 trace.set_tracer_provider(provider)
 tracer = trace.get_tracer(__name__)
 
-templates = Jinja2Templates(directory="static")
+templates = Jinja2Templates(directory="templates")
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
+app.mount("/static", StaticFiles(directory="static"), name="static")
 FastAPIInstrumentor.instrument_app(app)
 RequestsInstrumentor().instrument()
 handler = Mangum(app)
@@ -114,16 +116,14 @@ def read_game_types(db: Session = Depends(get_db)):
 
 
 @app.get("/feedback", response_class=HTMLResponse)
-def form_get():
-    return """<form method="post"> 
-    <input type="text" style="font-size: 18pt; height: 50px; width:1000px;" name="user_feedback" value=""/> 
-    <input type="submit" style="font-size: 12pt; height: 50px;"/> 
-    </form>"""
+def form_get(request: Request):
+    return templates.TemplateResponse("feedback.html", {"request": request})
 
 
 @app.post("/feedback", response_model=schemas.FeedbackBase)
-def post_feedback(user_feedback: str = Form(...), db: Session = Depends(get_db)):
-    return crud.send_feedback(db, user_feedback)
+def post_feedback(request: Request, user_feedback: str = Form(...), db: Session = Depends(get_db)):
+    crud.send_feedback(db, user_feedback)
+    return templates.TemplateResponse("feedback.html", {"request": request})
 
 
 @app.get("/schedule", response_model=List[schemas.ScheduleBase])
@@ -195,9 +195,10 @@ def user_create(request: Request):
 
 @app.post("/users/create", response_model=schemas.UserCreate)
 def create_users_from_form(
+    request: Request,
     username: str = Form(...),
     password: str = Form(...),
-    email: Optional[str] = Form(...),
+    email: Optional[str] = Form(None),
     db: Session = Depends(get_db),
 ):
     record_check = (
@@ -214,7 +215,9 @@ def create_users_from_form(
         username=username, password=password, email=email, created_at=datetime.utcnow(),
     )
 
-    return crud.create_user(db, record)
+    crud.create_user(db, record)
+
+    return templates.TemplateResponse("user_login.html", {"request": request, "username": username})
 
 
 @app.post("/users", response_model=schemas.UserBase, status_code=201)
@@ -399,3 +402,8 @@ def store_user_bets_predictions_from_ui(
             predictions_list.append(result)
 
     return crud.store_bet_predictions(db, predictions_list)
+
+
+# @app.get("/test", response_class=HTMLResponse)
+# def hello_world(request: Request):
+#     return templates.TemplateResponse("test.html", {"request": request})
