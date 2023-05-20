@@ -3,16 +3,22 @@
 {% block content %}
 
 <form name="user_logic_form" action="/users/login" method="post" enctype="multipart/form-data">
-    <center>
-        <h1> Please Login</h1>
+    <fieldset>
+        <legend>Login</legend>
         <br>
         <!-- <div class="text-danger font-weight-bold"> -->
-            {% for error in errors %}
-            <!-- <span style = color:#dc3545!important> -->
-                <div class="error"><li>{{error}}</li></div>
-            {% endfor %}
+        {% for error in errors %}
+        <!-- <span style = color:#dc3545!important> -->
+        <div class="error">
+            <li>{{error}}</li>
+        </div>
+        {% endfor %}
         </div>
         <br>
+        {% if username is defined and username and not errors %}
+        Welcome {{ username }} ! Please login
+        <br>
+        {% endif %}
         <table>
             <tr>
                 <td> Username: </td>
@@ -20,13 +26,13 @@
             </tr>
             <tr>
                 <td> Password: </td>
-                <td> <input type="text" name="password" password=””> </td>
+                <td> <input type="password" name="password" password=””> </td>
             </tr>
             <!-- </select> -->
         </table>
         <br>
         <button type="submit" class="btn btn-primary">Submit</button>
+        <h4> Don't have an account? <a href="/users/create">Create One</a></h1>
+    </fieldset>
 </form>
-<h4> Don't have an account?  <a href="/users/create">Create One</a></h1>
-</center>
 {% endblock %}

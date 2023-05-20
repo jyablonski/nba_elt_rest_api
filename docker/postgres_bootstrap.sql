@@ -173,14 +173,16 @@ DROP TABLE IF EXISTS nba_predictions;
 CREATE TABLE nba_predictions(
     proper_date date,
     home_team text,
+    home_team_odds text,
     home_team_predicted_win_pct numeric,
     away_team text,
+    away_team_odds text,
     away_team_predicted_win_pct numeric
 );
 
-INSERT INTO nba_predictions (proper_date, home_team, home_team_predicted_win_pct, away_team, away_team_predicted_win_pct)
-VALUES (current_date, 'Indiana Pacers', 0.247, 'San Antonio Spurs', 0.753),
-       (current_date, 'Houston Rockets', 0.194, 'Memphis Grizzlies', 0.806);
+INSERT INTO nba_predictions (proper_date, home_team, home_team_odds, home_team_predicted_win_pct, away_team, away_team_odds, away_team_predicted_win_pct)
+VALUES (current_date, 'Indiana Pacers', 'Indiana Pacers (+200)', 0.247, 'San Antonio Spurs', 'San Antonio Spurs (-160)', 0.753),
+       (current_date, 'Houston Rockets', 'Houston Rockets (-140)', 0.194, 'Memphis Grizzlies', 'Memphis Grizzlies (+180)', 0.806);
 
 DROP TABLE IF EXISTS transactions;
 CREATE TABLE IF NOT EXISTS transactions
@@ -206,7 +208,10 @@ CREATE TABLE IF NOT EXISTS rest_api_users
 
 INSERT INTO rest_api_users(username, password, email)
 VALUES ('jyablonski', 'password', 'j@yablonski.com'),
-       ('test', 'password', 'test@nobody.com');
+       ('test', 'password', 'test@nobody.com'),
+       ('test1', 'password', 'test@nobody.com'),
+       ('test2', 'password', 'test@nobody.com'),
+       ('test3', 'password', 'test@nobody.com');
 
 
 DROP TABLE IF EXISTS user_predictions;

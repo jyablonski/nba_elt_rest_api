@@ -12,4 +12,24 @@
 <div class="warning">Warning message</div>
 <div class="error">Error message</div>
 <div class="validation">Validation message 1<br>Validation message 2</div>
+
+<form th:object="${book}">
+    <fieldset>
+        <legend>Book</legend>
+        <table>
+            <tr>
+                <td><label for="id">Id:</label></td>
+                <td><input type="text" name="id" id=””></td>
+            </tr>
+            <tr>
+                <td><label for="title">Title:</label></td>
+                <td><input type="text" name="title" title=””> </td>
+            </tr>
+        </table>
+        <button type="submit" class="btn btn-primary">Save</button>
+    </fieldset>
+</form>
+
+<button id="myBtn">Open Modal</button>
+
 {% endblock content %}
