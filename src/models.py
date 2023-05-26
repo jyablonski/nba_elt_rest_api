@@ -154,10 +154,10 @@ class Predictions(Base):
 
     proper_date: date = Column(Date, nullable=True)
     home_team: str = Column(String, nullable=False)
-    home_team_odds: str = Column(String, nullable=False)
+    home_team_odds: int = Column(Integer, nullable=False)
     home_team_predicted_win_pct: float = Column(Float, nullable=True)
     away_team: str = Column(String, nullable=True)
-    away_team_odds: str = Column(String, nullable=False)
+    away_team_odds: int = Column(Integer, nullable=False)
     away_team_predicted_win_pct: float = Column(Float, nullable=True)
 
 
@@ -169,8 +169,10 @@ class UserPredictions(Base):
     username: str = Column(String, nullable=False)
     game_date: date = Column(Date, nullable=True)
     home_team: str = Column(String, nullable=False)
+    home_team_odds: int = Column(Integer, nullable=False)
     home_team_predicted_win_pct: float = Column(Float, nullable=True)
     away_team: str = Column(String, nullable=True)
+    away_team_odds: int = Column(Integer, nullable=False)
     away_team_predicted_win_pct: float = Column(Float, nullable=True)
     selected_winner: str = Column(String, nullable=False)
     created_at: datetime = Column(TIMESTAMP, nullable=False)

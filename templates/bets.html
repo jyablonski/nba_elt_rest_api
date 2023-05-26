@@ -41,8 +41,10 @@
          <tr>
             <th scope="col">Game Date</th>
             <th scope="col">Home Team</th>
+            <th scope="col">Home Team Odds</th>
             <th scope="col">Home Predicted Win %</th>
             <th scope="col">Away Team</th>
+            <th scope="col">Away Team Odds</th>
             <th scope="col">Away Predicted Win %</th>
             <th scope="col">Selected Winner</th>
          </tr>
@@ -52,8 +54,10 @@
          {% for game in games_today %}
          <tr>
             <th scope="row">{{game.proper_date }}</th>
+            <td>{{ game.home_team }}</td>
             <td>{{ game.home_team_odds }}</td>
             <td>{{ (game.home_team_predicted_win_pct * 100)|round(3) }}% </td>
+            <td>{{ game.away_team }}</td>
             <td>{{ game.away_team_odds }}</td>
             <td>{{ (game.away_team_predicted_win_pct * 100)|round(3)}}% </td>
             <td>

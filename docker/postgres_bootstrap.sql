@@ -173,16 +173,16 @@ DROP TABLE IF EXISTS nba_predictions;
 CREATE TABLE nba_predictions(
     proper_date date,
     home_team text,
-    home_team_odds text,
+    home_team_odds double precision,
     home_team_predicted_win_pct numeric,
     away_team text,
-    away_team_odds text,
+    away_team_odds double precision,
     away_team_predicted_win_pct numeric
 );
 
 INSERT INTO nba_predictions (proper_date, home_team, home_team_odds, home_team_predicted_win_pct, away_team, away_team_odds, away_team_predicted_win_pct)
-VALUES (current_date, 'Indiana Pacers', 'Indiana Pacers (+200)', 0.247, 'San Antonio Spurs', 'San Antonio Spurs (-160)', 0.753),
-       (current_date, 'Houston Rockets', 'Houston Rockets (-140)', 0.194, 'Memphis Grizzlies', 'Memphis Grizzlies (+180)', 0.806);
+VALUES (current_date, 'Indiana Pacers', '+200', 0.247, 'San Antonio Spurs', '-160', 0.753),
+       (current_date, 'Houston Rockets', '-140', 0.194, 'Memphis Grizzlies', '+180', 0.806);
 
 DROP TABLE IF EXISTS transactions;
 CREATE TABLE IF NOT EXISTS transactions
@@ -221,8 +221,10 @@ CREATE TABLE IF NOT EXISTS user_predictions
     username text,
     game_date date,
     home_team text COLLATE pg_catalog."default",
+    home_team_odds integer,
     home_team_predicted_win_pct double precision,
     away_team text COLLATE pg_catalog."default",
+    away_team_odds integer,
     away_team_predicted_win_pct double precision,
     selected_winner text COLLATE pg_catalog."default",
     created_at timestamp without time zone DEFAULT now()

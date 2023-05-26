@@ -407,3 +407,27 @@ def store_user_bets_predictions_from_ui(
 # @app.get("/test", response_class=HTMLResponse)
 # def hello_world(request: Request):
 #     return templates.TemplateResponse("test.html", {"request": request})
+
+@app.get("/users/{username}/past_bets", response_class=HTMLResponse)
+def get_user_past_bets_page(request: Request, username: str, db: Session = Depends(get_db)):
+    username_check = (
+        db.query(models.Users).filter(models.Users.username == username)
+    ).first()
+
+    if username_check is None:
+        return templates.TemplateResponse("404.html", {"request": request,},)
+
+    # this logic checks if every game from today has already been selected or not
+    # by the user, and then stores it as a cte for use in a query later
+    user_past_predictions = (
+        db.query(models.UserPredictions)
+        .filter(models.UserPredictions.username == username)
+    )
+    return templates.TemplateResponse(
+        "past_bets.html",
+        {
+            "request": request,
+            "past_predictions": user_past_predictions,
+            "username": username,
+        },
+    )
