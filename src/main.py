@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import List, Optional
+from typing import Annotated, List, Optional
 
 from fastapi import Depends, FastAPI, Form, HTTPException, Request
 from fastapi.responses import HTMLResponse
@@ -17,7 +17,7 @@ from sqlalchemy.orm import Session
 from . import crud, models, schemas
 from .database import engine, get_db
 from .utils import team_acronyms
-from .security import api_key_auth
+from .security import api_key_auth, AuthStaticFiles, verify_username
 
 provider = TracerProvider()
 processor = BatchSpanProcessor(OTLPSpanExporter())
@@ -29,7 +29,12 @@ templates = Jinja2Templates(directory="templates")
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
-app.mount("/static", StaticFiles(directory="static"), name="static")
+# app.mount("/static", StaticFiles(directory="static"), name="static")
+app.mount(
+    "/static",
+    AuthStaticFiles(directory="static"),
+    name="static",
+)
 FastAPIInstrumentor.instrument_app(app)
 RequestsInstrumentor().instrument()
 handler = Mangum(app)
@@ -290,7 +295,7 @@ async def delete_user(
 
 
 @app.get("/users/{username}/bets", response_class=HTMLResponse)
-def get_user_bets_page(request: Request, username: str, db: Session = Depends(get_db)):
+def get_user_bets_page(request: Request, username: Annotated[str, Depends(verify_username)], db: Session = Depends(get_db)):
     username_check = (
         db.query(models.Users).filter(models.Users.username == username)
     ).first()
@@ -331,7 +336,7 @@ def get_user_bets_page(request: Request, username: str, db: Session = Depends(ge
         )
         .filter(user_predictions_results.c.game_date == None)
     )
-
+    
     return templates.TemplateResponse(
         "bets.html",
         {
@@ -426,9 +431,10 @@ def get_user_past_bets_page(
 
     # this logic checks if every game from today has already been selected or not
     # by the user, and then stores it as a cte for use in a query later
-    user_past_predictions = db.query(models.UserPredictions).filter(
-        models.UserPredictions.username == username
+    user_past_predictions = db.query(models.UserPastPredictions).filter(
+        models.UserPastPredictions.username == username
     )
+
     return templates.TemplateResponse(
         "past_bets.html",
         {

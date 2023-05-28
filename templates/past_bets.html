@@ -13,6 +13,7 @@
           <th scope="col">Away Predicted Win %</th>
           <th scope="col">Selected Winner</th>
           <th scope="col">Actual Winner</th>
+          <th scope="col">Correct Prediction</th>
        </tr>
     </thead>
     <tbody>
@@ -26,6 +27,8 @@
           <td>{{ game.away_team_odds }}</td>
           <td>{{ (game.away_team_predicted_win_pct * 100)|round(3)}}% </td>
           <td>{{ game.selected_winner }}</td>
+          <td>{{ game.actual_winner }}</td>
+          <td>{{ game.is_correct_prediction }}</td>
        </tr>
        {% endfor %}
     </tbody>
