@@ -12,11 +12,18 @@ from .models import Users
 security = HTTPBasic()
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
-async def verify_username(request: Request, username: str, db: Session = Depends(get_db)) -> HTTPBasicCredentials:
+
+async def verify_username(
+    request: Request, username: str, db: Session = Depends(get_db)
+) -> HTTPBasicCredentials:
+    username_check = (db.query(Users).filter(Users.username == username)).first()
+
+    if username_check is None:
+        return None
 
     user_password = (
-        db.query(Users).filter(Users.username == username)
-    ).first().password
+        (db.query(Users).filter(Users.username == username)).first().password
+    )
 
     credentials = await security(request)
 

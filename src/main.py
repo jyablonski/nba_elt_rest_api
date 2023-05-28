@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import Annotated, List, Optional
 
-from fastapi import Depends, FastAPI, Form, HTTPException, Request
+from fastapi import Depends, FastAPI, Form, HTTPException, Request, Response
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
@@ -31,9 +31,7 @@ models.Base.metadata.create_all(bind=engine)
 app = FastAPI()
 # app.mount("/static", StaticFiles(directory="static"), name="static")
 app.mount(
-    "/static",
-    AuthStaticFiles(directory="static"),
-    name="static",
+    "/static", AuthStaticFiles(directory="static"), name="static",
 )
 FastAPIInstrumentor.instrument_app(app)
 RequestsInstrumentor().instrument()
@@ -295,16 +293,15 @@ async def delete_user(
 
 
 @app.get("/users/{username}/bets", response_class=HTMLResponse)
-def get_user_bets_page(request: Request, username: Annotated[str, Depends(verify_username)], db: Session = Depends(get_db)):
-    username_check = (
-        db.query(models.Users).filter(models.Users.username == username)
-    ).first()
+async def get_user_bets_page(
+    request: Request,
+    username: Annotated[str, Depends(verify_username)],
+    db: Session = Depends(get_db),
+):
 
-    if username_check is None:
-        return templates.TemplateResponse("404.html", {"request": request,},)
+    if username is None:
+        return templates.TemplateResponse("404.html", {"request": request},)
 
-    # this logic checks if every game from today has already been selected or not
-    # by the user, and then stores it as a cte for use in a query later
     user_predictions = (
         db.query(models.UserPredictions)
         .filter(models.UserPredictions.username == username)
@@ -336,7 +333,7 @@ def get_user_bets_page(request: Request, username: Annotated[str, Depends(verify
         )
         .filter(user_predictions_results.c.game_date == None)
     )
-    
+
     return templates.TemplateResponse(
         "bets.html",
         {
@@ -350,7 +347,10 @@ def get_user_bets_page(request: Request, username: Annotated[str, Depends(verify
 
 @app.post("/users/{username}/bets")
 def store_user_bets_predictions_from_ui(
-    username: str, bet_predictions: List[str] = Form(...), db: Session = Depends(get_db)
+    request: Request,
+    username: str,
+    bet_predictions: List[str] = Form(...),
+    db: Session = Depends(get_db),
 ):
     username_check = (
         db.query(models.Users).filter(models.Users.username == username)
@@ -410,24 +410,19 @@ def store_user_bets_predictions_from_ui(
             result["username"] = username
             predictions_list.append(result)
 
-    return crud.store_bet_predictions(db, predictions_list)
+    crud.store_bet_predictions(db, predictions_list)
 
-
-# @app.get("/test", response_class=HTMLResponse)
-# def hello_world(request: Request):
-#     return templates.TemplateResponse("test.html", {"request": request})
+    return templates.TemplateResponse(
+        "bets.html", {"request": request, "username": username,},
+    )
 
 
 @app.get("/users/{username}/past_bets", response_class=HTMLResponse)
 def get_user_past_bets_page(
-    request: Request, username: str, db: Session = Depends(get_db)
+    request: Request,
+    username: Annotated[str, Depends(verify_username)],
+    db: Session = Depends(get_db),
 ):
-    username_check = (
-        db.query(models.Users).filter(models.Users.username == username)
-    ).first()
-
-    if username_check is None:
-        return templates.TemplateResponse("404.html", {"request": request,},)
 
     # this logic checks if every game from today has already been selected or not
     # by the user, and then stores it as a cte for use in a query later
@@ -443,3 +438,8 @@ def get_user_past_bets_page(
             "username": username,
         },
     )
+
+
+@app.exception_handler(404)
+async def custom_404_handler(request: Request, __):
+    return templates.TemplateResponse("404.html", {"request": request}, status_code=404)

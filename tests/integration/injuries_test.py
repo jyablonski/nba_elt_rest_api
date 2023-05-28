@@ -45,10 +45,8 @@ def test_injuries_team_fail(client_fixture):
     team = "JACOBS_FAKE_TEAM"
 
     response = client_fixture.get(f"/injuries/{team}")
-    data = response.json()
 
     assert response.status_code == 404
-    assert "Team not found; please use a Team Acronym:" in data["detail"]
 
     # assert (
     #     data["detail"]

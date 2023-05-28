@@ -196,6 +196,7 @@ class Users(Base):
     email: str = Column(String, nullable=True)
     created_at: datetime = Column(TIMESTAMP, nullable=False)
 
+
 class UserPastPredictions(Base):
     __tablename__ = "user_past_predictions"
     __table_args__ = (PrimaryKeyConstraint("id"),)
