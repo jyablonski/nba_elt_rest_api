@@ -121,7 +121,9 @@ def form_get(request: Request):
 
 
 @app.post("/feedback", response_model=schemas.FeedbackBase)
-def post_feedback(request: Request, user_feedback: str = Form(...), db: Session = Depends(get_db)):
+def post_feedback(
+    request: Request, user_feedback: str = Form(...), db: Session = Depends(get_db)
+):
     crud.send_feedback(db, user_feedback)
     return templates.TemplateResponse("feedback.html", {"request": request})
 
@@ -217,7 +219,9 @@ def create_users_from_form(
 
     crud.create_user(db, record)
 
-    return templates.TemplateResponse("user_login.html", {"request": request, "username": username})
+    return templates.TemplateResponse(
+        "user_login.html", {"request": request, "username": username}
+    )
 
 
 @app.post("/users", response_model=schemas.UserBase, status_code=201)
@@ -408,8 +412,11 @@ def store_user_bets_predictions_from_ui(
 # def hello_world(request: Request):
 #     return templates.TemplateResponse("test.html", {"request": request})
 
+
 @app.get("/users/{username}/past_bets", response_class=HTMLResponse)
-def get_user_past_bets_page(request: Request, username: str, db: Session = Depends(get_db)):
+def get_user_past_bets_page(
+    request: Request, username: str, db: Session = Depends(get_db)
+):
     username_check = (
         db.query(models.Users).filter(models.Users.username == username)
     ).first()
@@ -419,9 +426,8 @@ def get_user_past_bets_page(request: Request, username: str, db: Session = Depen
 
     # this logic checks if every game from today has already been selected or not
     # by the user, and then stores it as a cte for use in a query later
-    user_past_predictions = (
-        db.query(models.UserPredictions)
-        .filter(models.UserPredictions.username == username)
+    user_past_predictions = db.query(models.UserPredictions).filter(
+        models.UserPredictions.username == username
     )
     return templates.TemplateResponse(
         "past_bets.html",
