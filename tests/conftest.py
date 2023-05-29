@@ -1,11 +1,16 @@
-import json
 import os
 
 from fastapi.testclient import TestClient
 import pytest
-import pytest_mock
 
-from src.main import app, api_key_auth
+from src.main import app
+from src.security import api_key_auth
+
+# def pytest_configure(config):
+#     import src.main # NB this causes `src/core/__init__.py` to run
+#     # set up any "aliases" (optional...)
+#     import sys
+#     sys.modules['core'] = sys.modules['src.core']
 
 
 @pytest.fixture()

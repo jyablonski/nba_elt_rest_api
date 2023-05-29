@@ -1,5 +1,7 @@
+from datetime import datetime, timedelta
 import os
 import secrets
+from typing import Optional
 
 from fastapi import Depends, HTTPException, Request, status
 from fastapi.security import HTTPBasic, HTTPBasicCredentials, OAuth2PasswordBearer
@@ -53,11 +55,25 @@ class AuthStaticFiles(StaticFiles):
         await super().__call__(scope, receive, send)
 
 
-def api_key_auth(
-    api_key: str = Depends(oauth2_scheme),
-    api_keys: str = os.environ.get("API_KEY", "a"),
-):
+def api_key_auth(api_key: str = Depends(oauth2_scheme),):
+    api_keys: str = os.environ.get("API_KEY", "a")
+
     if api_key not in api_keys:
         raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED, detail="Forbidden"
+            status_code=status.HTTP_401_UNAUTHORIZED, detail="Forbidden",
         )
+
+# jwt work TBD
+# def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
+#     to_encode = data.copy()
+#     if expires_delta:
+#         expire = datetime.utcnow() + expires_delta
+#     else:
+#         expire = datetime.utcnow() + timedelta(
+#             minutes=30,
+#         )
+#     to_encode.update({"exp": expire})
+#     encoded_jwt = jwt.encode(
+#         to_encode, os.environ.get("API_KEY", "a"), algorithm="HS256",
+#     )
+#     return encoded_jwt
