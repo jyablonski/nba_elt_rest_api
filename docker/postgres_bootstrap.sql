@@ -173,16 +173,16 @@ DROP TABLE IF EXISTS nba_predictions;
 CREATE TABLE nba_predictions(
     proper_date date,
     home_team text,
-    home_team_odds text,
+    home_team_odds double precision,
     home_team_predicted_win_pct numeric,
     away_team text,
-    away_team_odds text,
+    away_team_odds double precision,
     away_team_predicted_win_pct numeric
 );
 
 INSERT INTO nba_predictions (proper_date, home_team, home_team_odds, home_team_predicted_win_pct, away_team, away_team_odds, away_team_predicted_win_pct)
-VALUES (current_date, 'Indiana Pacers', 'Indiana Pacers (+200)', 0.247, 'San Antonio Spurs', 'San Antonio Spurs (-160)', 0.753),
-       (current_date, 'Houston Rockets', 'Houston Rockets (-140)', 0.194, 'Memphis Grizzlies', 'Memphis Grizzlies (+180)', 0.806);
+VALUES (current_date, 'Indiana Pacers', '+200', 0.247, 'San Antonio Spurs', '-160', 0.753),
+       (current_date, 'Houston Rockets', '-140', 0.194, 'Memphis Grizzlies', '+180', 0.806);
 
 DROP TABLE IF EXISTS transactions;
 CREATE TABLE IF NOT EXISTS transactions
@@ -221,9 +221,76 @@ CREATE TABLE IF NOT EXISTS user_predictions
     username text,
     game_date date,
     home_team text COLLATE pg_catalog."default",
+    home_team_odds integer,
     home_team_predicted_win_pct double precision,
     away_team text COLLATE pg_catalog."default",
+    away_team_odds integer,
     away_team_predicted_win_pct double precision,
     selected_winner text COLLATE pg_catalog."default",
     created_at timestamp without time zone DEFAULT now()
 );
+
+-- 2023-05-28 update: this table is made from dbt in prod.  for testing im just making a blank table to test 
+-- past bets functionality.
+DROP TABLE IF EXISTS mov;
+CREATE TABLE IF NOT EXISTS mov
+(
+    team text COLLATE pg_catalog."default",
+    full_team text COLLATE pg_catalog."default",
+    game_id bigint,
+    date date,
+    outcome text COLLATE pg_catalog."default",
+    opponent text COLLATE pg_catalog."default",
+    pts_scored numeric,
+    pts_scored_opp numeric,
+    mov numeric,
+    record text COLLATE pg_catalog."default"
+);
+
+create view user_past_predictions as
+WITH home_wins AS (
+    SELECT 
+        mov.full_team AS home_team,
+        mov.date AS game_date,
+        mov.outcome
+    FROM nba_prod.mov
+    ),
+    combo AS (
+    SELECT 
+        user_predictions.id,
+        user_predictions.username,
+        user_predictions.game_date,
+        user_predictions.home_team,
+        user_predictions.home_team_odds,
+        user_predictions.home_team_predicted_win_pct,
+        user_predictions.away_team,
+        user_predictions.away_team_odds,
+        user_predictions.away_team_predicted_win_pct,
+        user_predictions.selected_winner,
+        user_predictions.created_at,
+        CASE
+            WHEN home_wins.outcome = 'W'::text THEN user_predictions.home_team
+            WHEN home_wins.outcome = 'L'::text THEN user_predictions.away_team
+            ELSE 'TBD'::text
+        END AS actual_winner
+    FROM nba_prod.user_predictions
+    LEFT JOIN home_wins USING (home_team, game_date)
+    )
+SELECT 
+    combo.id,
+    combo.username,
+    combo.game_date,
+    combo.home_team,
+    combo.home_team_odds,
+    combo.home_team_predicted_win_pct,
+    combo.away_team,
+    combo.away_team_odds,
+    combo.away_team_predicted_win_pct,
+    combo.selected_winner,
+    combo.created_at,
+    combo.actual_winner,
+    CASE
+        WHEN combo.selected_winner = combo.actual_winner THEN 1
+        ELSE 0
+    END AS is_correct_prediction
+FROM combo;

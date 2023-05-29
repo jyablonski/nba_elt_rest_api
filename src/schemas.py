@@ -164,10 +164,10 @@ class ScheduleBase(BaseModel):
 class PredictionsBase(BaseModel):
     proper_date: date
     home_team: str
-    home_team_odds: str
+    home_team_odds: int
     home_team_predicted_win_pct: float
     away_team: str
-    away_team_odds: str
+    away_team_odds: int
     away_team_predicted_win_pct: float
 
     class Config:
@@ -178,8 +178,10 @@ class UserPredictions(BaseModel):
     username: str
     game_date: str
     home_team: str
+    home_team_odds: int
     home_team_predicted_win_pct: float
     away_team: str
+    away_team_odds: int
     away_team_predicted_win_pct: float
     selected_winner: str
     created_at: datetime = datetime.now(timezone.utc)

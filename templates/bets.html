@@ -41,8 +41,10 @@
          <tr>
             <th scope="col">Game Date</th>
             <th scope="col">Home Team</th>
+            <th scope="col">Home Team Odds</th>
             <th scope="col">Home Predicted Win %</th>
             <th scope="col">Away Team</th>
+            <th scope="col">Away Team Odds</th>
             <th scope="col">Away Predicted Win %</th>
             <th scope="col">Selected Winner</th>
          </tr>
@@ -52,8 +54,10 @@
          {% for game in games_today %}
          <tr>
             <th scope="row">{{game.proper_date }}</th>
+            <td>{{ game.home_team }}</td>
             <td>{{ game.home_team_odds }}</td>
             <td>{{ (game.home_team_predicted_win_pct * 100)|round(3) }}% </td>
+            <td>{{ game.away_team }}</td>
             <td>{{ game.away_team_odds }}</td>
             <td>{{ (game.away_team_predicted_win_pct * 100)|round(3)}}% </td>
             <td>
@@ -71,10 +75,14 @@
    </table>
    <center>
       <div class="col-6">
-         {% if is_games_left == 0 %}
-         <p class="btn btn-primary">No Games to Predict</p>
-         {% else %}
+         {% if is_games_left is not defined %}
+         {% set is_games_left = 0 %}
+         {% endif %}
+         
+         {% if is_games_left > 0 %}
          <button type="submit" class="btn btn-primary">Save</button>
+         {% else %}
+         <p class="btn btn-primary">No Games to Predict</p>
          {% endif %}
       </div>
 </form>

@@ -2,16 +2,18 @@ import os
 
 
 def test_create_user(client_fixture):
+    username = "my_fake_user"
     response = client_fixture.post(
         "/users",
         json={
-            "username": "my_fake_user",
+            "username": username,
             "password": "bababooiee",
             "email": "fake@user.net",
         },
     )
 
     assert response.status_code == 201
+    assert response.json()["username"] == username
 
 
 def test_create_user_from_form(client_fixture):
@@ -33,18 +35,20 @@ def test_create_user_bad_request(client_fixture):
     )
 
     assert response.status_code == 422
-
+    assert '[{"loc":["body","username"],"msg":"field required","type":"value_error.missing"},{"loc":["body","password"],"msg":"field required","type":"value_error.missing"}]' in response.text
 
 def test_update_user(client_fixture):
+    new_username = "jacobs_fake_user"
     response = client_fixture.put(
         f"/users/my_fake_user",
         json={
-            "username": "jacobs_fake_user",
+            "username": new_username,
             "password": "bby123",
             "email": "yooo@gmail.com",
         },
     )
 
+    assert response.json()["username"] == new_username
     assert response.status_code == 200
 
 
@@ -64,7 +68,7 @@ def test_delete_user_bad_key(client_fixture):
 
     response = client_fixture.delete(f"/users/{username}", headers=headers,)
 
-    assert response.json()["detail"] == f"Forbidden"
+    assert response.json()["detail"] == "Forbidden"
     assert response.status_code == 401
 
 
