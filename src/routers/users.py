@@ -9,7 +9,7 @@ from src.crud import create_user, delete_user, update_user
 from src.database import get_db
 from src.models import Users
 from src.schemas import UserBase, UserCreate
-from src.security import api_key_auth
+from src.security import api_key_auth, get_current_username
 from src.utils import templates
 
 router = APIRouter()
@@ -144,3 +144,7 @@ def delete_users(
         )
 
     return delete_user(db, user_record)
+
+@router.get("/users/me")
+def read_current_user(username: str = Depends(get_current_username)):
+    return {"username": username}

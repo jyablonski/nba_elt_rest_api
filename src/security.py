@@ -63,6 +63,25 @@ def api_key_auth(api_key: str = Depends(oauth2_scheme),):
             status_code=status.HTTP_401_UNAUTHORIZED, detail="Forbidden",
         )
 
+def get_current_username(credentials: HTTPBasicCredentials = Depends(security), db: Session = Depends(get_db)):
+    username_check = (db.query(Users).filter(Users.username == credentials.username)).first()
+
+    if username_check is None:
+        return None
+
+    user_password = (
+        (db.query(Users).filter(Users.username == credentials.username)).first().password
+    )
+
+    correct_password = secrets.compare_digest(credentials.password, user_password)
+    if not (username_check and correct_password):
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Incorrect username or password",
+            headers={"WWW-Authenticate": "Basic"},
+        )
+    return credentials.username
+
 # jwt work TBD
 # def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
 #     to_encode = data.copy()
