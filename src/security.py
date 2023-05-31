@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+import hashlib
 import os
 import secrets
 from typing import Dict, List, Optional
@@ -20,6 +21,7 @@ from sqlalchemy.orm import Session
 
 from .database import get_db
 from .models import Users
+from .utils import generate_hash_password
 
 security = HTTPBasic()
 oauth2_scheme_og = OAuth2PasswordBearer(tokenUrl="token")
@@ -84,10 +86,8 @@ def get_current_username(
     if username_check is None:
         return None
 
-    user_password = (
-        (db.query(Users).filter(Users.username == credentials.username))
-        .first()
-        .password
+    user_password = generate_hash_password(
+        password=username_check.password, salt=username_check.salt
     )
 
     correct_password = secrets.compare_digest(credentials.password, user_password)
@@ -216,11 +216,13 @@ def authenticate_user(username: str, password: str, db: Session = Depends(get_db
     if not user:
         return False
 
+    password_request = generate_hash_password(password=password, salt=user.salt)
+
     user_password = (
         (db.query(Users).filter(Users.username == username)).first().password
     )
 
-    correct_password = secrets.compare_digest(user_password, password)
+    correct_password = secrets.compare_digest(user_password, password_request)
 
     if not (correct_password):
         print(f"wrong password")

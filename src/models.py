@@ -194,6 +194,7 @@ class Users(Base):
     username: str = Column(String, nullable=False)
     password: str = Column(String, nullable=False)
     email: str = Column(String, nullable=True)
+    salt: str = Column(String, nullable=False)
     created_at: datetime = Column(TIMESTAMP, nullable=False)
 
 

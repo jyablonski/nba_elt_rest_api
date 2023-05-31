@@ -10,7 +10,7 @@ from src.database import get_db
 from src.models import Users
 from src.schemas import UserBase, UserCreate
 from src.security import api_key_auth, get_current_username
-from src.utils import templates
+from src.utils import generate_hash_password, templates
 
 router = APIRouter()
 
@@ -38,10 +38,12 @@ def user_login(
             {"request": request, "username": username, "errors": errors,},
         )
 
+    hash_password = generate_hash_password(password=password, salt=username_check.salt,)
+
     username_check = (
         db.query(Users)
         .filter(Users.username == username)
-        .filter(Users.password == password)
+        .filter(Users.password == hash_password)
         .first()
     )
 
@@ -144,6 +146,7 @@ def delete_users(
         )
 
     return delete_user(db, user_record)
+
 
 @router.get("/users/me")
 def read_current_user(username: str = Depends(get_current_username)):

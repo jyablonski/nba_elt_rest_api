@@ -1,4 +1,6 @@
 from datetime import datetime, timezone
+import hashlib
+
 from fastapi import Form
 from fastapi.encoders import jsonable_encoder
 from sqlalchemy.orm import Session
@@ -6,6 +8,7 @@ from typing import List
 
 from . import models
 from .schemas import UserBase, UserCreate
+from .utils import generate_hash_password, generate_salt
 
 
 def get_standings(db: Session):
@@ -88,10 +91,15 @@ def get_transactions(db: Session):
 
 
 def create_user(db: Session, user: UserCreate):
+    salt = generate_salt()
+
+    password_hash = generate_hash_password(password=user.password, salt=salt)
+
     record = models.Users(
         username=user.username,
-        password=user.password,
+        password=password_hash,
         email=user.email,
+        salt=salt,
         created_at=user.created_at,
     )
 
