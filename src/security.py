@@ -192,21 +192,27 @@ def get_current_user_from_token(
     token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)
 ):
     print(token)
+
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Could not validate credentials",
     )
+
     try:
         payload = jwt.decode(token, os.environ.get("API_KEY"), algorithms=["HS256"])
         username: str = payload.get("sub")
         print("username extracted is ", username)
         if username is None:
             raise credentials_exception
+
     except JWTError:
         raise credentials_exception
+
     user = get_user(username=username, db=db)
+
     if user is None:
         raise credentials_exception
+
     return user
 
 
