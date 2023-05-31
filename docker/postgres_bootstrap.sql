@@ -207,6 +207,7 @@ CREATE TABLE IF NOT EXISTS rest_api_users
     created_at timestamp default now()
 );
 
+-- these users all have password as the actual "password"
 INSERT INTO rest_api_users(username, password, salt, email)
 VALUES ('jyablonski', 'db15bf237233df6654f39476884e8bb9', 'eylptjzw6tqy68zxg5b8v9l2bdwxsztf', 'j@yablonski.com'),
        ('test', '0b1bcb3aa21cc0325ccfec50ae77ee09', 'utwvsvfcofpanwtwt7u3tegwvnz5ey35', 'test@nobody.com'),
