@@ -210,3 +210,8 @@ class UserBase(BaseModel):
 
 class UserCreate(UserBase):
     pass
+
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str

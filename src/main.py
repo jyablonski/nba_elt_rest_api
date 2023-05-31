@@ -16,6 +16,7 @@ from .routers import (
     feedback,
     game_types,
     injuries,
+    login,
     predictions,
     reddit_comments,
     schedule,
@@ -41,6 +42,7 @@ app.include_router(bets.router)
 app.include_router(feedback.router)
 app.include_router(game_types.router)
 app.include_router(injuries.router)
+app.include_router(login.router)
 app.include_router(predictions.router)
 app.include_router(reddit_comments.router)
 app.include_router(schedule.router)

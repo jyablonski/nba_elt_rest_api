@@ -35,7 +35,11 @@ def test_create_user_bad_request(client_fixture):
     )
 
     assert response.status_code == 422
-    assert '[{"loc":["body","username"],"msg":"field required","type":"value_error.missing"},{"loc":["body","password"],"msg":"field required","type":"value_error.missing"}]' in response.text
+    assert (
+        '[{"loc":["body","username"],"msg":"field required","type":"value_error.missing"},{"loc":["body","password"],"msg":"field required","type":"value_error.missing"}]'
+        in response.text
+    )
+
 
 def test_update_user(client_fixture):
     new_username = "jacobs_fake_user"
