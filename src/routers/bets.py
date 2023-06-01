@@ -8,19 +8,19 @@ from sqlalchemy.orm import Session
 from src.crud import store_bet_predictions
 from src.database import get_db
 from src.models import Predictions, UserPastPredictions, UserPredictions, Users
-from src.security import verify_username
+from src.security import get_current_user_from_token
 from src.utils import templates
 
 router = APIRouter()
 
 
-@router.get("/users/{username}/bets", response_class=HTMLResponse)
+@router.get("/bets", response_class=HTMLResponse)
 async def get_user_bets_page(
     request: Request,
-    username: Annotated[str, Depends(verify_username)],
+    username: str = Depends(get_current_user_from_token),
     db: Session = Depends(get_db),
 ):
-
+    print(f"username is {username}")
     if username is None:
         return templates.TemplateResponse("404.html", {"request": request},)
 
@@ -67,13 +67,14 @@ async def get_user_bets_page(
     )
 
 
-@router.post("/users/{username}/bets")
+@router.post("/bets")
 def store_user_bets_predictions_from_ui(
     request: Request,
-    username: str,
+    username: str = Depends(get_current_user_from_token),
     bet_predictions: List[str] = Form(...),
     db: Session = Depends(get_db),
 ):
+    print(f"hai")
     username_check = (db.query(Users).filter(Users.username == username)).first()
 
     if username_check is None:
@@ -137,10 +138,10 @@ def store_user_bets_predictions_from_ui(
     )
 
 
-@router.get("/users/{username}/past_bets", response_class=HTMLResponse)
+@router.get("/past_bets", response_class=HTMLResponse)
 def get_user_past_bets_page(
     request: Request,
-    username: Annotated[str, Depends(verify_username)],
+    username: str = Depends(get_current_user_from_token),
     db: Session = Depends(get_db),
 ):
 

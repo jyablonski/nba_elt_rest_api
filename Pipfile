@@ -18,6 +18,7 @@ opentelemetry-api = "*"
 opentelemetry-sdk = "*"
 protobuf = "*"
 envyaml = "*"
+python-jose = "*"
 
 [dev-packages]
 pytest = "*"
