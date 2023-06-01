@@ -18,6 +18,7 @@ def login(request: Request):
 async def login(request: Request, db: Session = Depends(get_db)):
     form = LoginForm(request)
     await form.load_data()
+
     if await form.is_valid():
         try:
             form.__dict__.update(msg="Login Successful")

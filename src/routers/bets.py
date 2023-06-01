@@ -8,19 +8,19 @@ from sqlalchemy.orm import Session
 from src.crud import store_bet_predictions
 from src.database import get_db
 from src.models import Predictions, UserPastPredictions, UserPredictions, Users
-from src.security import get_current_user_from_token, verify_username
+from src.security import get_current_user_from_token
 from src.utils import templates
 
 router = APIRouter()
 
 
-@router.get("/users/{username}/bets", response_class=HTMLResponse)
+@router.get("/bets", response_class=HTMLResponse)
 async def get_user_bets_page(
     request: Request,
-    username: Annotated[str, Depends(verify_username)],
+    username: str = Depends(get_current_user_from_token),
     db: Session = Depends(get_db),
 ):
-
+    print(f"username is {username}")
     if username is None:
         return templates.TemplateResponse("404.html", {"request": request},)
 
@@ -67,13 +67,14 @@ async def get_user_bets_page(
     )
 
 
-@router.post("/users/{username}/bets")
+@router.post("/bets")
 def store_user_bets_predictions_from_ui(
     request: Request,
-    username: str,
+    username: str = Depends(get_current_user_from_token),
     bet_predictions: List[str] = Form(...),
     db: Session = Depends(get_db),
 ):
+    print(f"hai")
     username_check = (db.query(Users).filter(Users.username == username)).first()
 
     if username_check is None:
@@ -137,10 +138,10 @@ def store_user_bets_predictions_from_ui(
     )
 
 
-@router.get("/users/{username}/past_bets", response_class=HTMLResponse)
+@router.get("/past_bets", response_class=HTMLResponse)
 def get_user_past_bets_page(
     request: Request,
-    username: Annotated[str, Depends(verify_username)],
+    username: str = Depends(get_current_user_from_token),
     db: Session = Depends(get_db),
 ):
 
@@ -157,53 +158,4 @@ def get_user_past_bets_page(
             "past_predictions": user_past_predictions,
             "username": username,
         },
-    )
-
-
-#
-@router.get("/users/bets", response_class=HTMLResponse)
-async def get_user_bets_page_v2(
-    request: Request,
-    user: str = Depends(get_current_user_from_token),
-    db: Session = Depends(get_db),
-):
-    print(user.username)
-
-    # if username is None:
-    #     return templates.TemplateResponse("404.html", {"request": request},)
-
-    # user_predictions = (
-    #     db.query(UserPredictions)
-    #     .filter(UserPredictions.username == username)
-    #     .filter(UserPredictions.game_date == datetime.utcnow().date())
-    # )
-    # user_predictions_count = user_predictions.count()
-    # user_predictions_results = user_predictions.cte("user_predictions")
-
-    # games_today_count = (
-    #     db.query(Predictions).filter(
-    #         Predictions.proper_date == datetime.utcnow().date()
-    #     )
-    # ).count()
-
-    # # variable to populate element of the UI
-    # if user_predictions_count >= games_today_count:
-    #     is_games_left = 0
-    # else:
-    #     is_games_left = 1
-
-    # # this logic returns only the unselected games from today's date for this user
-    # check_todays_predictions = (
-    #     db.query(Predictions)
-    #     .filter(Predictions.proper_date == datetime.utcnow().date())
-    #     .join(
-    #         user_predictions_results,
-    #         (Predictions.home_team == user_predictions_results.c.home_team),
-    #         isouter=True,
-    #     )
-    #     .filter(user_predictions_results.c.game_date == None)
-    # )
-
-    return templates.TemplateResponse(
-        "bets.html", {"request": request, "username": user.username,},
     )

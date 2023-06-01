@@ -27,44 +27,44 @@ security = HTTPBasic()
 oauth2_scheme_og = OAuth2PasswordBearer(tokenUrl="token")
 
 
-async def verify_username(
-    request: Request, username: str, db: Session = Depends(get_db)
-) -> HTTPBasicCredentials:
-    username_check = (db.query(Users).filter(Users.username == username)).first()
+# async def verify_username(
+#     request: Request, username: str, db: Session = Depends(get_db)
+# ) -> HTTPBasicCredentials:
+#     username_check = (db.query(Users).filter(Users.username == username)).first()
 
-    if username_check is None:
-        return None
+#     if username_check is None:
+#         return None
 
-    user_password = (
-        (db.query(Users).filter(Users.username == username)).first().password
-    )
+#     user_password = (
+#         (db.query(Users).filter(Users.username == username)).first().password
+#     )
 
-    credentials = await security(request)
+#     credentials = await security(request)
 
-    correct_username = secrets.compare_digest(credentials.username, username)
-    correct_password = secrets.compare_digest(credentials.password, user_password)
+#     correct_username = secrets.compare_digest(credentials.username, username)
+#     correct_password = secrets.compare_digest(credentials.password, user_password)
 
-    if not (correct_username and correct_password):
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Incorrect username or password",
-            headers={"WWW-Authenticate": "Basic"},
-        )
-    return credentials.username
+#     if not (correct_username and correct_password):
+#         raise HTTPException(
+#             status_code=status.HTTP_401_UNAUTHORIZED,
+#             detail="Incorrect username or password",
+#             headers={"WWW-Authenticate": "Basic"},
+#         )
+#     return credentials.username
 
 
-class AuthStaticFiles(StaticFiles):
-    def __init__(self, *args, **kwargs) -> None:
+# class AuthStaticFiles(StaticFiles):
+#     def __init__(self, *args, **kwargs) -> None:
 
-        super().__init__(*args, **kwargs)
+#         super().__init__(*args, **kwargs)
 
-    async def __call__(self, scope, receive, send) -> None:
+#     async def __call__(self, scope, receive, send) -> None:
 
-        assert scope["type"] == "http"
-
-        request = Request(scope, receive)
-        await verify_username(request)
-        await super().__call__(scope, receive, send)
+#         assert scope["type"] == "http"
+#         print(f"hi jaaacob ")
+#         request = Request(scope, receive)
+#         await verify_username(request)
+#         await super().__call__(scope, receive, send)
 
 
 def api_key_auth(api_key: str = Depends(oauth2_scheme_og),):
@@ -98,22 +98,6 @@ def get_current_username(
             headers={"WWW-Authenticate": "Basic"},
         )
     return credentials.username
-
-
-# jwt work TBD
-# def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
-#     to_encode = data.copy()
-#     if expires_delta:
-#         expire = datetime.utcnow() + expires_delta
-#     else:
-#         expire = datetime.utcnow() + timedelta(
-#             minutes=30,
-#         )
-#     to_encode.update({"exp": expire})
-#     encoded_jwt = jwt.encode(
-#         to_encode, os.environ.get("API_KEY", "a"), algorithm="HS256",
-#     )
-#     return encoded_jwt
 
 
 class LoginForm:
@@ -201,7 +185,7 @@ def get_current_user_from_token(
     try:
         payload = jwt.decode(token, os.environ.get("API_KEY"), algorithms=["HS256"])
         username: str = payload.get("sub")
-        print("username extracted is ", username)
+        # print(f"username extracted is {username}")
         if username is None:
             raise credentials_exception
 
@@ -213,7 +197,7 @@ def get_current_user_from_token(
     if user is None:
         raise credentials_exception
 
-    return user
+    return user.username
 
 
 def authenticate_user(username: str, password: str, db: Session = Depends(get_db)):
@@ -231,7 +215,6 @@ def authenticate_user(username: str, password: str, db: Session = Depends(get_db
     correct_password = secrets.compare_digest(user_password, password_request)
 
     if not (correct_password):
-        print(f"wrong password")
         return False
 
     return user
