@@ -1,5 +1,4 @@
 from datetime import datetime, timedelta
-import hashlib
 import os
 import secrets
 from typing import Dict, List, Optional
@@ -13,7 +12,6 @@ from fastapi.security import (
     OAuth2PasswordBearer,
 )
 from fastapi.security.utils import get_authorization_scheme_param
-from fastapi.staticfiles import StaticFiles
 from jose import jwt
 from jose import JWTError
 
