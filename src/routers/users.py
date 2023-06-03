@@ -14,57 +14,7 @@ from src.utils import generate_hash_password, templates
 
 router = APIRouter()
 
-
-@router.get("/users/login", response_class=HTMLResponse)
-def user_login(request: Request):
-    return templates.TemplateResponse("user_login.html", {"request": request})
-
-
-@router.post("/users/login", response_class=HTMLResponse)
-def user_login(
-    request: Request,
-    username: str = Form(...),
-    password: Optional[str] = Form(...),
-    db: Session = Depends(get_db),
-):
-    errors = []
-    username_check = db.query(Users).filter(Users.username == username).first()
-
-    if not username_check:
-        errors.append(f"That Username does not exist")
-
-        return templates.TemplateResponse(
-            "user_login.html",
-            {"request": request, "username": username, "errors": errors,},
-        )
-
-    hash_password = generate_hash_password(password=password, salt=username_check.salt,)
-
-    username_check = (
-        db.query(Users)
-        .filter(Users.username == username)
-        .filter(Users.password == hash_password)
-        .first()
-    )
-
-    if not username_check:
-        errors.append(f"Wrong Password!")
-        return templates.TemplateResponse(
-            "user_login.html",
-            {"request": request, "username": username, "errors": errors,},
-        )
-
-    return templates.TemplateResponse(
-        "user_page.html", {"request": request, "username": username, "errors": errors,},
-    )
-
-
-@router.get("/users/create", response_class=HTMLResponse)
-def user_create(request: Request):
-    return templates.TemplateResponse("create_user.html", {"request": request})
-
-
-@router.post("/users/create", response_model=UserCreate)
+@router.post("/login/create_user", response_model=UserCreate)
 def create_users_from_form(
     request: Request,
     username: str = Form(...),
