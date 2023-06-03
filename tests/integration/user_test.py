@@ -117,9 +117,12 @@ def test_delete_user_from_form(client_fixture_no_auth):
     assert response.status_code == 200
 
 
-def test_login_user(client_fixture):
+def test_login_user_success(client_fixture):
     response = client_fixture.post(
-        "/login", data={"username": "jyablonski", "password": "password",},
+        "/token", data={"username": "jyablonski", "password": "password",},
     )
 
+    print(response.text)
+    assert response.text == "hi"
+    assert response.json() == "hi"
     assert response.status_code == 200

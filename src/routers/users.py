@@ -14,31 +14,31 @@ from src.utils import generate_hash_password, templates
 
 router = APIRouter()
 
-@router.post("/login/create_user", response_model=UserCreate)
-def create_users_from_form(
-    request: Request,
-    username: str = Form(...),
-    password: str = Form(...),
-    email: Optional[str] = Form(None),
-    db: Session = Depends(get_db),
-):
-    record_check = db.query(Users).filter(Users.username == username).first()
+# @router.post("/login/create_user", response_model=UserCreate)
+# def create_users_from_form(
+#     request: Request,
+#     username: str = Form(...),
+#     password: str = Form(...),
+#     email: Optional[str] = Form(None),
+#     db: Session = Depends(get_db),
+# ):
+#     record_check = db.query(Users).filter(Users.username == username).first()
 
-    if record_check:
-        raise HTTPException(
-            status_code=403,
-            detail="Username already exists!  Please select another username.",
-        )
+#     if record_check:
+#         raise HTTPException(
+#             status_code=403,
+#             detail="Username already exists!  Please select another username.",
+#         )
 
-    record = Users(
-        username=username, password=password, email=email, created_at=datetime.utcnow(),
-    )
+#     record = Users(
+#         username=username, password=password, email=email, created_at=datetime.utcnow(),
+#     )
 
-    create_user(db, record)
+#     create_user(db, record)
 
-    return templates.TemplateResponse(
-        "user_login.html", {"request": request, "username": username}
-    )
+#     return templates.TemplateResponse(
+#         "user_login.html", {"request": request, "username": username}
+#     )
 
 
 @router.post("/users", response_model=UserCreate, status_code=201)

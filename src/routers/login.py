@@ -38,9 +38,11 @@ async def login(request: Request, db: Session = Depends(get_db)):
             return templates.TemplateResponse("login.html", form.__dict__)
     return templates.TemplateResponse("login.html", form.__dict__)
 
+
 @router.get("/login/create_user", response_class=HTMLResponse)
 def user_create(request: Request):
     return templates.TemplateResponse("create_user.html", {"request": request})
+
 
 @router.post("/login/create_user", response_model=UserCreate)
 def create_users_from_form(
@@ -64,7 +66,4 @@ def create_users_from_form(
 
     create_user(db, record)
 
-    return RedirectResponse(
-        "/login",
-    )
-
+    return RedirectResponse("/login",)

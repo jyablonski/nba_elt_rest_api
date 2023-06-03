@@ -20,7 +20,6 @@ async def get_user_bets_page(
     username: str = Depends(get_current_user_from_token),
     db: Session = Depends(get_db),
 ):
-    print(f"username is {username}")
     if username is None:
         return templates.TemplateResponse("404.html", {"request": request},)
 
@@ -74,7 +73,6 @@ def store_user_bets_predictions_from_ui(
     bet_predictions: List[str] = Form(...),
     db: Session = Depends(get_db),
 ):
-    print(f"hai")
     username_check = (db.query(Users).filter(Users.username == username)).first()
 
     if username_check is None:
