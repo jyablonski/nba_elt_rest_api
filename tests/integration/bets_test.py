@@ -4,6 +4,7 @@ def test_get_bets_form_incorrect_permissions(client_fixture):
     assert response.status_code == 401
     assert response.json()["detail"] == "Not authenticated"
 
+
 def test_post_bets_form_incorrect_permissions(client_fixture):
     username = "jyablonski"
 
@@ -25,12 +26,11 @@ def test_past_bets_form_get(client_fixture):
         "/login", data={"username": username, "password": "password",},
     )
 
-    bets_response = client_fixture.get(
-        "/bets"
-    )
+    bets_response = client_fixture.get("/bets")
 
     assert username in bets_response.text
     assert "Houston Rockets" in bets_response.text
+
 
 def test_past_bets_form_post(client_fixture):
     username = "jyablonski"
@@ -57,6 +57,9 @@ def test_past_bets_form_post(client_fixture):
 
     print(first_bets_response)
     assert username in first_bets_response.text
-    assert 'No Games to Predict' in first_bets_response.text
+    assert "No Games to Predict" in first_bets_response.text
 
-    assert second_bets_response.json()['detail'] == 'All Games for Today have been predicted already by this user!'
+    assert (
+        second_bets_response.json()["detail"]
+        == "All Games for Today have been predicted already by this user!"
+    )

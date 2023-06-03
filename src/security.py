@@ -25,46 +25,6 @@ security = HTTPBasic()
 oauth2_scheme_og = OAuth2PasswordBearer(tokenUrl="token")
 
 
-# async def verify_username(
-#     request: Request, username: str, db: Session = Depends(get_db)
-# ) -> HTTPBasicCredentials:
-#     username_check = (db.query(Users).filter(Users.username == username)).first()
-
-#     if username_check is None:
-#         return None
-
-#     user_password = (
-#         (db.query(Users).filter(Users.username == username)).first().password
-#     )
-
-#     credentials = await security(request)
-
-#     correct_username = secrets.compare_digest(credentials.username, username)
-#     correct_password = secrets.compare_digest(credentials.password, user_password)
-
-#     if not (correct_username and correct_password):
-#         raise HTTPException(
-#             status_code=status.HTTP_401_UNAUTHORIZED,
-#             detail="Incorrect username or password",
-#             headers={"WWW-Authenticate": "Basic"},
-#         )
-#     return credentials.username
-
-
-# class AuthStaticFiles(StaticFiles):
-#     def __init__(self, *args, **kwargs) -> None:
-
-#         super().__init__(*args, **kwargs)
-
-#     async def __call__(self, scope, receive, send) -> None:
-
-#         assert scope["type"] == "http"
-#         print(f"hi jaaacob ")
-#         request = Request(scope, receive)
-#         await verify_username(request)
-#         await super().__call__(scope, receive, send)
-
-
 def api_key_auth(api_key: str = Depends(oauth2_scheme_og),):
     api_keys: str = os.environ.get("API_KEY", "a")
 

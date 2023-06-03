@@ -14,6 +14,7 @@ from src.utils import generate_hash_password, templates
 
 router = APIRouter()
 
+
 @router.post("/users", response_model=UserCreate, status_code=201)
 async def create_users(create_user_request: UserCreate, db: Session = Depends(get_db)):
     print(type(db))
