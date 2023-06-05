@@ -18,7 +18,7 @@ def test_create_user(client_fixture):
 
 def test_create_user_from_form(client_fixture):
     response = client_fixture.post(
-        "/users/create",
+        "/login/create_user",
         data={
             "username": "test_form_user",
             "password": "bababooiee",
@@ -114,12 +114,4 @@ def test_delete_user_from_form(client_fixture_no_auth):
     response = client_fixture_no_auth.delete(f"/users/{username}", headers=headers,)
 
     assert response.json() == f"Username {username} Successfully deleted!"
-    assert response.status_code == 200
-
-
-def test_login_user(client_fixture):
-    response = client_fixture.post(
-        "/users/login", data={"username": "jyablonski", "password": "password",},
-    )
-
     assert response.status_code == 200

@@ -1,0 +1,15 @@
+name: Jacob's Discord Notification
+
+on:
+  pull_request:
+    types: [opened, reopened]
+
+
+jobs:
+  S3_Upload:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Update Discord
+        uses: sarisia/actions-status-discord@v1
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK_URL }}
