@@ -134,28 +134,3 @@ def store_user_bets_predictions_from_ui(
     return templates.TemplateResponse(
         "bets.html", {"request": request, "username": username,},
     )
-
-
-@router.get("/past_bets", response_class=HTMLResponse)
-def get_user_past_bets_page(
-    request: Request,
-    username: str = Depends(get_current_user_from_token),
-    db: Session = Depends(get_db),
-):
-
-    # this logic checks if every game from today has already been selected or not
-    # by the user, and then stores it as a cte for use in a query later
-    user_past_predictions = (
-        db.query(UserPastPredictions)
-        .filter(UserPastPredictions.username == username)
-        .order_by(UserPastPredictions.game_date.desc())
-    )
-
-    return templates.TemplateResponse(
-        "past_bets.html",
-        {
-            "request": request,
-            "past_predictions": user_past_predictions,
-            "username": username,
-        },
-    )
