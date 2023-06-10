@@ -27,4 +27,4 @@ def test_feedback_success(client_fixture):
     )
 
     assert response.status_code == 200
-    assert response.text == "hi"
+    assert "Your feedback has been stored!" in response.text
