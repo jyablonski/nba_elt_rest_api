@@ -182,7 +182,12 @@ CREATE TABLE nba_predictions(
 
 INSERT INTO nba_predictions (proper_date, home_team, home_team_odds, home_team_predicted_win_pct, away_team, away_team_odds, away_team_predicted_win_pct)
 VALUES (current_date, 'Indiana Pacers', '+200', 0.247, 'San Antonio Spurs', '-160', 0.753),
-       (current_date, 'Houston Rockets', '-140', 0.194, 'Memphis Grizzlies', '+180', 0.806);
+       (current_date, 'Houston Rockets', '-140', 0.194, 'Memphis Grizzlies', '+180', 0.806),
+       (current_date, 'Golden State Warriors', '-150', 0.712, 'Boston Celtics', '180', 0.288),
+       (current_date, 'Dallas Mavericks', '-140', 0.194, 'Detroit Pistons', '+180', 0.806),
+       (current_date, 'Chicago Bulls', '+200', 0.355, 'Charlotte Hornets', '-160', 0.645),
+       (current_date, 'Utah Jazz', '+320', 0.194, 'Phoenix Suns', '-250', 0.806);
+
 
 DROP TABLE IF EXISTS transactions;
 CREATE TABLE IF NOT EXISTS transactions

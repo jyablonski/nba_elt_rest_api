@@ -81,13 +81,14 @@ class LoginForm:
 
 
 def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
-    to_encode = data.copy()
     if expires_delta:
         expire = datetime.utcnow() + expires_delta
     else:
         expire = datetime.utcnow() + timedelta(minutes=60,)
-    to_encode.update({"exp": expire})
-    encoded_jwt = jwt.encode(to_encode, os.environ.get("API_KEY"), algorithm="HS256",)
+
+    data['exp'] = expire
+    encoded_jwt = jwt.encode(data, os.environ.get("API_KEY"), algorithm="HS256",)
+
     return encoded_jwt
 
 
@@ -141,7 +142,7 @@ def get_current_user_from_token(
     try:
         payload = jwt.decode(token, os.environ.get("API_KEY"), algorithms=["HS256"])
         username: str = payload.get("sub")
-        # print(f"username extracted is {username}")
+
         if username is None:
             raise credentials_exception
 

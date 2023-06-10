@@ -1,8 +1,4 @@
-from datetime import datetime
-from typing import Optional
-
-from fastapi import APIRouter, Depends, HTTPException, Form, Request
-from fastapi.responses import HTMLResponse
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
 from src.crud import create_user, delete_user, update_user
@@ -10,7 +6,6 @@ from src.database import get_db
 from src.models import Users
 from src.schemas import UserBase, UserCreate
 from src.security import api_key_auth, get_current_username
-from src.utils import generate_hash_password, templates
 
 router = APIRouter()
 

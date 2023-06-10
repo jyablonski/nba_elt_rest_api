@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import Annotated, List
+from typing import List
 
 from fastapi import APIRouter, Depends, HTTPException, Form, Request
 from fastapi.responses import HTMLResponse
@@ -147,7 +147,7 @@ def get_user_past_bets_page(
     # by the user, and then stores it as a cte for use in a query later
     user_past_predictions = db.query(UserPastPredictions).filter(
         UserPastPredictions.username == username
-    )
+    ).order_by(UserPastPredictions.game_date.desc())
 
     return templates.TemplateResponse(
         "past_bets.html",
