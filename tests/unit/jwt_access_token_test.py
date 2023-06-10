@@ -11,6 +11,7 @@ from src.security import create_access_token
 # then when u decode it, this is what's inside:
 # {'sub': 'jyablonski', 'exp': 1686152120}
 
+
 def test_generate_access_token():
     username = "jyablonski"
     access_token_expires = timedelta(minutes=60)
@@ -33,11 +34,10 @@ def test_decode_access_token():
     )
 
     payload = jwt.decode(access_token, os.environ.get("API_KEY"), algorithms=["HS256"])
-    jwt_username = payload['sub']
-    jwt_expiration = payload['exp']
+    jwt_username = payload["sub"]
+    jwt_expiration = payload["exp"]
 
     jwt_expiration = datetime.fromtimestamp(jwt_expiration)
 
     assert jwt_username == username
-    assert (datetime.now() + timedelta(minutes = 60)) > jwt_expiration
-
+    assert (datetime.now() + timedelta(minutes=60)) > jwt_expiration

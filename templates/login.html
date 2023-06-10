@@ -5,47 +5,69 @@
 {% endblock %}
 
 {% block content %}
-<div class="container">
-  <div class="row">
-    <div class="text-danger font-weight-bold">
-      {% for error in errors %}
-      <li>{{error}}</li>
-      {% endfor %}
-    </div>
+<style>
+  .center-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 90vh;
+  }
+</style>
 
-    <div class="text-success font-weight-bold">
-      {% if msg %}
-      <center>
-        <div class="badge bg-success text-wrap font-weight-bold" style="font-size: large;">
-          {{msg}}
-        </div>
-      <p> Welcome {{ username }} </p>
+{% if msg %}
+<div class="center-screen">
+  <div class="text-success font-weight-bold">
+    <center>
+      <div class="badge bg-success text-wrap font-weight-bold" style="font-size: large;">
+        {{msg}}
+      </div>
+      <br>
+      Welcome {{ username }}
 
+      <br>
       <br>
       <a href="/bets">Tonight's Bets Page</a>
       <br>
       <a href="/past_bets">Past Bets Page</a>
-      </center>
-      {% endif %}
-    </div>
+    </center>
   </div>
+  {% endif %}
 
   {% if not msg %}
+
   <div class="row my-5">
     <form method="POST">
+
+      <center>
+        <h1> User Login </h1>
+      </center>
+
+      <div class="text-danger font-weight-bold">
+        {% for error in errors %}
+        <li>{{error}}</li>
+        {% endfor %}
+      </div>
+
+      <br>
+
       <div class="mb-3">
         <label>Username</label>
         <input type="text" required placeholder="Your username" name="username" value="{{username}}"
           class="form-control">
       </div>
+
       <div class="mb-3">
         <label>Password</label>
         <input type="password" required placeholder="Choose a secure password" value="{{password}}" name="password"
           class="form-control">
       </div>
+
       <button type="submit" class="btn btn-primary">Submit</button>
+
       <br>
       <h4> Don't have an account? <a href="/login/create_user">Create One</a></h1>
+
     </form>
   </div>
 </div>

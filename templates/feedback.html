@@ -2,9 +2,19 @@
 
 {% block content %}
 <form method="post">
-    <h1> Feedback Form </h1>
-    <input type="text" style="font-size: 18pt; height: 50px; width:1000px;" name="user_feedback"
-        placeholder="Enter your feedback ..." value="" />
-    <input type="submit" style="font-size: 12pt; height: 50px;" />
+    <h1> Anonymous Feedback Form </h1>
+    <div class="mb-3">
+        <input type="text" required placeholder="Enter your feedback ..." value="" name="user_feedback"
+            class="form-control" style="font-size: 18pt; height: 35px; width:1000px;">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+
+<center>
+    <div class="badge bg-success text-wrap font-weight-bold" style="font-size: large;">
+        {% if feedback_response %}
+        {{ feedback_response }}
+        {% endif %}
+    </div>
+</center>
 {% endblock content %}
