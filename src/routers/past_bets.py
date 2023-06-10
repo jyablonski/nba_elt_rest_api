@@ -17,8 +17,6 @@ def get_user_past_bets_page(
     db: Session = Depends(get_db),
 ):
 
-    # this logic checks if every game from today has already been selected or not
-    # by the user, and then stores it as a cte for use in a query later
     user_past_predictions = (
         db.query(UserPastPredictions)
         .filter(UserPastPredictions.username == username)
@@ -26,8 +24,12 @@ def get_user_past_bets_page(
     )
 
     user_past_predictions_count = user_past_predictions.count()
-    user_past_predictions_success_count = user_past_predictions.filter(UserPastPredictions.is_correct_prediction == 1).count()
-    user_past_predictions_pct_count = round(user_past_predictions_success_count / user_past_predictions_count, 3)
+    user_past_predictions_success_count = user_past_predictions.filter(
+        UserPastPredictions.is_correct_prediction == 1
+    ).count()
+    user_past_predictions_pct_count = round(
+        user_past_predictions_success_count / user_past_predictions_count, 3
+    )
 
     return templates.TemplateResponse(
         "past_bets.html",

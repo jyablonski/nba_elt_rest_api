@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 import os
 import secrets
-from typing import Dict, List, Optional
+from typing import Annotated, Dict, List, Optional
 
 from fastapi import Depends, HTTPException, Request, status
 from fastapi.openapi.models import OAuthFlows as OAuthFlowsModel
@@ -23,15 +23,6 @@ from .utils import generate_hash_password
 
 security = HTTPBasic()
 oauth2_scheme_og = OAuth2PasswordBearer(tokenUrl="token")
-
-
-def api_key_auth(api_key: str = Depends(oauth2_scheme_og),):
-    api_keys: str = os.environ.get("API_KEY", "a")
-
-    if api_key not in api_keys:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED, detail="Forbidden",
-        )
 
 
 def get_current_username(
@@ -128,15 +119,15 @@ def get_user(username: str, db: Session):
     return user
 
 
-oauth2_scheme = OAuth2PasswordBearerWithCookie(tokenUrl="/login/token")
+oauth2_scheme = OAuth2PasswordBearerWithCookie(tokenUrl="token")
 
-
-def get_current_user_from_token(
-    token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)
-):
+# this is the form / web app version to authenticate
+# only difference is `oauth2_scheme` vs `oauth2_scheme_og`
+def get_current_user_from_token(token: str = Depends(oauth2_scheme)) -> str:
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Could not validate credentials",
+        headers={"WWW-Authenticate": "Bearer"},
     )
 
     try:
@@ -145,16 +136,34 @@ def get_current_user_from_token(
 
         if username is None:
             raise credentials_exception
+        else:
+            return username
 
     except JWTError:
         raise credentials_exception
 
-    user = get_user(username=username, db=db)
 
-    if user is None:
+# this is the programmatic version to authenticate
+async def get_current_user_from_api_token(
+    token: Annotated[str, Depends(oauth2_scheme_og)]
+) -> str:
+    credentials_exception = HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="Could not validate credentials",
+        headers={"WWW-Authenticate": "Bearer"},
+    )
+    try:
+        payload = jwt.decode(token, os.environ.get("API_KEY"), algorithms=["HS256"])
+        username: str = payload.get("sub")
+
+        if username is None:
+            raise credentials_exception
+        else:
+            print(f"Returning username {username}")
+            return username
+
+    except JWTError:
         raise credentials_exception
-
-    return user.username
 
 
 def authenticate_user(username: str, password: str, db: Session = Depends(get_db)):

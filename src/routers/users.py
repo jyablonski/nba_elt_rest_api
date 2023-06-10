@@ -5,7 +5,10 @@ from src.crud import create_user, delete_user, update_user
 from src.database import get_db
 from src.models import Users
 from src.schemas import UserBase, UserCreate
-from src.security import api_key_auth, get_current_username
+from src.security import (
+    get_current_username,
+    get_current_user_from_api_token,
+)
 
 router = APIRouter()
 
@@ -52,10 +55,21 @@ async def update_users(
     return update_user(db, existing_user_record, update_user_request)
 
 
-@router.delete("/users/{username}", dependencies=[Depends(api_key_auth)])
+@router.delete("/users/{username}")
 def delete_users(
-    username: str, db: Session = Depends(get_db),
+    username: str,
+    token_user: str = Depends(get_current_user_from_api_token),
+    db: Session = Depends(get_db),
 ):
+    print(f"username in delete users endpoint is {username}")
+    print(f"token user is delete users endpoint is {token_user}")
+    if username != token_user:
+        raise HTTPException(
+            status_code=401,
+            detail=f"{token_user} is not authenticated to perform this action on {username}",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+
     user_record = db.query(Users).filter(Users.username == username).first()
 
     if not user_record:

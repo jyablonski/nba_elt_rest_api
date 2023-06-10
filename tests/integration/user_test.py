@@ -1,15 +1,14 @@
 import os
+import random
 
 
 def test_create_user(client_fixture):
-    username = "my_fake_user"
+    number = random.randint(0, 1000)
+    username = f"my_fake_user_{number}"
+
     response = client_fixture.post(
         "/users",
-        json={
-            "username": username,
-            "password": "bababooiee",
-            "email": "fake@user.net",
-        },
+        json={"username": username, "password": "password", "email": "fake@user.net",},
     )
 
     assert response.status_code == 201
@@ -18,15 +17,15 @@ def test_create_user(client_fixture):
 
 def test_create_user_from_form(client_fixture):
     response = client_fixture.post(
-        "/login/create_user",
-        data={
+        "/users",
+        json={
             "username": "test_form_user",
             "password": "bababooiee",
             "email": "fake@user.net",
         },
     )
 
-    assert response.status_code == 200
+    assert response.status_code == 201
 
 
 def test_create_user_bad_request(client_fixture):
@@ -42,12 +41,13 @@ def test_create_user_bad_request(client_fixture):
 
 
 def test_update_user(client_fixture):
-    new_username = "jacobs_fake_user"
+    new_username = "test_form_user_v2"
+
     response = client_fixture.put(
-        f"/users/my_fake_user",
+        f"/users/test_form_user",
         json={
             "username": new_username,
-            "password": "bby123",
+            "password": "bababooiee",
             "email": "yooo@gmail.com",
         },
     )
@@ -56,14 +56,14 @@ def test_update_user(client_fixture):
     assert response.status_code == 200
 
 
-def test_delete_user_bad_request(client_fixture):
+def test_delete_user_no_token(client_fixture):
     response = client_fixture.delete(f"/users/jacobs_fake_user")
 
     assert response.json()["detail"] == "Not authenticated"
     assert response.status_code == 401
 
 
-def test_delete_user_bad_key(client_fixture):
+def test_delete_user_bad_token(client_fixture):
     username = "fake_user"
     headers = {
         "Content-Type": "application/json",
@@ -72,46 +72,70 @@ def test_delete_user_bad_key(client_fixture):
 
     response = client_fixture.delete(f"/users/{username}", headers=headers,)
 
-    assert response.json()["detail"] == "Forbidden"
+    assert response.json()["detail"] == "Could not validate credentials"
     assert response.status_code == 401
 
 
-def test_delete_user(client_fixture_no_auth):
+def test_delete_user_no_username(client_fixture):
     username = "jacobs_fake_user"
     headers = {
         "Content-Type": "application/json",
         "Authorization": f"Bearer {os.environ.get('API_KEY')}",
     }
 
-    response = client_fixture_no_auth.delete(f"/users/{username}", headers=headers,)
+    response = client_fixture.delete(f"/users/{username}", headers=headers,)
 
+    assert response.json()["detail"] == "Could not validate credentials"
+    assert response.status_code == 401
+
+
+def test_delete_user(client_fixture):
+    username = "jacob123"
+    password = "password"
+
+    response = client_fixture.post(
+        "/users",
+        json={"username": username, "password": password, "email": "fake@user.net",},
+    )
+
+    df = client_fixture.post(
+        f"/token", data={"username": username, "password": password}
+    )
+
+    token = df.json()["access_token"]
+
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {token}",
+    }
+    response = client_fixture.delete(f"/users/{username}", headers=headers)
     assert response.json() == f"Username {username} Successfully deleted!"
     assert response.status_code == 200
 
 
-def test_delete_user_no_username(client_fixture):
+def test_delete_user_no_permissions(client_fixture):
+    username = "jacob456"
+    real_username = "jyablonski"
+    password = "password"
+
+    response = client_fixture.post(
+        "/users",
+        json={"username": username, "password": password, "email": "fake@user.net",},
+    )
+
+    df = client_fixture.post(
+        f"/token", data={"username": username, "password": password}
+    )
+    token = df.json()["access_token"]
+
     headers = {
         "Content-Type": "application/json",
-        "Authorization": f"Bearer {os.environ.get('API_KEY')}",
+        "Authorization": f"Bearer {token}",
     }
+    response = client_fixture.delete(f"/users/{real_username}", headers=headers)
 
-    response = client_fixture.delete(f"/users/jacobs_fake_user", headers=headers,)
-
+    assert response.status_code == 401
     assert (
         response.json()["detail"]
-        == "Username doesn't exist!  Please select another username."
+        == f"{username} is not authenticated to perform this action on {real_username}"
     )
-    assert response.status_code == 400
-
-
-def test_delete_user_from_form(client_fixture_no_auth):
-    username = "test_form_user"
-    headers = {
-        "Content-Type": "application/json",
-        "Authorization": f"Bearer {os.environ.get('API_KEY')}",
-    }
-
-    response = client_fixture_no_auth.delete(f"/users/{username}", headers=headers,)
-
-    assert response.json() == f"Username {username} Successfully deleted!"
-    assert response.status_code == 200
