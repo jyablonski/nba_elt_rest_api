@@ -1,6 +1,6 @@
 import random
 
-# didnt get this workin
+
 def test_feedback_get(client_fixture):
     response = client_fixture.get("/feedback")
 
@@ -8,15 +8,12 @@ def test_feedback_get(client_fixture):
     assert "Enter your feedback ..." in response.text
 
 
-# didnt get this workin
 def test_feedback_fail(client_fixture):
     response = client_fixture.post("/feedback", data='{"user_feedback": "hello world"}')
-    data = response.json()
 
     assert response.status_code == 422
 
 
-# didnt get this workin
 def test_feedback_success(client_fixture):
     number = random.random()
 
@@ -28,3 +25,18 @@ def test_feedback_success(client_fixture):
 
     assert response.status_code == 200
     assert "Your feedback has been stored!" in response.text
+
+
+def test_feedback_missing_value(client_fixture):
+    response = client_fixture.post(
+        "/feedback",
+        data={"user_feedback": f""},
+        headers={"content-type": "application/x-www-form-urlencoded"},
+    )
+
+    assert response.status_code == 422
+    assert response.json()["detail"][0] == {
+        "loc": ["body", "user_feedback"],
+        "msg": "field required",
+        "type": "value_error.missing",
+    }
