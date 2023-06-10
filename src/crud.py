@@ -106,6 +106,9 @@ def create_user(db: Session, user: UserCreate):
     db.add(record)
     db.commit()
     db.refresh(record)
+
+    # return the password that the user presented in the form instead of the salted hash
+    record.password = user.password
     return record
 
 
