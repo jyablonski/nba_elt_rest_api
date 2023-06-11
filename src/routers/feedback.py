@@ -20,4 +20,7 @@ def post_feedback(
     request: Request, user_feedback: str = Form(...), db: Session = Depends(get_db)
 ):
     send_feedback(db, user_feedback)
-    return templates.TemplateResponse("feedback.html", {"request": request})
+    return templates.TemplateResponse(
+        "feedback.html",
+        {"request": request, "feedback_response": "Your feedback has been stored!"},
+    )

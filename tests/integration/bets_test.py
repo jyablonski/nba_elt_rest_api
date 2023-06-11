@@ -16,6 +16,7 @@ def test_post_bets_form_incorrect_permissions(client_fixture):
         },
     )
 
+    assert response.status_code == 401
     assert response.json()["detail"] == "Not authenticated"
 
 
@@ -28,6 +29,8 @@ def test_past_bets_form_get(client_fixture):
 
     bets_response = client_fixture.get("/bets")
 
+    assert login_response.status_code == 200
+    assert bets_response.status_code == 200
     assert username in bets_response.text
     assert "Houston Rockets" in bets_response.text
 
@@ -43,7 +46,14 @@ def test_past_bets_form_post(client_fixture):
         "/bets",
         data={
             "username": username,
-            "bet_predictions": ["Indiana Pacers", "Houston Rockets"],
+            "bet_predictions": [
+                "Indiana Pacers",
+                "Houston Rockets",
+                "Golden State Warriors",
+                "Dallas Mavericks",
+                "Chicago Bulls",
+                "Utah Jazz",
+            ],
         },
     )
 
@@ -55,10 +65,13 @@ def test_past_bets_form_post(client_fixture):
         },
     )
 
-    print(first_bets_response)
+    assert login_response.status_code == 200
+
+    assert first_bets_response.status_code == 200
     assert username in first_bets_response.text
     assert "No Games to Predict" in first_bets_response.text
 
+    assert second_bets_response.status_code == 403
     assert (
         second_bets_response.json()["detail"]
         == "All Games for Today have been predicted already by this user!"

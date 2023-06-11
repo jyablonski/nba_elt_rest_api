@@ -1,5 +1,5 @@
-from datetime import datetime
-from typing import Annotated, List
+from datetime import datetime, timedelta
+from typing import List
 
 from fastapi import APIRouter, Depends, HTTPException, Form, Request
 from fastapi.responses import HTMLResponse
@@ -23,18 +23,18 @@ async def get_user_bets_page(
     if username is None:
         return templates.TemplateResponse("404.html", {"request": request},)
 
+    local_datetime = (datetime.utcnow() - timedelta(hours=5)).date()
+
     user_predictions = (
         db.query(UserPredictions)
         .filter(UserPredictions.username == username)
-        .filter(UserPredictions.game_date == datetime.utcnow().date())
+        .filter(UserPredictions.game_date == local_datetime)
     )
     user_predictions_count = user_predictions.count()
     user_predictions_results = user_predictions.cte("user_predictions")
 
     games_today_count = (
-        db.query(Predictions).filter(
-            Predictions.proper_date == datetime.utcnow().date()
-        )
+        db.query(Predictions).filter(Predictions.proper_date == local_datetime)
     ).count()
 
     # variable to populate element of the UI
@@ -46,7 +46,7 @@ async def get_user_bets_page(
     # this logic returns only the unselected games from today's date for this user
     check_todays_predictions = (
         db.query(Predictions)
-        .filter(Predictions.proper_date == datetime.utcnow().date())
+        .filter(Predictions.proper_date == local_datetime)
         .join(
             user_predictions_results,
             (Predictions.home_team == user_predictions_results.c.home_team),
@@ -75,6 +75,8 @@ def store_user_bets_predictions_from_ui(
 ):
     username_check = (db.query(Users).filter(Users.username == username)).first()
 
+    local_datetime = (datetime.utcnow() - timedelta(hours=5)).date()
+
     if username_check is None:
         raise HTTPException(
             status_code=403, detail="This User does not exist.",
@@ -85,15 +87,13 @@ def store_user_bets_predictions_from_ui(
     user_predictions = (
         db.query(UserPredictions)
         .filter(UserPredictions.username == username)
-        .filter(UserPredictions.game_date == datetime.utcnow().date())
+        .filter(UserPredictions.game_date == local_datetime)
     )
     user_predictions_count = user_predictions.count()
     user_predictions_results = user_predictions.cte("user_predictions")
 
     games_today_count = (
-        db.query(Predictions).filter(
-            Predictions.proper_date == datetime.utcnow().date()
-        )
+        db.query(Predictions).filter(Predictions.proper_date == local_datetime)
     ).count()
 
     if user_predictions_count >= games_today_count:
@@ -104,7 +104,7 @@ def store_user_bets_predictions_from_ui(
 
     check_todays_predictions = (
         db.query(Predictions)
-        .filter(Predictions.proper_date == datetime.utcnow().date())
+        .filter(Predictions.proper_date == local_datetime)
         .join(
             user_predictions_results,
             (Predictions.home_team == user_predictions_results.c.home_team),
@@ -133,27 +133,4 @@ def store_user_bets_predictions_from_ui(
 
     return templates.TemplateResponse(
         "bets.html", {"request": request, "username": username,},
-    )
-
-
-@router.get("/past_bets", response_class=HTMLResponse)
-def get_user_past_bets_page(
-    request: Request,
-    username: str = Depends(get_current_user_from_token),
-    db: Session = Depends(get_db),
-):
-
-    # this logic checks if every game from today has already been selected or not
-    # by the user, and then stores it as a cte for use in a query later
-    user_past_predictions = db.query(UserPastPredictions).filter(
-        UserPastPredictions.username == username
-    )
-
-    return templates.TemplateResponse(
-        "past_bets.html",
-        {
-            "request": request,
-            "past_predictions": user_past_predictions,
-            "username": username,
-        },
     )

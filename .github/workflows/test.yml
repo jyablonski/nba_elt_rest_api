@@ -11,7 +11,7 @@ env:
   RDS_SCHEMA: nba_prod
 
 jobs:
-  deploy:
+  test:
     name: Test Pipeline
     runs-on: ubuntu-latest
 

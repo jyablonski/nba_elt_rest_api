@@ -106,6 +106,9 @@ def create_user(db: Session, user: UserCreate):
     db.add(record)
     db.commit()
     db.refresh(record)
+
+    # return the password that the user presented in the form instead of the salted hash
+    record.password = user.password
     return record
 
 
@@ -128,9 +131,10 @@ def delete_user(db: Session, user_record: UserBase):
 
 def store_bet_predictions(db: Session, bet_predictions: List[models.UserPredictions]):
     # this is so all records in this batch get the same timestamp
-    created_at = datetime.now(timezone.utc)
+    created_at = datetime.utcnow()
 
     for prediction in bet_predictions:
+        print(prediction)
         record = models.UserPredictions(
             username=prediction["username"],
             game_date=prediction["proper_date"],

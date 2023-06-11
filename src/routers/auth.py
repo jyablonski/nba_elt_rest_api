@@ -1,5 +1,4 @@
 from datetime import timedelta
-import os
 
 from fastapi import APIRouter, Depends, HTTPException, Response, status
 from fastapi.security import OAuth2PasswordRequestForm
@@ -10,7 +9,6 @@ from src.schemas import Token
 from src.security import (
     authenticate_user,
     create_access_token,
-    OAuth2PasswordBearerWithCookie,
 )
 
 router = APIRouter()
@@ -38,6 +36,3 @@ def login_for_access_token(
         key="access_token", value=f"Bearer {access_token}", httponly=True
     )
     return {"access_token": access_token, "token_type": "bearer"}
-
-
-oauth2_scheme = OAuth2PasswordBearerWithCookie(tokenUrl="/login/token")

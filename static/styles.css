@@ -103,3 +103,11 @@ caption {
     font-family: sans-serif;
     font-size: 0.8rem;
 }
+
+.center-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 100vh;
+  }

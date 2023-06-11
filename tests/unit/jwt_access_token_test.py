@@ -1,11 +1,15 @@
-from datetime import timedelta
+from datetime import datetime, timedelta
 import os
 
-from fastapi import HTTPException, status
 from jose import jwt
-import pytest
 
 from src.security import create_access_token
+
+# this is base64 encoded
+# eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXSD3.eyJzdWIiOiJqeWFibG9uc2tpIiwiZXhwIjoxNjg2ATUyMTIwfQ.7S3zquBmNJD5s2d7i3_zbxjJFLa79HVjx75GFh9R92s
+
+# then when u decode it, this is what's inside:
+# {'sub': 'jyablonski', 'exp': 1686152120}
 
 
 def test_generate_access_token():
@@ -30,6 +34,10 @@ def test_decode_access_token():
     )
 
     payload = jwt.decode(access_token, os.environ.get("API_KEY"), algorithms=["HS256"])
-    jwt_username = payload.get("sub")
+    jwt_username = payload["sub"]
+    jwt_expiration = payload["exp"]
+
+    jwt_expiration = datetime.fromtimestamp(jwt_expiration)
 
     assert jwt_username == username
+    assert (datetime.now() + timedelta(minutes=60)) > jwt_expiration
