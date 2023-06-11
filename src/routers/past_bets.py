@@ -27,9 +27,13 @@ def get_user_past_bets_page(
     user_past_predictions_success_count = user_past_predictions.filter(
         UserPastPredictions.is_correct_prediction == 1
     ).count()
-    user_past_predictions_pct_count = round(
-        user_past_predictions_success_count / user_past_predictions_count, 3
-    )
+    
+    if user_past_predictions_count == 0:
+        user_past_predictions_pct_count = 0
+    else:
+        user_past_predictions_pct_count = round(
+            user_past_predictions_success_count / user_past_predictions_count, 3
+        )
 
     return templates.TemplateResponse(
         "past_bets.html",
