@@ -145,6 +145,7 @@ def store_bet_predictions(db: Session, bet_predictions: List[models.UserPredicti
             away_team_odds=prediction["away_team_odds"],
             away_team_predicted_win_pct=prediction["away_team_predicted_win_pct"],
             selected_winner=prediction["selected_winner"],
+            bet_amount=prediction["bet_amount"],
             created_at=created_at,
         )
         db.add(record)

@@ -71,6 +71,7 @@ def store_user_bets_predictions_from_ui(
     request: Request,
     username: str = Depends(get_current_user_from_token),
     bet_predictions: List[str] = Form(...),
+    bet_amounts: List[int] = Form(...),
     db: Session = Depends(get_db),
 ):
     username_check = (db.query(Users).filter(Users.username == username)).first()
@@ -114,7 +115,9 @@ def store_user_bets_predictions_from_ui(
     ).cte("user_remaining_games")
 
     predictions_list = []
-    for prediction in bet_predictions:
+
+    for prediction, bet_amount in zip(bet_predictions, bet_amounts):
+        print(f"heyo bet amount is {bet_amount}")
         result = (
             db.query(check_todays_predictions)
             .filter(
@@ -127,6 +130,7 @@ def store_user_bets_predictions_from_ui(
             result = result._asdict()
             result["selected_winner"] = prediction
             result["username"] = username
+            result["bet_amount"] = bet_amount
             predictions_list.append(result)
 
     store_bet_predictions(db, predictions_list)

@@ -175,6 +175,7 @@ class UserPredictions(Base):
     away_team_odds: int = Column(Integer, nullable=False)
     away_team_predicted_win_pct: float = Column(Float, nullable=True)
     selected_winner: str = Column(String, nullable=False)
+    bet_amount: int = Column(Integer, nullable=False)
     created_at: datetime = Column(TIMESTAMP, nullable=False)
 
 
@@ -212,6 +213,7 @@ class UserPastPredictions(Base):
     away_team_odds: int = Column(Integer, nullable=False)
     away_team_predicted_win_pct: float = Column(Float, nullable=True)
     selected_winner: str = Column(String, nullable=False)
+    bet_amount: int = Column(Integer, nullable=False)
     created_at: datetime = Column(TIMESTAMP, nullable=False)
     actual_winner: str = Column(String, nullable=False)
     is_correct_prediction: int = Column(Integer, nullable=False)

@@ -234,6 +234,7 @@ CREATE TABLE IF NOT EXISTS user_predictions
     away_team_odds integer,
     away_team_predicted_win_pct double precision,
     selected_winner text COLLATE pg_catalog."default",
+    bet_amount integer,
     created_at timestamp without time zone DEFAULT now()
 );
 
@@ -274,6 +275,7 @@ WITH home_wins AS (
         user_predictions.away_team_odds,
         user_predictions.away_team_predicted_win_pct,
         user_predictions.selected_winner,
+        user_predictions.bet_amount,
         user_predictions.created_at,
         CASE
             WHEN home_wins.outcome = 'W'::text THEN user_predictions.home_team
@@ -294,6 +296,7 @@ SELECT
     combo.away_team_odds,
     combo.away_team_predicted_win_pct,
     combo.selected_winner,
+    combo.bet_amount,
     combo.created_at,
     combo.actual_winner,
     CASE
