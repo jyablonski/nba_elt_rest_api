@@ -116,6 +116,7 @@ def store_user_bets_predictions_from_ui(
 
     predictions_list = []
 
+    # this `zip` shit just lets me iterate through both lists in sync at the same time
     for prediction, bet_amount in zip(bet_predictions, bet_amounts):
         result = (
             db.query(check_todays_predictions)
