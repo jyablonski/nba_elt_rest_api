@@ -134,7 +134,6 @@ def store_bet_predictions(db: Session, bet_predictions: List[models.UserPredicti
     created_at = datetime.utcnow()
 
     for prediction in bet_predictions:
-        print(prediction)
         record = models.UserPredictions(
             username=prediction["username"],
             game_date=prediction["proper_date"],

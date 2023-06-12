@@ -117,7 +117,6 @@ def store_user_bets_predictions_from_ui(
     predictions_list = []
 
     for prediction, bet_amount in zip(bet_predictions, bet_amounts):
-        print(f"heyo bet amount is {bet_amount}")
         result = (
             db.query(check_todays_predictions)
             .filter(
