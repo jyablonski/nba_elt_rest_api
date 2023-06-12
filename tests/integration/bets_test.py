@@ -13,6 +13,7 @@ def test_post_bets_form_incorrect_permissions(client_fixture):
         data={
             "username": username,
             "bet_predictions": ["Indiana Pacers", "Houston Rockets"],
+            "bet_amounts": [10, 20],
         },
     )
 
@@ -54,6 +55,7 @@ def test_past_bets_form_post(client_fixture):
                 "Chicago Bulls",
                 "Utah Jazz",
             ],
+            "bet_amounts": [10, 20, 30, 40, 50, 60],
         },
     )
 
@@ -62,6 +64,7 @@ def test_past_bets_form_post(client_fixture):
         data={
             "username": username,
             "bet_predictions": ["Indiana Pacers", "Houston Rockets"],
+            "bet_amounts": [10, 20],
         },
     )
 

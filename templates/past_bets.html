@@ -5,65 +5,67 @@
    <br>
    <h4 class="text-center my-3 pb-3">{{ username }}</h4>
    <h1 class="text-center my-3 pb-3">NBA User Prediction Past Bets Page</h4>
-   <br>
+      <br>
 
-   <table class="table">
-      <thead>
-         <tr>
-            <th scope="col">Total Correct Predictions</th>
-            <th scope="col">Total Predictions</th>
-            <th scope="col">% Correct</th>
-         </tr>
-      </thead>
-      <tbody>
-         <tr>
-            <th>  {{ past_predictions_success_count }}
+      <table class="table">
+         <thead>
+            <tr>
+               <th scope="col">Total Correct Predictions</th>
+               <th scope="col">Total Predictions</th>
+               <th scope="col">% Correct</th>
+            </tr>
+         </thead>
+         <tbody>
+            <tr>
+               <th> {{ past_predictions_success_count }}
                <td> {{ past_predictions_total_count }} </td>
                <td> {{ (past_predictions_pct_count * 100)|round(3) }}% </td>
-            </th>
-         </tr>
-      </tbody>
+               </th>
+            </tr>
+         </tbody>
       </table>
 
       <br>
       <br>
       <br>
-   
-   <table class="table">
-      <thead>
-         <tr>
-            <th scope="col">Game Date</th>
-            <th scope="col">Home Team</th>
-            <th scope="col">Home Team Odds</th>
-            <th scope="col">Home Predicted Win %</th>
-            <th scope="col">Away Team</th>
-            <th scope="col">Away Team Odds</th>
-            <th scope="col">Away Predicted Win %</th>
-            <th scope="col">Selected Winner</th>
-            <th scope="col">Actual Winner</th>
-            <th scope="col">Correct Prediction</th>
-         </tr>
-      </thead>
-      <tbody>
-         {% for game in past_predictions %}
-         <tr>
-            <th scope="row">{{game.game_date }}</th>
-            <td>{{ game.home_team }}</td>
-            <td>{{ game.home_team_odds }}</td>
-            <td>{{ (game.home_team_predicted_win_pct * 100)|round(3) }}% </td>
-            <td>{{ game.away_team }}</td>
-            <td>{{ game.away_team_odds }}</td>
-            <td>{{ (game.away_team_predicted_win_pct * 100)|round(3) }}% </td>
-            <td>{{ game.selected_winner }}</td>
-            <td>{{ game.actual_winner }}</td>
-            <td>{{ game.is_correct_prediction }}</td>
-         </tr>
-         {% endfor %}
-      </tbody>
-   </table>
 
-   <br>
-   <a href="/bets">Tonight's Bets Page</a>
+      <table class="table">
+         <thead>
+            <tr>
+               <th scope="col">Game Date</th>
+               <th scope="col">Home Team</th>
+               <th scope="col">Home Team Odds</th>
+               <th scope="col">Home Predicted Win %</th>
+               <th scope="col">Away Team</th>
+               <th scope="col">Away Team Odds</th>
+               <th scope="col">Away Predicted Win %</th>
+               <th scope="col">Bet Amount</th>
+               <th scope="col">Selected Winner</th>
+               <th scope="col">Actual Winner</th>
+               <th scope="col">Correct Prediction</th>
+            </tr>
+         </thead>
+         <tbody>
+            {% for game in past_predictions %}
+            <tr>
+               <th scope="row">{{game.game_date }}</th>
+               <td>{{ game.home_team }}</td>
+               <td>{{ game.home_team_odds }}</td>
+               <td>{{ (game.home_team_predicted_win_pct * 100)|round(3) }}% </td>
+               <td>{{ game.away_team }}</td>
+               <td>{{ game.away_team_odds }}</td>
+               <td>{{ (game.away_team_predicted_win_pct * 100)|round(3) }}% </td>
+               <td>${{ game.bet_amount }}</td>
+               <td>{{ game.selected_winner }}</td>
+               <td>{{ game.actual_winner }}</td>
+               <td>{{ game.is_correct_prediction }}</td>
+            </tr>
+            {% endfor %}
+         </tbody>
+      </table>
+
+      <br>
+      <a href="/bets">Tonight's Bets Page</a>
 
 </center>
 {% endblock content %}

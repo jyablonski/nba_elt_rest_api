@@ -27,7 +27,7 @@ def get_user_past_bets_page(
     user_past_predictions_success_count = user_past_predictions.filter(
         UserPastPredictions.is_correct_prediction == 1
     ).count()
-    
+
     if user_past_predictions_count == 0:
         user_past_predictions_pct_count = 0
     else:

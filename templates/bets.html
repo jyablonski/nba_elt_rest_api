@@ -17,7 +17,7 @@
       font-size: 0.9rem;
       margin: 20px;
       text-align: center;
-	   vertical-align: middle;
+      vertical-align: middle;
       border-spacing: 15px;
       padding: 0.5rem;
    }
@@ -47,6 +47,7 @@
             <th scope="col">Away Team Odds</th>
             <th scope="col">Away Predicted Win %</th>
             <th scope="col">Selected Winner</th>
+            <th scope="col">Bet Amount</th>
          </tr>
       </thead>
       <tbody>
@@ -68,6 +69,7 @@
                   {% endfor %}
                </select>
             </td>
+            <td> <input type="number" name="bet_amounts" value="10" class="form-control"></td>
          </tr>
          {% endfor %}
          <!-- </select> -->
@@ -78,7 +80,7 @@
          {% if is_games_left is not defined %}
          {% set is_games_left = 0 %}
          {% endif %}
-         
+
          {% if is_games_left > 0 %}
          <button type="submit" class="btn btn-primary">Save</button>
          {% else %}
