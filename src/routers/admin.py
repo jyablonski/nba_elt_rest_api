@@ -11,8 +11,7 @@ router = APIRouter()
 
 @router.get("/admin", response_class=HTMLResponse)
 def get_admin(
-    request: Request,
-    username: str = Depends(get_current_user_from_token),
+    request: Request, username: str = Depends(get_current_user_from_token),
 ):
     if username != "jyablonski":
         raise HTTPException(

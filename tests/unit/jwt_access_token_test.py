@@ -39,5 +39,6 @@ def test_decode_access_token():
 
     jwt_expiration = datetime.fromtimestamp(jwt_expiration)
 
+    # asserting that the username is the same and that the expiration timestamp is < 60 mins from now
     assert jwt_username == username
     assert (datetime.now() + timedelta(minutes=60)) > jwt_expiration

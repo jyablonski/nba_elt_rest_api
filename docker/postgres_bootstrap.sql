@@ -262,7 +262,8 @@ CREATE TABLE IF NOT EXISTS feature_flags
 	flag text,
 	is_enabled integer,
 	created_at timestamp without time zone default now(),
-	modified_at timestamp without time zone default now()
+	modified_at timestamp without time zone default now(),
+    CONSTRAINT flag_unique UNIQUE (flag)
 );
 INSERT INTO feature_flags(flag, is_enabled)
 VALUES ('season', 1),
