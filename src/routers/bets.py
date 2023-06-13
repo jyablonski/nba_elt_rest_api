@@ -7,7 +7,7 @@ from sqlalchemy.orm import Session
 
 from src.crud import store_bet_predictions
 from src.database import get_db
-from src.models import Predictions, UserPastPredictions, UserPredictions, Users
+from src.models import Predictions, UserPredictions, Users
 from src.security import get_current_user_from_token
 from src.utils import templates
 

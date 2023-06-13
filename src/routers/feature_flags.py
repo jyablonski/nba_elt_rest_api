@@ -1,7 +1,8 @@
 from typing import List
 
 from fastapi import APIRouter, Depends, Form, HTTPException, Request, status
-from fastapi.responses import HTMLResponse, RedirectResponse
+from fastapi.responses import HTMLResponse
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from src.crud import create_feature_flags, update_feature_flags
@@ -38,7 +39,6 @@ def post_feature_flags(
     username: str = Depends(get_current_user_from_token),
     db: Session = Depends(get_db),
 ):
-    print(feature_flag_list)
     if username != "jyablonski":
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED, detail="You do not have the powa",
@@ -63,6 +63,23 @@ def post_feature_flags(
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED, detail="You do not have the powa",
         )
+
+    existing_feature_flags = db.query(FeatureFlags).order_by(FeatureFlags.flag)
+
+    existing_feature_flags_check = existing_feature_flags.filter(
+        FeatureFlags.flag == feature_flag_name_form
+    ).count()
+
+    if existing_feature_flags_check > 0:
+        return templates.TemplateResponse(
+            "feature_flags.html",
+            {
+                "request": request,
+                "feature_flags": existing_feature_flags,
+                "feature_flag_error": "You cannot store a Feature Flag with that name!",
+            },
+        )
+
     create_feature_flags(db, feature_flag_name_form, feature_flag_is_enabled_form)
 
     feature_flags = db.query(FeatureFlags).order_by(FeatureFlags.flag)

@@ -1,4 +1,3 @@
-from sqlalchemy.exc import IntegrityError
 import pytest
 
 
@@ -82,17 +81,18 @@ def test_feature_flags_create_failure_unique_contraint(client_fixture):
         "/login", data={"username": username, "password": "password",},
     )
 
-    # cant make a duplicate feature flag w/ the same name
-    with pytest.raises(IntegrityError):
-        response = client_fixture.post(
-            "/admin/feature_flags/create",
-            data={
-                "username": username,
-                "feature_flag_name_form": ["season",],
-                "feature_flag_is_enabled_form": [0],
-            },
-            headers={"content-type": "application/x-www-form-urlencoded"},
-        )
+    response = client_fixture.post(
+        "/admin/feature_flags/create",
+        data={
+            "username": username,
+            "feature_flag_name_form": ["season",],
+            "feature_flag_is_enabled_form": [0],
+        },
+        headers={"content-type": "application/x-www-form-urlencoded"},
+    )
+
+    assert response.status_code == 200
+    assert "You cannot store a Feature Flag with that name!" in response.text
 
 
 def test_feature_flags_update_success(client_fixture):
