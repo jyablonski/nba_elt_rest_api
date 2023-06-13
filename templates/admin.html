@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .center-screen {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      min-height: 90vh;
+    }
+  </style>
+  
+  <div class="center-screen">
+    <div class="text-success font-weight-bold">
+      <center>
+        <div class="badge bg-success text-wrap font-weight-bold" style="font-size: large;">
+        </div>
+        <br>
+        <a href="/admin/feature_flags">Tonight's Bets Page</a>
+        <br>
+        <a href="/past_bets">Past Bets Page</a>
+      </center>
+    </div>
+    </div>
+{% endblock content %}

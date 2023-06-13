@@ -217,3 +217,14 @@ class UserPastPredictions(Base):
     created_at: datetime = Column(TIMESTAMP, nullable=False)
     actual_winner: str = Column(String, nullable=False)
     is_correct_prediction: int = Column(Integer, nullable=False)
+
+
+class FeatureFlags(Base):
+    __tablename__ = "feature_flags"
+    __table_args__ = (PrimaryKeyConstraint("id"),)
+
+    id: int = Column(Integer, nullable=False, autoincrement=True)
+    flag: str = Column(String, nullable=False)
+    is_enabled: int = Column(Integer, nullable=False)
+    created_at: datetime = Column(TIMESTAMP, nullable=False)
+    modified_at: datetime = Column(TIMESTAMP, nullable=False)

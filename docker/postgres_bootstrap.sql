@@ -255,6 +255,19 @@ CREATE TABLE IF NOT EXISTS mov
     record text COLLATE pg_catalog."default"
 );
 
+DROP TABLE IF EXISTS feature_flags;
+CREATE TABLE IF NOT EXISTS feature_flags
+(
+	id serial primary key,
+	flag text,
+	is_enabled integer,
+	created_at timestamp without time zone default now(),
+	modified_at timestamp without time zone default now()
+);
+INSERT INTO feature_flags(flag, is_enabled)
+VALUES ('season', 1),
+       ('playoffs', 1);
+
 create view user_past_predictions as
 WITH home_wins AS (
     SELECT 

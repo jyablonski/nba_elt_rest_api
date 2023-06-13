@@ -152,3 +152,14 @@ def store_bet_predictions(db: Session, bet_predictions: List[models.UserPredicti
         db.refresh(record)
 
     return record
+
+def update_feature_flags(db: Session, feature_flags_list: List[models.FeatureFlags]):
+    modified_at = datetime.utcnow()
+
+    for feature_flag in feature_flags_list:
+        feature_flag.modified_at = modified_at
+
+        db.merge(feature_flag)
+        db.commit()
+
+    return True
