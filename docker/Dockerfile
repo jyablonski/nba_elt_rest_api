@@ -26,8 +26,10 @@ RUN useradd --create-home appuser
 WORKDIR /home/appuser
 USER appuser
 
+COPY config.yaml ./config.yaml
 COPY src/ ./src/
 COPY static/ ./static/
+COPY templates/ ./templates/
 
 EXPOSE 8080
 

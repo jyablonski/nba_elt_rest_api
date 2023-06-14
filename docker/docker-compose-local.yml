@@ -25,6 +25,8 @@ services:
       - RDS_PW=postgres
       - RDS_DB=postgres
       - RDS_SCHEMA=nba_prod
+      - ENV_TYPE=docker_dev
+      - API_KEY=bkmSqgcZMzR1JS3ek8gdNGyOrVefyVkK!
       - OTEL_EXPORTER_OTLP_ENDPOINT=https://api.honeycomb.io
       - OTEL_EXPORTER_OTLP_HEADERS=x-honeycomb-team=bababooiee
       - OTEL_SERVICE_NAME=rest-api-dev

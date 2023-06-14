@@ -7,6 +7,12 @@ dev:
   pass: postgres
   database: postgres
   schema: nba_prod
+docker_dev:
+  host: postgres
+  user: postgres
+  pass: postgres
+  database: postgres
+  schema: nba_prod
 prod:
   host: $IP
   user: $RDS_USER
