@@ -2,7 +2,6 @@ from datetime import datetime, timedelta, timezone
 
 from fastapi import Form
 from fastapi.encoders import jsonable_encoder
-from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 from typing import List
 
