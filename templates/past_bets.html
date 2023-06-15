@@ -13,6 +13,7 @@
             <th scope="col">Total Correct Predictions</th>
             <th scope="col">Total Predictions</th>
             <th scope="col">% Correct</th>
+            <th scope="col">Total Profit</th>
          </tr>
       </thead>
       <tbody>
@@ -20,6 +21,7 @@
             <th> {{ past_predictions_success_count }}
             <td> {{ past_predictions_total_count }} </td>
             <td> {{ (past_predictions_pct_count * 100)|round(3) }}% </td>
+            <td> $ {{ past_predictions_bet_profit }} </td>
             </th>
          </tr>
       </tbody>

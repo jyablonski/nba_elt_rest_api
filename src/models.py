@@ -217,6 +217,7 @@ class UserPastPredictions(Base):
     created_at: datetime = Column(TIMESTAMP, nullable=False)
     actual_winner: str = Column(String, nullable=False)
     is_correct_prediction: int = Column(Integer, nullable=False)
+    bet_profit: int = Column(Integer, nullable=False)
 
 
 class FeatureFlags(Base):

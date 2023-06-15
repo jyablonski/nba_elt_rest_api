@@ -1,4 +1,4 @@
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 
 from fastapi import Form
 from fastapi.encoders import jsonable_encoder
@@ -79,9 +79,11 @@ def get_schedule(db: Session):
 
 
 def get_predictions(db: Session):
+    local_datetime = (datetime.utcnow() - timedelta(hours=5)).date()
+
     return (
         db.query(models.Predictions)
-        .filter(models.Predictions.proper_date == str(datetime.utcnow().date()))
+        .filter(models.Predictions.proper_date == str(local_datetime))
         .all()
     )
 
