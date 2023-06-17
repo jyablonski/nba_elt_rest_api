@@ -29,8 +29,10 @@ def get_user_past_bets_page(
     user_past_predictions_bet_profit = user_past_predictions.with_entities(
         func.sum(UserPastPredictions.bet_profit)
     ).scalar()
-    print(user_past_predictions_bet_profit)
 
+    if user_past_predictions_bet_profit == None:
+        user_past_predictions_bet_profit = 0
+        
     if user_past_predictions_count == 0:
         user_past_predictions_pct_count = 0
     else:
