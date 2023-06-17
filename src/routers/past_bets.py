@@ -32,7 +32,7 @@ def get_user_past_bets_page(
 
     if user_past_predictions_bet_profit == None:
         user_past_predictions_bet_profit = 0
-        
+
     if user_past_predictions_count == 0:
         user_past_predictions_pct_count = 0
     else:
