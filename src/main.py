@@ -12,8 +12,10 @@ from opentelemetry.sdk.trace.export import BatchSpanProcessor
 from .models import Base
 from .database import engine
 from .routers import (
+    admin,
     auth,
     bets,
+    feature_flags,
     feedback,
     game_types,
     injuries,
@@ -40,8 +42,10 @@ tracer = trace.get_tracer(__name__)
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
+app.include_router(admin.router)
 app.include_router(auth.router)
 app.include_router(bets.router)
+app.include_router(feature_flags.router)
 app.include_router(feedback.router)
 app.include_router(game_types.router)
 app.include_router(injuries.router)

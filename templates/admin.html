@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+  .center-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 90vh;
+  }
+</style>
+
+<div class="center-screen">
+  <div class="text-success font-weight-bold">
+    <center>
+      <h1> Admin Page </h1>
+      <div class="badge bg-success text-wrap font-weight-bold" style="font-size: large;">
+      </div>
+      <br>
+      <a href="/admin/feature_flags">Feature Flags</a>
+      <br>
+      <a href="/login">Login Page</a>
+    </center>
+  </div>
+</div>
+{% endblock content %}

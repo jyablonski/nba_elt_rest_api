@@ -181,12 +181,12 @@ CREATE TABLE nba_predictions(
 );
 
 INSERT INTO nba_predictions (proper_date, home_team, home_team_odds, home_team_predicted_win_pct, away_team, away_team_odds, away_team_predicted_win_pct)
-VALUES (current_date, 'Indiana Pacers', '+200', 0.247, 'San Antonio Spurs', '-160', 0.753),
-       (current_date, 'Houston Rockets', '-140', 0.194, 'Memphis Grizzlies', '+180', 0.806),
-       (current_date, 'Golden State Warriors', '-150', 0.712, 'Boston Celtics', '180', 0.288),
-       (current_date, 'Dallas Mavericks', '-140', 0.194, 'Detroit Pistons', '+180', 0.806),
-       (current_date, 'Chicago Bulls', '+200', 0.355, 'Charlotte Hornets', '-160', 0.645),
-       (current_date, 'Utah Jazz', '+320', 0.194, 'Phoenix Suns', '-250', 0.806);
+VALUES (date(current_timestamp - interval '5 hour'), 'Indiana Pacers', '+200', 0.247, 'San Antonio Spurs', '-160', 0.753),
+       (date(current_timestamp - interval '5 hour'), 'Houston Rockets', '-140', 0.194, 'Memphis Grizzlies', '+180', 0.806),
+       (date(current_timestamp - interval '5 hour'), 'Golden State Warriors', '-150', 0.712, 'Boston Celtics', '180', 0.288),
+       (date(current_timestamp - interval '5 hour'), 'Dallas Mavericks', '-140', 0.194, 'Detroit Pistons', '+180', 0.806),
+       (date(current_timestamp - interval '5 hour'), 'Chicago Bulls', '+200', 0.355, 'Charlotte Hornets', '-160', 0.645),
+       (date(current_timestamp - interval '5 hour'), 'Utah Jazz', '+320', 0.194, 'Phoenix Suns', '-250', 0.806);
 
 
 DROP TABLE IF EXISTS transactions;
@@ -255,6 +255,20 @@ CREATE TABLE IF NOT EXISTS mov
     record text COLLATE pg_catalog."default"
 );
 
+DROP TABLE IF EXISTS feature_flags;
+CREATE TABLE IF NOT EXISTS feature_flags
+(
+	id serial primary key,
+	flag text,
+	is_enabled integer,
+	created_at timestamp without time zone default now(),
+	modified_at timestamp without time zone default now(),
+    CONSTRAINT flag_unique UNIQUE (flag)
+);
+INSERT INTO feature_flags(flag, is_enabled)
+VALUES ('season', 1),
+       ('playoffs', 1);
+
 create view user_past_predictions as
 WITH home_wins AS (
     SELECT 
@@ -284,23 +298,18 @@ WITH home_wins AS (
         END AS actual_winner
     FROM nba_prod.user_predictions
     LEFT JOIN home_wins USING (home_team, game_date)
+    ),
+
+    final as (
+        select 
+            *,
+            case when selected_winner = actual_winner then 1
+                else 0 end as is_correct_prediction
+        from combo
     )
-SELECT 
-    combo.id,
-    combo.username,
-    combo.game_date,
-    combo.home_team,
-    combo.home_team_odds,
-    combo.home_team_predicted_win_pct,
-    combo.away_team,
-    combo.away_team_odds,
-    combo.away_team_predicted_win_pct,
-    combo.selected_winner,
-    combo.bet_amount,
-    combo.created_at,
-    combo.actual_winner,
-    CASE
-        WHEN combo.selected_winner = combo.actual_winner THEN 1
-        ELSE 0
-    END AS is_correct_prediction
-FROM combo;
+
+    select
+        *,
+        case when is_correct_prediction = 1 then bet_amount
+            else bet_amount * -1 end as bet_profit
+    from final;
