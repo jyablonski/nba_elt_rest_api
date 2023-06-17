@@ -39,13 +39,6 @@ jobs:
           make install-packages-r
           make zip
 
-      # stores it to the repo as an artifact you can download
-      # - name: Grab Artifact
-      #   uses: actions/download-artifact@master
-      #   with:
-      #     name: my-artifact
-      #     path: lambda_function.zip
-
       - name: Deploy to S3
         env:
           aws_bucket: ${{ secrets.AWS_BUCKET }}
