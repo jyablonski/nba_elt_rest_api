@@ -17,7 +17,7 @@
                 <tr>
                     <th scope="col">Flag</th>
                     <th scope="col">Enabled</th>
-                    <th scope="col">Created</th>
+                    <th scope="col">Modified</th>
                     <th scope="col">Update Flag</th>
                 </tr>
             </thead>
@@ -26,7 +26,7 @@
                 <tr>
                     <th scope="row">{{ flag.flag }}</th>
                     <td>{{ flag.is_enabled }}</td>
-                    <td>{{ flag.created_at }} UTC</td>
+                    <td>{{ flag.modified_at.strftime('%Y-%m-%d %H:%M:%S') }} UTC</td>
                     <td>
                         <select name="feature_flag_list" id="feature_flag_list">
                             {% for choice in [0, 1] %}
