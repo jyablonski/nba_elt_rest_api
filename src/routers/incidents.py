@@ -4,17 +4,17 @@ from fastapi import APIRouter, Depends, Form, HTTPException, Request, status
 from fastapi.responses import HTMLResponse
 from sqlalchemy.orm import Session
 
-from src.crud import create_feature_flags, update_feature_flags
+from src.crud import create_incident, update_incident
 from src.database import get_db
-from src.models import FeatureFlags
+from src.models import Incidents
 from src.security import get_current_user_from_token
 from src.utils import templates
 
 router = APIRouter()
 
 
-@router.get("/admin/feature_flags", response_class=HTMLResponse)
-def get_feature_flags(
+@router.get("/admin/incidents", response_class=HTMLResponse)
+def get_incidents(
     request: Request,
     username: str = Depends(get_current_user_from_token),
     db: Session = Depends(get_db),
@@ -24,17 +24,17 @@ def get_feature_flags(
             status_code=status.HTTP_401_UNAUTHORIZED, detail="You do not have the powa",
         )
 
-    feature_flags = db.query(FeatureFlags).order_by(FeatureFlags.flag)
+    incidents = db.query(Incidents).order_by(Incidents.incident_name)
 
     return templates.TemplateResponse(
-        "feature_flags.html", {"request": request, "feature_flags": feature_flags}
+        "incidents.html", {"request": request, "incidents": incidents}
     )
 
 
-@router.post("/admin/feature_flags")
-def post_feature_flags(
+@router.post("/admin/incidents")
+def post_incidents(
     request: Request,
-    feature_flag_list: List[str] = Form(...),
+    incident_list: List[str] = Form(...),
     username: str = Depends(get_current_user_from_token),
     db: Session = Depends(get_db),
 ):
@@ -43,18 +43,19 @@ def post_feature_flags(
             status_code=status.HTTP_401_UNAUTHORIZED, detail="You do not have the powa",
         )
 
-    new_feature_flags = update_feature_flags(db, feature_flag_list)
+    new_incident = update_incident(db, incident_list)
 
     return templates.TemplateResponse(
-        "feature_flags.html", {"request": request, "feature_flags": new_feature_flags}
+        "incidents.html", {"request": request, "incidents": new_incident}
     )
 
 
-@router.post("/admin/feature_flags/create")
-def post_feature_flags(
+@router.post("/admin/incidents/create")
+def post_incidents(
     request: Request,
-    feature_flag_name_form: str = Form(...),
-    feature_flag_is_enabled_form: int = Form(...),
+    incident_name_form: str = Form(...),
+    incident_description_form: str = Form(...),
+    incident_is_active_form: int = Form(...),
     username: str = Depends(get_current_user_from_token),
     db: Session = Depends(get_db),
 ):
@@ -63,26 +64,26 @@ def post_feature_flags(
             status_code=status.HTTP_401_UNAUTHORIZED, detail="You do not have the powa",
         )
 
-    existing_feature_flags = db.query(FeatureFlags).order_by(FeatureFlags.flag)
+    existing_incident = db.query(Incidents).order_by(Incidents.incident_name)
 
-    existing_feature_flags_check = existing_feature_flags.filter(
-        FeatureFlags.flag == feature_flag_name_form
+    existing_incident_check = existing_incident.filter(
+        Incidents.incident_name == incident_name_form
     ).count()
 
-    if existing_feature_flags_check > 0:
+    if existing_incident_check > 0:
         return templates.TemplateResponse(
-            "feature_flags.html",
+            "incidents.html",
             {
                 "request": request,
-                "feature_flags": existing_feature_flags,
-                "feature_flag_error": "You cannot store a Feature Flag with that name!",
+                "incidents": existing_incident,
+                "incident_error": "You cannot store an Incident with that name!",
             },
         )
 
-    create_feature_flags(db, feature_flag_name_form, feature_flag_is_enabled_form)
+    create_incident(db, incident_name_form, incident_description_form, incident_is_active_form)
 
-    feature_flags = db.query(FeatureFlags).order_by(FeatureFlags.flag)
+    incident = db.query(Incidents).order_by(Incidents.incident_name)
 
     return templates.TemplateResponse(
-        "feature_flags.html", {"request": request, "feature_flags": feature_flags}
+        "incidents.html", {"request": request, "incidents": incident}
     )

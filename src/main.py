@@ -18,9 +18,11 @@ from .routers import (
     feature_flags,
     feedback,
     game_types,
+    incidents,
     injuries,
     login,
     past_bets,
+    practice,
     predictions,
     reddit_comments,
     schedule,
@@ -48,9 +50,11 @@ app.include_router(bets.router)
 app.include_router(feature_flags.router)
 app.include_router(feedback.router)
 app.include_router(game_types.router)
+app.include_router(incidents.router)
 app.include_router(injuries.router)
 app.include_router(login.router)
 app.include_router(past_bets.router)
+app.include_router(practice.router)
 app.include_router(predictions.router)
 app.include_router(reddit_comments.router)
 app.include_router(schedule.router)
@@ -61,9 +65,7 @@ app.include_router(transactions.router)
 app.include_router(twitter_comments.router)
 app.include_router(users.router)
 
-# app.mount(
-#     "/static", AuthStaticFiles(directory="static"), name="static",
-# )
+
 app.mount("/static", StaticFiles(directory="static"), name="static")
 FastAPIInstrumentor.instrument_app(app)
 RequestsInstrumentor().instrument()

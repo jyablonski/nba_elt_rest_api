@@ -1,12 +1,10 @@
 {% extends "base.html" %}
 
 {% block content %}
-<form method="post">
+<form id="feedback-form" method="post">
     <h1> Anonymous Feedback Form </h1>
-    <div class="mb-3">
         <input type="text" required placeholder="Enter your feedback ..." value="" name="user_feedback"
             class="form-control" style="font-size: 18pt; height: 35px; width:1000px;">
-    </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
