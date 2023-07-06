@@ -80,7 +80,9 @@ def post_incidents(
             },
         )
 
-    create_incident(db, incident_name_form, incident_description_form, incident_is_active_form)
+    create_incident(
+        db, incident_name_form, incident_description_form, incident_is_active_form
+    )
 
     incident = db.query(Incidents).order_by(Incidents.incident_name)
 
