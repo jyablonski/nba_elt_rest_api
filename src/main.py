@@ -22,7 +22,6 @@ from .routers import (
     injuries,
     login,
     past_bets,
-    practice,
     predictions,
     reddit_comments,
     schedule,
@@ -54,7 +53,6 @@ app.include_router(incidents.router)
 app.include_router(injuries.router)
 app.include_router(login.router)
 app.include_router(past_bets.router)
-app.include_router(practice.router)
 app.include_router(predictions.router)
 app.include_router(reddit_comments.router)
 app.include_router(schedule.router)
