@@ -2,27 +2,18 @@
 
 {% block content %}
 
-<form name="create_user_form" action="/login/create_user" method="post" enctype="multipart/form-data">
-    <fieldset>
-        <legend>User Creation</legend>
-        <br>
-        <table>
-            <tr>
-                <td> Username: </td>
-                <td> <input type=”text” name="username" username=””> </td>
-            </tr>
-            <tr>
-                <td> Password: </td>
-                <td> <input type="password" name="password" password=””> </td>
-            </tr>
-            <tr>
-                <td> Email Address (Optional): </td>
-                <td> <input type=”text” name="email" email=””> </td>
-            </tr>
-            <!-- </select> -->
-        </table>
-        <br>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </fieldset>
+<form id="login-form" name="create_user_form" action="/login/create_user" method="post" enctype="multipart/form-data">
+    <h1> Create a User </h1>
+    <label>Username</label>
+    <input type="text" required placeholder="Your username" name="username" value="{{username}}" class="form-control">
+
+    <label>Password</label>
+    <input type="password" required placeholder="Choose a secure password" value="{{password}}" name="password"
+        class="form-control">
+
+    <label>Email Address (Optional)</label>
+    <input type="email" placeholder="Choose an optional email" value="{{email}}" name="email" class="form">
+
+    <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 {% endblock %}

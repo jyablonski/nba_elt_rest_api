@@ -35,34 +35,27 @@
   <div class="row my-5">
     <form id="login-form" method="POST">
 
-      <center>
-        <h1> User Login </h1>
-      </center>
-
-      <div class="text-danger font-weight-bold">
-        {% for error in errors %}
-        <li>{{error}}</li>
-        {% endfor %}
-      </div>
+      <h1> User Login </h1>
+      {% for error in errors %}
+      <p>
+      <div class="text-danger">{{error}}</div>
+      </p>
+      {% endfor %}
 
       <br>
 
-      <div class="mb-3">
-        <label>Username</label>
-        <input type="text" required placeholder="Your username" name="username" value="{{username}}"
-          class="form-control">
-      </div>
+      <label>Username</label>
+      <input type="text" required placeholder="Your username" name="username" value="{{username}}" class="form-control">
 
-      <div class="mb-3">
-        <label>Password</label>
-        <input type="password" required placeholder="Choose a secure password" value="{{password}}" name="password"
-          class="form-control">
-      </div>
+      <label>Password</label>
+      <input type="password" required placeholder="Choose a secure password" value="{{password}}" name="password"
+        class="form-control">
 
       <button type="submit" class="btn btn-primary">Submit</button>
 
       <br>
-      <h4> Don't have an account? <a href="/login/create_user">Create One</a></h1>
+      <br>
+      <p> Don't have an account? <a href="/login/create_user"><b>Create One</b></a></hp>
 
     </form>
   </div>
