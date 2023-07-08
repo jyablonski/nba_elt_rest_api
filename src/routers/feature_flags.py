@@ -21,7 +21,7 @@ def get_feature_flags(
 ):
     if username != "jyablonski":
         raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED, detail="You do not have the powa",
+            status_code=status.HTTP_403_FORBIDDEN, detail="You do not have the powa",
         )
 
     feature_flags = db.query(FeatureFlags).order_by(FeatureFlags.flag)
@@ -40,7 +40,7 @@ def post_feature_flags(
 ):
     if username != "jyablonski":
         raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED, detail="You do not have the powa",
+            status_code=status.HTTP_403_FORBIDDEN, detail="You do not have the powa",
         )
 
     new_feature_flags = update_feature_flags(db, feature_flag_list)
@@ -60,7 +60,7 @@ def post_feature_flags(
 ):
     if username != "jyablonski":
         raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED, detail="You do not have the powa",
+            status_code=status.HTTP_403_FORBIDDEN, detail="You do not have the powa",
         )
 
     existing_feature_flags = db.query(FeatureFlags).order_by(FeatureFlags.flag)

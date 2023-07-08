@@ -21,7 +21,7 @@ def get_incidents(
 ):
     if username != "jyablonski":
         raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED, detail="You do not have the powa",
+            status_code=status.HTTP_403_FORBIDDEN, detail="You do not have the powa",
         )
 
     incidents = db.query(Incidents).order_by(Incidents.incident_name)
@@ -40,7 +40,7 @@ def post_incidents(
 ):
     if username != "jyablonski":
         raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED, detail="You do not have the powa",
+            status_code=status.HTTP_403_FORBIDDEN, detail="You do not have the powa",
         )
 
     new_incident = update_incident(db, incident_list)
@@ -61,7 +61,7 @@ def post_incidents(
 ):
     if username != "jyablonski":
         raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED, detail="You do not have the powa",
+            status_code=status.HTTP_403_FORBIDDEN, detail="You do not have the powa",
         )
 
     existing_incident = db.query(Incidents).order_by(Incidents.incident_name)
