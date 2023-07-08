@@ -5,7 +5,7 @@ def test_login(client_fixture):
         "/login", data={"username": username, "password": "password",},
     )
 
-    assert f"Welcome {username}" in response.text
+    assert f"Welcome <b>{username}" in response.text
     assert response.status_code == 200
 
 

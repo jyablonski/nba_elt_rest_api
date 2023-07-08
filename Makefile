@@ -50,7 +50,7 @@ docker-build-local:
 
 .PHONY: up
 up:
-	@docker compose -f docker/docker-compose-local.yml up
+	@docker compose -f docker/docker-compose-local.yml up -d
 
 .PHONY: down
 down:
