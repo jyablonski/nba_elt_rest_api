@@ -14,14 +14,15 @@
         <p>{{msg}}
       <br>
       <br>
-      Welcome {{ username }}</p>
+      Welcome <b>{{ username }}</b></p>
     </div>
       <br>
       <br>
       <a href="/bets">Tonight's Bets Page</a>
       <br>
+      <br>
       <a href="/past_bets">Past Bets Page</a>
-
+      <br>
       {% if username == 'jyablonski' %}
       <br>
       <a href="/admin">Admin Page</a>
@@ -42,21 +43,19 @@
       </p>
       {% endfor %}
 
-      <br>
-
       <label>Username</label>
       <input class="web-form-input" type="text" required placeholder="Your username" name="username"
         value="{{username}}" class="form-control">
 
       <label>Password</label>
-      <input class="web-form-input" type="password" required placeholder="Choose a secure password" value="{{password}}"
+      <input class="web-form-input" type="password" required placeholder="Your password" value="{{password}}"
         name="password" class="form-control">
 
       <button type="submit" class="btn btn-primary">Submit</button>
 
       <br>
       <br>
-      <p> Don't have an account? <a href="/login/create_user"><b>Create One</b></a></hp>
+      <p> Don't have an account? <a class="create_user" href="/login/create_user"><b>Create One</b></a></hp>
 
     </form>
   </div>

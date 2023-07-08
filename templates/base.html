@@ -18,9 +18,9 @@
     {% endblock %}
     <nav class="navfoot">
         <div style="text-align:center;">
-            <a>&copy; 2023</a>
-            &thinsp; <a href="/" class="home"><img id="home" src="static/home.png"></a>
-            <a>Version: 1.4.0</a>
+            &copy; 2023
+            <a href="/" class="home"><img id="home" src="{{ url_for('static', path='/home.png') }}"></a>
+            Version: 1.4.0
         </div>
     </nav>
 
