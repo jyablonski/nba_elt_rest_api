@@ -313,3 +313,17 @@ WITH home_wins AS (
         case when is_correct_prediction = 1 then bet_amount
             else bet_amount * -1 end as bet_profit
     from final;
+
+DROP TABLE IF EXISTS incidents;
+CREATE TABLE IF NOT EXISTS incidents
+(
+	id serial primary key,
+	incident_name text,
+    incident_description text,
+	is_active integer,
+	created_at timestamp without time zone default now(),
+	modified_at timestamp without time zone default now()
+);
+INSERT INTO incidents(incident_name, incident_description, is_active)
+VALUES ('New Transactions Down', 'New Transactions have been unavailable as of July 5, 2023', 1),
+       ('NBA Dashboard Lag', 'The NBA Dashboard has been experiencing latency issues since July 1, 2023', 1);

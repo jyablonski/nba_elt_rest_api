@@ -39,6 +39,12 @@ services:
       - api_network
     links:
       - postgres:postgres
+    volumes:
+      - ${PWD}/src/:/home/appuser/src
+      - ${PWD}/static/:/home/appuser/static
+      - ${PWD}/templates:/home/appuser/templates
+      # these are for fast local docker compose dev so changes will automatically make it into the app
+
 
 networks:
   api_network:

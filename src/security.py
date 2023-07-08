@@ -97,21 +97,31 @@ class OAuth2PasswordBearerWithCookie(OAuth2):
         super().__init__(flows=flows, scheme_name=scheme_name, auto_error=auto_error)
 
     async def __call__(self, request: Request) -> Optional[str]:
-        authorization: str = request.cookies.get(
-            "access_token"
-        )  # changed to accept access token from httpOnly Cookie
-
-        scheme, param = get_authorization_scheme_param(authorization)
-        if not authorization or scheme.lower() != "bearer":
-            if self.auto_error:
-                raise HTTPException(
-                    status_code=status.HTTP_401_UNAUTHORIZED,
-                    detail="Not authenticated",
-                    headers={"WWW-Authenticate": "Bearer"},
-                )
+        # skip the automatic error on login screen
+        if "/login" in str(request.url):
+            token: str = request.cookies.get("access_token")
+            if token is not None:
+                scheme, param = get_authorization_scheme_param(token)
+                return param
             else:
                 return None
-        return param
+
+        else:
+            token: str = request.cookies.get(
+                "access_token"
+            )  # changed to accept access token from httpOnly Cookie
+
+            scheme, param = get_authorization_scheme_param(token)
+            if not token or scheme.lower() != "bearer":
+                if self.auto_error:
+                    raise HTTPException(
+                        status_code=status.HTTP_401_UNAUTHORIZED,
+                        detail="Not authenticated",
+                        headers={"WWW-Authenticate": "Bearer"},
+                    )
+                else:
+                    return None
+            return param
 
 
 def get_user(username: str, db: Session):
@@ -120,6 +130,7 @@ def get_user(username: str, db: Session):
 
 
 oauth2_scheme = OAuth2PasswordBearerWithCookie(tokenUrl="token")
+
 
 # this is the form / web app version to authenticate
 # only difference is `oauth2_scheme` vs `oauth2_scheme_og`
@@ -131,6 +142,9 @@ def get_current_user_from_token(token: str = Depends(oauth2_scheme)) -> str:
     )
 
     try:
+        if token == None:
+            return None
+
         payload = jwt.decode(token, os.environ.get("API_KEY"), algorithms=["HS256"])
         username: str = payload.get("sub")
 
@@ -139,7 +153,8 @@ def get_current_user_from_token(token: str = Depends(oauth2_scheme)) -> str:
         else:
             return username
 
-    except JWTError:
+    except JWTError as e:
+        print(f"JWT Error Occurred, {e}")
         raise credentials_exception
 
 

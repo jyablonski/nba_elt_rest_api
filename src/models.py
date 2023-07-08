@@ -229,3 +229,15 @@ class FeatureFlags(Base):
     is_enabled: int = Column(Integer, nullable=False)
     created_at: datetime = Column(TIMESTAMP, nullable=False)
     modified_at: datetime = Column(TIMESTAMP, nullable=False)
+
+
+class Incidents(Base):
+    __tablename__ = "incidents"
+    __table_args__ = (PrimaryKeyConstraint("id"),)
+
+    id: int = Column(Integer, nullable=False, autoincrement=True)
+    incident_name: str = Column(String, nullable=False)
+    incident_description: str = Column(String, nullable=False)
+    is_active: int = Column(Integer, nullable=False)
+    created_at: datetime = Column(TIMESTAMP, nullable=False)
+    modified_at: datetime = Column(TIMESTAMP, nullable=False)

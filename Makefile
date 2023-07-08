@@ -48,9 +48,13 @@ stop-postgres:
 docker-build-local:
 	@docker compose -f docker/docker-compose-local.yml build
 
-.PHONY: docker-run-local
-docker-run-local:
-	@docker compose -f docker/docker-compose-local.yml up
+.PHONY: up
+up:
+	@docker compose -f docker/docker-compose-local.yml up -d
+
+.PHONY: down
+down:
+	@docker compose -f docker/docker-compose-local.yml down
 
 .PHONY: test
 test:

@@ -17,7 +17,7 @@ def test_feature_flags_get_wrong_auth(client_fixture):
 
     response = client_fixture.get("/admin/feature_flags")
 
-    assert response.status_code == 401
+    assert response.status_code == 403
     assert response.json()["detail"] == "You do not have the powa"
 
 
@@ -50,7 +50,7 @@ def test_feature_flags_create_wrong_auth(client_fixture):
         headers={"content-type": "application/x-www-form-urlencoded"},
     )
 
-    assert response.status_code == 401
+    assert response.status_code == 403
     assert response.json()["detail"] == "You do not have the powa"
 
 
