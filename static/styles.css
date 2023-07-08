@@ -2,15 +2,6 @@
     color: #dc3545
 }
 
-.navfoot {
-    color: #fff;
-    background: #161c22;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    position: fixed;
-}
-
 .error-msg {
     margin: 10px 0;
     padding: 10px;
@@ -89,14 +80,15 @@ form button {
 td,
 th {
     border: 1px solid rgb(190, 190, 190);
-    padding: 10px;
+    padding: 5px;
 }
 
 td {
     text-align: center;
+    border-spacing: 0px;
 }
 
-tr:nth-child(even) {
+tr {
     background-color: #eee;
 }
 
@@ -154,7 +146,7 @@ caption {
     background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
 } */
 body {
-    background-color: #161c22;
+    background-color: #0f1218;
     flex-wrap: no-wrap;
     min-height: 80vh;
 }
@@ -250,8 +242,23 @@ input {
     /* border:#000; */
     color: white !important;
     background-color: rgba(8, 3, 3, 0.07);
+    border-radius: 1px;
+    border-width: 1px;
+    padding: 0px;
+    margin-top: 0px;
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.web-form-input {
+    display: block;
+    height: 50px;
+    width: 100%;
+    /* border:#000; */
+    color: white !important;
+    background-color: rgba(8, 3, 3, 0.07);
     border-radius: 3px;
-    padding: 0 10px;
+    padding: 10px;
     margin-top: 8px;
     font-size: 14px;
     font-weight: 300;
@@ -284,6 +291,7 @@ p {
 a:link,
 a:visited {
     background-color: rgba(35, 85, 160, 0.247);
+    /* background-color: #161c22; */
     color: #fff;
     border: 2px solid rgba(0, 0, 0, 0);
     padding: 3px 8px;
@@ -296,4 +304,39 @@ a:hover,
 a:active {
     color: white;
     background: #6d44b8;
+}
+
+.navfoot {
+    background: #161c22;
+    color: #fff;
+    height: 64px;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    position: fixed;
+    display: inline-block;
+    line-height: 56px;
+}
+
+
+#home {
+    display: inline-block;
+    justify-content: center;
+    margin: 0px;
+    width: 40px;
+    height: 40px;
+    background: #161c22;
+    background-color: #161c22;
+}
+
+a.home:link,
+a.home:visited {
+    /* background-color: rgba(35, 85, 160, 0.247); */
+    background-color: #161c22;
+    color: #fff;
+    border: 0px solid rgba(0, 0, 0, 0);
+    padding: 0px 0px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
 }

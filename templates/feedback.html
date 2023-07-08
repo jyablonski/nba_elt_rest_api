@@ -3,12 +3,12 @@
 {% block content %}
 <form id="feedback-form" method="post">
     <h1> Anonymous Feedback Form </h1>
-        <input type="text" required placeholder="Enter your feedback ..." value="" name="user_feedback"
-            class="form-control" style="font-size: 18pt; height: 35px; width:1000px;">
+    <input class="web-form-input" type="text" required placeholder="Enter your feedback ..." value=""
+        name="user_feedback" class="form-control" style="font-size: 18pt; height: 35px; width:1000px;">
     <button type="submit" class="btn btn-primary">Submit</button>
     <br>
     <br>
-    
+
     <div class="badge bg-success text-wrap font-weight-bold" style="font-size: large;">
         {% if feedback_response %}
         <p>{{ feedback_response }}</p>
