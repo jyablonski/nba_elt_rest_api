@@ -1,5 +1,5 @@
 # REST API for NBA ELT Project
-![Tests](https://github.com/jyablonski/nba_elt_rest_api/actions/workflows/test.yml/badge.svg) ![Deployment](https://github.com/jyablonski/nba_elt_rest_api/actions/workflows/deploy.yml/badge.svg) ![Code Style](https://img.shields.io/badge/code%20style-black-000000.svg)
+![Tests](https://github.com/jyablonski/nba_elt_rest_api/actions/workflows/test.yml/badge.svg) ![Deployment](https://github.com/jyablonski/nba_elt_rest_api/actions/workflows/deploy.yml/badge.svg) [![Coverage Status](https://coveralls.io/repos/github/jyablonski/nba_elt_rest_api/badge.svg?branch=master)](https://coveralls.io/github/jyablonski/nba_elt_rest_api?branch=master) ![Code Style](https://img.shields.io/badge/code%20style-black-000000.svg)
 
 Version: 1.4.1
 
