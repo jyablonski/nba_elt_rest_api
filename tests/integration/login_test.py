@@ -1,4 +1,4 @@
-def test_login(client_fixture):
+def test_login_get(client_fixture):
     username = "jyablonski"
 
     response = client_fixture.post(
@@ -18,3 +18,31 @@ def test_login_fail(client_fixture):
 
     assert response.status_code == 200
     assert "Incorrect Username or Password" in response.text
+
+
+def test_login_get_with_no_token(client_fixture):
+    response = client_fixture.get("/login")
+
+    assert "User Login" in response.text
+    assert response.status_code == 200
+
+
+def test_login_get_with_token(client_fixture):
+    username = "jyablonski"
+
+    response = client_fixture.post(
+        "/login", data={"username": username, "password": "password",},
+    )
+
+    get_response = client_fixture.get("/login")
+
+    assert response.status_code == 200
+    assert f"Welcome <b>{username}" in get_response.text
+    assert get_response.status_code == 200
+
+
+def test_create_user_get(client_fixture):
+    response = client_fixture.get("/login/create_user")
+
+    assert "Create a User" in response.text
+    assert response.status_code == 200

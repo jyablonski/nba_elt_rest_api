@@ -7,7 +7,6 @@ from fastapi import Depends, HTTPException, Request, status
 from fastapi.openapi.models import OAuthFlows as OAuthFlowsModel
 from fastapi.security import (
     HTTPBasic,
-    HTTPBasicCredentials,
     OAuth2,
     OAuth2PasswordBearer,
 )
@@ -23,30 +22,6 @@ from .utils import generate_hash_password
 
 security = HTTPBasic()
 oauth2_scheme_og = OAuth2PasswordBearer(tokenUrl="token")
-
-
-def get_current_username(
-    credentials: HTTPBasicCredentials = Depends(security), db: Session = Depends(get_db)
-):
-    username_check = (
-        db.query(Users).filter(Users.username == credentials.username)
-    ).first()
-
-    if username_check is None:
-        return None
-
-    user_password = generate_hash_password(
-        password=username_check.password, salt=username_check.salt
-    )
-
-    correct_password = secrets.compare_digest(credentials.password, user_password)
-    if not (username_check and correct_password):
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Incorrect username or password",
-            headers={"WWW-Authenticate": "Basic"},
-        )
-    return credentials.username
 
 
 class LoginForm:

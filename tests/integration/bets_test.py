@@ -21,7 +21,7 @@ def test_post_bets_form_incorrect_permissions(client_fixture):
     assert response.json()["detail"] == "Not authenticated"
 
 
-def test_past_bets_form_get(client_fixture):
+def test_bets_form_get(client_fixture):
     username = "jyablonski"
 
     login_response = client_fixture.post(
@@ -36,7 +36,7 @@ def test_past_bets_form_get(client_fixture):
     assert "Houston Rockets" in bets_response.text
 
 
-def test_past_bets_form_post(client_fixture):
+def test_bets_form_post(client_fixture):
     username = "jyablonski"
 
     login_response = client_fixture.post(

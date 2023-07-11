@@ -1,5 +1,10 @@
+import json
 import os
 import random
+
+import pytest
+
+from src.security import get_current_user_from_api_token
 
 
 def test_create_user(client_fixture):
@@ -15,17 +20,35 @@ def test_create_user(client_fixture):
     assert response.json()["username"] == username
 
 
-def test_create_user_from_form(client_fixture):
+def test_create_user_from_api(client_fixture):
+    username = "test_api_user"
+
     response = client_fixture.post(
         "/users",
         json={
-            "username": "test_form_user",
+            "username": username,
             "password": "bababooiee",
             "email": "fake@user.net",
         },
     )
 
     assert response.status_code == 201
+
+
+def test_create_user_from_form(client_fixture):
+    username = "test_form_user"
+
+    response = client_fixture.post(
+        "/login/create_user",
+        data={
+            "username": username,
+            "password": "password",
+            "email": "fake@formuser.net",
+        },
+    )
+
+    assert response.status_code == 200
+    assert username in response.text
 
 
 def test_create_user_bad_request(client_fixture):
@@ -54,6 +77,43 @@ def test_update_user(client_fixture):
 
     assert response.json()["username"] == new_username
     assert response.status_code == 200
+
+
+def test_update_user_doesnt_exist(client_fixture):
+    new_username = "bigfakeuser"
+    existing_username = "test55"
+
+    response = client_fixture.put(
+        f"/users/{existing_username}",
+        json={
+            "username": new_username,
+            "password": "bababooiee",
+            "email": "yooo@gmail.com",
+        },
+    )
+
+    assert response.status_code == 404
+    assert "this doesn't exist hoe" in response.text
+
+
+def test_update_user_username_taken(client_fixture):
+    new_username = "jyablonski"
+    existing_username = "test1"
+
+    response = client_fixture.put(
+        f"/users/{existing_username}",
+        json={
+            "username": new_username,
+            "password": "bababooiee",
+            "email": "yooo@gmail.com",
+        },
+    )
+
+    assert (
+        response.json()["detail"]
+        == "The new requested Username already exists!  Please select another username."
+    )
+    assert response.status_code == 409
 
 
 def test_delete_user_no_token(client_fixture):

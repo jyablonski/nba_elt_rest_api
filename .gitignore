@@ -7,3 +7,5 @@ jacobs_notes.md
 *.ipynb
 prac.py
 *practice*
+*coveralls*
+*coverage*
