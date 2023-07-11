@@ -26,18 +26,14 @@ def sql_connection(user: str, password: str, host: str, database: str, schema: s
     Returns:
         SQL Engine variable to a specified schema in the DB
     """
-    try:
-        connection = create_engine(
-            f"postgresql+psycopg2://{user}:{password}@{host}:5432/{database}",
-            connect_args={"options": f"-csearch_path={schema}"},
-            # defining schema to connect to
-            echo=False,
-        )
-        print(f"SQL Engine created for {schema}")
-        return connection
-    except exc.SQLAlchemyError as e:
-        print(f"SQL Engine failed to create for {schema}, Error: {e}")
-        return e
+    connection = create_engine(
+        f"postgresql+psycopg2://{user}:{password}@{host}:5432/{database}",
+        connect_args={"options": f"-csearch_path={schema}"},
+        # defining schema to connect to
+        echo=False,
+    )
+    print(f"SQL Engine created for {schema}")
+    return connection
 
 
 def get_db():

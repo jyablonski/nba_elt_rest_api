@@ -5,10 +5,7 @@ from src.crud import create_user, delete_user, update_user
 from src.database import get_db
 from src.models import Users
 from src.schemas import UserBase, UserCreate
-from src.security import (
-    get_current_username,
-    get_current_user_from_api_token,
-)
+from src.security import get_current_user_from_api_token
 
 router = APIRouter()
 
@@ -38,7 +35,7 @@ async def update_users(
 
     if not existing_user_record:
         raise HTTPException(
-            status_code=400,
+            status_code=404,
             detail="That old Username doesn't exist!  Please select another username.",
         )
 
@@ -48,7 +45,7 @@ async def update_users(
 
     if new_record_check:
         raise HTTPException(
-            status_code=403,
+            status_code=409,
             detail="The new requested Username already exists!  Please select another username.",
         )
 
@@ -72,15 +69,4 @@ def delete_users(
 
     user_record = db.query(Users).filter(Users.username == username).first()
 
-    if not user_record:
-        raise HTTPException(
-            status_code=400,
-            detail="Username doesn't exist!  Please select another username.",
-        )
-
     return delete_user(db, user_record)
-
-
-@router.get("/users/me")
-def read_current_user(username: str = Depends(get_current_username)):
-    return {"username": username}

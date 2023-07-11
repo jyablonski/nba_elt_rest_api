@@ -58,4 +58,8 @@ down:
 
 .PHONY: test
 test:
-	@pytest -v
+	@make stop-postgres
+	@make start-postgres
+	@sleep 1
+	@pipenv run pytest --cov-report term --cov-report xml:coverage.xml --cov=src
+	@make stop-postgres
