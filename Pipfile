@@ -6,7 +6,7 @@ name = "pypi"
 [packages]
 fastapi = {extras = ["all"], version = "*"}
 sqlalchemy = "*"
-pydantic = "*"
+pydantic = "==1.10.11"
 psycopg2-binary = "*"
 mangum = "*"
 jinja2 = "*"
@@ -23,6 +23,8 @@ python-jose = "*"
 [dev-packages]
 pytest = "*"
 pytest-mock = "*"
+pytest-cov = "*"
+coveralls = "*"
 
 [requires]
 python_version = "3.9"
