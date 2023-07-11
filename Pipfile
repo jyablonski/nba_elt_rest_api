@@ -24,7 +24,7 @@ python-jose = "*"
 pytest = "*"
 pytest-mock = "*"
 pytest-cov = "*"
-coveralls = "*"
+coveralls = "==3.2.0"
 
 [requires]
 python_version = "3.9"
