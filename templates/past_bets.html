@@ -68,6 +68,14 @@
 
    <br>
    <a href="/bets">Tonight's Bets Page</a>
+   <br>
+   <br>
+   {% if past_predictions_total_count > 0 %}
+   <form id="download-button" method="post" action="/past_bets"
+      style="font-size: 18pt; height: 35px; width:1000px; top: 80%;">
+      <button type="submit"">Download</button>
+      </form>
+   {% endif %}
 
 </center>
 {% endblock content %}
