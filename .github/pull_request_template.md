@@ -2,10 +2,10 @@
 Description for the PR
 
 ## Added
-- x
+- None
 
 ## Updated
-- y
+- None
 
 ## Deleted
-- z
+- None
