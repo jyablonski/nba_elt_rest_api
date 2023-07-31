@@ -10,55 +10,74 @@
 <div class="center-screen">
   <div class="text-success font-weight-bold">
     <center>
-      <div class="badge bg-success text-wrap font-weight-bold" style="font-size: large;">
-        <p>{{msg}}
-      <br>
-      <br>
-      Welcome <b>{{ username }}</b></p>
-    </div>
-      <br>
-      <br>
-      <a href="/bets">Tonight's Bets Page</a>
-      <br>
-      <br>
-      <a href="/past_bets">Past Bets Page</a>
-      <br>
-      {% if username == 'jyablonski' %}
-      <br>
-      <a href="/admin">Admin Page</a>
-      {% endif %}
+      <p>{{msg}}
+        <br>
+        <br>
+        Welcome <b>{{ username }}</b>
+      </p>
+
+      <!-- here -->
+      <div class="cards">
+        <a href="/bets">
+          <div class="card">
+            <div class="card-container">
+              <h2 class="card-title">Tonight's Bets</h2>
+              <p>Page to make Win Predictions</p>
+            </div>
+          </div>
+        </a>
+        <a href="/past_bets">
+          <div class="card">
+            <div class="card-container">
+              <h2 class="card-title">Past Bets</h2>
+              <p>Page to see Past Bets Accuracy</p>
+            </div>
+          </div>
+        </a>
+        {% if username == 'jyablonski' %}
+        <a href="/admin">
+          <div class="card">
+            <div class="card-container">
+              <h2 class="card-title">Admin</h2>
+              <p>Management Page</p>
+            </div>
+          </div>
+        </a>
+        {% endif %}
+
+      </div>
+      <!-- here -->
     </center>
+    {% endif %}
+
+    {% if not msg %}
+
+    <div class="row my-5">
+      <form id="login-form" method="POST">
+
+        <h1> User Login </h1>
+        {% for error in errors %}
+        <p>
+        <div class="text-danger">{{error}}</div>
+        </p>
+        {% endfor %}
+
+        <label>Username</label>
+        <input class="web-form-input" type="text" required placeholder="Your username" name="username"
+          value="{{username}}" class="form-control">
+
+        <label>Password</label>
+        <input class="web-form-input" type="password" required placeholder="Your password" value="{{password}}"
+          name="password" class="form-control">
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+
+        <br>
+        <br>
+        <p> Don't have an account? <a class="create_user" href="/login/create_user"><b>Create One</b></a></hp>
+
+      </form>
+    </div>
   </div>
   {% endif %}
-
-  {% if not msg %}
-
-  <div class="row my-5">
-    <form id="login-form" method="POST">
-
-      <h1> User Login </h1>
-      {% for error in errors %}
-      <p>
-      <div class="text-danger">{{error}}</div>
-      </p>
-      {% endfor %}
-
-      <label>Username</label>
-      <input class="web-form-input" type="text" required placeholder="Your username" name="username"
-        value="{{username}}" class="form-control">
-
-      <label>Password</label>
-      <input class="web-form-input" type="password" required placeholder="Your password" value="{{password}}"
-        name="password" class="form-control">
-
-      <button type="submit" class="btn btn-primary">Submit</button>
-
-      <br>
-      <br>
-      <p> Don't have an account? <a class="create_user" href="/login/create_user"><b>Create One</b></a></hp>
-
-    </form>
-  </div>
-</div>
-{% endif %}
-{% endblock %}
+  {% endblock %}
