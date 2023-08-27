@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+    /* From extension vscode.github */
+    /*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+    .vscode-dark img[src$=\#gh-light-mode-only],
+    .vscode-light img[src$=\#gh-dark-mode-only] {
+        display: none;
+    }
+</style>
+
+<link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+        font-size: 14px;
+        line-height: 1.6;
+    }
+</style>
+<style>
+    .task-list-item {
+        list-style-type: none;
+    }
+
+    .task-list-item-checkbox {
+        margin-left: -20px;
+        vertical-align: middle;
+        pointer-events: none;
+    }
+</style>
+
+</head>
+<h2 id="login-page">Login Page</h2>
+<ul>
+    <li>The Login Page with the following applications:</li>
+    <li>Allows users to make predictions</li>
+    <li>Allows users to see their past predictions, their total Profit, and download their bets as a csv</li>
+</ul>
+<h2 id="get-endpoints">GET Endpoints</h2>
+<h3 id="game-types">Game Types</h3>
+<ul>
+    <li><code>/game_types</code></li>
+</ul>
+<h3 id="injuries">Injuries</h3>
+<h3 id="injuries-team-specific">Injuries (Team Specific)</h3>
+<h3 id="daily-predictions">Daily Predictions</h3>
+<h3 id="reddit-comments">Reddit Comments</h3>
+<h3 id="daily-schedule">Daily Schedule</h3>
+<h3 id="player-stats">Player Stats</h3>
+<h3 id="standings">Standings</h3>
+<h3 id="team-ratings">Team Ratings</h3>
+<h3 id="transactions">Transactions</h3>
+<h3 id="twitter-comments">Twitter Comments</h3>
+<h3 id="scorers">Scorers</h3>
+<ul>
+    <li><code>/scorers</code></li>
+</ul>
+<ol>
+    <li>f</li>
+    <li>sd</li>
+    <li>d</li>
+</ol>
+
+
+</body>
+
+</html>
+{% endblock content %}

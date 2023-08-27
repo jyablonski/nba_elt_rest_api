@@ -18,6 +18,7 @@ from .routers import (
     feature_flags,
     feedback,
     game_types,
+    help_page,
     incidents,
     injuries,
     login,
@@ -49,6 +50,7 @@ app.include_router(bets.router)
 app.include_router(feature_flags.router)
 app.include_router(feedback.router)
 app.include_router(game_types.router)
+app.include_router(help_page.router)
 app.include_router(incidents.router)
 app.include_router(injuries.router)
 app.include_router(login.router)
