@@ -1,6 +1,7 @@
 import os
 import re
-from github import Github, Issue
+
+from github import Github
 
 # Initialize the GitHub API client
 g = Github(os.environ["GITHUB_TOKEN"])
@@ -17,8 +18,8 @@ label_mappings = {
     "src": "backend",
     "templates": "frontend",
     "static": "frontend",
-    "test": "test",
-    ".github": "ci",
+    "tests": "tests",
+    ".github": "cicd",
     # Add more mappings as needed
 }
 
