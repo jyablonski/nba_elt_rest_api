@@ -9,7 +9,11 @@ def test_incidents_get_wrong_auth(client_fixture):
     username = "test1"
 
     login_response = client_fixture.post(
-        "/login", data={"username": username, "password": "password",},
+        "/login",
+        data={
+            "username": username,
+            "password": "password",
+        },
     )
 
     response = client_fixture.get("/admin/incidents")
@@ -22,7 +26,11 @@ def test_incidents_get_success(client_fixture):
     username = "jyablonski"
 
     login_response = client_fixture.post(
-        "/login", data={"username": username, "password": "password",},
+        "/login",
+        data={
+            "username": username,
+            "password": "password",
+        },
     )
 
     response = client_fixture.get("/admin/incidents")
@@ -35,14 +43,22 @@ def test_incidents_create_wrong_auth(client_fixture):
     username = "test1"
 
     login_response = client_fixture.post(
-        "/login", data={"username": username, "password": "password",},
+        "/login",
+        data={
+            "username": username,
+            "password": "password",
+        },
     )
     response = client_fixture.post(
         "/admin/incidents/create",
         data={
             "username": username,
-            "incident_name_form": ["test1",],
-            "incident_description_form": ["description1",],
+            "incident_name_form": [
+                "test1",
+            ],
+            "incident_description_form": [
+                "description1",
+            ],
             "incident_is_active_form": [0, 1],
         },
         headers={"content-type": "application/x-www-form-urlencoded"},
@@ -57,7 +73,11 @@ def test_incidents_create_success(client_fixture):
     incident_name = "jacobs_fake_test"
 
     login_response = client_fixture.post(
-        "/login", data={"username": username, "password": "password",},
+        "/login",
+        data={
+            "username": username,
+            "password": "password",
+        },
     )
 
     response = client_fixture.post(
@@ -79,12 +99,19 @@ def test_incidents_update_success(client_fixture):
     username = "jyablonski"
 
     login_response = client_fixture.post(
-        "/login", data={"username": username, "password": "password",},
+        "/login",
+        data={
+            "username": username,
+            "password": "password",
+        },
     )
 
     response = client_fixture.post(
         "/admin/incidents",
-        data={"username": username, "incident_list": [1, 1, 1],},
+        data={
+            "username": username,
+            "incident_list": [1, 1, 1],
+        },
         headers={"content-type": "application/x-www-form-urlencoded"},
     )
 

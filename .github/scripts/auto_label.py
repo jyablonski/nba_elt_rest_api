@@ -1,3 +1,8 @@
+# this script automatically adds labels to the github pr based on the changed files
+# it will *not* automatically remove the labels retroactively if the changed files
+# end up getting the commits revoked and they're no longer changed.
+# however, it will continue to add new labels if the pr gets new commits to new directoriesssss
+
 import os
 import re
 
