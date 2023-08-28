@@ -1,34 +1,12 @@
-name: Auto Label PRs
-
+name: "Pull Request Labeler"
 on:
-  pull_request:
-    types:
-      - opened
-      - synchronize
+- pull_request_target
 
 jobs:
-  auto-label:
+  triage:
+    permissions:
+      contents: read
+      pull-requests: write
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.11
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install PyGithub
-          
-      - name: Get Pull Request Number
-        run: echo "PULL_REQUEST_NUMBER=$(echo "$GITHUB_REF" | awk -F / '{print $3}')" >> $GITHUB_ENV
-        shell: bash
-
-      - name: Assign labels based on changed directories
-        run: python .github/scripts/auto_label.py
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - uses: actions/labeler@v4
