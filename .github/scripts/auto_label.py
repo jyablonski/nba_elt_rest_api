@@ -1,6 +1,6 @@
-# this script automatically adds labels to the github pr based on the changed files
-# it will *not* automatically remove the labels retroactively if the changed files
-# end up getting the commits revoked and they're no longer changed.
+# this script works in combination with `.github/workflows/auto_labeler.yml` to 
+# automatically adds labels to the github pr based on the changed files
+# it will *not* automatically remove the labels if the files are retroactively changed back
 # however, it will continue to add new labels if the pr gets new commits to new directoriesssss
 
 import os
