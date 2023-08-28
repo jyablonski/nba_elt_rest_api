@@ -39,37 +39,103 @@
 </style>
 
 </head>
-<h2 id="login-page">Login Page</h2>
-<ul>
-    <li>The Login Page with the following applications:</li>
-    <li>Allows users to make predictions</li>
-    <li>Allows users to see their past predictions, their total Profit, and download their bets as a csv</li>
-</ul>
+<h1 id="rest-api-help-page">REST API Help Page</h1>
+<p>Documentation on various Endpoints, Pages, and Functionality provided by the API</p>
 <h2 id="get-endpoints">GET Endpoints</h2>
+<h3 id="daily-predictions">Daily Predictions</h3>
+<ul>
+    <li>The Daily Predictions Endpoint is used to showcase Win Predictions from the ML Model for that night's games</li>
+</ul>
+<h3 id="daily-schedule">Daily Schedule</h3>
+<ul>
+    <li>The Daily Schedule Endpoint is used to show Upcoming NBA Schedule Information</li>
+</ul>
 <h3 id="game-types">Game Types</h3>
 <ul>
-    <li><code>/game_types</code></li>
+    <li>The Game Types Endpoint is used to offer an aggregated breakdown of the point differential of all NBA Games in
+        the Season to-date with the following bins:
+        <ul>
+            <li>Clutch Game (1 - 5 pts)</li>
+            <li>10 pt Game (6 - 10 pts)</li>
+            <li>20 pt Game (11 - 20 pts)</li>
+            <li>Blowout Game (21+ pts)</li>
+            <li>This is additionally split out between Regular Season &amp; Playoffs, for a total of 8 total bins by the
+                end of the Season</li>
+        </ul>
+    </li>
 </ul>
 <h3 id="injuries">Injuries</h3>
+<ul>
+    <li>The Injuries Endpoint returns all NBA Players with active injuries pulled from <a
+            href="https://www.basketball-reference.com/friv/injuries.fcgi">basketball-reference</a></li>
+</ul>
 <h3 id="injuries-team-specific">Injuries (Team Specific)</h3>
-<h3 id="daily-predictions">Daily Predictions</h3>
-<h3 id="reddit-comments">Reddit Comments</h3>
-<h3 id="daily-schedule">Daily Schedule</h3>
+<ul>
+    <li>The Injuries Team Specfic Endpoint is used to return all NBA Players with active injuries for a specific Team
+    </li>
+</ul>
 <h3 id="player-stats">Player Stats</h3>
-<h3 id="standings">Standings</h3>
-<h3 id="team-ratings">Team Ratings</h3>
-<h3 id="transactions">Transactions</h3>
-<h3 id="twitter-comments">Twitter Comments</h3>
+<ul>
+    <li>The Player Stats Endpoint is used to show all NBA Stats + Aggregations for Active NBA Players</li>
+</ul>
+<h3 id="reddit-comments">Reddit Comments</h3>
+<ul>
+    <li>The Reddit Comments Endpoint is used to showcase recent Reddit comments from <a
+            href="https://www.reddit.com/r/nba">https://www.reddit.com/r/nba</a></li>
+</ul>
 <h3 id="scorers">Scorers</h3>
 <ul>
-    <li><code>/scorers</code></li>
+    <li>The Scorers Endpoint is used to show advanced Player &amp; MVP Rank Calculations</li>
 </ul>
-<ol>
-    <li>f</li>
-    <li>sd</li>
-    <li>d</li>
-</ol>
+<h3 id="standings">Standings</h3>
+<ul>
+    <li>The Standings Endpoint is used to show NBA Team Standings, Win Loss Records, and a Total Count of Active
+        Injuries per Team</li>
+</ul>
+<h3 id="team-ratings">Team Ratings</h3>
+<ul>
+    <li>The Team Ratings Endpoint is used to show basic &amp; advanced Team Stats for all NBA Teams</li>
+</ul>
+<h3 id="team-ratings-team-specific">Team Ratings (Team Specific)</h3>
+<ul>
+    <li>The Team Ratings Endpoint is used to show basic &amp; advanced Team Stats for a specific Team</li>
+</ul>
+<h3 id="transactions">Transactions</h3>
+<ul>
+    <li>The Transactions Endpoint is used to show all NBA Team Transactions in the current Season</li>
+</ul>
+<h3 id="twitter-comments">Twitter Comments</h3>
+<ul>
+    <li>The Twitter Comments Endpoint is used to showcase recent Twitter comments referencing nba-related content</li>
+</ul>
+<h2 id="feedback-page">Feedback Page</h2>
+<ul>
+    <li>The Feedback Page allows users to submit anonymous Feedback to the Application Developer</li>
+</ul>
+<h2 id="login-page">Login Page</h2>
+<ul>
+    <li>The Login Page allows users to either create a new Account, or login to an existing Account where they can then
+        access the following Pages:</li>
+</ul>
+<h3 id="tonights-bets">Tonight's Bets</h3>
+<ul>
+    <li>This Page allows the current user to make Win Predictions for that night's NBA Games</li>
+</ul>
+<h3 id="past-bets">Past Bets</h3>
+<ul>
+    <li>This Page shows all Past Predictions made by the current User
+        <ul>
+            <li>Total Predictions, Total Correct Predictions, and Total Profit Metrics are available to the User</li>
+            <li>User's also have the option of downloading their Prediction History as of the current date into a CSV
+            </li>
+        </ul>
+    </li>
+</ul>
 
+
+<br>
+<br>
+<br>
 
 </body>
 

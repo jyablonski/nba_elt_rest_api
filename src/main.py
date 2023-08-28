@@ -23,10 +23,10 @@ from .routers import (
     injuries,
     login,
     past_bets,
+    player_stats,
     predictions,
     reddit_comments,
     schedule,
-    scorers,
     standings,
     team_ratings,
     transactions,
@@ -55,10 +55,10 @@ app.include_router(incidents.router)
 app.include_router(injuries.router)
 app.include_router(login.router)
 app.include_router(past_bets.router)
+app.include_router(player_stats.router)
 app.include_router(predictions.router)
 app.include_router(reddit_comments.router)
 app.include_router(schedule.router)
-app.include_router(scorers.router)
 app.include_router(standings.router)
 app.include_router(team_ratings.router)
 app.include_router(transactions.router)
