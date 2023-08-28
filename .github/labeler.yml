@@ -11,8 +11,8 @@ ci:
 - .github/workflows/test.yml
 
 dependencies:
-- docker/*
 - Pipfile
+- requirements.txt
 
 frontend:
 - static/*
