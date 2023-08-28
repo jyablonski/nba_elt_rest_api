@@ -1,5 +1,5 @@
-def test_scorers(client_fixture):
-    response = client_fixture.get("/scorers")
+def test_player_stats(client_fixture):
+    response = client_fixture.get("/player_stats")
     data = response.json()
 
     assert response.status_code == 200

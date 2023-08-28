@@ -1,0 +1,19 @@
+backend:
+- src/*
+- tests/*
+
+cd:
+- .github/workflows/deploy.yml
+- docker/*
+- requirements.txt
+
+ci:
+- .github/workflows/test.yml
+
+dependencies:
+- Pipfile
+- requirements.txt
+
+frontend:
+- static/*
+- templates/*

@@ -13,7 +13,11 @@ def test_create_user(client_fixture):
 
     response = client_fixture.post(
         "/users",
-        json={"username": username, "password": "password", "email": "fake@user.net",},
+        json={
+            "username": username,
+            "password": "password",
+            "email": "fake@user.net",
+        },
     )
 
     assert response.status_code == 201
@@ -130,7 +134,10 @@ def test_delete_user_bad_token(client_fixture):
         "Authorization": f"Bearer fake-token",
     }
 
-    response = client_fixture.delete(f"/users/{username}", headers=headers,)
+    response = client_fixture.delete(
+        f"/users/{username}",
+        headers=headers,
+    )
 
     assert response.json()["detail"] == "Could not validate credentials"
     assert response.status_code == 401
@@ -143,7 +150,10 @@ def test_delete_user_no_username(client_fixture):
         "Authorization": f"Bearer {os.environ.get('API_KEY')}",
     }
 
-    response = client_fixture.delete(f"/users/{username}", headers=headers,)
+    response = client_fixture.delete(
+        f"/users/{username}",
+        headers=headers,
+    )
 
     assert response.json()["detail"] == "Could not validate credentials"
     assert response.status_code == 401
@@ -155,7 +165,11 @@ def test_delete_user(client_fixture):
 
     response = client_fixture.post(
         "/users",
-        json={"username": username, "password": password, "email": "fake@user.net",},
+        json={
+            "username": username,
+            "password": password,
+            "email": "fake@user.net",
+        },
     )
 
     df = client_fixture.post(
@@ -180,7 +194,11 @@ def test_delete_user_no_permissions(client_fixture):
 
     response = client_fixture.post(
         "/users",
-        json={"username": username, "password": password, "email": "fake@user.net",},
+        json={
+            "username": username,
+            "password": password,
+            "email": "fake@user.net",
+        },
     )
 
     df = client_fixture.post(

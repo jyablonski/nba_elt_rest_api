@@ -2,7 +2,11 @@ def test_login_get(client_fixture):
     username = "jyablonski"
 
     response = client_fixture.post(
-        "/login", data={"username": username, "password": "password",},
+        "/login",
+        data={
+            "username": username,
+            "password": "password",
+        },
     )
 
     assert f"Welcome <b>{username}" in response.text
@@ -13,7 +17,11 @@ def test_login_fail(client_fixture):
     username = "jyablonski"
 
     response = client_fixture.post(
-        "/login", data={"username": username, "password": "fake_fkn_password",},
+        "/login",
+        data={
+            "username": username,
+            "password": "fake_fkn_password",
+        },
     )
 
     assert response.status_code == 200
@@ -31,7 +39,11 @@ def test_login_get_with_token(client_fixture):
     username = "jyablonski"
 
     response = client_fixture.post(
-        "/login", data={"username": username, "password": "password",},
+        "/login",
+        data={
+            "username": username,
+            "password": "password",
+        },
     )
 
     get_response = client_fixture.get("/login")

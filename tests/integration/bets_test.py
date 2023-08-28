@@ -1,5 +1,7 @@
 def test_get_bets_form_incorrect_permissions(client_fixture):
-    response = client_fixture.get(f"/bets",)
+    response = client_fixture.get(
+        f"/bets",
+    )
 
     assert response.status_code == 401
     assert response.json()["detail"] == "Not authenticated"
@@ -25,7 +27,11 @@ def test_bets_form_get(client_fixture):
     username = "jyablonski"
 
     login_response = client_fixture.post(
-        "/login", data={"username": username, "password": "password",},
+        "/login",
+        data={
+            "username": username,
+            "password": "password",
+        },
     )
 
     bets_response = client_fixture.get("/bets")
@@ -40,7 +46,11 @@ def test_bets_form_post(client_fixture):
     username = "jyablonski"
 
     login_response = client_fixture.post(
-        "/login", data={"username": username, "password": "password",},
+        "/login",
+        data={
+            "username": username,
+            "password": "password",
+        },
     )
 
     first_bets_response = client_fixture.post(
