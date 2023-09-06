@@ -6,14 +6,14 @@ Version: 1.4.6
 ## [API](https://api.jyablonski.dev)
 
 The REST API has the following functionalities:
-- Serves Data built from the NBA ELT Pipeline through various endpoints
+- Serves Data built from the NBA ELT Pipeline through various GET endpoints
 - Allows Users to login & make NBA Game Win Predictions starting from the [Login Web Page](https://api.jyablonski.dev/login)
 - Hosts an Internal Admin Site w/ the following Pages:
-  -  Page to flip Feature Flags on / off that are used in the project.
+  -  Page to flip Feature Flags on / off that are used in various components throughout the Project.
   -  Page to create incidents which will automatically popup on the Web Dashboard to alert users of any missing or out-of-data data issues.
 
 ## Running The App
-Clone the Repo & run `make up` which spins up the App locally [here](http://localhost:8080/) using 2 Docker Containers:
+Clone the Repo & run `make up` which spins up the App locally served [here](http://localhost:8080/) using 2 Docker Containers:
 - Postgres Database
 - FastAPI Server
 
