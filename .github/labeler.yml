@@ -15,5 +15,5 @@ dependencies:
 - requirements.txt
 
 frontend:
-- static/*
-- templates/*
+- any: ['static/*', 'templates/*']
+  all: ['!templates/base.html']
