@@ -24,6 +24,11 @@ To run tests locally, run `make test`.
 
 The same Test Suite is ran after every commit on a PR via GitHub Actions.
 
+## Contributing
+Please be sure that all PRs are Squash Merged into `master`
+
+To bump the Repo, run `make bump-patch` (or `make bump-minor` / `make bump-major`) which bumps the Version Number in `.bumpversion.cfg` as well as `templates/base.html`.
+
 ## Project
 ![NBA ELT Pipeline Data Flow 2](https://github.com/jyablonski/nba_elt_rest_api/assets/16946556/67fd15c7-7fed-43cc-a3b8-0e267ca968b3)
 
