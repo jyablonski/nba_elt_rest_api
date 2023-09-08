@@ -14,6 +14,8 @@ dependencies:
 - Pipfile
 - requirements.txt
 
+# any file in static or templates
+# but if the only change is in base.html, then no label
 frontend:
-- static/*
-- templates/*
+- any: ['static/*', 'templates/*']
+  all: ['!templates/base.html']
