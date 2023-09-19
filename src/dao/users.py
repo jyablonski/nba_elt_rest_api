@@ -1,9 +1,9 @@
 from fastapi.encoders import jsonable_encoder
 from sqlalchemy.orm import Session
 
-from . import models
-from .schemas import UserBase, UserCreate
-from .utils import generate_hash_password, generate_salt
+from src.models import Users
+from src.schemas import UserBase, UserCreate
+from src.utils import generate_hash_password, generate_salt
 
 
 def create_user(db: Session, user: UserCreate):
@@ -11,7 +11,7 @@ def create_user(db: Session, user: UserCreate):
 
     password_hash = generate_hash_password(password=user.password, salt=salt)
 
-    record = models.Users(
+    record = Users(
         username=user.username,
         password=password_hash,
         email=user.email,
