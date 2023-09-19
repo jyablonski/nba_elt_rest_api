@@ -57,6 +57,7 @@ def generate_hash_password(password: str, salt: str) -> str:
 
     return hash_password
 
+
 # avoiding pandas
 def generate_csv(sqlalchemy_query: List, headers: List[str], report_date: date):
     output = io.StringIO()
