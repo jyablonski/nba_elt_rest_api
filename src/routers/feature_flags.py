@@ -4,7 +4,7 @@ from fastapi import APIRouter, Depends, Form, HTTPException, Request, status
 from fastapi.responses import HTMLResponse
 from sqlalchemy.orm import Session
 
-from src.crud import create_feature_flags, update_feature_flags
+from src.dao.feature_flags import create_feature_flags, update_feature_flags
 from src.database import get_db
 from src.models import FeatureFlags
 from src.security import get_current_user_from_token
@@ -21,7 +21,8 @@ def get_feature_flags(
 ):
     if username != "jyablonski":
         raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN, detail="You do not have the powa",
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="You do not have the powa",
         )
 
     feature_flags = db.query(FeatureFlags).order_by(FeatureFlags.flag)
@@ -40,7 +41,8 @@ def post_feature_flags(
 ):
     if username != "jyablonski":
         raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN, detail="You do not have the powa",
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="You do not have the powa",
         )
 
     new_feature_flags = update_feature_flags(db, feature_flag_list)
@@ -60,7 +62,8 @@ def post_feature_flags(
 ):
     if username != "jyablonski":
         raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN, detail="You do not have the powa",
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="You do not have the powa",
         )
 
     existing_feature_flags = db.query(FeatureFlags).order_by(FeatureFlags.flag)

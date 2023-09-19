@@ -16,9 +16,9 @@ from jose import JWTError
 
 from sqlalchemy.orm import Session
 
-from .database import get_db
-from .models import Users
-from .utils import generate_hash_password
+from src.database import get_db
+from src.models import Users
+from src.utils import generate_hash_password
 
 security = HTTPBasic()
 oauth2_scheme_og = OAuth2PasswordBearer(tokenUrl="token")
@@ -50,10 +50,16 @@ def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
     if expires_delta:
         expire = datetime.utcnow() + expires_delta
     else:
-        expire = datetime.utcnow() + timedelta(minutes=60,)
+        expire = datetime.utcnow() + timedelta(
+            minutes=60,
+        )
 
     data["exp"] = expire
-    encoded_jwt = jwt.encode(data, os.environ.get("API_KEY"), algorithm="HS256",)
+    encoded_jwt = jwt.encode(
+        data,
+        os.environ.get("API_KEY"),
+        algorithm="HS256",
+    )
 
     return encoded_jwt
 

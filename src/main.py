@@ -9,9 +9,9 @@ from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExport
 from opentelemetry.sdk.trace import TracerProvider
 from opentelemetry.sdk.trace.export import BatchSpanProcessor
 
-from .models import Base
-from .database import engine
-from .routers import (
+from src.models import Base
+from src.database import engine
+from src.routers import (
     admin,
     auth,
     bets,
@@ -33,7 +33,7 @@ from .routers import (
     twitter_comments,
     users,
 )
-from .utils import templates
+from src.utils import templates
 
 provider = TracerProvider()
 processor = BatchSpanProcessor(OTLPSpanExporter())

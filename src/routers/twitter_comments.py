@@ -3,7 +3,7 @@ from typing import List
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
-from src.crud import get_twitter_comments
+from src.dao.twitter_comments import get_twitter_comments
 from src.database import get_db
 from src.schemas import TwitterBase
 

@@ -13,6 +13,7 @@ from sqlalchemy import (
 
 from .database import Base
 
+
 # SqlAlchemy models use name = Column(String)
 class Standings(Base):
     __tablename__ = "standings"

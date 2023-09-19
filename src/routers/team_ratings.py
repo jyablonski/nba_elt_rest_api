@@ -3,7 +3,7 @@ from typing import List
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
-from src.crud import get_team_ratings, get_team_ratings_by_team
+from src.dao.team_ratings import get_team_ratings, get_team_ratings_by_team
 from src.database import get_db
 from src.schemas import TeamRatingsBase
 from src.utils import team_acronyms
