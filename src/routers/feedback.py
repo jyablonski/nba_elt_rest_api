@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, Form, Request
 from fastapi.responses import HTMLResponse
 from sqlalchemy.orm import Session
 
-from src.crud import send_feedback
+from src.dao.feedback import send_feedback
 from src.database import get_db
 from src.schemas import FeedbackBase
 from src.utils import templates

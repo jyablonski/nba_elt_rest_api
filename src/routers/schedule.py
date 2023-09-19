@@ -3,7 +3,7 @@ from typing import List
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
-from src.crud import get_schedule
+from src.dao.schedule import get_schedule
 from src.database import get_db
 from src.schemas import ScheduleBase
 

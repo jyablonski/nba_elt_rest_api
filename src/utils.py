@@ -1,6 +1,11 @@
+import csv
+from datetime import date
 import hashlib
+import io
 import random
 import string
+from typing import List
+
 
 from fastapi.templating import Jinja2Templates
 
@@ -51,3 +56,20 @@ def generate_hash_password(password: str, salt: str) -> str:
     hash_password = hashlib.md5((password + salt).encode("utf-8")).hexdigest()
 
     return hash_password
+
+
+# avoiding pandas
+def generate_csv(sqlalchemy_query: List, headers: List[str], report_date: date):
+    output = io.StringIO()
+    writer = csv.writer(output)
+
+    file_headers = headers.copy()
+    file_headers.append("report_pull_date")
+    writer.writerow(file_headers)
+
+    for row in sqlalchemy_query:
+        data_row = [getattr(row, column) for column in headers]
+        data_row.append(report_date)
+        writer.writerow(data_row)
+
+    return output.getvalue()

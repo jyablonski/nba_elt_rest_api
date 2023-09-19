@@ -5,7 +5,7 @@ from fastapi import APIRouter, Depends, HTTPException, Form, Request
 from fastapi.responses import HTMLResponse
 from sqlalchemy.orm import Session
 
-from src.crud import store_bet_predictions
+from src.dao.bets import store_bet_predictions
 from src.database import get_db
 from src.models import Predictions, UserPredictions, Users
 from src.security import get_current_user_from_token
@@ -21,7 +21,10 @@ async def get_user_bets_page(
     db: Session = Depends(get_db),
 ):
     if username is None:
-        return templates.TemplateResponse("404.html", {"request": request},)
+        return templates.TemplateResponse(
+            "404.html",
+            {"request": request},
+        )
 
     local_datetime = (datetime.utcnow() - timedelta(hours=5)).date()
 
@@ -80,7 +83,8 @@ def store_user_bets_predictions_from_ui(
 
     if username_check is None:
         raise HTTPException(
-            status_code=403, detail="This User does not exist.",
+            status_code=403,
+            detail="This User does not exist.",
         )
 
     # this logic checks if every game from today has already been selected or not
@@ -136,5 +140,9 @@ def store_user_bets_predictions_from_ui(
     store_bet_predictions(db, predictions_list)
 
     return templates.TemplateResponse(
-        "bets.html", {"request": request, "username": username,},
+        "bets.html",
+        {
+            "request": request,
+            "username": username,
+        },
     )

@@ -5,7 +5,7 @@ from fastapi import APIRouter, Depends, Form, HTTPException, Request
 from fastapi.responses import HTMLResponse, RedirectResponse
 from sqlalchemy.orm import Session
 
-from src.crud import create_user
+from src.dao.users import create_user
 from src.database import get_db
 from src.models import Users
 from src.schemas import UserCreate
@@ -18,7 +18,8 @@ router = APIRouter()
 
 @router.get("/login")
 def login(
-    request: Request, username: str = Depends(get_current_user_from_token),
+    request: Request,
+    username: str = Depends(get_current_user_from_token),
 ):
     if username is not None:
         return templates.TemplateResponse(
@@ -69,9 +70,14 @@ def create_users_from_form(
         )
 
     record = Users(
-        username=username, password=password, email=email, created_at=datetime.utcnow(),
+        username=username,
+        password=password,
+        email=email,
+        created_at=datetime.utcnow(),
     )
 
     create_user(db, record)
 
-    return RedirectResponse("/login",)
+    return RedirectResponse(
+        "/login",
+    )

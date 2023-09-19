@@ -4,7 +4,7 @@ from fastapi import APIRouter, Depends, Form, HTTPException, Request, status
 from fastapi.responses import HTMLResponse
 from sqlalchemy.orm import Session
 
-from src.crud import create_incident, update_incident
+from src.dao.incidents import create_incident, update_incident
 from src.database import get_db
 from src.models import Incidents
 from src.security import get_current_user_from_token
@@ -21,7 +21,8 @@ def get_incidents(
 ):
     if username != "jyablonski":
         raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN, detail="You do not have the powa",
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="You do not have the powa",
         )
 
     incidents = db.query(Incidents).order_by(Incidents.incident_name)
@@ -40,7 +41,8 @@ def post_incidents(
 ):
     if username != "jyablonski":
         raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN, detail="You do not have the powa",
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="You do not have the powa",
         )
 
     new_incident = update_incident(db, incident_list)
@@ -61,7 +63,8 @@ def post_incidents(
 ):
     if username != "jyablonski":
         raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN, detail="You do not have the powa",
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="You do not have the powa",
         )
 
     existing_incident = db.query(Incidents).order_by(Incidents.incident_name)

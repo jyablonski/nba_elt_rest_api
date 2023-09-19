@@ -3,7 +3,7 @@ from typing import List
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
-from src.crud import get_injuries, get_injuries_by_team
+from src.dao.injuries import get_injuries, get_injuries_by_team
 from src.database import get_db
 from src.schemas import InjuriesBase
 from src.utils import team_acronyms

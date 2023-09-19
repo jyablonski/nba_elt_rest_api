@@ -7,9 +7,8 @@ from sqlalchemy.orm import Session
 
 from src.database import get_db
 from src.models import UserPastPredictions
-from src.file_helpers import generate_csv
 from src.security import get_current_user_from_token
-from src.utils import templates
+from src.utils import generate_csv, templates
 
 router = APIRouter()
 
