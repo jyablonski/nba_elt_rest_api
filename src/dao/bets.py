@@ -3,15 +3,15 @@ from datetime import datetime
 from sqlalchemy.orm import Session
 from typing import List
 
-from src import models
+from src.models import UserPredictions
 
 
-def store_bet_predictions(db: Session, bet_predictions: List[models.UserPredictions]):
+def store_bet_predictions(db: Session, bet_predictions: List[UserPredictions]):
     # this is so all records in this batch get the same timestamp
     created_at = datetime.utcnow()
 
     for prediction in bet_predictions:
-        record = models.UserPredictions(
+        record = UserPredictions(
             username=prediction["username"],
             game_date=prediction["proper_date"],
             home_team=prediction["home_team"],

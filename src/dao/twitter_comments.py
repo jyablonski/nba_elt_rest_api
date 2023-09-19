@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 
-from src import models
+from src.models import Twitter_Comments
 
 
 def get_twitter_comments(db: Session, skip: int = 0, limit=250):
-    return db.query(models.Twitter_Comments).offset(skip).limit(limit).all()
+    return db.query(Twitter_Comments).offset(skip).limit(limit).all()

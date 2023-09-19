@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 
-from src import models
+from src.models import Standings
 
 
 def get_standings(db: Session):
-    return db.query(models.Standings).all()
+    return db.query(Standings).all()

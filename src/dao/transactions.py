@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 
-from src import models
+from src.models import Transactions
 
 
 def get_transactions(db: Session):
-    return db.query(models.Transactions).all()
+    return db.query(Transactions).all()

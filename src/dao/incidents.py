@@ -3,7 +3,7 @@ from datetime import datetime
 from sqlalchemy.orm import Session
 from typing import List
 
-from src import models
+from src.models import Incidents
 
 
 # incidents
@@ -15,7 +15,7 @@ def create_incident(
 ):
     created_timestamp = datetime.utcnow()
 
-    record = models.Incidents(
+    record = Incidents(
         incident_name=incident_name_form,
         incident_description=incident_description_form,
         is_active=incident_is_active_form,
@@ -33,7 +33,7 @@ def create_incident(
 def update_incident(db: Session, incidents_list: List[int]):
     modified_at = datetime.utcnow()
 
-    incidents = db.query(models.Incidents).order_by(models.Incidents.incident_name)
+    incidents = db.query(Incidents).order_by(Incidents.incident_name)
 
     for incident, incident_update in zip(incidents, incidents_list):
         incident_update = int(incident_update)

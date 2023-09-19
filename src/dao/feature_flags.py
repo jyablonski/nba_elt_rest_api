@@ -3,7 +3,7 @@ from datetime import datetime
 from sqlalchemy.orm import Session
 from typing import List
 
-from src import models
+from src.models import FeatureFlags
 
 
 def create_feature_flags(
@@ -11,7 +11,7 @@ def create_feature_flags(
 ):
     created_timestamp = datetime.utcnow()
 
-    record = models.FeatureFlags(
+    record = FeatureFlags(
         flag=feature_flag_name_form,
         is_enabled=feature_flag_is_enabled_form,
         created_at=created_timestamp,
@@ -28,7 +28,7 @@ def create_feature_flags(
 def update_feature_flags(db: Session, feature_flags_list: List[int]):
     modified_at = datetime.utcnow()
 
-    feature_flags = db.query(models.FeatureFlags).order_by(models.FeatureFlags.flag)
+    feature_flags = db.query(FeatureFlags).order_by(FeatureFlags.flag)
 
     for feature_flag, feature_flag_update in zip(feature_flags, feature_flags_list):
         feature_flag_update = int(feature_flag_update)
