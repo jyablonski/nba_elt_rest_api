@@ -341,3 +341,9 @@ a.home:visited {
 
 
 /* USER CARDS */
+
+li {
+    content: "• ";
+    padding-right: 5px;
+    color: rgb(255, 255, 255);
+  }
