@@ -340,7 +340,5 @@ a.home:visited {
 }
 
 li {
-    content: "• ";
-    padding-right: 5px;
     color: rgb(255, 255, 255);
-  }
+}
