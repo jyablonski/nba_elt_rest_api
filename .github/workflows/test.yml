@@ -25,7 +25,7 @@ jobs:
       - name: Install Poetry
         run: |
           python -m pip install --upgrade pip
-          pip install poetry==${{ env.PYTHON_VERSION }}
+          pip install poetry==${{ env.POETRY_VERSION }}
 
       - name: Install Python 3.11
         uses: actions/setup-python@v4
