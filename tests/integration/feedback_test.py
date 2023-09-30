@@ -35,8 +35,14 @@ def test_feedback_missing_value(client_fixture):
     )
 
     assert response.status_code == 422
-    assert response.json()["detail"][0] == {
-        "loc": ["body", "user_feedback"],
-        "msg": "field required",
-        "type": "value_error.missing",
+    assert response.json() == {
+        "detail": [
+            {
+                "type": "missing",
+                "loc": ["body", "user_feedback"],
+                "msg": "Field required",
+                "input": None,
+                "url": "https://errors.pydantic.dev/2.4/v/missing",
+            }
+        ]
     }

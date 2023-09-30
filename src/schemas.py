@@ -15,7 +15,7 @@ class StandingsBase(BaseModel):
     wins: int
     losses: int
     games_played: int
-    win_pct: str
+    win_pct: float
     active_injuries: int
     active_protocols: int
     last_10: str
@@ -40,7 +40,7 @@ class ScorersBase(BaseModel):
     games_missed: int
     penalized_games_missed: int
     top5_candidates: str
-    mvp_rank: str
+    mvp_rank: int
 
     class Config:
         orm_mode = True

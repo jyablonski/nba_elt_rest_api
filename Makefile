@@ -61,5 +61,9 @@ test:
 	@make stop-postgres
 	@make start-postgres
 	@sleep 1
-	@pipenv run pytest --cov-report term --cov-report xml:coverage.xml --cov=src
+	@poetry run pytest --cov-report term --cov-report xml:coverage.xml --cov=src
 	@make stop-postgres
+
+.PHONY: follow-logs
+follow-logs:
+	@docker compose -f docker/docker-compose-local.yml logs rest_api --follow

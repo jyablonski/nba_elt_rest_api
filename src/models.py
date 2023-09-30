@@ -11,7 +11,7 @@ from sqlalchemy import (
     TIMESTAMP,
 )
 
-from .database import Base
+from src.database import Base
 
 
 # SqlAlchemy models use name = Column(String)
