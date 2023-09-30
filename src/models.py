@@ -25,7 +25,7 @@ class Standings(Base):
     wins: int = Column(Integer, nullable=False)
     losses: int = Column(Integer, nullable=False)
     games_played: int = Column(Integer, nullable=False)
-    win_pct: str = Column(Float, nullable=False)
+    win_pct: float = Column(Float, nullable=False)
     active_injuries: int = Column(Integer, nullable=False)
     active_protocols: int = Column(Integer, nullable=False)
     last_10: str = Column(String, nullable=False)
@@ -49,7 +49,7 @@ class Scorers(Base):
     games_missed: int = Column(Integer)
     penalized_games_missed: int = Column(Integer)
     top5_candidates: str = Column(String)
-    mvp_rank: str = Column(Integer)
+    mvp_rank: int = Column(Integer)
 
 
 class Team_Ratings(Base):
