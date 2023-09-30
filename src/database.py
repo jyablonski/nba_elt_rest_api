@@ -44,10 +44,7 @@ def get_db():
         db.close()
 
 
-print(f"zzz1 {os.environ.get('ENV_TYPE')}")
-
 with open("config.yaml", "r") as config:
-    print(f"zzz {os.environ.get('ENV_TYPE')}")
     env = yaml.safe_load(config)[os.environ.get("ENV_TYPE")]
 
 engine = sql_connection(
