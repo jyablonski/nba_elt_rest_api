@@ -11,7 +11,7 @@ ci:
 - .github/workflows/test.yml
 
 dependencies:
-- Pipfile
+- poetry.lock
 - requirements.txt
 
 # any file in static or templates
