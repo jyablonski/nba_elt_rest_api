@@ -1,8 +1,9 @@
 version: '3'
 services:
 
-  latest:
-      build:
-          context: ../
-          dockerfile: docker/Dockerfile
-      image: ${ECR_REGISTRY}/${ECR_REPOSITORY}:${IMAGE_TAG}
+  test:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: "nba_elt_rest_api_local"
+    command: python3 -m pytest -v

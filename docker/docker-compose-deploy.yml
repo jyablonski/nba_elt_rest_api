@@ -1,0 +1,9 @@
+# 2023-10-01 not currently used, but could be to deploy ecr docker image
+version: '3'
+services:
+
+  latest:
+      build:
+          context: ../
+          dockerfile: docker/Dockerfile
+      image: ${ECR_REGISTRY}/${ECR_REPOSITORY}:${IMAGE_TAG}

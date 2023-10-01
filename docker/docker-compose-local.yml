@@ -43,6 +43,7 @@ services:
       - ${PWD}/src/:/home/appuser/src
       - ${PWD}/static/:/home/appuser/static
       - ${PWD}/templates:/home/appuser/templates
+      - ${PWD}/config.yaml:/home/appuser/config.yaml
       # these are for fast local docker compose dev so changes will automatically make it into the app
 
 

@@ -3,19 +3,19 @@ project:
 
 dev:
   host: localhost
-  user: postgres
+  user: ${RDS_USER}
   pass: postgres
   database: postgres
   schema: nba_prod
 docker_dev:
   host: postgres
-  user: postgres
+  user: ${RDS_USER}
   pass: postgres
   database: postgres
   schema: nba_prod
 prod:
-  host: $IP
-  user: $RDS_USER
-  pass: $RDS_PW
-  database: $RDS_DB
+  host: ${IP}
+  user: ${RDS_USER}
+  pass: ${RDS_PW}
+  database: ${RDS_DB}
   schema: nba_prod

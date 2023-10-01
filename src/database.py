@@ -2,9 +2,25 @@ import os
 import yaml
 
 from opentelemetry.instrumentation.sqlalchemy import SQLAlchemyInstrumentor
-from sqlalchemy import create_engine, exc
+from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+
+
+# pyyaml is fucking useless lmfao, how does this not come w/ the package ??????
+def substitute_env_vars(yaml_content: dict) -> None:
+    for key, value in yaml_content.items():
+        if isinstance(value, str):
+            yaml_content[key] = os.path.expandvars(value)
+        elif isinstance(value, dict):
+            substitute_env_vars(value)
+
+
+def load_yaml_with_env(filename: str) -> dict:
+    with open(filename, "r") as file:
+        yaml_content = yaml.safe_load(file)
+        substitute_env_vars(yaml_content)
+        return yaml_content
 
 
 def sql_connection(user: str, password: str, host: str, database: str, schema: str):
@@ -44,8 +60,7 @@ def get_db():
         db.close()
 
 
-with open("config.yaml", "r") as config:
-    env = yaml.safe_load(config)[os.environ.get("ENV_TYPE")]
+env = load_yaml_with_env("config.yaml")[os.environ.get("ENV_TYPE")]
 
 engine = sql_connection(
     user=env["user"],
