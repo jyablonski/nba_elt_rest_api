@@ -1,0 +1,9 @@
+project:
+  name: "REST_API_${ENV_TYPE}"
+
+dev:
+  host: ${RDS_HOST}
+  user: ${RDS_USER}
+  pass: ${RDS_PASSWORD}
+  database: postgres
+  schema: nba_prod
