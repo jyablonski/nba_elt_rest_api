@@ -56,8 +56,8 @@ up:
 down:
 	@docker compose -f docker/docker-compose-local.yml down
 
-.PHONY: test
-test:
+.PHONY: ci-test
+ci-test:
 	@make stop-postgres
 	@make start-postgres
 	@sleep 1
@@ -67,3 +67,8 @@ test:
 .PHONY: follow-logs
 follow-logs:
 	@docker compose -f docker/docker-compose-local.yml logs rest_api --follow
+
+.PHONY: test
+test:
+	@docker compose -f docker/docker-compose-test.yml down
+	@docker compose -f docker/docker-compose-test.yml up --exit-code-from rest_api_test_runner
