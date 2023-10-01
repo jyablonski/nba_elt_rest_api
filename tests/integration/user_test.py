@@ -62,8 +62,8 @@ def test_create_user_bad_request(client_fixture):
 
     assert response.status_code == 422
     assert (
-        '[{"loc":["body","username"],"msg":"field required","type":"value_error.missing"},{"loc":["body","password"],"msg":"field required","type":"value_error.missing"}]'
-        in response.text
+        response.text
+        == '{"detail":[{"type":"missing","loc":["body","username"],"msg":"Field required","input":{"username_fake":"jyablonski","email":"jacob@yablonski.net"},"url":"https://errors.pydantic.dev/2.4/v/missing"},{"type":"missing","loc":["body","password"],"msg":"Field required","input":{"username_fake":"jyablonski","email":"jacob@yablonski.net"},"url":"https://errors.pydantic.dev/2.4/v/missing"}]}'
     )
 
 

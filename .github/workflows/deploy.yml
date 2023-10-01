@@ -9,6 +9,7 @@ env:
   BUCKET_NAME : ${{ secrets.AWS_BUCKET }}
   IAM_ROLE: ${{ secrets.IAM_ROLE }}
   AWS_REGION : "us-east-1"
+  PYTHON_VERSION: "3.11"
 
 # permission can be added at job level or workflow level    
 permissions:
@@ -29,10 +30,10 @@ jobs:
           role-session-name: samplerolesession
           aws-region: ${{ env.AWS_REGION }}
     
-      - name: Install Python 3.9
+      - name: Install Python 3.11
         uses: actions/setup-python@v1
         with:
-          python-version: 3.9
+          python-version: ${{ env.PYTHON_VERSION }}
 
       - name: Zip Files
         run: |

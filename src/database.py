@@ -1,6 +1,6 @@
 import os
+import yaml
 
-from envyaml import EnvYAML
 from opentelemetry.instrumentation.sqlalchemy import SQLAlchemyInstrumentor
 from sqlalchemy import create_engine, exc
 from sqlalchemy.ext.declarative import declarative_base
@@ -44,7 +44,8 @@ def get_db():
         db.close()
 
 
-env = EnvYAML("config.yaml")[os.environ.get("ENV_TYPE")]
+with open("config.yaml", "r") as config:
+    env = yaml.safe_load(config)[os.environ.get("ENV_TYPE")]
 
 engine = sql_connection(
     user=env["user"],
