@@ -8,6 +8,6 @@ def test_yaml_load_with_env_vars(config_fixture):
     assert config_fixture["project"]["name"] == "REST_API_TEST"
     assert len(config_fixture) == 2
     assert config["database"] == "postgres"
-    assert config["host"] == "aaaaa"
+    assert config["host"] == "PYTEST"
     assert config["user"] == "jacob"
-    assert config["pass"] == "zzzzz"
+    assert config["pass"] == "password"

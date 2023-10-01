@@ -2,8 +2,8 @@ project:
   name: "REST_API_${ENV_TYPE}"
 
 dev:
-  host: ${bababooiee}
+  host: ${RDS_HOST}
   user: ${RDS_USER}
-  pass: ${sigh}
+  pass: ${RDS_PASSWORD}
   database: postgres
   schema: nba_prod

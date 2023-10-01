@@ -18,9 +18,9 @@ def client_fixture():
 @pytest.fixture()
 def config_fixture():
     os.environ["ENV_TYPE"] = "TEST"
-    os.environ["bababooiee"] = "aaaaa"
+    os.environ["RDS_HOST"] = "PYTEST"
     os.environ["RDS_USER"] = "jacob"
-    os.environ["sigh"] = "zzzzz"
+    os.environ["RDS_PASSWORD"] = "password"
     config = load_yaml_with_env(f"tests/fixtures/config.yaml")
 
     return config
