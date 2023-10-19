@@ -46,6 +46,31 @@ services:
       - ${PWD}/config.yaml:/home/appuser/config.yaml
       # these are for fast local docker compose dev so changes will automatically make it into the app
 
+  # prometheus:
+  #   image: prom/prometheus
+  #   container_name: prometheus
+  #   ports:
+  #     - 9090:9090
+  #   command:
+  #     - '--config.file=/etc/prometheus/prometheus.yml'
+  #   volumes:
+  #     - .././prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+  #   networks: 
+  #     - api_network
+
+
+  # grafana:
+  #   image: grafana/grafana
+  #   container_name: grafana
+  #   ports:
+  #     - 3000:3000
+  #   # volumes:
+  #   #   - grafana_data:/var/lib/grafana
+  #   networks: 
+  #     - api_network
+
+# volumes:
+#   grafana_data:
 
 networks:
   api_network:

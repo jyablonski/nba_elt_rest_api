@@ -9,6 +9,9 @@ from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExport
 from opentelemetry.sdk.trace import TracerProvider
 from opentelemetry.sdk.trace.export import BatchSpanProcessor
 
+# from prometheus_fastapi_instrumentator import Instrumentator
+# if i ever swap to ecs ;-)
+
 from src.models import Base
 from src.database import engine
 from src.routers import (
@@ -69,6 +72,9 @@ app.include_router(users.router)
 app.mount("/static", StaticFiles(directory="static"), name="static")
 FastAPIInstrumentor.instrument_app(app)
 RequestsInstrumentor().instrument()
+# Instrumentator().instrument(app).expose(app)
+# if i ever swap to ecs ;-)
+
 handler = Mangum(app)
 
 
