@@ -55,7 +55,9 @@ async def get_user_bets_page(
             (Predictions.home_team == user_predictions_results.c.home_team),
             isouter=True,
         )
-        .filter(user_predictions_results.c.game_date == None)
+        .filter(
+            user_predictions_results.c.game_date == None
+        )  # noqa: E711 dont fucking break my shit mfer
     )
 
     return templates.TemplateResponse(
@@ -115,7 +117,9 @@ def store_user_bets_predictions_from_ui(
             (Predictions.home_team == user_predictions_results.c.home_team),
             isouter=True,
         )
-        .filter(user_predictions_results.c.game_date == None)
+        .filter(
+            user_predictions_results.c.game_date == None
+        )  # noqa: E711 dont fucking break my shit mfer
     ).cte("user_remaining_games")
 
     predictions_list = []

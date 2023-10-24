@@ -31,7 +31,7 @@ def get_user_past_bets_page(
         func.sum(UserPastPredictions.bet_profit)
     ).scalar()
 
-    if user_past_predictions_bet_profit == None:
+    if user_past_predictions_bet_profit is None:
         user_past_predictions_bet_profit = 0
 
     if user_past_predictions_count == 0:

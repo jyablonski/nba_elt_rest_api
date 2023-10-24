@@ -21,7 +21,7 @@ class StandingsBase(BaseModel):
     last_10: str
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 class ScorersBase(BaseModel):
@@ -43,14 +43,14 @@ class ScorersBase(BaseModel):
     mvp_rank: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 class TeamRatingsBase(BaseModel):
     team: str
     team_acronym: str
     w: int
-    l: int
+    l: int  # noqa: E741
     ortg: float
     drtg: float
     nrtg: float
@@ -60,7 +60,7 @@ class TeamRatingsBase(BaseModel):
     ortg_rank: str
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 class TwitterBase(BaseModel):
@@ -76,7 +76,7 @@ class TwitterBase(BaseModel):
     pos: float
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 class RedditBase(BaseModel):
@@ -92,7 +92,7 @@ class RedditBase(BaseModel):
     pos: float
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 class InjuriesBase(BaseModel):
@@ -108,7 +108,7 @@ class InjuriesBase(BaseModel):
     team_active_protocols: Optional[int] = None
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 class GameTypesBase(BaseModel):
@@ -118,7 +118,7 @@ class GameTypesBase(BaseModel):
     explanation: str
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 class PlayerBase(BaseModel):
@@ -127,7 +127,7 @@ class PlayerBase(BaseModel):
     ppg: float
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 class TeamOriginalBase(BaseModel):
@@ -136,7 +136,7 @@ class TeamOriginalBase(BaseModel):
     players: str
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 class FeedbackBase(BaseModel):
@@ -144,7 +144,7 @@ class FeedbackBase(BaseModel):
     time: datetime
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 class ScheduleBase(BaseModel):
@@ -158,7 +158,7 @@ class ScheduleBase(BaseModel):
     away_moneyline_raw: Optional[int] = None
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 class PredictionsBase(BaseModel):
@@ -171,7 +171,7 @@ class PredictionsBase(BaseModel):
     away_team_predicted_win_pct: float
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 class UserPredictions(BaseModel):
@@ -187,7 +187,7 @@ class UserPredictions(BaseModel):
     created_at: datetime = datetime.now(timezone.utc)
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 class TransactionsBase(BaseModel):
@@ -195,7 +195,7 @@ class TransactionsBase(BaseModel):
     transaction: str
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 class UserBase(BaseModel):
@@ -205,7 +205,7 @@ class UserBase(BaseModel):
     created_at: datetime = datetime.now(timezone.utc)
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 class UserCreate(UserBase):

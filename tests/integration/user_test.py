@@ -1,10 +1,5 @@
-import json
 import os
 import random
-
-import pytest
-
-from src.security import get_current_user_from_api_token
 
 
 def test_create_user(client_fixture):
@@ -71,7 +66,7 @@ def test_update_user(client_fixture):
     new_username = "test_form_user_v2"
 
     response = client_fixture.put(
-        f"/users/test_form_user",
+        "/users/test_form_user",
         json={
             "username": new_username,
             "password": "bababooiee",
@@ -121,7 +116,7 @@ def test_update_user_username_taken(client_fixture):
 
 
 def test_delete_user_no_token(client_fixture):
-    response = client_fixture.delete(f"/users/jacobs_fake_user")
+    response = client_fixture.delete("/users/jacobs_fake_user")
 
     assert response.json()["detail"] == "Not authenticated"
     assert response.status_code == 401
@@ -131,7 +126,7 @@ def test_delete_user_bad_token(client_fixture):
     username = "fake_user"
     headers = {
         "Content-Type": "application/json",
-        "Authorization": f"Bearer fake-token",
+        "Authorization": "Bearer fake-token",
     }
 
     response = client_fixture.delete(
@@ -173,7 +168,7 @@ def test_delete_user(client_fixture):
     )
 
     df = client_fixture.post(
-        f"/token", data={"username": username, "password": password}
+        "/token", data={"username": username, "password": password}
     )
 
     token = df.json()["access_token"]
@@ -202,7 +197,7 @@ def test_delete_user_no_permissions(client_fixture):
     )
 
     df = client_fixture.post(
-        f"/token", data={"username": username, "password": password}
+        "/token", data={"username": username, "password": password}
     )
     token = df.json()["access_token"]
 

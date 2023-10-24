@@ -21,6 +21,6 @@ def config_fixture():
     os.environ["RDS_HOST"] = "PYTEST"
     os.environ["RDS_USER"] = "jacob"
     os.environ["RDS_PASSWORD"] = "password"
-    config = load_yaml_with_env(f"tests/fixtures/config.yaml")
+    config = load_yaml_with_env("tests/fixtures/config.yaml")
 
     return config

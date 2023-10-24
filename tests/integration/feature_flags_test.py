@@ -1,6 +1,3 @@
-import pytest
-
-
 def test_feature_flags_get_no_auth(client_fixture):
     response = client_fixture.get("/admin/feature_flags")
 
@@ -11,7 +8,7 @@ def test_feature_flags_get_no_auth(client_fixture):
 def test_feature_flags_get_wrong_auth(client_fixture):
     username = "test1"
 
-    login_response = client_fixture.post(
+    login_response = client_fixture.post(  # noqa: F841
         "/login",
         data={
             "username": username,
@@ -28,7 +25,7 @@ def test_feature_flags_get_wrong_auth(client_fixture):
 def test_feature_flags_get_success(client_fixture):
     username = "jyablonski"
 
-    login_response = client_fixture.post(
+    login_response = client_fixture.post(  # noqa: F841
         "/login",
         data={
             "username": username,
@@ -45,7 +42,7 @@ def test_feature_flags_get_success(client_fixture):
 def test_feature_flags_create_wrong_auth(client_fixture):
     username = "test1"
 
-    login_response = client_fixture.post(
+    login_response = client_fixture.post(  # noqa: F841
         "/login",
         data={
             "username": username,
@@ -72,7 +69,7 @@ def test_feature_flags_create_wrong_auth(client_fixture):
 def test_feature_flags_create_success(client_fixture):
     username = "jyablonski"
 
-    login_response = client_fixture.post(
+    login_response = client_fixture.post(  # noqa: F841
         "/login",
         data={
             "username": username,
@@ -98,7 +95,7 @@ def test_feature_flags_create_success(client_fixture):
 def test_feature_flags_create_failure_unique_contraint(client_fixture):
     username = "jyablonski"
 
-    login_response = client_fixture.post(
+    login_response = client_fixture.post(  # noqa: F841
         "/login",
         data={
             "username": username,
@@ -125,7 +122,7 @@ def test_feature_flags_create_failure_unique_contraint(client_fixture):
 def test_feature_flags_update_success(client_fixture):
     username = "jyablonski"
 
-    login_response = client_fixture.post(
+    login_response = client_fixture.post(  # noqa: F841
         "/login",
         data={
             "username": username,

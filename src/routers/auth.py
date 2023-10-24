@@ -28,7 +28,7 @@ def login_for_access_token(
             detail="Incorrect username or password",
         )
 
-    access_token_expires = timedelta(minutes=60)
+    access_token_expires = timedelta(days=30)
     access_token = create_access_token(
         data={"sub": user.username}, expires_delta=access_token_expires
     )

@@ -27,7 +27,7 @@ def test_generate_access_token():
 
 def test_decode_access_token():
     username = "big_stupid_jwt_user"
-    access_token_expires = timedelta(minutes=60)
+    access_token_expires = timedelta(days=30)
 
     access_token = create_access_token(
         data={"sub": username}, expires_delta=access_token_expires
@@ -39,6 +39,8 @@ def test_decode_access_token():
 
     jwt_expiration = datetime.fromtimestamp(jwt_expiration)
 
-    # asserting that the username is the same and that the expiration timestamp is < 60 mins from now
+    # asserting that the username is the same, and that the jwt token lasts
+    # longer than 30 days
     assert jwt_username == username
-    assert (datetime.now() + timedelta(minutes=60)) > jwt_expiration
+    assert (datetime.now() + timedelta(days=31)) > jwt_expiration
+    assert (datetime.now() + timedelta(days=29)) < jwt_expiration

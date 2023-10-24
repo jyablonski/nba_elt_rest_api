@@ -1,6 +1,6 @@
 def test_get_bets_form_incorrect_permissions(client_fixture):
     response = client_fixture.get(
-        f"/bets",
+        "/bets",
     )
 
     assert response.status_code == 401
@@ -11,7 +11,7 @@ def test_post_bets_form_incorrect_permissions(client_fixture):
     username = "jyablonski"
 
     response = client_fixture.post(
-        f"/bets",
+        "/bets",
         data={
             "username": username,
             "bet_predictions": ["Indiana Pacers", "Houston Rockets"],
