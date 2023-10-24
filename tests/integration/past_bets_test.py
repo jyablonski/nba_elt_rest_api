@@ -1,6 +1,6 @@
 def test_get_past_bets_form_incorrect_permissions(client_fixture):
     response = client_fixture.get(
-        f"/past_bets",
+        "/past_bets",
     )
 
     assert response.status_code == 401

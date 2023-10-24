@@ -58,7 +58,7 @@ class Team_Ratings(Base):
     team: str = Column(String, unique=True, primary_key=True, nullable=False)
     team_acronym: str = Column(String, unique=True, nullable=False)
     w: int = Column(Integer, nullable=False)
-    l: int = Column(Integer, nullable=False)
+    l: int = Column(Integer, nullable=False)  # noqa: E741
     ortg: float = Column(Float, nullable=False)
     drtg: float = Column(Float, nullable=False)
     nrtg: float = Column(Float, nullable=False)

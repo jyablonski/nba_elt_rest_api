@@ -123,7 +123,7 @@ def get_current_user_from_token(token: str = Depends(oauth2_scheme)) -> str:
     )
 
     try:
-        if token == None:
+        if token is None:
             return None
 
         payload = jwt.decode(token, os.environ.get("API_KEY"), algorithms=["HS256"])

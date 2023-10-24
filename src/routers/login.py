@@ -31,7 +31,7 @@ def login(
 
 
 @router.post("/login")
-async def login(request: Request, db: Session = Depends(get_db)):
+async def login(request: Request, db: Session = Depends(get_db)):  # noqa: F811
     form = LoginForm(request)
     await form.load_data()
 

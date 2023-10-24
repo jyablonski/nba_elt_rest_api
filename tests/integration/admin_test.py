@@ -8,7 +8,7 @@ def test_admin_get_no_auth(client_fixture):
 def test_admin_get_wrong_auth(client_fixture):
     username = "test1"
 
-    login_response = client_fixture.post(
+    login_response = client_fixture.post(  # noqa: F841
         "/login",
         data={
             "username": username,
@@ -25,7 +25,7 @@ def test_admin_get_wrong_auth(client_fixture):
 def test_admin_get_success(client_fixture):
     username = "jyablonski"
 
-    login_response = client_fixture.post(
+    login_response = client_fixture.post(  # noqa: F841
         "/login",
         data={
             "username": username,

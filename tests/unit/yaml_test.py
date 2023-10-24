@@ -1,6 +1,3 @@
-import os
-
-
 def test_yaml_load_with_env_vars(config_fixture):
     env_type = "dev"
     config = config_fixture[env_type]

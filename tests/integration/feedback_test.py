@@ -30,7 +30,7 @@ def test_feedback_success(client_fixture):
 def test_feedback_missing_value(client_fixture):
     response = client_fixture.post(
         "/feedback",
-        data={"user_feedback": f""},
+        data={"user_feedback": ""},
         headers={"content-type": "application/x-www-form-urlencoded"},
     )
 
