@@ -47,15 +47,8 @@ class LoginForm:
         return False
 
 
-def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
-    if expires_delta:
-        expire = datetime.utcnow() + expires_delta
-    else:
-        expire = datetime.utcnow() + timedelta(
-            minutes=60,
-        )
-
-    data["exp"] = expire
+def create_access_token(data: dict, expires: datetime):
+    data["exp"] = expires
     encoded_jwt = jwt.encode(
         data,
         os.environ.get("API_KEY"),

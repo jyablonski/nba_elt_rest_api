@@ -1,4 +1,4 @@
-from datetime import timedelta
+from datetime import datetime, timedelta, timezone
 
 from fastapi import APIRouter, Depends, HTTPException, Response, status
 from fastapi.security import OAuth2PasswordRequestForm
@@ -28,11 +28,20 @@ def login_for_access_token(
             detail="Incorrect username or password",
         )
 
-    access_token_expires = timedelta(days=30)
+    # 2 things here:
+    # the (jwt) access token is set as a cookie in the user's browser
+    # and is set to expire after 30 days
+
+    # the server then reads that access token and checks that the exp
+    # on the token is not > 30 days old
+    access_token_expires = datetime.now(timezone.utc) + timedelta(days=30)
     access_token = create_access_token(
-        data={"sub": user.username}, expires_delta=access_token_expires
+        data={"sub": user.username}, expires=access_token_expires
     )
     response.set_cookie(
-        key="access_token", value=f"Bearer {access_token}", httponly=True
+        key="access_token",
+        value=f"Bearer {access_token}",
+        httponly=True,
+        expires=access_token_expires,
     )
     return {"access_token": access_token, "token_type": "bearer"}
