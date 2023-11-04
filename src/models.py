@@ -135,7 +135,7 @@ class Feedback(Base):
 
 class Schedule(Base):
     __tablename__ = "schedule"
-    __table_args__ = (PrimaryKeyConstraint("home_team", "date", "away_team"),)
+    __table_args__ = (PrimaryKeyConstraint("home_team", "game_date", "away_team"),)
 
     game_date: date = Column(Date, nullable=True)
     day: str = Column(String, nullable=True)

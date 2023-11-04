@@ -28,11 +28,11 @@ CREATE TABLE player_stats(
     team text,
     full_team text,
     avg_ppg numeric,
-    season_ts_percent numeric,
-    playoffs_ts_percent numeric,
+    avg_ts_percent numeric,
+    avg_mvp_score numeric,
     games_played bigint,
     ppg_rank bigint,
-    top20_scorers text,
+    is_top_scorer text,
     mvp_score numeric,
     games_missed bigint,
     penalized_games_missed numeric,
@@ -40,18 +40,18 @@ CREATE TABLE player_stats(
     mvp_rank bigint
 );
 
-INSERT INTO player_stats (player, team, full_team, season_avg_ppg, playoffs_avg_ppg, season_ts_percent, playoffs_ts_percent, games_played, playoffs_games_played,
-                          ppg_rank, top20_scorers, player_mvp_calc_adj, games_missed, penalized_games_missed, is_mvp_candidate, mvp_rank)
-VALUES ('Nikola Jokic', 'DEN', 'Denver Nuggets', 24.8, null, 0.702, null, 68, null, 23, 'Other', 48.70, 11, 0, 'Top 5 MVP Candidate', 1),
-       ('Shai Gilgeous-Alexander', 'OKC', 'Okalahoma City Thunder', 31.5, null, 0.628, null, 67, null, 4, 'Top 20 Scorers', 44.10, 13, 0,
+INSERT INTO player_stats (player, season_type, team, full_team, avg_ppg, avg_ts_percent, games_played,
+                          ppg_rank, is_top_scorer, avg_mvp_score, games_missed, penalized_games_missed, is_mvp_candidate, mvp_rank)
+VALUES ('Nikola Jokic', 'Regular Season', 'DEN', 'Denver Nuggets', 24.8, 0.702, 68, 23, 'Other', 48.70, 11, 0, 'Top 5 MVP Candidate', 1),
+       ('Shai Gilgeous-Alexander', 'Regular Season', 'OKC', 'Okalahoma City Thunder', 31.5, 0.628, 67, 4, 'Top 20 Scorers', 44.10, 13, 0,
         'Top 5 MVP Candidate', 5);
 
 DROP TABLE IF EXISTS team_ratings;
 CREATE TABLE team_ratings(
     team text,
     team_acronym text,
-    w integer,
-    l integer,
+    wins integer,
+    losses integer,
     ortg numeric,
     drtg numeric,
     nrtg numeric,
@@ -61,7 +61,7 @@ CREATE TABLE team_ratings(
     ortg_rank text
 );
 
-INSERT INTO team_ratings (team, team_acronym, w, l, ortg, drtg, nrtg, team_logo, nrtg_rank, drtg_rank, ortg_rank)
+INSERT INTO team_ratings (team, team_acronym, wins, losses, ortg, drtg, nrtg, team_logo, nrtg_rank, drtg_rank, ortg_rank)
 VALUES ('Boston Celtics', 'BOS', 54, 25, 118, 111.6, 6.4, 'logos/bos.png', '1st', '3rd', '2nd'),
        ('Cleveland Cavaliers', 'CLE', 50, 30, 116.4, 110.8, 5.6, 'logos/cle.png', '2nd', '1st', '8th');
 

@@ -6,7 +6,7 @@ def test_schedule(client_fixture):
     assert len(data) == 2
     assert data[0]["home_team"] == "Indiana Pacers"
     assert list(data[0].keys()) == [
-        "date",
+        "game_date",
         "day",
         "start_time",
         "avg_team_rank",
