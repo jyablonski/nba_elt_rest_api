@@ -54,7 +54,7 @@
     background-color: #FFCCBA;
 }
 
-form {
+form:not(#download-button) {
     position: fixed;
     top: 50%;
     left: 50%;
@@ -379,4 +379,13 @@ a.home:visited {
 
 li {
     color: rgb(255, 255, 255);
+}
+
+.bets-download {
+    width: 250px;
+}
+
+.bets-download button {
+    width: 100%;
+    font-size: 18pt !important;
 }

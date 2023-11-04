@@ -20,14 +20,23 @@ def get_user_past_bets_page(
     db: Session = Depends(get_db),
 ):
     user_past_predictions = db.query(UserPastPredictions).filter(
-        UserPastPredictions.username == username
+        UserPastPredictions.username == username,
+        UserPastPredictions.game_date >= "2023-10-01",
     )
 
-    user_past_predictions_count = user_past_predictions.count()
-    user_past_predictions_success_count = user_past_predictions.filter(
+    user_current_predictions = user_past_predictions.filter(
+        UserPastPredictions.actual_winner == "TBD"
+    ).count()
+
+    user_past_predictions_aggs = user_past_predictions.filter(
+        UserPastPredictions.actual_winner != "TBD"
+    )
+
+    user_past_predictions_count = user_past_predictions_aggs.count()
+    user_past_predictions_success_count = user_past_predictions_aggs.filter(
         UserPastPredictions.is_correct_prediction == 1
     ).count()
-    user_past_predictions_bet_profit = user_past_predictions.with_entities(
+    user_past_predictions_bet_profit = user_past_predictions_aggs.with_entities(
         func.sum(UserPastPredictions.bet_profit)
     ).scalar()
 
@@ -48,6 +57,7 @@ def get_user_past_bets_page(
             "past_predictions": user_past_predictions.order_by(
                 UserPastPredictions.game_date.desc()
             ),
+            "current_predictions_total_count": user_current_predictions,
             "past_predictions_total_count": user_past_predictions_count,
             "past_predictions_success_count": user_past_predictions_success_count,
             "past_predictions_pct_count": user_past_predictions_pct_count,
