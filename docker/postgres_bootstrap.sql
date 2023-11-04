@@ -30,9 +30,10 @@ CREATE TABLE player_stats(
     avg_ppg numeric,
     avg_ts_percent numeric,
     avg_mvp_score numeric,
+    avg_plus_minus numeric,
     games_played bigint,
     ppg_rank bigint,
-    is_top_scorer text,
+    scoring_category text,
     mvp_score numeric,
     games_missed bigint,
     penalized_games_missed numeric,
@@ -40,10 +41,10 @@ CREATE TABLE player_stats(
     mvp_rank bigint
 );
 
-INSERT INTO player_stats (player, season_type, team, full_team, avg_ppg, avg_ts_percent, games_played,
-                          ppg_rank, is_top_scorer, avg_mvp_score, games_missed, penalized_games_missed, is_mvp_candidate, mvp_rank)
-VALUES ('Nikola Jokic', 'Regular Season', 'DEN', 'Denver Nuggets', 24.8, 0.702, 68, 23, 'Other', 48.70, 11, 0, 'Top 5 MVP Candidate', 1),
-       ('Shai Gilgeous-Alexander', 'Regular Season', 'OKC', 'Okalahoma City Thunder', 31.5, 0.628, 67, 4, 'Top 20 Scorers', 44.10, 13, 0,
+INSERT INTO player_stats (player, season_type, team, full_team, avg_ppg, avg_ts_percent, avg_mvp_score, avg_plus_minus, games_played,
+                          ppg_rank, scoring_category, games_missed, penalized_games_missed, is_mvp_candidate, mvp_rank)
+VALUES ('Nikola Jokic', 'Regular Season', 'DEN', 'Denver Nuggets', 24.8, 0.702, 68, 9.5, 68, 23, 'Other', 11, 0, 'Top 5 MVP Candidate', 1),
+       ('Shai Gilgeous-Alexander', 'Regular Season', 'OKC', 'Okalahoma City Thunder', 31.5, 0.628, 67, 4.1, 68, 4, 'Top 20 Scorers', 13, 0,
         'Top 5 MVP Candidate', 5);
 
 DROP TABLE IF EXISTS team_ratings;
@@ -134,12 +135,12 @@ VALUES ('09a97226ecd7b666dd516039ce752720', 'Myles Turner', 'IND', 'Indiana Pace
 DROP TABLE IF EXISTS game_types;
 CREATE TABLE game_types(
     game_type text,
-    type text,
+    season_type text,
     n bigint,
     explanation text
 );
 
-INSERT INTO game_types (game_type, type, n, explanation)
+INSERT INTO game_types (game_type, season_type, n, explanation)
 VALUES ('20 pt Game', 'Regular Season', 356, 'between 11 and 20 points'),
        ('Blowout Game', 'Regular Season', 154, 'more than 20 points'),
        ('10 pt Game', 'Regular Season', 351, 'between 6 and 10 points'),
@@ -155,7 +156,7 @@ CREATE TABLE feedback(
 DROP TABLE IF EXISTS schedule;
 CREATE TABLE schedule(
     game_date date,
-    day text,
+    day_name text,
     avg_team_rank bigint,
     start_time text,
     home_team text,
@@ -164,7 +165,7 @@ CREATE TABLE schedule(
     away_moneyline_raw numeric
 );
 
-INSERT INTO schedule (game_date, day, avg_team_rank, start_time, home_team, away_team, home_moneyline_raw, away_moneyline_raw)
+INSERT INTO schedule (game_date, day_name, avg_team_rank, start_time, home_team, away_team, home_moneyline_raw, away_moneyline_raw)
 VALUES (current_date, 'Monday', 16, '7:00 PM', 'Indiana Pacers', 'New York Knicks', 300, -365),
        (current_date, 'Monday', 20, '7:00 PM', 'New York Knicks', 'Indiana Pacers', -365, 300);
 

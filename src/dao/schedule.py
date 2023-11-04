@@ -9,7 +9,7 @@ def get_schedule(db: Session):
     return (
         db.query(
             Schedule.game_date,
-            Schedule.day,
+            Schedule.day_name,
             Schedule.start_time,
             Schedule.avg_team_rank,
             Schedule.home_team,

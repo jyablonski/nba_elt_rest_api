@@ -32,9 +32,10 @@ class PlayerStatsBase(BaseModel):
     avg_ppg: float
     avg_ts_percent: Optional[float]
     avg_mvp_score: float
+    avg_plus_minus: float
     games_played: int
     ppg_rank: int
-    is_top_scorer: str
+    scoring_category: str
     games_missed: int
     penalized_games_missed: int
     is_mvp_candidate: str
@@ -111,7 +112,7 @@ class InjuriesBase(BaseModel):
 
 class GameTypesBase(BaseModel):
     game_type: str
-    type: str
+    season_type: str
     n: int
     explanation: str
 
@@ -147,7 +148,7 @@ class FeedbackBase(BaseModel):
 
 class ScheduleBase(BaseModel):
     game_date: date
-    day: str
+    day_name: str
     start_time: str
     avg_team_rank: int
     home_team: str
