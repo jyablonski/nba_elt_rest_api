@@ -7,6 +7,7 @@ def test_player_stats(client_fixture):
     assert data[0]["player"] == "Nikola Jokic"
     assert list(data[0].keys()) == [
         "player",
+        "season_type",
         "team",
         "full_team",
         "avg_ppg",
@@ -17,6 +18,6 @@ def test_player_stats(client_fixture):
         "is_top_scorer",
         "games_missed",
         "penalized_games_missed",
-        "is_top_candidate",
+        "is_mvp_candidate",
         "mvp_rank",
     ]

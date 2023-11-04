@@ -24,17 +24,17 @@ class StandingsBase(BaseModel):
         from_attributes = True
 
 
-class ScorersBase(BaseModel):
+class PlayerStatsBase(BaseModel):
     player: str
     season_type: str
     team: str
     full_team: str
     avg_ppg: float
     avg_ts_percent: Optional[float]
+    avg_mvp_score: float
     games_played: int
     ppg_rank: int
     is_top_scorer: str
-    player_mvp_calc_adj: float
     games_missed: int
     penalized_games_missed: int
     is_mvp_candidate: str

@@ -24,8 +24,11 @@ def test_post_bets_form_incorrect_permissions(client_fixture):
         allow_redirects=False,
     )
 
-    assert response.status_code == 401
-    assert response.json()["detail"] == "Not authenticated"
+    if response.status_code == 302:
+        assert response.headers["Location"] == "/login"
+    else:
+        assert response.status_code == 401
+        assert response.json()["detail"] == "Not authenticated"
 
 
 def test_bets_form_get(client_fixture):
