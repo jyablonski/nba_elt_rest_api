@@ -5,6 +5,7 @@ from typing import Annotated, Dict, List, Optional
 
 from fastapi import Depends, HTTPException, Request, status
 from fastapi.openapi.models import OAuthFlows as OAuthFlowsModel
+from fastapi.responses import RedirectResponse
 from fastapi.security import (
     HTTPBasic,
     OAuth2,
@@ -22,6 +23,10 @@ from src.utils import generate_hash_password
 
 security = HTTPBasic()
 oauth2_scheme_og = OAuth2PasswordBearer(tokenUrl="token")
+
+
+class RequiresLoginException(Exception):
+    pass
 
 
 class LoginForm:
@@ -78,7 +83,6 @@ class OAuth2PasswordBearerWithCookie(OAuth2):
         super().__init__(flows=flows, scheme_name=scheme_name, auto_error=auto_error)
 
     async def __call__(self, request: Request) -> Optional[str]:
-        # skip the automatic error on login screen
         if "/login" in str(request.url):
             token: str = request.cookies.get("access_token")
             if token is not None:
@@ -88,17 +92,14 @@ class OAuth2PasswordBearerWithCookie(OAuth2):
                 return None
 
         else:
-            token: str = request.cookies.get(
-                "access_token"
-            )  # changed to accept access token from httpOnly Cookie
+            token: str = request.cookies.get("access_token")
 
             scheme, param = get_authorization_scheme_param(token)
             if not token or scheme.lower() != "bearer":
                 if self.auto_error:
                     raise HTTPException(
-                        status_code=status.HTTP_401_UNAUTHORIZED,
-                        detail="Not authenticated",
-                        headers={"WWW-Authenticate": "Bearer"},
+                        status_code=status.HTTP_302_FOUND,
+                        headers={"Location": "/login"},
                     )
                 else:
                     return None

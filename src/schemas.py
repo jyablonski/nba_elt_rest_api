@@ -26,20 +26,18 @@ class StandingsBase(BaseModel):
 
 class ScorersBase(BaseModel):
     player: str
+    season_type: str
     team: str
     full_team: str
-    season_avg_ppg: float
-    playoffs_avg_ppg: Optional[float]
-    season_ts_percent: Optional[float]
-    playoffs_ts_percent: Optional[float]
+    avg_ppg: float
+    avg_ts_percent: Optional[float]
     games_played: int
-    playoffs_games_played: Optional[int]
     ppg_rank: int
-    top20_scorers: str
+    is_top_scorer: str
     player_mvp_calc_adj: float
     games_missed: int
     penalized_games_missed: int
-    top5_candidates: str
+    is_mvp_candidate: str
     mvp_rank: int
 
     class Config:
@@ -49,8 +47,8 @@ class ScorersBase(BaseModel):
 class TeamRatingsBase(BaseModel):
     team: str
     team_acronym: str
-    w: int
-    l: int  # noqa: E741
+    wins: int
+    losses: int  # noqa: E741
     ortg: float
     drtg: float
     nrtg: float
@@ -148,7 +146,7 @@ class FeedbackBase(BaseModel):
 
 
 class ScheduleBase(BaseModel):
-    date: date
+    game_date: date
     day: str
     start_time: str
     avg_team_rank: int

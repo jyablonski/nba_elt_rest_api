@@ -2,7 +2,7 @@ from datetime import datetime, timedelta
 from typing import List
 
 from fastapi import APIRouter, Depends, HTTPException, Form, Request
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, RedirectResponse
 from sqlalchemy.orm import Session
 
 from src.dao.bets import store_bet_predictions
@@ -21,10 +21,8 @@ async def get_user_bets_page(
     db: Session = Depends(get_db),
 ):
     if username is None:
-        return templates.TemplateResponse(
-            "404.html",
-            {"request": request},
-        )
+        # Redirect to the /login endpoint
+        return RedirectResponse("/login")
 
     local_datetime = (datetime.utcnow() - timedelta(hours=5)).date()
 
@@ -77,15 +75,14 @@ def store_user_bets_predictions_from_ui(
     bet_amounts: List[int] = Form(...),
     db: Session = Depends(get_db),
 ):
-    username_check = (db.query(Users).filter(Users.username == username)).first()
+    # username_check = (db.query(Users).filter(Users.username == username)).first()
 
+    # if username_check is None:
+    #     raise HTTPException(
+    #         status_code=403,
+    #         detail="This User does not exist.",
+    #     )
     local_datetime = (datetime.utcnow() - timedelta(hours=5)).date()
-
-    if username_check is None:
-        raise HTTPException(
-            status_code=403,
-            detail="This User does not exist.",
-        )
 
     # this logic checks if every game from today has already been selected or not
     # by the user, and then stores it as a cte for use in a query later

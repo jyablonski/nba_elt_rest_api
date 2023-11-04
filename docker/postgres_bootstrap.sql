@@ -21,28 +21,27 @@ INSERT INTO standings (rank, team, team_full, conference, wins, losses, games_pl
 VALUES ('1st', 'MIL', 'Milwaukee Bucks', 'Eastern', 57, 22, 79, 0.722, 3, 0, '7-3'),
        ('2nd', 'BOS', 'Boston Celtics', 'Eastern', 54, 25, 79, 0.684, 4, 0, '7-3');
 
-DROP TABLE IF EXISTS scorers;
-CREATE TABLE scorers(
+DROP TABLE IF EXISTS player_stats;
+CREATE TABLE player_stats(
     player text,
+    season_type text,
     team text,
     full_team text,
-    season_avg_ppg numeric,
-    playoffs_avg_ppg numeric,
+    avg_ppg numeric,
     season_ts_percent numeric,
     playoffs_ts_percent numeric,
     games_played bigint,
-    playoffs_games_played bigint,
     ppg_rank bigint,
     top20_scorers text,
-    player_mvp_calc_adj numeric,
+    mvp_score numeric,
     games_missed bigint,
     penalized_games_missed numeric,
-    top5_candidates text,
+    is_mvp_candidate text,
     mvp_rank bigint
 );
 
-INSERT INTO scorers (player, team, full_team, season_avg_ppg, playoffs_avg_ppg, season_ts_percent, playoffs_ts_percent, games_played, playoffs_games_played,
-                          ppg_rank, top20_scorers, player_mvp_calc_adj, games_missed, penalized_games_missed, top5_candidates, mvp_rank)
+INSERT INTO player_stats (player, team, full_team, season_avg_ppg, playoffs_avg_ppg, season_ts_percent, playoffs_ts_percent, games_played, playoffs_games_played,
+                          ppg_rank, top20_scorers, player_mvp_calc_adj, games_missed, penalized_games_missed, is_mvp_candidate, mvp_rank)
 VALUES ('Nikola Jokic', 'DEN', 'Denver Nuggets', 24.8, null, 0.702, null, 68, null, 23, 'Other', 48.70, 11, 0, 'Top 5 MVP Candidate', 1),
        ('Shai Gilgeous-Alexander', 'OKC', 'Okalahoma City Thunder', 31.5, null, 0.628, null, 67, null, 4, 'Top 20 Scorers', 44.10, 13, 0,
         'Top 5 MVP Candidate', 5);
@@ -155,7 +154,7 @@ CREATE TABLE feedback(
 
 DROP TABLE IF EXISTS schedule;
 CREATE TABLE schedule(
-    date date,
+    game_date date,
     day text,
     avg_team_rank bigint,
     start_time text,
@@ -165,7 +164,7 @@ CREATE TABLE schedule(
     away_moneyline_raw numeric
 );
 
-INSERT INTO schedule (date, day, avg_team_rank, start_time, home_team, away_team, home_moneyline_raw, away_moneyline_raw)
+INSERT INTO schedule (game_date, day, avg_team_rank, start_time, home_team, away_team, home_moneyline_raw, away_moneyline_raw)
 VALUES (current_date, 'Monday', 16, '7:00 PM', 'Indiana Pacers', 'New York Knicks', 300, -365),
        (current_date, 'Monday', 20, '7:00 PM', 'New York Knicks', 'Indiana Pacers', -365, 300);
 
@@ -238,6 +237,86 @@ CREATE TABLE IF NOT EXISTS user_predictions
     created_at timestamp without time zone DEFAULT now()
 );
 
+INSERT INTO user_predictions (username,game_date,home_team,home_team_odds,home_team_predicted_win_pct,away_team,away_team_odds,away_team_predicted_win_pct,selected_winner,bet_amount,created_at) VALUES
+	 ('test1','2023-05-14','Boston Celtics',-265,0.552,'Philadelphia 76ers',225,0.448,'Boston Celtics',10,'2023-05-14 16:16:38.800'),
+	 ('test1','2023-05-16','Denver Nuggets',-245,0.72,'Los Angeles Lakers',205,0.28,'Denver Nuggets',10,'2023-05-16 23:54:01.162'),
+	 ('test1','2023-05-17','Boston Celtics',-365,0.647,'Miami Heat',300,0.353,'Boston Celtics',10,'2023-05-17 23:20:01.556'),
+	 ('test1','2023-05-19','Boston Celtics',-390,0.71,'Miami Heat',320,0.29,'Boston Celtics',10,'2023-05-19 19:49:34.151'),
+	 ('test1','2023-05-20','Los Angeles Lakers',-225,0.365,'Denver Nuggets',190,0.635,'Los Angeles Lakers',10,'2023-05-20 15:28:01.286'),
+	 ('test1','2023-05-21','Miami Heat',135,0.34,'Boston Celtics',-155,0.66,'Boston Celtics',10,'2023-05-21 16:04:20.554'),
+	 ('test1','2023-05-27','Miami Heat',120,0.339,'Boston Celtics',-140,0.661,'Boston Celtics',10,'2023-05-27 22:44:41.634'),
+	 ('test1','2023-05-29','Boston Celtics',NULL,0.707,'Miami Heat',NULL,0.293,'Miami Heat',10,'2023-05-29 17:56:19.546'),
+	 ('test1','2023-06-01','Denver Nuggets',-360,0.895,'Miami Heat',295,0.105,'Denver Nuggets',10,'2023-06-01 18:03:51.465'),
+	 ('test1','2023-06-12','Denver Nuggets',-380,0.671,'Miami Heat',310,0.329,'Denver Nuggets',10,'2023-06-12 15:45:57.518');
+INSERT INTO user_predictions (username,game_date,home_team,home_team_odds,home_team_predicted_win_pct,away_team,away_team_odds,away_team_predicted_win_pct,selected_winner,bet_amount,created_at) VALUES
+	 ('test1','2023-10-24','Denver Nuggets',-200,0.163,'Los Angeles Lakers',165,0.837,'Denver Nuggets',10,'2023-10-24 17:34:57.722'),
+	 ('test1','2023-10-24','Golden State Warriors',-160,0.762,'Phoenix Suns',130,0.238,'Golden State Warriors',10,'2023-10-24 17:34:57.722'),
+	 ('test1','2023-10-25','Miami Heat',-425,0.776,'Detroit Pistons',330,0.224,'Miami Heat',10,'2023-10-25 13:53:55.055'),
+	 ('test1','2023-10-25','Charlotte Hornets',140,0.358,'Atlanta Hawks',-170,0.642,'Atlanta Hawks',10,'2023-10-25 13:53:55.055'),
+	 ('test1','2023-10-25','Orlando Magic',-175,0.598,'Houston Rockets',145,0.402,'Houston Rockets',10,'2023-10-25 13:53:55.055'),
+	 ('test1','2023-10-25','Brooklyn Nets',-105,0.44,'Cleveland Cavaliers',-115,0.56,'Cleveland Cavaliers',10,'2023-10-25 13:53:55.055'),
+	 ('test1','2023-10-25','Toronto Raptors',100,0.529,'Minnesota Timberwolves',-120,0.471,'Minnesota Timberwolves',10,'2023-10-25 13:53:55.055'),
+	 ('test1','2023-10-25','Chicago Bulls',-110,0.589,'Oklahoma City Thunder',-110,0.411,'Oklahoma City Thunder',10,'2023-10-25 13:53:55.055'),
+	 ('test1','2023-10-25','San Antonio Spurs',140,0.367,'Dallas Mavericks',-170,0.633,'San Antonio Spurs',10,'2023-10-25 13:53:55.055'),
+	 ('test1','2023-10-25','Los Angeles Clippers',-417,0.74,'Portland Trail Blazers',330,0.26,'Los Angeles Clippers',10,'2023-10-25 13:53:55.055');
+INSERT INTO user_predictions (username,game_date,home_team,home_team_odds,home_team_predicted_win_pct,away_team,away_team_odds,away_team_predicted_win_pct,selected_winner,bet_amount,created_at) VALUES
+	 ('test1','2023-10-25','New York Knicks',140,0.425,'Boston Celtics',-170,0.575,'Boston Celtics',10,'2023-10-25 13:53:55.055'),
+	 ('test1','2023-10-25','Memphis Grizzlies',-115,0.61,'New Orleans Pelicans',-105,0.39,'New Orleans Pelicans',10,'2023-10-25 13:53:55.055'),
+	 ('test1','2023-10-25','Indiana Pacers',-290,0.564,'Washington Wizards',230,0.436,'Washington Wizards',10,'2023-10-25 13:53:55.055'),
+	 ('test1','2023-10-25','Utah Jazz',105,0.308,'Sacramento Kings',-125,0.692,'Sacramento Kings',10,'2023-10-25 13:53:55.055'),
+	 ('test1','2023-10-26','Los Angeles Lakers',-225,0.228,'Phoenix Suns',185,0.772,'Los Angeles Lakers',10,'2023-10-26 13:33:36.280'),
+	 ('test1','2023-10-26','Milwaukee Bucks',-250,0.535,'Philadelphia 76ers',200,0.465,'Milwaukee Bucks',10,'2023-10-26 13:33:36.280'),
+	 ('test1','2023-10-27','Chicago Bulls',-140,0.111,'Toronto Raptors',115,0.889,'Toronto Raptors',10,'2023-10-27 13:48:07.160'),
+	 ('test1','2023-10-27','Memphis Grizzlies',165,0.198,'Denver Nuggets',-200,0.802,'Denver Nuggets',10,'2023-10-27 13:48:07.160'),
+	 ('test1','2023-10-27','Boston Celtics',-325,0.487,'Miami Heat',250,0.513,'Boston Celtics',10,'2023-10-27 13:48:07.160'),
+	 ('test1','2023-10-27','Atlanta Hawks',-125,0.531,'New York Knicks',105,0.469,'New York Knicks',10,'2023-10-27 13:48:07.160');
+INSERT INTO user_predictions (username,game_date,home_team,home_team_odds,home_team_predicted_win_pct,away_team,away_team_odds,away_team_predicted_win_pct,selected_winner,bet_amount,created_at) VALUES
+	 ('test1','2023-10-27','Portland Trail Blazers',115,0.332,'Orlando Magic',-140,0.668,'Orlando Magic',10,'2023-10-27 13:48:07.160'),
+	 ('test1','2023-10-27','Utah Jazz',130,0.158,'Los Angeles Clippers',-152,0.842,'Los Angeles Clippers',10,'2023-10-27 13:48:07.160'),
+	 ('test1','2023-10-27','Cleveland Cavaliers',-160,0.597,'Oklahoma City Thunder',130,0.403,'Oklahoma City Thunder',10,'2023-10-27 13:48:07.160'),
+	 ('test1','2023-10-27','Charlotte Hornets',-170,0.876,'Detroit Pistons',140,0.124,'Detroit Pistons',10,'2023-10-27 13:48:07.160'),
+	 ('test1','2023-10-27','San Antonio Spurs',-130,0.284,'Houston Rockets',110,0.716,'San Antonio Spurs',10,'2023-10-27 13:48:07.160'),
+	 ('test1','2023-10-27','Dallas Mavericks',-240,0.878,'Brooklyn Nets',190,0.122,'Dallas Mavericks',10,'2023-10-27 13:48:07.160'),
+	 ('test1','2023-10-27','Sacramento Kings',-160,0.779,'Golden State Warriors',130,0.221,'Golden State Warriors',10,'2023-10-27 13:48:07.160'),
+	 ('test1','2023-10-28','Minnesota Timberwolves',-190,0.192,'Miami Heat',160,0.808,'Minnesota Timberwolves',10,'2023-10-28 13:17:53.282'),
+	 ('test1','2023-10-28','Toronto Raptors',150,0.877,'Philadelphia 76ers',-180,0.123,'Philadelphia 76ers',10,'2023-10-28 13:17:53.282'),
+	 ('test1','2023-10-28','Phoenix Suns',-250,0.463,'Utah Jazz',200,0.537,'Phoenix Suns',10,'2023-10-28 13:17:53.282');
+INSERT INTO user_predictions (username,game_date,home_team,home_team_odds,home_team_predicted_win_pct,away_team,away_team_odds,away_team_predicted_win_pct,selected_winner,bet_amount,created_at) VALUES
+	 ('test1','2023-10-28','Detroit Pistons',105,0.531,'Chicago Bulls',-125,0.469,'Chicago Bulls',10,'2023-10-28 13:17:53.282'),
+	 ('test1','2023-10-28','New Orleans Pelicans',-170,0.742,'New York Knicks',140,0.258,'New Orleans Pelicans',10,'2023-10-28 13:17:53.282'),
+	 ('test1','2023-10-28','Cleveland Cavaliers',-160,0.567,'Indiana Pacers',130,0.433,'Indiana Pacers',10,'2023-10-28 13:17:53.282'),
+	 ('test1','2023-10-28','Washington Wizards',105,0.356,'Memphis Grizzlies',-125,0.644,'Memphis Grizzlies',10,'2023-10-28 13:17:53.282'),
+	 ('test1','2023-10-30','Toronto Raptors',-290,0.752,'Portland Trail Blazers',230,0.248,'Toronto Raptors',10,'2023-10-30 14:27:20.762'),
+	 ('test1','2023-10-30','New Orleans Pelicans',-145,0.745,'Golden State Warriors',120,0.255,'Golden State Warriors',10,'2023-10-30 14:27:20.762'),
+	 ('test1','2023-10-30','Memphis Grizzlies',120,0.158,'Dallas Mavericks',-145,0.842,'Dallas Mavericks',10,'2023-10-30 14:27:20.762'),
+	 ('test1','2023-10-30','Charlotte Hornets',100,0.743,'Brooklyn Nets',-120,0.257,'Brooklyn Nets',10,'2023-10-30 14:27:20.762'),
+	 ('test1','2023-10-30','Oklahoma City Thunder',-240,0.448,'Detroit Pistons',190,0.552,'Detroit Pistons',10,'2023-10-30 14:27:20.762'),
+	 ('test1','2023-10-30','Los Angeles Lakers',-145,0.177,'Orlando Magic',120,0.823,'Orlando Magic',10,'2023-10-30 14:27:20.762');
+INSERT INTO user_predictions (username,game_date,home_team,home_team_odds,home_team_predicted_win_pct,away_team,away_team_odds,away_team_predicted_win_pct,selected_winner,bet_amount,created_at) VALUES
+	 ('test1','2023-10-30','Milwaukee Bucks',-200,0.489,'Miami Heat',165,0.511,'Milwaukee Bucks',10,'2023-10-30 14:27:20.762'),
+	 ('test1','2023-10-30','Washington Wizards',350,0.224,'Boston Celtics',-450,0.776,'Boston Celtics',10,'2023-10-30 14:27:20.762'),
+	 ('test1','2023-10-30','Denver Nuggets',-350,0.849,'Utah Jazz',260,0.151,'Denver Nuggets',10,'2023-10-30 14:27:20.762'),
+	 ('test1','2023-10-30','Atlanta Hawks',110,0.471,'Minnesota Timberwolves',-130,0.529,'Minnesota Timberwolves',10,'2023-10-30 14:27:20.762'),
+	 ('test1','2023-10-30','Indiana Pacers',-170,0.883,'Chicago Bulls',140,0.117,'Chicago Bulls',10,'2023-10-30 14:27:20.762'),
+	 ('test1','2023-10-31','Phoenix Suns',-300,0.78,'San Antonio Spurs',240,0.22,'Phoenix Suns',10,'2023-10-31 14:49:59.012'),
+	 ('test1','2023-10-31','Cleveland Cavaliers',130,0.371,'New York Knicks',-160,0.629,'Cleveland Cavaliers',10,'2023-10-31 14:49:59.012'),
+	 ('test1','2023-10-31','Los Angeles Clippers',-325,0.745,'Orlando Magic',250,0.255,'Los Angeles Clippers',10,'2023-10-31 14:49:59.012'),
+	 ('test1',current_date - INTERVAL '2 DAY','Toronto Raptors',175,0.239,'Milwaukee Bucks',-210,0.761,'Milwaukee Bucks',10,current_timestamp - INTERVAL '2 DAY'),
+	 ('test1',current_date - INTERVAL '2 DAY','Houston Rockets',-140,0.355,'Charlotte Hornets',115,0.645,'Charlotte Hornets',10,current_timestamp - INTERVAL '2 DAY');
+INSERT INTO user_predictions (username,game_date,home_team,home_team_odds,home_team_predicted_win_pct,away_team,away_team_odds,away_team_predicted_win_pct,selected_winner,bet_amount,created_at) VALUES
+	 ('test1',current_date - INTERVAL '2 DAY','Minnesota Timberwolves',125,0.254,'Denver Nuggets',-150,0.746,'Denver Nuggets',10,current_timestamp - INTERVAL '2 DAY'),
+	 ('test1',current_date - INTERVAL '2 DAY','Miami Heat',-250,0.393,'Brooklyn Nets',200,0.607,'Brooklyn Nets',10,current_timestamp - INTERVAL '2 DAY'),
+	 ('test1',current_date - INTERVAL '2 DAY','New York Knicks',-275,0.797,'Cleveland Cavaliers',220,0.203,'New York Knicks',10,current_timestamp - INTERVAL '2 DAY'),
+	 ('test1',current_date - INTERVAL '2 DAY','Utah Jazz',-145,0.513,'Memphis Grizzlies',120,0.487,'Memphis Grizzlies',10,current_timestamp - INTERVAL '2 DAY'),
+	 ('test1',current_date - INTERVAL '2 DAY','Los Angeles Lakers',-210,0.404,'Los Angeles Clippers',175,0.596,'Los Angeles Clippers',10,current_timestamp - INTERVAL '2 DAY'),
+	 ('test1',current_date - INTERVAL '2 DAY','Detroit Pistons',-175,0.84,'Portland Trail Blazers',145,0.16,'Detroit Pistons',10,current_timestamp - INTERVAL '2 DAY'),
+	 ('test1',current_date - INTERVAL '2 DAY','Oklahoma City Thunder',-170,0.585,'New Orleans Pelicans',140,0.415,'Oklahoma City Thunder',10,current_timestamp - INTERVAL '2 DAY'),
+	 ('test1',current_date - INTERVAL '2 DAY','Golden State Warriors',-290,0.722,'Sacramento Kings',230,0.278,'Golden State Warriors',10,current_timestamp - INTERVAL '2 DAY'),
+	 ('test1',current_date - INTERVAL '2 DAY','Boston Celtics',-625,0.676,'Indiana Pacers',450,0.324,'Boston Celtics',10,current_timestamp - INTERVAL '2 DAY'),
+	 ('test1',current_date - INTERVAL '2 DAY','Atlanta Hawks',-325,0.681,'Washington Wizards',250,0.319,'Atlanta Hawks',10,current_timestamp - INTERVAL '2 DAY');
+INSERT INTO user_predictions (username,game_date,home_team,home_team_odds,home_team_predicted_win_pct,away_team,away_team_odds,away_team_predicted_win_pct,selected_winner,bet_amount,created_at) VALUES
+	 ('test1',current_date - INTERVAL '2 DAY','Dallas Mavericks',-210,0.798,'Chicago Bulls',175,0.202,'Chicago Bulls',10,current_timestamp - INTERVAL '2 DAY');
+
 -- 2023-05-28 update: this table is made from dbt in prod.  for testing im just making a blank table to test 
 -- past bets functionality.
 DROP TABLE IF EXISTS mov;
@@ -246,7 +325,7 @@ CREATE TABLE IF NOT EXISTS mov
     team text COLLATE pg_catalog."default",
     full_team text COLLATE pg_catalog."default",
     game_id bigint,
-    date date,
+    game_date date,
     outcome text COLLATE pg_catalog."default",
     opponent text COLLATE pg_catalog."default",
     pts_scored numeric,
@@ -273,7 +352,7 @@ create view user_past_predictions as
 WITH home_wins AS (
     SELECT 
         mov.full_team AS home_team,
-        mov.date AS game_date,
+        mov.game_date,
         mov.outcome
     FROM nba_prod.mov
     ),

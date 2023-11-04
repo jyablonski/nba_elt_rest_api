@@ -105,11 +105,49 @@ caption {
 }
 
 .bets-table {
+    background-color: #333;
+    color: #fff;
     border-collapse: collapse;
-    border: 10px solid rgb(200, 200, 200);
+    border: 2px solid #666;
     letter-spacing: 1px;
     font-family: sans-serif;
     font-size: 0.8rem;
+}
+
+.bets-table td {
+    background-color: #383b3d;
+    border: 1px solid #555;
+    padding: 8px;
+}
+
+.bets-table tr:hover {
+    background-color: #b65656 !important;
+}
+
+/* Style the select element */
+select[name="bet_predictions"] {
+    background-color: #727272;
+    /* Background color */
+    color: #fff;
+    /* Text color */
+    border: 1px solid #202020;
+    /* Border color */
+    padding: 8px;
+}
+
+/* Style the options within the select element */
+select[name="bet_predictions"] option {
+    background-color: #383b3d;
+    /* Background color */
+    color: #fff;
+    /* Text color */
+    padding: 8px;
+    text-align: center;
+}
+
+input[type="number"] {
+    color: #fff;
+    text-align: center;
 }
 
 .center-screen {

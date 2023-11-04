@@ -1,10 +1,14 @@
 def test_get_bets_form_incorrect_permissions(client_fixture):
     response = client_fixture.get(
         "/bets",
+        allow_redirects=False,
     )
 
-    assert response.status_code == 401
-    assert response.json()["detail"] == "Not authenticated"
+    if response.status_code == 302:
+        assert response.headers["Location"] == "/login"
+    else:
+        assert response.status_code == 401
+        assert response.json()["detail"] == "Not authenticated"
 
 
 def test_post_bets_form_incorrect_permissions(client_fixture):
@@ -17,6 +21,7 @@ def test_post_bets_form_incorrect_permissions(client_fixture):
             "bet_predictions": ["Indiana Pacers", "Houston Rockets"],
             "bet_amounts": [10, 20],
         },
+        allow_redirects=False,
     )
 
     assert response.status_code == 401
