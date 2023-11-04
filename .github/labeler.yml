@@ -4,7 +4,6 @@ backend:
 
 cd:
 - .github/workflows/deploy.yml
-- requirements.txt
 
 ci:
 - .github/workflows/test.yml
