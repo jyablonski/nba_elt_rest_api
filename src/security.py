@@ -25,10 +25,6 @@ security = HTTPBasic()
 oauth2_scheme_og = OAuth2PasswordBearer(tokenUrl="token")
 
 
-class RequiresLoginException(Exception):
-    pass
-
-
 class LoginForm:
     def __init__(self, request: Request):
         self.request: Request = request
