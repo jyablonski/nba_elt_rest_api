@@ -25,7 +25,7 @@
          <!-- <select name="bet_predictions"> -->
          {% for game in games_today %}
          <tr>
-            <th scope="row">{{game.proper_date }}</th>
+            <th scope="row">{{game.game_date }}</th>
             <td>{{ game.home_team }}</td>
             <td>{{ game.home_team_odds }}</td>
             <td>{{ (game.home_team_predicted_win_pct * 100)|round(3) }}% </td>

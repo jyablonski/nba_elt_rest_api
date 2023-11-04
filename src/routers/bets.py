@@ -35,7 +35,7 @@ async def get_user_bets_page(
     user_predictions_results = user_predictions.cte("user_predictions")
 
     games_today_count = (
-        db.query(Predictions).filter(Predictions.proper_date == local_datetime)
+        db.query(Predictions).filter(Predictions.game_date == local_datetime)
     ).count()
 
     # variable to populate element of the UI
@@ -47,7 +47,7 @@ async def get_user_bets_page(
     # this logic returns only the unselected games from today's date for this user
     check_todays_predictions = (
         db.query(Predictions)
-        .filter(Predictions.proper_date == local_datetime)
+        .filter(Predictions.game_date == local_datetime)
         .join(
             user_predictions_results,
             (Predictions.home_team == user_predictions_results.c.home_team),
@@ -95,7 +95,7 @@ def store_user_bets_predictions_from_ui(
     user_predictions_results = user_predictions.cte("user_predictions")
 
     games_today_count = (
-        db.query(Predictions).filter(Predictions.proper_date == local_datetime)
+        db.query(Predictions).filter(Predictions.game_date == local_datetime)
     ).count()
 
     if user_predictions_count >= games_today_count:
@@ -106,7 +106,7 @@ def store_user_bets_predictions_from_ui(
 
     check_todays_predictions = (
         db.query(Predictions)
-        .filter(Predictions.proper_date == local_datetime)
+        .filter(Predictions.game_date == local_datetime)
         .join(
             user_predictions_results,
             (Predictions.home_team == user_predictions_results.c.home_team),

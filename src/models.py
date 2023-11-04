@@ -153,7 +153,7 @@ class Predictions(Base):
     __tablename__ = "nba_predictions"
     __table_args__ = (PrimaryKeyConstraint("home_team"),)
 
-    proper_date: date = Column(Date, nullable=True)
+    game_date: date = Column(Date, nullable=True)
     home_team: str = Column(String, nullable=False)
     home_team_odds: int = Column(Integer, nullable=False)
     home_team_predicted_win_pct: float = Column(Float, nullable=True)

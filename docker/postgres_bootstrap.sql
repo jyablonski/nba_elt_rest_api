@@ -171,7 +171,7 @@ VALUES (current_date, 'Monday', 16, '7:00 PM', 'Indiana Pacers', 'New York Knick
 
 DROP TABLE IF EXISTS nba_predictions;
 CREATE TABLE nba_predictions(
-    proper_date date,
+    game_date date,
     home_team text,
     home_team_odds double precision,
     home_team_predicted_win_pct numeric,
@@ -180,7 +180,7 @@ CREATE TABLE nba_predictions(
     away_team_predicted_win_pct numeric
 );
 
-INSERT INTO nba_predictions (proper_date, home_team, home_team_odds, home_team_predicted_win_pct, away_team, away_team_odds, away_team_predicted_win_pct)
+INSERT INTO nba_predictions (game_date, home_team, home_team_odds, home_team_predicted_win_pct, away_team, away_team_odds, away_team_predicted_win_pct)
 VALUES (date(current_timestamp - interval '5 hour'), 'Indiana Pacers', '+200', 0.247, 'San Antonio Spurs', '-160', 0.753),
        (date(current_timestamp - interval '5 hour'), 'Houston Rockets', '-140', 0.194, 'Memphis Grizzlies', '+180', 0.806),
        (date(current_timestamp - interval '5 hour'), 'Golden State Warriors', '-150', 0.712, 'Boston Celtics', '180', 0.288),

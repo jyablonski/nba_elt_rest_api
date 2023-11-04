@@ -161,7 +161,7 @@ class ScheduleBase(BaseModel):
 
 
 class PredictionsBase(BaseModel):
-    proper_date: date
+    game_date: date
     home_team: str
     home_team_odds: int
     home_team_predicted_win_pct: float
