@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 import os
 
 from jose import jwt
@@ -14,10 +14,10 @@ from src.security import create_access_token
 
 def test_generate_access_token():
     username = "jyablonski"
-    access_token_expires = timedelta(minutes=60)
+    access_token_expires = datetime.now(timezone.utc) + timedelta(days=30)
 
     access_token = create_access_token(
-        data={"sub": username}, expires_delta=access_token_expires
+        data={"sub": username}, expires=access_token_expires
     )
 
     # jwt tokens have 3 separate "blocks", separated by 2 periods
@@ -27,10 +27,10 @@ def test_generate_access_token():
 
 def test_decode_access_token():
     username = "big_stupid_jwt_user"
-    access_token_expires = timedelta(days=30)
+    access_token_expires = datetime.now(timezone.utc) + timedelta(days=30)
 
     access_token = create_access_token(
-        data={"sub": username}, expires_delta=access_token_expires
+        data={"sub": username}, expires=access_token_expires
     )
 
     payload = jwt.decode(access_token, os.environ.get("API_KEY"), algorithms=["HS256"])

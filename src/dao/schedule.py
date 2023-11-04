@@ -8,8 +8,8 @@ from src.models import Schedule
 def get_schedule(db: Session):
     return (
         db.query(
-            Schedule.date,
-            Schedule.day,
+            Schedule.game_date,
+            Schedule.day_name,
             Schedule.start_time,
             Schedule.avg_team_rank,
             Schedule.home_team,
@@ -17,6 +17,6 @@ def get_schedule(db: Session):
             Schedule.away_team,
             Schedule.away_moneyline_raw,
         )
-        .filter(Schedule.date == datetime.utcnow().date())
+        .filter(Schedule.game_date == datetime.utcnow().date())
         .all()
     )

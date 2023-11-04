@@ -14,6 +14,7 @@
             <th scope="col">Total Predictions</th>
             <th scope="col">% Correct</th>
             <th scope="col">Total Profit</th>
+            <th scope="col">Total TBD Predictions</th>
          </tr>
       </thead>
       <tbody>
@@ -22,6 +23,7 @@
             <td> {{ past_predictions_total_count }} </td>
             <td> {{ (past_predictions_pct_count * 100)|round(3) }}% </td>
             <td> $ {{ past_predictions_bet_profit }} </td>
+            <td> {{ current_predictions_total_count }} </td>
             </th>
          </tr>
       </tbody>
@@ -31,7 +33,7 @@
    <br>
    <br>
 
-   <table class="table">
+   <table class="bets-table">
       <thead>
          <tr>
             <th scope="col">Game Date</th>
@@ -71,11 +73,15 @@
    <br>
    <br>
    {% if past_predictions_total_count > 0 %}
-   <form id="download-button" method="post" action="/past_bets"
-      style="font-size: 18pt; height: 35px; width:1000px; top: 80%;">
+   <form id="download-button" class="bets-download" method="post" action="/past_bets">
       <button type="submit"">Download</button>
-      </form>
+   </form>
    {% endif %}
-
+   <br>
+   <br>
+   <br>
+   <br>
+   <br>
+   <br>
 </center>
 {% endblock content %}

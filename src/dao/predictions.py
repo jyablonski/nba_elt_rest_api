@@ -9,7 +9,5 @@ def get_predictions(db: Session):
     local_datetime = (datetime.utcnow() - timedelta(hours=5)).date()
 
     return (
-        db.query(Predictions)
-        .filter(Predictions.proper_date == str(local_datetime))
-        .all()
+        db.query(Predictions).filter(Predictions.game_date == str(local_datetime)).all()
     )

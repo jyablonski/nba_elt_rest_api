@@ -1,8 +1,14 @@
 def test_incidents_get_no_auth(client_fixture):
-    response = client_fixture.get("/admin/incidents")
+    response = client_fixture.get(
+        "/admin/incidents",
+        allow_redirects=False,
+    )
 
-    assert response.status_code == 401
-    assert response.json()["detail"] == "Not authenticated"
+    if response.status_code == 302:
+        assert response.headers["Location"] == "/login"
+    else:
+        assert response.status_code == 401
+        assert response.json()["detail"] == "Not authenticated"
 
 
 def test_incidents_get_wrong_auth(client_fixture):

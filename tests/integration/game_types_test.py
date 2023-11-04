@@ -7,7 +7,7 @@ def test_game_types(client_fixture):
     assert data[0]["game_type"] == "20 pt Game"
     assert list(data[0].keys()) == [
         "game_type",
-        "type",
+        "season_type",
         "n",
         "explanation",
     ]

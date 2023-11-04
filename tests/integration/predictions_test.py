@@ -6,7 +6,7 @@ def test_predictions(client_fixture):
     assert len(data) == 6
     assert data[0]["home_team"] == "Indiana Pacers"
     assert list(data[0].keys()) == [
-        "proper_date",
+        "game_date",
         "home_team",
         "home_team_odds",
         "home_team_predicted_win_pct",

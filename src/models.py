@@ -31,34 +31,34 @@ class Standings(Base):
     last_10: str = Column(String, nullable=False)
 
 
-class Scorers(Base):
-    __tablename__ = "scorers"
+class PlayerStats(Base):
+    __tablename__ = "player_stats"
+    __table_args__ = (PrimaryKeyConstraint("player", "season_type"),)
 
-    player: str = Column(String, unique=True, primary_key=True, nullable=False)
+    player: str = Column(String, nullable=False)
+    season_type: str = Column(String, nullable=False)
     team: str = Column(String, unique=True, nullable=False)
     full_team: str = Column(String, unique=True, nullable=False)
-    season_avg_ppg: float = Column(Float)
-    playoffs_avg_ppg: float = Column(Float, nullable=True)
-    season_ts_percent: float = Column(Float)
-    playoffs_ts_percent: float = Column(Float, nullable=True)
+    avg_ppg: float = Column(Float)
+    avg_ts_percent: float = Column(Float)
+    avg_mvp_score: float = Column(Float)
+    avg_plus_minus: float = Column(Float)
     games_played: int = Column(Integer)
-    playoffs_games_played: int = Column(Integer, nullable=True)
     ppg_rank: int = Column(Integer)
-    top20_scorers: str = Column(String)
-    player_mvp_calc_adj: float = Column(Float)
+    scoring_category: str = Column(String)
     games_missed: int = Column(Integer)
     penalized_games_missed: int = Column(Integer)
-    top5_candidates: str = Column(String)
+    is_mvp_candidate: str = Column(String)
     mvp_rank: int = Column(Integer)
 
 
-class Team_Ratings(Base):
+class TeamRatings(Base):
     __tablename__ = "team_ratings"
 
     team: str = Column(String, unique=True, primary_key=True, nullable=False)
     team_acronym: str = Column(String, unique=True, nullable=False)
-    w: int = Column(Integer, nullable=False)
-    l: int = Column(Integer, nullable=False)  # noqa: E741
+    wins: int = Column(Integer, nullable=False)
+    losses: int = Column(Integer, nullable=False)  # noqa: E741
     ortg: float = Column(Float, nullable=False)
     drtg: float = Column(Float, nullable=False)
     nrtg: float = Column(Float, nullable=False)
@@ -68,7 +68,7 @@ class Team_Ratings(Base):
     ortg_rank: str = Column(String, nullable=False)
 
 
-class Twitter_Comments(Base):
+class TwitterComments(Base):
     __tablename__ = "twitter_comments"
     __table_args__ = (PrimaryKeyConstraint("scrape_ts", "username", "tweet"),)
 
@@ -84,7 +84,7 @@ class Twitter_Comments(Base):
     pos: float = Column(Float, nullable=False)
 
 
-class Reddit_Comments(Base):
+class RedditComments(Base):
     __tablename__ = "reddit_comments"
     __table_args__ = (PrimaryKeyConstraint("scrape_date", "author", "comment"),)
 
@@ -116,12 +116,12 @@ class Injuries(Base):
     team_active_protocols: int = Column(Integer, nullable=True)
 
 
-class Game_Types(Base):
+class GameTypes(Base):
     __tablename__ = "game_types"
-    __table_args__ = (PrimaryKeyConstraint("game_type", "type"),)
+    __table_args__ = (PrimaryKeyConstraint("game_type", "season_type"),)
 
     game_type: str = Column(String, nullable=False)
-    type: str = Column(String, nullable=False)
+    season_type: str = Column(String, nullable=False)
     n: int = Column(Integer, nullable=False)
     explanation: str = Column(String, nullable=False)
 
@@ -137,10 +137,10 @@ class Feedback(Base):
 
 class Schedule(Base):
     __tablename__ = "schedule"
-    __table_args__ = (PrimaryKeyConstraint("home_team", "date", "away_team"),)
+    __table_args__ = (PrimaryKeyConstraint("home_team", "game_date", "away_team"),)
 
-    date: date = Column(Date, nullable=True)
-    day: str = Column(String, nullable=True)
+    game_date: date = Column(Date, nullable=True)
+    day_name: str = Column(String, nullable=True)
     start_time: str = Column(String, nullable=True)
     avg_team_rank: int = Column(Integer, nullable=True)
     home_team: str = Column(String, nullable=True)
@@ -153,7 +153,7 @@ class Predictions(Base):
     __tablename__ = "nba_predictions"
     __table_args__ = (PrimaryKeyConstraint("home_team"),)
 
-    proper_date: date = Column(Date, nullable=True)
+    game_date: date = Column(Date, nullable=True)
     home_team: str = Column(String, nullable=False)
     home_team_odds: int = Column(Integer, nullable=False)
     home_team_predicted_win_pct: float = Column(Float, nullable=True)

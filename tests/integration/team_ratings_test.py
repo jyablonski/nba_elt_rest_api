@@ -8,8 +8,8 @@ def test_team_ratings(client_fixture):
     assert list(data[0].keys()) == [
         "team",
         "team_acronym",
-        "w",
-        "l",
+        "wins",
+        "losses",
         "ortg",
         "drtg",
         "nrtg",
@@ -31,8 +31,8 @@ def test_team_ratings_individual(client_fixture):
     assert list(data.keys()) == [
         "team",
         "team_acronym",
-        "w",
-        "l",
+        "wins",
+        "losses",
         "ortg",
         "drtg",
         "nrtg",
