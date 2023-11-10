@@ -107,6 +107,12 @@ VALUES (current_date, 'rattatatouille', 'Jokic putting up a dismal effort', 'Spu
         -0.6124, 0, 0.846, 0.154),
        (current_date, 'KaiserKaiba', 'NBA scriptwriters working overtime right now', null, 2829,
         'https://www.reddit.com/r/nba/comments/12c4y8y/nikola_jokic_disasterclass_against_houston_14/',
+        0, 0, 1, 0),
+       (current_date, 'babbabooie', 'nba dos dude', null, 3232,
+        'https://www.reddit.com/r/nba/',
+        0, 0, 1, 0),
+       (current_date, 'babbabooie_v2', 'nba dos v2 dude', null, 1111,
+        'https://www.reddit.com/r/nba/',
         0, 0, 1, 0);
 
 DROP TABLE IF EXISTS injuries;
