@@ -1,11 +1,10 @@
-from datetime import datetime, timedelta
+from datetime import datetime
 import os
 import secrets
 from typing import Annotated, Dict, List, Optional
 
 from fastapi import Depends, HTTPException, Request, status
 from fastapi.openapi.models import OAuthFlows as OAuthFlowsModel
-from fastapi.responses import RedirectResponse
 from fastapi.security import (
     HTTPBasic,
     OAuth2,

@@ -36,6 +36,7 @@ from src.routers import (
     twitter_comments,
     users,
 )
+from src.routers.ml import predict
 from src.utils import templates
 
 provider = TracerProvider()
@@ -59,6 +60,7 @@ app.include_router(injuries.router)
 app.include_router(login.router)
 app.include_router(past_bets.router)
 app.include_router(player_stats.router)
+app.include_router(predict.router)
 app.include_router(predictions.router)
 app.include_router(reddit_comments.router)
 app.include_router(schedule.router)
