@@ -214,3 +214,13 @@ class UserCreate(UserBase):
 class Token(BaseModel):
     access_token: str
     token_type: str
+
+
+class HousingPredictionBase(BaseModel):
+    state: str
+    square_ft: int
+    num_stories: int
+    qol_index: float
+
+    class Config:
+        from_attributes = True
