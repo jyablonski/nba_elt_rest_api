@@ -27,6 +27,7 @@ services:
       - RDS_SCHEMA=nba_prod
       - ENV_TYPE=docker_dev
       - API_KEY=bkmSqgcZMzR1JS3ek8gdNGyOrVefyVkK!
+      - OPENSEARCH_ENDPOINT=http://opensearch:9200
       - OTEL_EXPORTER_OTLP_ENDPOINT=https://api.honeycomb.io
       - OTEL_EXPORTER_OTLP_HEADERS=x-honeycomb-team=bababooiee
       - OTEL_SERVICE_NAME=rest-api-dev
@@ -45,6 +46,18 @@ services:
       - ${PWD}/templates:/home/appuser/templates
       - ${PWD}/config.yaml:/home/appuser/config.yaml
       # these are for fast local docker compose dev so changes will automatically make it into the app
+
+  opensearch:
+    image: opensearchproject/opensearch:latest
+    container_name: opensearch
+    environment:
+      - discovery.type=single-node
+      - plugins.security.disabled=true
+    ports:
+      - 9200:9200
+      - 9600:9600
+    networks: 
+      - api_network
 
   # prometheus:
   #   image: prom/prometheus

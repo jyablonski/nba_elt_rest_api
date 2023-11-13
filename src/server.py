@@ -1,3 +1,5 @@
+import os
+
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
@@ -14,6 +16,7 @@ from opentelemetry.sdk.trace.export import BatchSpanProcessor
 
 from src.models import Base
 from src.database import engine
+from src.logging import create_os_logger
 from src.routers import (
     admin,
     auth,
@@ -38,6 +41,11 @@ from src.routers import (
 )
 from src.routers.ml import predict
 from src.utils import templates
+
+logger = create_os_logger(
+    index=f"rest_api_{os.environ.get('ENV_TYPE')}",
+    host_endpoint=f"{os.environ.get('OPENSEARCH_ENDPOINT')}",
+)
 
 provider = TracerProvider()
 processor = BatchSpanProcessor(OTLPSpanExporter())
@@ -82,6 +90,7 @@ handler = Mangum(app)
 
 @app.get("/", response_class=HTMLResponse)
 def home(request: Request):
+    logger.info("hi")
     return templates.TemplateResponse("index.html", {"request": request})
 
 
