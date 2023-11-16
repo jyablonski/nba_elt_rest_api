@@ -88,6 +88,14 @@ RequestsInstrumentor().instrument()
 handler = Mangum(app)
 
 
+@app.on_event("startup")
+async def startup_event():
+    logger = create_os_logger(
+        index=f"rest_api_{os.environ.get('ENV_TYPE')}",
+        host_endpoint=f"{os.environ.get('OPENSEARCH_ENDPOINT')}",
+    )
+
+
 @app.get("/", response_class=HTMLResponse)
 def home(request: Request):
     logger.info("hi")
