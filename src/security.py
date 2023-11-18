@@ -31,12 +31,12 @@ class LoginForm:
         self.username: Optional[str] = None
         self.password: Optional[str] = None
 
-    async def load_data(self):
+    async def load_data(self) -> str | None:
         form = await self.request.form()
         self.username = form.get("username")
         self.password = form.get("password")
 
-    async def is_valid(self):
+    async def is_valid(self) -> bool:
         if not self.username:
             self.errors.append("Username is required")
         if not self.password or not len(self.password) > 0:
@@ -71,8 +71,8 @@ class OAuth2PasswordBearerWithCookie(OAuth2):
         super().__init__(flows=flows, scheme_name=scheme_name, auto_error=auto_error)
 
     async def __call__(self, request: Request) -> Optional[str]:
+        token: str = request.cookies.get("access_token")
         if "/login" in str(request.url):
-            token: str = request.cookies.get("access_token")
             if token is not None:
                 scheme, param = get_authorization_scheme_param(token)
                 return param
@@ -80,8 +80,6 @@ class OAuth2PasswordBearerWithCookie(OAuth2):
                 return None
 
         else:
-            token: str = request.cookies.get("access_token")
-
             scheme, param = get_authorization_scheme_param(token)
             if not token or scheme.lower() != "bearer":
                 if self.auto_error:
@@ -94,7 +92,7 @@ class OAuth2PasswordBearerWithCookie(OAuth2):
             return param
 
 
-def get_user(username: str, db: Session):
+def get_user(username: str, db: Session) -> Users | None:
     user = db.query(Users).filter(Users.username == username).first()
     return user
 
@@ -151,7 +149,9 @@ async def get_current_user_from_api_token(
         raise credentials_exception
 
 
-def authenticate_user(username: str, password: str, db: Session = Depends(get_db)):
+def authenticate_user(
+    username: str, password: str, db: Session = Depends(get_db)
+) -> str | bool:
     user = get_user(username, db)
 
     if not user:

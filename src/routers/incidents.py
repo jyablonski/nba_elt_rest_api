@@ -18,7 +18,7 @@ def get_incidents(
     request: Request,
     username: str = Depends(get_current_user_from_token),
     db: Session = Depends(get_db),
-):
+) -> HTMLResponse:
     if username != "jyablonski":
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
