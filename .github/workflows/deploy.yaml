@@ -60,7 +60,7 @@ jobs:
       - name: Slack Notification
         uses: rtCamp/action-slack-notify@v2
         env:
-          SLACK_COLOR: ${{ job.status }} # or a specific color like 'good' or '#ff00ff'
+          SLACK_COLOR: ${{ job.status }}
           SLACK_MESSAGE: 'REST API Deployed to Production'
           SLACK_TITLE: Deploy Pipeline
           SLACK_USERNAME: GitHub Actions
