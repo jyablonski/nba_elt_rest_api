@@ -3,10 +3,12 @@ name: Jacob's Discord Notification
 on:
   pull_request:
     types: [opened, reopened]
-
+  push:
+    branches:
+      - master
 
 jobs:
-  S3_Upload:
+  discord_notification:
     runs-on: ubuntu-latest
     steps:
       - name: Update Discord

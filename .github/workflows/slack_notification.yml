@@ -3,9 +3,12 @@ name: Jacob's Slack Notification
 on:
   pull_request:
     types: [opened, reopened]
+  push:
+    branches:
+      - master
 
 jobs:
-  build:
+  slack_notification:
     runs-on: ubuntu-latest
     steps:
     - name: Notify Slack On PR
