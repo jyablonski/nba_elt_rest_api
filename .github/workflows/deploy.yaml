@@ -51,3 +51,17 @@ jobs:
           aws_bucket: ${{ secrets.AWS_BUCKET }}
         run: |
           aws lambda update-function-code --function-name jacobs_rest_api_lambda --s3-bucket $aws_bucket --s3-key rest-api/lambda_function.zip
+
+  deploy-alert:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Slack Notification
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_COLOR: ${{ job.status }} # or a specific color like 'good' or '#ff00ff'
+          SLACK_MESSAGE: 'REST API Deployed to Production'
+          SLACK_TITLE: Deploy Pipeline
+          SLACK_USERNAME: GitHub Actions
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
