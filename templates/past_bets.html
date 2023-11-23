@@ -72,7 +72,7 @@
    <a href="/bets">Tonight's Bets Page</a>
    <br>
    <br>
-   {% if past_predictions_total_count > 0 %}
+   {% if past_predictions_total_count >= 0 %}
    <form id="download-button" class="bets-download" method="post" action="/past_bets">
       <button type="submit"">Download</button>
    </form>
