@@ -47,14 +47,15 @@ class LoginForm:
 
 
 def create_access_token(data: dict, expires: datetime):
-    data["exp"] = expires
-    encoded_jwt = jwt.encode(
-        data,
-        os.environ.get("API_KEY"),
-        algorithm="HS256",
-    )
+    if isinstance(data["username"], Users):
+        data["exp"] = expires
+        encoded_jwt = jwt.encode(
+            data,
+            os.environ.get("API_KEY"),
+            algorithm="HS256",
+        )
 
-    return encoded_jwt
+        return encoded_jwt
 
 
 class OAuth2PasswordBearerWithCookie(OAuth2):
@@ -151,7 +152,7 @@ async def get_current_user_from_api_token(
 
 def authenticate_user(
     username: str, password: str, db: Session = Depends(get_db)
-) -> str | bool:
+) -> Users | bool:
     user = get_user(username, db)
 
     if not user:

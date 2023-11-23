@@ -12,6 +12,7 @@ from sqlalchemy.orm import sessionmaker
 if TYPE_CHECKING:
     from typing import Generator
     from sqlalchemy import Engine
+    from sqlalchemy.orm import Session
 
 
 # pyyaml is fucking useless lmfao, how does this not come w/ the package ??????
@@ -61,7 +62,7 @@ def sql_connection(
     return connection
 
 
-def get_db() -> Generator[sessionmaker]:
+def get_db() -> Generator[Session, None, None]:
     db = SessionLocal()
     try:
         yield db

@@ -84,7 +84,7 @@ handler = Mangum(app)
 
 
 @app.on_event("startup")
-async def startup():
+async def startup() -> None:
     FastAPICache.init(InMemoryBackend())
 
 
