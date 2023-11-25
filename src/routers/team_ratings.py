@@ -1,8 +1,10 @@
 from typing import List
 
 from fastapi import APIRouter, Depends, HTTPException
+from fastapi_cache.decorator import cache
 from sqlalchemy.orm import Session
 
+from src.cache import key_builder_no_db
 from src.dao.team_ratings import get_team_ratings, get_team_ratings_by_team
 from src.database import get_db
 from src.schemas import TeamRatingsBase
@@ -12,13 +14,15 @@ router = APIRouter()
 
 
 @router.get("/team_ratings", response_model=List[TeamRatingsBase])
-def read_team_ratings(db: Session = Depends(get_db)):
+@cache(expire=900, key_builder=key_builder_no_db)
+async def read_team_ratings(db: Session = Depends(get_db)):
     team_ratings = get_team_ratings(db)
     return team_ratings
 
 
 @router.get("/team_ratings/{team}", response_model=TeamRatingsBase)
-def read_team_ratings_team(team: str, db: Session = Depends(get_db)):
+@cache(expire=900, key_builder=key_builder_no_db)
+async def read_team_ratings_team(team: str, db: Session = Depends(get_db)):
     team_ratings_team = get_team_ratings_by_team(db, team=team.upper())
     if team not in team_acronyms:
         raise HTTPException(

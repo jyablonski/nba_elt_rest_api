@@ -1,6 +1,9 @@
+from datetime import datetime
+
 from fastapi import FastAPI, Request
 from fastapi_cache import FastAPICache
 from fastapi_cache.backends.inmemory import InMemoryBackend
+from fastapi_cache.decorator import cache
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from mangum import Mangum
@@ -85,6 +88,12 @@ handler = Mangum(app)
 @app.on_event("startup")
 async def startup() -> None:
     FastAPICache.init(InMemoryBackend())
+
+
+@app.get("/test")
+@cache(expire=10)
+async def test():
+    return f"hello world {datetime.now()}"
 
 
 @app.get("/", response_class=HTMLResponse)

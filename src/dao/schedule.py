@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 
 from sqlalchemy.orm import Session
 
@@ -17,6 +17,6 @@ def get_schedule(db: Session):
             Schedule.away_team,
             Schedule.away_moneyline_raw,
         )
-        .filter(Schedule.game_date == datetime.utcnow().date())
+        .filter(Schedule.game_date == datetime.now(timezone.utc).date())
         .all()
     )
