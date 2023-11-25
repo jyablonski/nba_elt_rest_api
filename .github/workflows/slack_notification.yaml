@@ -3,9 +3,6 @@ name: Jacob's Slack Notification
 on:
   pull_request:
     types: [opened, reopened]
-  push:
-    branches:
-      - master
 
 jobs:
   slack_notification:
