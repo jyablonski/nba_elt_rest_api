@@ -11,7 +11,7 @@ from sqlalchemy.orm import sessionmaker
 
 if TYPE_CHECKING:
     from typing import Generator
-    from sqlalchemy import Engine
+    from sqlalchemy.engine import Engine
     from sqlalchemy.orm import Session
 
 

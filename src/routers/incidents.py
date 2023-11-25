@@ -53,7 +53,7 @@ def post_incidents(
 
 
 @router.post("/admin/incidents/create")
-def post_incidents(  # noqa: F811
+def post_incidents_create(  # noqa: F811
     request: Request,
     incident_name_form: str = Form(...),
     incident_description_form: str = Form(...),

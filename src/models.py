@@ -1,6 +1,3 @@
-from datetime import date, datetime
-
-# from psycopg2 import Date
 from sqlalchemy import (
     Column,
     Integer,

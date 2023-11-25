@@ -72,8 +72,10 @@ def test_bets_form_post(client_fixture):
                 "Dallas Mavericks",
                 "Chicago Bulls",
                 "Utah Jazz",
+                "Washington Wizards",
+                "Sacramento Kings",
             ],
-            "bet_amounts": [10, 20, 30, 40, 50, 60],
+            "bet_amounts": [10, 20, 30, 40, 50, 60, 70, 10],
         },
     )
 

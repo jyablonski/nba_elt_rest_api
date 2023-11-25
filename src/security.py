@@ -35,6 +35,7 @@ class LoginForm:
         form = await self.request.form()
         self.username = form.get("username")
         self.password = form.get("password")
+        return self.username
 
     async def is_valid(self) -> bool:
         if not self.username:
@@ -46,16 +47,15 @@ class LoginForm:
         return False
 
 
-def create_access_token(data: dict, expires: datetime):
-    if isinstance(data["username"], Users):
-        data["exp"] = expires
-        encoded_jwt = jwt.encode(
-            data,
-            os.environ.get("API_KEY"),
-            algorithm="HS256",
-        )
+def create_access_token(data: dict[str, str], expires: str | datetime):
+    data["exp"] = expires
+    encoded_jwt = jwt.encode(
+        claims=data,
+        key=os.environ.get("API_KEY"),
+        algorithm="HS256",
+    )
 
-        return encoded_jwt
+    return encoded_jwt
 
 
 class OAuth2PasswordBearerWithCookie(OAuth2):
@@ -129,7 +129,7 @@ def get_current_user_from_token(token: str = Depends(oauth2_scheme)) -> str:
 
 # this is the programmatic version to authenticate
 async def get_current_user_from_api_token(
-    token: Annotated[str, Depends(oauth2_scheme_og)]
+    token: Annotated[str | bytes, Depends(oauth2_scheme_og)]
 ) -> str:
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
