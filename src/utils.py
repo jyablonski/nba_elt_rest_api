@@ -4,8 +4,6 @@ import hashlib
 import io
 import random
 import string
-from typing import List
-
 
 from fastapi.templating import Jinja2Templates
 
@@ -62,7 +60,7 @@ def generate_hash_password(password: str, salt: str) -> str:
 
 # avoiding pandas
 def generate_csv(
-    sqlalchemy_query: List[UserPastPredictions], headers: List[str], report_date: date
+    sqlalchemy_query: list[UserPastPredictions], headers: list[str], report_date: date
 ) -> str:
     output = io.StringIO()
     writer = csv.writer(output)
