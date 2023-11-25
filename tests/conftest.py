@@ -1,7 +1,5 @@
 import os
-from typing import Any, Generator
 
-from httpx import AsyncClient
 from fastapi.testclient import TestClient
 from fastapi_cache import FastAPICache
 from fastapi_cache.backends.inmemory import InMemoryBackend
@@ -19,15 +17,9 @@ def cache_setup():
 @pytest.fixture()
 def client_fixture():
     os.environ["API_KEY"] = "aaaa"
-    # FastAPICache.init(InMemoryBackend())
     client = TestClient(app)
 
     yield client
-
-
-# @pytest.fixture(autouse=True)
-# def client_cache_init():
-#     FastAPICache.init(InMemoryBackend(), prefix="fastapi-cache")
 
 
 @pytest.fixture()

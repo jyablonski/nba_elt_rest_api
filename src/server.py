@@ -1,9 +1,6 @@
-from datetime import datetime
-
 from fastapi import FastAPI, Request
 from fastapi_cache import FastAPICache
 from fastapi_cache.backends.inmemory import InMemoryBackend
-from fastapi_cache.decorator import cache
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from mangum import Mangum
