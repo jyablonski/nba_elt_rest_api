@@ -90,12 +90,6 @@ async def startup() -> None:
     FastAPICache.init(InMemoryBackend())
 
 
-@app.get("/test")
-@cache(expire=10)
-async def test():
-    return f"hello world {datetime.now()}"
-
-
 @app.get("/", response_class=HTMLResponse)
 def home(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
