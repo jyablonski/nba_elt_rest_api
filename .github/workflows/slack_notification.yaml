@@ -5,7 +5,7 @@ on:
     types: [opened, reopened]
 
 jobs:
-  build:
+  slack_notification:
     runs-on: ubuntu-latest
     steps:
     - name: Notify Slack On PR

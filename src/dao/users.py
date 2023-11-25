@@ -39,7 +39,7 @@ def update_user(db: Session, user_record: UserBase, update_user_request: UserBas
     return updated_user
 
 
-def delete_user(db: Session, user_record: UserBase):
+def delete_user(db: Session, user_record: Users) -> str:
     db.delete(user_record)
     db.commit()
     return f"Username {user_record.username} Successfully deleted!"

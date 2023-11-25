@@ -18,7 +18,7 @@ def get_incidents(
     request: Request,
     username: str = Depends(get_current_user_from_token),
     db: Session = Depends(get_db),
-):
+) -> HTMLResponse:
     if username != "jyablonski":
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
@@ -53,7 +53,7 @@ def post_incidents(
 
 
 @router.post("/admin/incidents/create")
-def post_incidents(  # noqa: F811
+def post_incidents_create(  # noqa: F811
     request: Request,
     incident_name_form: str = Form(...),
     incident_description_form: str = Form(...),

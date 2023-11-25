@@ -57,9 +57,7 @@ def delete_users(
     username: str,
     token_user: str = Depends(get_current_user_from_api_token),
     db: Session = Depends(get_db),
-):
-    print(f"username in delete users endpoint is {username}")
-    print(f"token user is delete users endpoint is {token_user}")
+) -> str:
     if username != token_user:
         raise HTTPException(
             status_code=401,
@@ -69,4 +67,11 @@ def delete_users(
 
     user_record = db.query(Users).filter(Users.username == username).first()
 
-    return delete_user(db, user_record)
+    if user_record:
+        return delete_user(db=db, user_record=user_record)
+    else:
+        raise HTTPException(
+            status_code=401,
+            detail="Unknown Error Occurred; Please Reach out to an Admin",
+            headers={"WWW-Authenticate": "Bearer"},
+        )

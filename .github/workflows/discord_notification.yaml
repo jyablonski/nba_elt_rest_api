@@ -4,9 +4,8 @@ on:
   pull_request:
     types: [opened, reopened]
 
-
 jobs:
-  S3_Upload:
+  discord_notification:
     runs-on: ubuntu-latest
     steps:
       - name: Update Discord

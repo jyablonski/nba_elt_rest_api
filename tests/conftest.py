@@ -1,10 +1,17 @@
 import os
 
 from fastapi.testclient import TestClient
+from fastapi_cache import FastAPICache
+from fastapi_cache.backends.inmemory import InMemoryBackend
 import pytest
 
 from src.database import load_yaml_with_env
 from src.server import app
+
+
+@pytest.fixture(autouse=True)
+def cache_setup():
+    FastAPICache.init(InMemoryBackend())
 
 
 @pytest.fixture()

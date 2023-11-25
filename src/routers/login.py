@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from datetime import datetime
 from typing import Optional
 
@@ -31,7 +33,7 @@ def login(
 
 
 @router.post("/login")
-async def login(request: Request, db: Session = Depends(get_db)):  # noqa: F811
+async def login_post(request: Request, db: Session = Depends(get_db)):  # noqa: F811
     form = LoginForm(request)
     await form.load_data()
 

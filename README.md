@@ -1,7 +1,7 @@
 # REST API for NBA ELT Project
 ![Tests](https://github.com/jyablonski/nba_elt_rest_api/actions/workflows/test.yml/badge.svg) ![Deployment](https://github.com/jyablonski/nba_elt_rest_api/actions/workflows/deploy.yml/badge.svg) [![Coverage Status](https://coveralls.io/repos/github/jyablonski/nba_elt_rest_api/badge.svg?branch=master)](https://coveralls.io/github/jyablonski/nba_elt_rest_api?branch=master) ![Code Style](https://img.shields.io/badge/code%20style-black-000000.svg)
 
-Version: 1.6.4
+Version: 1.7.0
 
 ## [API](https://api.jyablonski.dev)
 
@@ -23,11 +23,6 @@ When finished run `make down`.
 To run tests locally, run `make test`.
 
 The same Test Suite is ran after every commit on a PR via GitHub Actions.
-
-## Contributing
-Please be sure that all PRs are Squash Merged into `master`
-
-To bump the Repo, run `make bump-patch` (or `make bump-minor` / `make bump-major`) which bumps the Version Number in `.bumpversion.cfg` as well as `templates/base.html`.
 
 ## Project
 ![nba_pipeline_diagram](https://github.com/jyablonski/nba_elt_rest_api/assets/16946556/12d00fcf-1d5a-4ced-a392-b7a8de239ff2)

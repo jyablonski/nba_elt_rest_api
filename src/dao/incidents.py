@@ -1,9 +1,15 @@
+from __future__ import annotations
+
+
 from datetime import datetime
+from typing import TYPE_CHECKING
 
 from sqlalchemy.orm import Session
-from typing import List
 
 from src.models import Incidents
+
+if TYPE_CHECKING:
+    from sqlalchemy.orm import Query
 
 
 # incidents
@@ -30,7 +36,7 @@ def create_incident(
     return record
 
 
-def update_incident(db: Session, incidents_list: List[int]):
+def update_incident(db: Session, incidents_list: list[int]) -> Query[Incidents]:
     modified_at = datetime.utcnow()
 
     incidents = db.query(Incidents).order_by(Incidents.incident_name)

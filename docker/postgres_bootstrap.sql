@@ -192,7 +192,9 @@ VALUES (date(current_timestamp - interval '5 hour'), 'Indiana Pacers', '+200', 0
        (date(current_timestamp - interval '5 hour'), 'Golden State Warriors', '-150', 0.712, 'Boston Celtics', '180', 0.288),
        (date(current_timestamp - interval '5 hour'), 'Dallas Mavericks', '-140', 0.194, 'Detroit Pistons', '+180', 0.806),
        (date(current_timestamp - interval '5 hour'), 'Chicago Bulls', '+200', 0.355, 'Charlotte Hornets', '-160', 0.645),
-       (date(current_timestamp - interval '5 hour'), 'Utah Jazz', '+320', 0.194, 'Phoenix Suns', '-250', 0.806);
+       (date(current_timestamp - interval '5 hour'), 'Utah Jazz', '+320', 0.194, 'Phoenix Suns', '-250', 0.806),
+       (date(current_timestamp - interval '5 hour'), 'Washington Wizards', '+250', 0.323, 'Philadelphia 76ers', '-320', 0.677),
+       (date(current_timestamp - interval '5 hour'), 'Portland Trail Blazers', '-165', 0.194, 'Sacramento Kings', '+210', 0.806);
 
 
 DROP TABLE IF EXISTS transactions;
