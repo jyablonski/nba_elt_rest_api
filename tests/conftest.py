@@ -6,6 +6,7 @@ from fastapi_cache.backends.inmemory import InMemoryBackend
 import pytest
 
 from src.database import load_yaml_with_env
+from src.security import OAuth2PasswordBearerWithCookie
 from src.server import app
 
 
@@ -31,3 +32,11 @@ def config_fixture():
     config = load_yaml_with_env("tests/fixtures/config.yaml")
 
     return config
+
+
+@pytest.fixture()
+def oauth2_password_bearer():
+    oauth2 = OAuth2PasswordBearerWithCookie(
+        tokenUrl="/token", scopes={"read": "Read access"}
+    )
+    return oauth2
