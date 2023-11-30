@@ -1,7 +1,7 @@
 from datetime import datetime
 import os
 import secrets
-from typing import Annotated, Optional
+from typing import Annotated
 
 from fastapi import Depends, HTTPException, Request, status
 from fastapi.openapi.models import OAuthFlows as OAuthFlowsModel
