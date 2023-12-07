@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "nba-elt-rest-api"
-version = "1.7.0"
+version = "1.7.1"
 description = "REST API Project"
 authors = ["jyablonski9 <jyablonski9@gmail.com>"]
 readme = "README.md"
@@ -39,7 +39,7 @@ pytest-asyncio = "^0.21.1"
 
 [tool.poetry.group.local_dev.dependencies]
 ipykernel = "^6.25.2"
-mypy = "^1.7.0"
+mypy = "^1.7.1"
 
 [tool.mypy]
 files = ["."]
