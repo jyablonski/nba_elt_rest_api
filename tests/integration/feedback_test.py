@@ -42,7 +42,7 @@ def test_feedback_missing_value(client_fixture):
                 "loc": ["body", "user_feedback"],
                 "msg": "Field required",
                 "input": None,
-                "url": "https://errors.pydantic.dev/2.4/v/missing",
+                "url": "https://errors.pydantic.dev/2.5/v/missing",
             }
         ]
     }
