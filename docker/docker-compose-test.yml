@@ -46,7 +46,7 @@ services:
       - ${PWD}/config.yaml:/home/appuser/config.yaml
       - ${PWD}/pytest.ini:/home/appuser/pytest.ini
       # these are for fast local docker compose dev so changes will automatically make it into the app
-    command: python3 -m pytest -v
+    command: python3 -m pytest -vv
 
 
 networks:

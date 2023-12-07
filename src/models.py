@@ -214,6 +214,7 @@ class UserPastPredictions(Base):
     bet_amount = Column(Integer, nullable=False)
     created_at = Column(TIMESTAMP, nullable=False)
     actual_winner = Column(String, nullable=False)
+    selected_winner_odds = Column(Integer, nullable=False)
     is_correct_prediction = Column(Integer, nullable=False)
     bet_profit = Column(Integer, nullable=False)
 
