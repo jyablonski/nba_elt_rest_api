@@ -5,7 +5,7 @@ from typing import Any, TYPE_CHECKING
 import yaml
 
 from opentelemetry.instrumentation.sqlalchemy import SQLAlchemyInstrumentor
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, text
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
@@ -36,7 +36,7 @@ def sql_connection(
 ) -> Engine:
     """
     SQL Connection function connecting to my postgres db with a specific schema
-    For GraphQL Project use `nba_prod` for schema
+    For REST API Project use `nba_prod` for schema
 
     Args:
         user (str): Database User
@@ -60,6 +60,20 @@ def sql_connection(
     )
     print(f"SQL Engine created for {schema}")
     return connection
+
+
+def run_query(query: str, session: Session) -> list[tuple]:
+    """
+    Small Wrapper Function to run Raw SQL Queries
+    Args:
+        query (str): The raw SQL query to be executed.
+            (ex. select * from game_types limit 10)
+        session (Session): The SQLAlchemy database session.
+    Returns:
+        list[tuple]: A list of tuples representing the query results.
+    """
+    result = session.execute(text(query))
+    return result
 
 
 def get_db() -> Generator[Session, None, None]:
