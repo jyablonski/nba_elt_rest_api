@@ -65,10 +65,13 @@ def sql_connection(
 def run_query(query: str, session: Session) -> list[tuple]:
     """
     Small Wrapper Function to run Raw SQL Queries
+
     Args:
         query (str): The raw SQL query to be executed.
             (ex. select * from game_types limit 10)
+
         session (Session): The SQLAlchemy database session.
+
     Returns:
         list[tuple]: A list of tuples representing the query results.
     """
