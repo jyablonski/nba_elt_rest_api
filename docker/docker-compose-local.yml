@@ -20,12 +20,12 @@ services:
         dockerfile: docker/Dockerfile
     image: nba_elt_rest_api_local
     environment:
-      - IP=postgres
-      - RDS_USER=postgres
-      - RDS_PW=postgres
-      - RDS_DB=postgres
+      - IP=rds.jyablonski.dev
+      - RDS_USER=jacob1
+      - RDS_PW=jacobspass123
+      - RDS_DB=jacob_db
       - RDS_SCHEMA=nba_prod
-      - ENV_TYPE=docker_dev
+      - ENV_TYPE=prod
       - API_KEY=bkmSqgcZMzR1JS3ek8gdNGyOrVefyVkK!
       - OTEL_EXPORTER_OTLP_ENDPOINT=https://api.honeycomb.io
       - OTEL_EXPORTER_OTLP_HEADERS=x-honeycomb-team=bababooiee

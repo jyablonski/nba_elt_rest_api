@@ -389,3 +389,13 @@ li {
     width: 100%;
     font-size: 18pt !important;
 }
+
+.table-container:not(.navfoot) {
+    max-height: 800px;
+    overflow-y: auto;
+    margin-top: 200px;
+}
+
+.header-container {
+    text-align: center;
+}
