@@ -173,7 +173,9 @@ CREATE TABLE schedule(
 
 INSERT INTO schedule (game_date, day_name, avg_team_rank, start_time, home_team, away_team, home_moneyline_raw, away_moneyline_raw)
 VALUES (current_date, 'Monday', 16, '7:00 PM', 'Indiana Pacers', 'New York Knicks', 300, -365),
-       (current_date, 'Monday', 20, '7:00 PM', 'New York Knicks', 'Indiana Pacers', -365, 300);
+       (current_date, 'Monday', 20, '7:00 PM', 'New York Knicks', 'Indiana Pacers', -365, 300),
+       (current_date - interval '1 day', 'Sunday', 4, '7:00 PM', 'Philadelphia 76ers', 'Milwaukee Bucks', -125, 110),
+       (current_date - interval '1 day', 'Sunday', 13, '7:00 PM', 'Golden State Warriors', 'Miami Heat', -140, 130);
 
 DROP TABLE IF EXISTS nba_predictions;
 CREATE TABLE nba_predictions(
