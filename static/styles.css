@@ -392,11 +392,25 @@ li {
 
 
 .table-container:not(.navfoot) {
-    max-height: 800px;
-    overflow-y: auto;
-    margin-top: 200px;
+    overflow: auto;
+    margin-top: 20px;
+    max-height: 500px;
 }
 
 .header-container {
     text-align: center;
+}
+
+/* Add styles for the links container */
+.links-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+/* Center the content within the links container */
+.links-container>* {
+    margin: 10px;
+    /* Adjust the margin as needed */
 }
