@@ -16,8 +16,6 @@ def read_schedule(db: Session = Depends(get_db)):
     return schedule
 
 
-# couldnt cache here it kept failing, something to do with
-# the datetime stuff i think
 @router.get("/yesterdays_schedule", response_model=list[ScheduleBase])
 def read_schedule(db: Session = Depends(get_db)):
     schedule = get_yesterdays_schedule(db)
