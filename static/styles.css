@@ -414,3 +414,18 @@ li {
     margin: 10px;
     /* Adjust the margin as needed */
 }
+
+#logoutForm input[type="submit"] {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 200px;
+    background-color: #573b8a33;
+    
+}
+
+
+#logoutForm input[type="submit"]:hover {
+    background-color: #6d44b8; /* Change the hover color as desired */
+}

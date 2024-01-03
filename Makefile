@@ -72,3 +72,12 @@ follow-logs:
 test:
 	@docker compose -f docker/docker-compose-test.yml down
 	@docker compose -f docker/docker-compose-test.yml up --exit-code-from rest_api_test_runner
+
+.PHONY: lint
+lint:
+	@echo Checking Black --------------
+	@poetry run black src/
+	@echo Checking Ruff ---------------
+	@poetry run ruff check .
+	@echo Checking MyPy ---------------
+	@poetry run mypy src/
