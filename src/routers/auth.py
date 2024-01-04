@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta, timezone
 
 from fastapi import APIRouter, Depends, HTTPException, Response, status
+from fastapi.responses import RedirectResponse
 from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 
@@ -45,3 +46,12 @@ def login_for_access_token(
         expires=access_token_expires,
     )
     return {"access_token": access_token, "token_type": "bearer"}
+
+
+# this only works with 302 found lol, if you change it to 307 it fucks a bunch of a shit up
+# wild.
+@router.post("/logout")
+async def logout(response: Response):
+    response = RedirectResponse(url="/login", status_code=status.HTTP_302_FOUND)
+    response.delete_cookie("access_token")
+    return response

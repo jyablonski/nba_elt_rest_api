@@ -17,6 +17,6 @@ def read_schedule(db: Session = Depends(get_db)):
 
 
 @router.get("/yesterdays_schedule", response_model=list[ScheduleBase])
-def read_schedule(db: Session = Depends(get_db)):
+def read_yesterdays_schedule(db: Session = Depends(get_db)):
     schedule = get_yesterdays_schedule(db)
     return schedule

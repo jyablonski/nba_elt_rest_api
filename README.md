@@ -1,7 +1,7 @@
 # REST API for NBA ELT Project
 ![Tests](https://github.com/jyablonski/nba_elt_rest_api/actions/workflows/test.yaml/badge.svg) ![Deployment](https://github.com/jyablonski/nba_elt_rest_api/actions/workflows/deploy.yaml/badge.svg) [![Coverage Status](https://coveralls.io/repos/github/jyablonski/nba_elt_rest_api/badge.svg?branch=master)](https://coveralls.io/github/jyablonski/nba_elt_rest_api?branch=master) ![Code Style](https://img.shields.io/badge/code%20style-black-000000.svg)
 
-Version: 1.7.3
+Version: 1.7.4
 
 ## [API](https://api.jyablonski.dev)
 
@@ -16,6 +16,10 @@ The REST API has the following functionalities:
 Clone the Repo & run `make up` which spins up the App locally served [here](http://localhost:8080/) using 2 Docker Containers:
 - Postgres Database
 - FastAPI Server
+
+If you wish to login to a User locally with bootstrapped data ready to go, a set of Credentials are listed below:
+- Username: `test1`
+- Password: `password`
 
 When finished run `make down`.
 

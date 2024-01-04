@@ -46,7 +46,14 @@
         {% endif %}
 
       </div>
-      <!-- here -->
+      <br>
+      <div>
+        <!-- Logout link triggers a POST request to /logout -->
+        <form id="logoutForm" action="/logout" method="post">
+          <input type="submit" value="Logout" class="form-control">
+        </form>
+      </div>
+
     </center>
     {% endif %}
 
