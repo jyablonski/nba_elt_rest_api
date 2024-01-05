@@ -64,6 +64,16 @@ def test_schedule_date(client_fixture):
     assert data[0]["game_date"] == date
 
 
+def test_schedule_date_no_data(client_fixture):
+    date = "2024-01-01"
+    response = client_fixture.get(f"/schedule?date={date}")
+    data = response.json()
+
+    assert response.status_code == 200
+    assert len(data) == 0
+    assert response.text == "[]"
+
+
 def test_schedule_date_fail(client_fixture):
     bad_date = "2023-01-01x"
     response = client_fixture.get(f"/schedule?date={bad_date}")
