@@ -24,7 +24,7 @@ def get_yesterdays_schedule(db: Session):
     )
 
 
-def get_schedule_for_date(db: Session, target_date: date):
+def get_schedule_for_date(db: Session, target_date: date | None = None):
     if not target_date:
         target_date = datetime.now(timezone.utc).date()
 
