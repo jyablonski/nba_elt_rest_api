@@ -1,0 +1,8 @@
+# configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: rest-api-config
+data:
+  config.yaml: |
+    # Add your config.yaml content here

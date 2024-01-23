@@ -171,6 +171,8 @@ input[type="number"] {
 }
 
 body {
+    justify-content: center;
+    align-items: center;
     background-color: #0f1218;
     flex-wrap: no-wrap;
     min-height: 80vh;
@@ -256,18 +258,21 @@ input {
     margin-top: 0px;
     font-size: 14px;
     font-weight: 300;
+    border: 2px solid rgba(255, 255, 255, .2);
+    border-radius: 40px;
+    color: #fff;
 }
 
 .web-form-input {
     display: block;
     height: 50px;
     width: 100%;
-    color: white !important;
+    color: #fff;
     background-color: rgba(8, 3, 3, 0.07);
-    border-radius: 3px;
+    border-radius: 12px;
     padding: 10px;
     margin-top: 8px;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 300;
 }
 
