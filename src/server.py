@@ -11,11 +11,15 @@ from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExport
 from opentelemetry.sdk.trace import TracerProvider
 from opentelemetry.sdk.trace.export import BatchSpanProcessor
 
+# from starlette.middleware.base import BaseHTTPMiddleware
 # from prometheus_fastapi_instrumentator import Instrumentator
 # if i ever swap to ecs ;-)
 
 from src.models import Base
 from src.database import engine
+
+# from src.logger import logger
+# from src.middleware import log_middleware
 from src.routers.admin import router as admin_router
 from src.routers.auth import router as auth_router
 from src.routers.bets import router as bets_router
@@ -50,6 +54,7 @@ tracer = trace.get_tracer(__name__)
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
+# app.add_middleware(BaseHTTPMiddleware, dispatch=log_middleware)
 app.include_router(admin_router)
 app.include_router(auth_router)
 app.include_router(bets_router)

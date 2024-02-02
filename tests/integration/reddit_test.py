@@ -3,7 +3,7 @@ def test_reddit_comments(client_fixture):
     data = response.json()
 
     assert response.status_code == 200
-    assert len(data) == 4
+    assert len(data) == 250
     assert data[0]["author"] == "rattatatouille"
     assert list(data[0].keys()) == [
         "scrape_date",
@@ -33,8 +33,8 @@ def test_reddit_comments_filter(client_fixture):
     data = response.json()
 
     assert response.status_code == 200
-    assert len(data) == 1
-    assert data[0]["author"] == "rattatatouille"
+    assert len(data) == 3
+    assert data[0]["author"] == "BowlWinHoosiers"
 
 
 def test_reddit_comments_filter_case_insensitive(client_fixture):
@@ -42,9 +42,9 @@ def test_reddit_comments_filter_case_insensitive(client_fixture):
     data = response.json()
 
     assert response.status_code == 200
-    assert len(data) == 3
-    assert data[0]["author"] == "KaiserKaiba"
-    assert data[0]["comment"] == "NBA scriptwriters working overtime right now"
+    assert len(data) == 54
+    assert data[0]["author"] == "goingtothegreek"
+    assert data[0]["comment"] == "I fine the NBA $50k for lying on the L2M, checkmate"
 
 
 def test_reddit_comments_multiple_conditions(client_fixture):
@@ -53,5 +53,29 @@ def test_reddit_comments_multiple_conditions(client_fixture):
 
     assert response.status_code == 200
     assert len(data) == 2
-    assert data[0]["author"] == "KaiserKaiba"
-    assert data[0]["comment"] == "NBA scriptwriters working overtime right now"
+    assert data[0]["author"] == "goingtothegreek"
+    assert data[0]["comment"] == "I fine the NBA $50k for lying on the L2M, checkmate"
+
+
+def test_reddit_comments_pagination(client_fixture):
+    response1 = client_fixture.get("/reddit_comments?page=1&filter=as&limit=10")
+    data1 = response1.json()
+
+    response2 = client_fixture.get("/reddit_comments?page=2&filter=as&limit=10")
+    data2 = response2.json()
+
+    assert response1.status_code == 200
+    assert len(data1) == 10
+    assert data1[0]["author"] == "MVPiid"
+    assert (
+        data1[0]["comment"]
+        == "ngl i read this as these unnamed Sixers org people blaming Embiid for letting it get to him. Either way this isn't something the sixers should be putting out"
+    )
+
+    assert response2.status_code == 200
+    assert len(data2) == 10
+    assert data2[1]["author"] == "Pizzaplan3tman"
+    assert (
+        data2[1]["comment"]
+        == "Reminds me of when LeBron set a pick for the Heat during a pre season game his second time back as a Cavalier. Was absolutely hilarious"
+    )
