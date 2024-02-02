@@ -26,6 +26,11 @@ Documentation on various Endpoints, Pages, and Functionality provided by the API
 
 ### Reddit Comments
 - The Reddit Comments Endpoint is used to showcase recent Reddit comments from https://www.reddit.com/r/nba
+  - Examples of how to use the Endpoint w/ filtering & pagination are below:
+    - Base Endpoint: `https://api.jyablonski.dev/reddit_comments`
+    - Filter Example: `https://api.jyablonski.dev/reddit_comments?filter=lebron`
+    - Pagination Example: `https://api.jyablonski.dev/reddit_comments?page=1`
+    - Pagination + Filter Example: `https://api.jyablonski.dev/reddit_comments?page=1&filter=lebron`
 
 ### Standings
 - The Standings Endpoint is used to show NBA Team Standings, Win Loss Records, and a Total Count of Active Injuries per Team
