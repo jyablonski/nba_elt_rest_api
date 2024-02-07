@@ -30,6 +30,7 @@ from src.routers.help_page import router as help_page_router
 from src.routers.incidents import router as incidents_router
 from src.routers.injuries import router as injuries_router
 from src.routers.login import router as login_router
+from src.routers.health import router as health_router
 from src.routers.past_bets import router as past_bets_router
 from src.routers.player_stats import router as player_stats_router
 from src.routers.predictions import router as predictions_router
@@ -66,6 +67,7 @@ app.include_router(housing_fake_router)
 app.include_router(incidents_router)
 app.include_router(injuries_router)
 app.include_router(login_router)
+app.include_router(health_router)
 app.include_router(past_bets_router)
 app.include_router(player_stats_router)
 app.include_router(predictions_router)
