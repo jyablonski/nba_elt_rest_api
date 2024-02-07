@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "nba-elt-rest-api"
-version = "1.7.6"
+version = "1.7.7"
 description = "REST API Project"
 authors = ["jyablonski9 <jyablonski9@gmail.com>"]
 readme = "README.md"
