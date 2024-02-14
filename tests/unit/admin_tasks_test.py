@@ -1,10 +1,15 @@
+from __future__ import annotations
+
+
 import os
-from unittest.mock import MagicMock
+from typing import TYPE_CHECKING
 
 import pytest
 
-# Import the function to be tested
 from src.admin_tasks import invoke_restart_dashboard
+
+if TYPE_CHECKING:
+    from pytest_mock import MockerFixture
 
 
 @pytest.mark.parametrize(
@@ -33,7 +38,9 @@ from src.admin_tasks import invoke_restart_dashboard
         ),
     ],
 )
-def test_invoke_restart_dashboard(env_type, expected_response, mocker):
+def test_invoke_restart_dashboard(
+    env_type: str, expected_response: dict[str, str | int], mocker: MockerFixture
+):
     os.environ["ENV_TYPE"] = env_type
     mocker.patch("src.admin_tasks.boto3.client").return_value = 1
     mocker.patch("src.admin_tasks.boto3.client").return_value.invoke.return_value = {
