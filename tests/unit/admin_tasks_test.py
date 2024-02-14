@@ -47,8 +47,6 @@ def test_invoke_restart_dashboard(
         "StatusCode": expected_response["response_code"]
     }
 
-    # Call the function to be tested
     result = invoke_restart_dashboard()
 
-    # Assertions
     assert result == expected_response
