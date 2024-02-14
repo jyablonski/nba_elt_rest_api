@@ -427,10 +427,19 @@ li {
     cursor: pointer;
     margin-top: 200px;
     background-color: #573b8a33;
-    
+
 }
 
 
 #logoutForm input[type="submit"]:hover {
-    background-color: #6d44b8; /* Change the hover color as desired */
+    background-color: #6d44b8;
+    /* Change the hover color as desired */
+}
+
+.admin-section {
+    width: 50%;
+}
+
+.admin-section h1 {
+    margin-bottom: 0;
 }
