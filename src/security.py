@@ -115,12 +115,34 @@ def get_current_user_from_token(token: str = Depends(oauth2_scheme)) -> str:
             return None
 
         payload = jwt.decode(token, os.environ.get("API_KEY"), algorithms=["HS256"])
-        username: str = payload.get("sub")
 
-        if username is None:
+        if payload.get("sub") is None:
             raise credentials_exception
-        else:
-            return username
+
+        return payload.get("sub")
+
+    except JWTError as e:
+        print(f"JWT Error Occurred, {e}")
+        raise credentials_exception
+
+
+def get_current_role_from_token(token: str = Depends(oauth2_scheme)) -> str:
+    credentials_exception = HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="Could not validate credentials",
+        headers={"WWW-Authenticate": "Bearer"},
+    )
+
+    try:
+        if token is None:
+            return None
+
+        payload = jwt.decode(token, os.environ.get("API_KEY"), algorithms=["HS256"])
+
+        if payload.get("role") is None:
+            raise credentials_exception
+
+        return payload.get("role")
 
     except JWTError as e:
         print(f"JWT Error Occurred, {e}")

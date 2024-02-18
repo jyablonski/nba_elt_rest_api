@@ -37,7 +37,7 @@ def login_for_access_token(
     # on the token is not > 30 days old
     access_token_expires = datetime.now(timezone.utc) + timedelta(days=30)
     access_token = create_access_token(
-        data={"sub": user.username}, expires=access_token_expires
+        data={"sub": user.username, "role": user.role}, expires=access_token_expires
     )
     response.set_cookie(
         key="access_token",
