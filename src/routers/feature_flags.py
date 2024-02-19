@@ -7,7 +7,7 @@ from sqlalchemy.orm import Session
 from src.dao.feature_flags import create_feature_flags, update_feature_flags
 from src.database import get_db
 from src.models import FeatureFlags
-from src.security import get_current_user_from_token
+from src.security import get_current_creds_from_token
 from src.utils import templates
 
 router = APIRouter()
@@ -16,10 +16,10 @@ router = APIRouter()
 @router.get("/admin/feature_flags", response_class=HTMLResponse)
 def get_feature_flags(
     request: Request,
-    username: str = Depends(get_current_user_from_token),
+    creds: str = Depends(get_current_creds_from_token),
     db: Session = Depends(get_db),
 ):
-    if username != "jyablonski":
+    if creds["role"] != "Admin":
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="You do not have the powa",
@@ -36,10 +36,10 @@ def get_feature_flags(
 def post_feature_flags(
     request: Request,
     feature_flag_list: List[str] = Form(...),
-    username: str = Depends(get_current_user_from_token),
+    creds: str = Depends(get_current_creds_from_token),
     db: Session = Depends(get_db),
 ):
-    if username != "jyablonski":
+    if creds["role"] != "Admin":
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="You do not have the powa",
@@ -57,10 +57,10 @@ def post_feature_flags(  # noqa: F811
     request: Request,
     feature_flag_name_form: str = Form(...),
     feature_flag_is_enabled_form: int = Form(...),
-    username: str = Depends(get_current_user_from_token),
+    creds: str = Depends(get_current_creds_from_token),
     db: Session = Depends(get_db),
 ):
-    if username != "jyablonski":
+    if creds["role"] != "Admin":
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="You do not have the powa",

@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException, Request, status
 from fastapi.responses import HTMLResponse
 
 from src.admin_tasks import invoke_restart_dashboard
-from src.security import get_current_role_from_token
+from src.security import get_current_creds_from_token
 from src.utils import templates
 
 router = APIRouter()
@@ -11,9 +11,9 @@ router = APIRouter()
 @router.get("/admin", response_class=HTMLResponse)
 def get_admin(
     request: Request,
-    role: str = Depends(get_current_role_from_token),
+    creds: str = Depends(get_current_creds_from_token),
 ):
-    if role != "Admin":
+    if creds["role"] != "Admin":
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="You do not have the powa",
@@ -25,9 +25,9 @@ def get_admin(
 @router.post("/invoke_dashboard_restart", response_class=HTMLResponse)
 def post_dashboard_restart(
     request: Request,
-    role: str = Depends(get_current_role_from_token),
+    creds: str = Depends(get_current_creds_from_token),
 ):
-    if role != "Admin":
+    if creds["role"] != "Admin":
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="You do not have the powa",

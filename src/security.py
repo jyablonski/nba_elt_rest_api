@@ -149,6 +149,34 @@ def get_current_role_from_token(token: str = Depends(oauth2_scheme)) -> str:
         raise credentials_exception
 
 
+def get_current_creds_from_token(token: str = Depends(oauth2_scheme)) -> str:
+    credentials_exception = HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="Could not validate credentials",
+        headers={"WWW-Authenticate": "Bearer"},
+    )
+
+    try:
+        if token is None:
+            return None
+
+        payload = jwt.decode(token, os.environ.get("API_KEY"), algorithms=["HS256"])
+        print(payload)
+        if payload.get("role") is None or payload.get("sub") is None:
+            raise credentials_exception
+
+        creds = {
+            "role": payload.get("role"),
+            "username": payload.get("sub"),
+            "exp": payload.get("exp"),
+        }
+        return creds
+
+    except JWTError as e:
+        print(f"JWT Error Occurred, {e}")
+        raise credentials_exception
+
+
 # this is the programmatic version to authenticate
 async def get_current_user_from_api_token(
     token: Annotated[str | bytes, Depends(oauth2_scheme_og)]

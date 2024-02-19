@@ -12,7 +12,7 @@ def test_incidents_get_no_auth(client_fixture):
 
 
 def test_incidents_get_wrong_auth(client_fixture):
-    username = "test1"
+    username = "test"
 
     login_response = client_fixture.post(  # noqa: F841
         "/login",
@@ -46,7 +46,7 @@ def test_incidents_get_success(client_fixture):
 
 
 def test_incidents_create_wrong_auth(client_fixture):
-    username = "test1"
+    username = "test"
 
     login_response = client_fixture.post(  # noqa: F841
         "/login",

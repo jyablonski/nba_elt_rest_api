@@ -3,7 +3,7 @@ import os
 
 from jose import jwt
 
-from src.security import create_access_token
+from src.security import create_access_token, get_current_creds_from_token
 
 # this is base64 encoded
 # eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXSD3.eyJzdWIiOiJqeWFibG9uc2tpIiwiZXhwIjoxNjg2ATUyMTIwfQ.7S3zquBmNJD5s2d7i3_zbxjJFLa79HVjx75GFh9R92s
@@ -34,8 +34,8 @@ def test_decode_access_token():
         data={"sub": username, "role": role}, expires=access_token_expires
     )
 
-    payload = jwt.decode(access_token, os.environ.get("API_KEY"), algorithms=["HS256"])
-    jwt_username = payload["sub"]
+    payload = get_current_creds_from_token(token=access_token)
+    jwt_username = payload["username"]
     jwt_role = payload["role"]
     jwt_expiration = payload["exp"]
 
