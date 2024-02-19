@@ -17,7 +17,7 @@ Clone the Repo & run `make up` which spins up the App locally served [here](http
 - Postgres Database
 - FastAPI Server
 
-If you wish to login to a User locally with bootstrapped data ready to go, a set of Credentials are listed below:
+To Login to the App locally, a set of Credentials for an Admin User are listed below:
 - Username: `test1`
 - Password: `password`
 
