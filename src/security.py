@@ -161,7 +161,7 @@ def get_current_creds_from_token(token: str = Depends(oauth2_scheme)) -> str:
             return None
 
         payload = jwt.decode(token, os.environ.get("API_KEY"), algorithms=["HS256"])
-        print(payload)
+
         if payload.get("role") is None or payload.get("sub") is None:
             raise credentials_exception
 
