@@ -7,7 +7,7 @@ from sqlalchemy.orm import Session
 
 from src.database import get_db
 from src.models import UserPastPredictions
-from src.security import get_current_user_from_token
+from src.security import get_current_creds_from_token
 from src.utils import generate_csv, templates
 
 router = APIRouter()
@@ -16,9 +16,11 @@ router = APIRouter()
 @router.get("/past_bets", response_class=HTMLResponse)
 def get_user_past_bets_page(
     request: Request,
-    username: str = Depends(get_current_user_from_token),
+    creds: str = Depends(get_current_creds_from_token),
     db: Session = Depends(get_db),
 ):
+    username = creds["username"]
+
     user_past_predictions = db.query(UserPastPredictions).filter(
         UserPastPredictions.username == username,
         UserPastPredictions.game_date >= "2023-10-01",
@@ -70,9 +72,11 @@ def get_user_past_bets_page(
 @router.post("/past_bets", response_class=StreamingResponse)
 def post_user_past_bets_page(
     request: Request,
-    username: str = Depends(get_current_user_from_token),
+    creds: str = Depends(get_current_creds_from_token),
     db: Session = Depends(get_db),
 ):
+    username = creds["username"]
+
     user_past_predictions = (
         (db.query(UserPastPredictions))
         .filter(UserPastPredictions.username == username)

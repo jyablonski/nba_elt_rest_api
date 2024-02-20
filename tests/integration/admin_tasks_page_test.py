@@ -11,7 +11,7 @@ def test_admin_task_post_no_auth(client_fixture):
 
 
 def test_admin_tasks_post_wrong_auth(client_fixture):
-    username = "test1"
+    username = "test"
 
     login_response = client_fixture.post(  # noqa: F841
         "/login",

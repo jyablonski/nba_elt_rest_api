@@ -7,7 +7,7 @@ from sqlalchemy.orm import Session
 from src.dao.incidents import create_incident, update_incident
 from src.database import get_db
 from src.models import Incidents
-from src.security import get_current_user_from_token
+from src.security import get_current_creds_from_token
 from src.utils import templates
 
 router = APIRouter()
@@ -16,10 +16,10 @@ router = APIRouter()
 @router.get("/admin/incidents", response_class=HTMLResponse)
 def get_incidents(
     request: Request,
-    username: str = Depends(get_current_user_from_token),
+    creds: str = Depends(get_current_creds_from_token),
     db: Session = Depends(get_db),
 ) -> HTMLResponse:
-    if username != "jyablonski":
+    if creds["role"] != "Admin":
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="You do not have the powa",
@@ -36,10 +36,10 @@ def get_incidents(
 def post_incidents(
     request: Request,
     incident_list: List[str] = Form(...),
-    username: str = Depends(get_current_user_from_token),
+    creds: str = Depends(get_current_creds_from_token),
     db: Session = Depends(get_db),
 ):
-    if username != "jyablonski":
+    if creds["role"] != "Admin":
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="You do not have the powa",
@@ -58,10 +58,10 @@ def post_incidents_create(  # noqa: F811
     incident_name_form: str = Form(...),
     incident_description_form: str = Form(...),
     incident_is_active_form: int = Form(...),
-    username: str = Depends(get_current_user_from_token),
+    creds: str = Depends(get_current_creds_from_token),
     db: Session = Depends(get_db),
 ):
-    if username != "jyablonski":
+    if creds["role"] != "Admin":
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="You do not have the powa",

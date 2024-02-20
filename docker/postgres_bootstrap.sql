@@ -1899,16 +1899,18 @@ CREATE TABLE IF NOT EXISTS rest_api_users
     password text not null,
     email text,
     salt text,
-    created_at timestamp default now()
+	role varchar default 'Consumer',
+    created_at timestamp default now(),
+	modified_at timestamp default now()
 );
 
 -- these users all have password as the actual "password"
-INSERT INTO rest_api_users(username, password, salt, email)
-VALUES ('jyablonski', 'db15bf237233df6654f39476884e8bb9', 'eylptjzw6tqy68zxg5b8v9l2bdwxsztf', 'j@yablonski.com'),
-       ('test', '0b1bcb3aa21cc0325ccfec50ae77ee09', 'utwvsvfcofpanwtwt7u3tegwvnz5ey35', 'test@nobody.com'),
-       ('test1', 'fc69b839fbcd8ecd2d9407406a9eec66', 'u61hred56dm6il2sgtws9m1k4704y3ph', 'test@nobody.com'),
-       ('test2', '32b67f6dad97c4d009bab26dfbafbe27', 'cxfpyjvny5kro6phuxpchxlxg1c1stjw', 'test@nobody.com'),
-       ('test3', '6c4dab6f6c721e9eb0ed908e8b7f7a06', 'lv1exd0c2tmfv414voo1716ggrpnk60f', 'test@nobody.com');
+INSERT INTO rest_api_users(username, password, salt, email, role)
+VALUES ('jyablonski', 'db15bf237233df6654f39476884e8bb9', 'eylptjzw6tqy68zxg5b8v9l2bdwxsztf', 'j@yablonski.com', 'Admin'),
+       ('test', '0b1bcb3aa21cc0325ccfec50ae77ee09', 'utwvsvfcofpanwtwt7u3tegwvnz5ey35', 'test@nobody.com', 'Consumer'),
+       ('test1', 'fc69b839fbcd8ecd2d9407406a9eec66', 'u61hred56dm6il2sgtws9m1k4704y3ph', 'test@nobody.com', 'Admin'),
+       ('test2', '32b67f6dad97c4d009bab26dfbafbe27', 'cxfpyjvny5kro6phuxpchxlxg1c1stjw', 'test@nobody.com', 'Consumer'),
+       ('test3', '6c4dab6f6c721e9eb0ed908e8b7f7a06', 'lv1exd0c2tmfv414voo1716ggrpnk60f', 'test@nobody.com', 'Consumer');
 
 
 DROP TABLE IF EXISTS user_predictions;

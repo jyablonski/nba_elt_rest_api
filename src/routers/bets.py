@@ -8,7 +8,7 @@ from sqlalchemy.orm import Session
 from src.dao.bets import store_bet_predictions
 from src.database import get_db
 from src.models import Predictions, UserPredictions
-from src.security import get_current_user_from_token
+from src.security import get_current_creds_from_token
 from src.utils import templates
 
 router = APIRouter()
@@ -17,9 +17,11 @@ router = APIRouter()
 @router.get("/bets", response_class=HTMLResponse)
 async def get_user_bets_page(
     request: Request,
-    username: str = Depends(get_current_user_from_token),
+    creds: str = Depends(get_current_creds_from_token),
     db: Session = Depends(get_db),
 ):
+    username = creds["username"]
+
     if username is None:
         # Redirect to the /login endpoint
         return RedirectResponse("/login")
@@ -70,11 +72,12 @@ async def get_user_bets_page(
 @router.post("/bets")
 def store_user_bets_predictions_from_ui(
     request: Request,
-    username: str = Depends(get_current_user_from_token),
+    creds: str = Depends(get_current_creds_from_token),
     bet_predictions: List[str] = Form(...),
     bet_amounts: List[int] = Form(...),
     db: Session = Depends(get_db),
 ):
+    username = creds["username"]
     # username_check = (db.query(Users).filter(Users.username == username)).first()
 
     # if username_check is None:

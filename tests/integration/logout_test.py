@@ -11,12 +11,14 @@ def test_logout(client_fixture):
 
     assert f"Welcome <b>{username}" in response.text
     assert response.status_code == 200
+    assert "access_token" in client_fixture.cookies
 
     logout_response = client_fixture.post(
         "/logout",
         follow_redirects=False,
     )
     assert logout_response.status_code == 302
+    assert "access_token" not in client_fixture.cookies
 
 
 def test_logout_no_user(client_fixture):
@@ -25,3 +27,4 @@ def test_logout_no_user(client_fixture):
     )
     assert response.status_code == 200
     assert "User Login" in response.text
+    assert "access_token" not in client_fixture.cookies
