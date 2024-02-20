@@ -6,7 +6,7 @@ from src.security import create_access_token, get_current_creds_from_token
 # eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXSD3.eyJzdWIiOiJqeWFibG9uc2tpIiwiZXhwIjoxNjg2ATUyMTIwfQ.7S3zquBmNJD5s2d7i3_zbxjJFLa79HVjx75GFh9R92s
 
 # then when u decode it, this is what's inside:
-# {'sub': 'jyablonski', 'exp': 1686152120}
+# {'sub': 'jyablonski', 'role': 'Admin', 'exp': 1686152120}
 
 
 def test_generate_access_token():
