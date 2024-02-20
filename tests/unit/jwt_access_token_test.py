@@ -1,7 +1,4 @@
 from datetime import datetime, timedelta, timezone
-import os
-
-from jose import jwt
 
 from src.security import create_access_token, get_current_creds_from_token
 
