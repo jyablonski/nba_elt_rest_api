@@ -475,3 +475,28 @@ li {
     cursor: pointer;
     text-align: center;
 }
+
+.google-btn {
+    display: flex;
+    align-items: center;
+    color: white;
+    width: 200px;
+    height: 50px;
+    border-radius: 5px;
+    box-shadow: 0px 3px 10px -2px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    padding-inline: 8px;
+    text-decoration: none;
+}
+
+.google-icon {
+    background: url("google.png") transparent center center/contain no-repeat;
+    display: inline-block;
+    vertical-align: middle;
+    width: 35px;
+    height: 50px;
+}
+
+.btn-text {
+    margin-left: 10px;
+}

@@ -1,3 +1,6 @@
+import string
+import random
+
 from fastapi.encoders import jsonable_encoder
 from sqlalchemy.orm import Session
 
@@ -43,3 +46,50 @@ def delete_user(db: Session, user_record: Users) -> str:
     db.delete(user_record)
     db.commit()
     return f"Username {user_record.username} Successfully deleted!"
+
+
+def check_oauth_user(db: Session, user_email: str) -> bool:
+    user = db.query(Users).filter(Users.username == user_email).first()
+
+    if user:
+        return True
+    else:
+        return False
+
+
+def create_oauth_user(db: Session, user_email: str) -> Users:
+    """
+    Function to create Users that signed in via Google OAuth.
+
+    2024-02-22 - wasn't sure how to implement this without them
+    entering a password.  Ended up creating a Random Password &
+    if they log in with Gmail then they will only be able to
+    continue logging in with that.
+
+    Args:
+        db (Session): Database Session Variable
+
+        user_email (str): User Email from the provided Token from
+            Google
+
+    Returns:
+        Users Record to display information in the /login Page
+    """
+    characters = string.ascii_letters + string.digits
+    random_password = "".join(random.choice(characters) for _ in range(32))
+    salt = generate_salt()
+
+    password_hash = generate_hash_password(password=random_password, salt=salt)
+
+    record = Users(
+        username=user_email,
+        password=password_hash,
+        email=user_email,
+        salt=salt,
+    )
+
+    db.add(record)
+    db.commit()
+    db.refresh(record)
+
+    return record

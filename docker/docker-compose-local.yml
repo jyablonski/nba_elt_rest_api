@@ -1,23 +1,23 @@
-version: '3'
+version: "3"
 services:
   postgres:
     image: postgres:14-alpine
     container_name: postgres
     ports:
-     - 5432:5432
+      - 5432:5432
     environment:
-     - POSTGRES_USER=postgres
-     - POSTGRES_PASSWORD=postgres
-     - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
     volumes:
       - ${PWD}/docker/postgres_bootstrap.sql:/docker-entrypoint-initdb.d/z99_dump.sql
-    networks: 
+    networks:
       - api_network
 
   rest_api:
     build:
-        context: ../
-        dockerfile: docker/Dockerfile
+      context: ../
+      dockerfile: docker/Dockerfile
     image: nba_elt_rest_api_local
     environment:
       - IP=postgres
@@ -30,12 +30,15 @@ services:
       - OTEL_EXPORTER_OTLP_ENDPOINT=https://api.honeycomb.io
       - OTEL_EXPORTER_OTLP_HEADERS=x-honeycomb-team=bababooiee
       - OTEL_SERVICE_NAME=rest-api-dev
+      - GMAIL_OAUTH_ID=aaaa
+      - GMAIL_OAUTH_CLIENT_SECRET=bbbb
+      - GMAIL_OAUTH_REDIRECT_URL=http://localhost:8080/google_auth
     restart: on-failure
     ports:
       - 8080:8080
     depends_on:
       - postgres
-    networks: 
+    networks:
       - api_network
     links:
       - postgres:postgres
@@ -55,9 +58,8 @@ services:
   #     - '--config.file=/etc/prometheus/prometheus.yml'
   #   volumes:
   #     - .././prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
-  #   networks: 
+  #   networks:
   #     - api_network
-
 
   # grafana:
   #   image: grafana/grafana
@@ -66,7 +68,7 @@ services:
   #     - 3000:3000
   #   # volumes:
   #   #   - grafana_data:/var/lib/grafana
-  #   networks: 
+  #   networks:
   #     - api_network
 
 # volumes:

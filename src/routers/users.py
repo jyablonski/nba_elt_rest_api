@@ -12,7 +12,6 @@ router = APIRouter()
 
 @router.post("/users", response_model=UserCreate, status_code=201)
 async def create_users(create_user_request: UserCreate, db: Session = Depends(get_db)):
-    print(type(db))
     record_check = (
         db.query(Users).filter(Users.username == create_user_request.username).first()
     )
@@ -30,7 +29,6 @@ async def create_users(create_user_request: UserCreate, db: Session = Depends(ge
 async def update_users(
     username: str, update_user_request: UserBase, db: Session = Depends(get_db)
 ):
-    print(f"type db is {type(db)}")
     existing_user_record = db.query(Users).filter(Users.username == username).first()
 
     if not existing_user_record:

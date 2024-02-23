@@ -1,3 +1,5 @@
+import os
+
 from fastapi import FastAPI, Request
 from fastapi_cache import FastAPICache
 from fastapi_cache.backends.inmemory import InMemoryBackend
@@ -10,6 +12,8 @@ from opentelemetry.instrumentation.requests import RequestsInstrumentor
 from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExporter
 from opentelemetry.sdk.trace import TracerProvider
 from opentelemetry.sdk.trace.export import BatchSpanProcessor
+from starlette.middleware.sessions import SessionMiddleware
+
 
 # from starlette.middleware.base import BaseHTTPMiddleware
 # from prometheus_fastapi_instrumentator import Instrumentator
@@ -26,6 +30,7 @@ from src.routers.bets import router as bets_router
 from src.routers.feature_flags import router as feature_flags_router
 from src.routers.feedback import router as feedback_router
 from src.routers.game_types import router as game_types_router
+from src.routers.gmail_auth import router as gmail_auth_router
 from src.routers.help_page import router as help_page_router
 from src.routers.incidents import router as incidents_router
 from src.routers.injuries import router as injuries_router
@@ -56,12 +61,14 @@ Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 # app.add_middleware(BaseHTTPMiddleware, dispatch=log_middleware)
+app.add_middleware(SessionMiddleware, secret_key=os.environ.get("API_KEY"))
 app.include_router(admin_router)
 app.include_router(auth_router)
 app.include_router(bets_router)
 app.include_router(feature_flags_router)
 app.include_router(feedback_router)
 app.include_router(game_types_router)
+app.include_router(gmail_auth_router)
 app.include_router(help_page_router)
 app.include_router(housing_fake_router)
 app.include_router(incidents_router)
