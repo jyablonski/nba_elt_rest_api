@@ -3,6 +3,7 @@ import os
 import secrets
 from typing import Annotated
 
+from authlib.integrations.starlette_client import OAuth
 from fastapi import Depends, HTTPException, Request, status
 from fastapi.openapi.models import OAuthFlows as OAuthFlowsModel
 from fastapi.security import (
@@ -22,6 +23,17 @@ from src.utils import generate_hash_password
 
 security = HTTPBasic()
 oauth2_scheme_og = OAuth2PasswordBearer(tokenUrl="token")
+gmail_oauth = OAuth()
+gmail_oauth.register(
+    name="google",
+    server_metadata_url="https://accounts.google.com/.well-known/openid-configuration",
+    client_id=os.environ.get("GMAIL_OAUTH_ID"),
+    client_secret=os.environ.get("GMAIL_OAUTH_CLIENT_SECRET"),
+    client_kwargs={
+        "scope": "email openid profile",
+        "redirect_url": os.environ.get("GMAIL_OAUTH_REDIRECT_URL"),
+    },
+)
 
 
 class LoginForm:
