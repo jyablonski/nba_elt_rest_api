@@ -14,6 +14,8 @@ dependencies:
 
 auth:
 - src/security.py
+- src/routers/auth.py
+- src/routers/gmail_auth.py
 
 # any file in static or templates
 # but if the only change is in base.html, then no label
