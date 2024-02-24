@@ -32,7 +32,7 @@ services:
       - OTEL_SERVICE_NAME=rest-api-dev
       - GMAIL_OAUTH_ID=aaaa
       - GMAIL_OAUTH_CLIENT_SECRET=bbbb
-      - GMAIL_OAUTH_REDIRECT_URL=http://localhost:8080/google_auth
+      - GMAIL_OAUTH_REDIRECT_URL=http://localhost:8080/auth_google
     restart: on-failure
     ports:
       - 8080:8080

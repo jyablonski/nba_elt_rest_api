@@ -43,3 +43,24 @@ def update_feature_flags(db: Session, feature_flags_list: List[int]):
         db.commit()
 
     return feature_flags
+
+
+def get_feature_flag(db: Session, flag_name: str) -> bool:
+    """
+    Function to retrieve the value of the specified feature
+    flag from the database.
+
+    Args:
+        db (Session): Database Session Variable
+
+        flag_name (str): Feature Flag Name from the `flag`
+            column on the `FeatureFlags` Model
+
+    Returns:
+        Boolean of whether the Feature Flag is enabled or not
+    """
+    feature_flag = db.query(FeatureFlags).filter(FeatureFlags.flag == flag_name).first()
+    if not feature_flag:
+        # Feature flag not found, default to False
+        return False
+    return bool(feature_flag.is_enabled)

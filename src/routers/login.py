@@ -7,6 +7,7 @@ from fastapi import APIRouter, Depends, Form, HTTPException, Request
 from fastapi.responses import HTMLResponse, RedirectResponse
 from sqlalchemy.orm import Session
 
+from src.dao.feature_flags import get_feature_flag
 from src.dao.users import create_user
 from src.database import get_db
 from src.models import Users
@@ -22,7 +23,9 @@ router = APIRouter()
 def login(
     request: Request,
     creds: str = Depends(get_current_creds_from_token),
+    db: Session = Depends(get_db),
 ):
+    gmail_oauth_enabled = get_feature_flag(db, "gmail_oauth_login_form")
     if creds is not None:
         return templates.TemplateResponse(
             "login.html",
@@ -34,11 +37,15 @@ def login(
             },
         )
     else:
-        return templates.TemplateResponse("login.html", {"request": request})
+        return templates.TemplateResponse(
+            "login.html",
+            {"request": request, "gmail_oauth_enabled": gmail_oauth_enabled},
+        )
 
 
 @router.post("/login")
 async def login_post(request: Request, db: Session = Depends(get_db)):  # noqa: F811
+    gmail_oauth_enabled = get_feature_flag(db, "gmail_oauth_login_form")
     form = LoginForm(request)
     await form.load_data()
 
@@ -49,7 +56,7 @@ async def login_post(request: Request, db: Session = Depends(get_db)):  # noqa: 
             login_for_access_token(response=response, form_data=form, db=db)
             return response
         except HTTPException:
-            form.__dict__.update(msg="")
+            form.__dict__.update(msg="", gmail_oauth_enabled=gmail_oauth_enabled)
             form.__dict__.get("errors").append("Incorrect Username or Password")
             return templates.TemplateResponse("login.html", form.__dict__)
     return templates.TemplateResponse("login.html", form.__dict__)
