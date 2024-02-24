@@ -10,6 +10,14 @@ from src.dao.users import check_oauth_user, create_oauth_user
 
 router = APIRouter()
 
+# 2024-02-24 update
+# this just doesn't work with the api hosted on a lambda function url
+# figured out that `SessionMiddleware` doesn't store a single thing
+# because every request is stateless basically, and this oauth2 flow
+# for fastapi / starlette implementations is based around using
+# the session middleware to store the state parameter during the workflow.
+# this would work fine when hosted on an actual server.
+
 
 @router.get("/login/google")
 async def login_google(request: Request):

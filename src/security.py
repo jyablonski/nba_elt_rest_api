@@ -3,6 +3,7 @@ import os
 import secrets
 from typing import Annotated
 
+
 from authlib.integrations.starlette_client import OAuth
 from fastapi import Depends, HTTPException, Request, status
 from fastapi.openapi.models import OAuthFlows as OAuthFlowsModel

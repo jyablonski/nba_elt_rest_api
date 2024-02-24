@@ -81,10 +81,12 @@
 
         <br>
         <br>
+        {% if gmail_oauth_enabled %}
         <a href="/login/google" class="google-btn">
           <div class="google-icon"></div>
           <span class="btn-text">Login with Gmail</span>
         </a>
+        {% endif %}
         <br>
         <br>
         <p> Don't have an account? <a class="create_user" href="/login/create_user"><b>Create One</b></a></hp>

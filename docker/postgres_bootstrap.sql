@@ -2039,7 +2039,8 @@ CREATE TABLE IF NOT EXISTS feature_flags
 );
 INSERT INTO feature_flags(flag, is_enabled)
 VALUES ('season', 1),
-       ('playoffs', 1);
+       ('playoffs', 1),
+	   ('gmail_oauth_login_form', 0);
 
 create view user_past_predictions as
 WITH home_wins AS (

@@ -1,3 +1,4 @@
+# import logging
 import os
 
 from fastapi import FastAPI, Request
@@ -14,8 +15,8 @@ from opentelemetry.sdk.trace import TracerProvider
 from opentelemetry.sdk.trace.export import BatchSpanProcessor
 from starlette.middleware.sessions import SessionMiddleware
 
-
 # from starlette.middleware.base import BaseHTTPMiddleware
+
 # from prometheus_fastapi_instrumentator import Instrumentator
 # if i ever swap to ecs ;-)
 
@@ -61,7 +62,11 @@ Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 # app.add_middleware(BaseHTTPMiddleware, dispatch=log_middleware)
-app.add_middleware(SessionMiddleware, secret_key=os.environ.get("API_KEY"))
+app.add_middleware(
+    SessionMiddleware,
+    secret_key=os.environ.get("API_KEY"),
+    https_only=True,
+)
 app.include_router(admin_router)
 app.include_router(auth_router)
 app.include_router(bets_router)
@@ -109,3 +114,18 @@ def home(request: Request):
 @app.exception_handler(404)
 async def custom_404_handler(request: Request, __):
     return templates.TemplateResponse("404.html", {"request": request}, status_code=404)
+
+
+# useful for session middleware testing
+# @app.get("/a")
+# async def session_set(request: Request):
+#     request.session["my_var"] = "1234"
+#     logging.info(f"session a is {request.session}")
+#     return "ok"
+
+
+# @app.get("/b")
+# async def session_info(request: Request):
+#     my_var = request.session.get("my_var", None)
+#     logging.info(f"session b is {request.session}")
+#     return my_var
