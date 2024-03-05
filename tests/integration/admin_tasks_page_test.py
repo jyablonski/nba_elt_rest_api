@@ -27,17 +27,7 @@ def test_admin_tasks_post_wrong_auth(client_fixture):
     assert response.json()["detail"] == "You do not have the powa"
 
 
-def test_admin_tasks_post(client_fixture):
-    username = "jyablonski"
-
-    login_response = client_fixture.post(  # noqa: F841
-        "/login",
-        data={
-            "username": username,
-            "password": "password",
-        },
-    )
-
+def test_admin_tasks_post(client_fixture, admin_user):
     response = client_fixture.post("/invoke_dashboard_restart")
 
     assert response.status_code == 200

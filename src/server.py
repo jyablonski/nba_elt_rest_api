@@ -41,6 +41,7 @@ from src.routers.past_bets import router as past_bets_router
 from src.routers.player_stats import router as player_stats_router
 from src.routers.predictions import router as predictions_router
 from src.routers.reddit_comments import router as reddit_comments_router
+from src.routers.settings import router as settings_router
 from src.routers.schedule import router as schedule_router
 from src.routers.standings import router as standings_router
 from src.routers.team_ratings import router as team_ratings_router
@@ -84,6 +85,7 @@ app.include_router(past_bets_router)
 app.include_router(player_stats_router)
 app.include_router(predictions_router)
 app.include_router(reddit_comments_router)
+app.include_router(settings_router)
 app.include_router(schedule_router)
 app.include_router(standings_router)
 app.include_router(team_ratings_router)

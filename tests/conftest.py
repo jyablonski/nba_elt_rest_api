@@ -42,3 +42,48 @@ def oauth2_password_bearer():
         tokenUrl="/token", scopes={"read": "Read access"}
     )
     return oauth2
+
+
+@pytest.fixture()
+def consumer_user(client_fixture):
+    username = "test"
+
+    login_response = client_fixture.post(  # noqa: F841
+        "/login",
+        data={
+            "username": username,
+            "password": "password",
+        },
+    )
+
+    return login_response
+
+
+@pytest.fixture()
+def admin_user(client_fixture):
+    username = "test1"
+
+    login_response = client_fixture.post(  # noqa: F841
+        "/login",
+        data={
+            "username": username,
+            "password": "password",
+        },
+    )
+
+    return login_response
+
+
+@pytest.fixture()
+def jyablonski_user(client_fixture):
+    username = "jyablonski"
+
+    login_response = client_fixture.post(  # noqa: F841
+        "/login",
+        data={
+            "username": username,
+            "password": "password",
+        },
+    )
+
+    return login_response
