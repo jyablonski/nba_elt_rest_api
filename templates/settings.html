@@ -2,6 +2,24 @@
 
 {% block content %}
 
-<p> hello {{ username }} </p>
+<div class="settings-container">
+    <h1>{{ username }} Settings</h1>
+    <h1><a href="/login">Back to Login</a></h1>
+</div>
+<div class="settings-container">
+    <h1>Select Your Timezone</h1>
+    <select id="timezone">
+        <option value="America/Los_Angeles">Pacific Time </option>
+        <option value="America/Denver">Mountain Time </option>
+        <option value="America/Chicago">Central Time (Current Selection)</option>
+        <option value="America/New_York">Eastern Time ({{ username }})</option>
+        <option value="UTC">Coordinated Universal Time (UTC)</option>
+    </select>
+    <button class="settings-btn">Submit</button>
+</div>
+
+
+</p>
+
 
 {% endblock %}
