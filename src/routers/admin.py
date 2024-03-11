@@ -15,7 +15,7 @@ def get_admin(
 ):
     if creds["role"] != "Admin":
         raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
+            status_code=status.HTTP_403_FORBIDDEN,
             detail="You do not have the powa",
         )
 
@@ -29,7 +29,7 @@ def post_dashboard_restart(
 ):
     if creds["role"] != "Admin":
         raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
+            status_code=status.HTTP_403_FORBIDDEN,
             detail="You do not have the powa",
         )
 

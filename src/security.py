@@ -233,3 +233,36 @@ def authenticate_user(
         return False
 
     return user
+
+
+def check_creds(
+    creds: dict[str, str] | None = None, check_type: str = "Username"
+) -> None:
+    """
+    Helper Function to use in Protected Endpoints to check Credentials for either
+    a Username or an Admin Role.
+
+    Args:
+        creds: Credentials provided by the Function via
+            `creds: str = Depends(get_current_creds_from_token),`
+
+        check_type (str): Variable to specify to check for either
+            `Username` or `Admin`
+
+    Returns:
+        None
+
+    Example:
+
+        >>> check_creds(creds=creds, check_type="Admin")
+    """
+    if check_type == "Username":
+        if not creds["username"]:
+            raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
+
+    elif check_type == "Admin":
+        if creds["role"] != "Admin":
+            raise HTTPException(status.HTTP_403_FORBIDDEN)
+
+    else:
+        raise ValueError("Please use either `Username` or `Admin` for check_type")

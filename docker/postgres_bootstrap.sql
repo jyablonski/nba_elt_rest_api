@@ -1901,7 +1901,8 @@ CREATE TABLE IF NOT EXISTS rest_api_users
     salt text,
 	role varchar default 'Consumer',
     created_at timestamp default now(),
-	modified_at timestamp default now()
+	modified_at timestamp default now(),
+	timezone varchar default 'UTC'
 );
 
 -- these users all have password as the actual "password"

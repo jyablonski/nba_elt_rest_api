@@ -13,7 +13,7 @@ def test_settings_get_consumer_auth(client_fixture, consumer_user):
     response = client_fixture.get("/settings")
 
     assert response.status_code == 200
-    assert f"hello {username}" in response.text
+    assert f"{username} Settings" in response.text
 
 
 def test_settings_get_admin_auth(client_fixture, admin_user):
@@ -21,4 +21,4 @@ def test_settings_get_admin_auth(client_fixture, admin_user):
     response = client_fixture.get("/settings")
 
     assert response.status_code == 200
-    assert f"hello {username}" in response.text
+    assert f"{username} Settings" in response.text
