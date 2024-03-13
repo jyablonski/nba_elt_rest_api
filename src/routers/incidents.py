@@ -1,5 +1,3 @@
-from typing import List
-
 from fastapi import APIRouter, Depends, Form, HTTPException, Request, status
 from fastapi.responses import HTMLResponse
 from sqlalchemy.orm import Session
@@ -35,7 +33,7 @@ def get_incidents(
 @router.post("/admin/incidents")
 def post_incidents(
     request: Request,
-    incident_list: List[str] = Form(...),
+    incident_list: list[str] = Form(...),
     creds: str = Depends(get_current_creds_from_token),
     db: Session = Depends(get_db),
 ):

@@ -1,7 +1,6 @@
 from datetime import datetime
 
-from sqlalchemy.orm import Session
-from typing import List
+from sqlalchemy.orm import Query, Session
 
 from src.models import FeatureFlags
 
@@ -25,7 +24,9 @@ def create_feature_flags(
     return record
 
 
-def update_feature_flags(db: Session, feature_flags_list: List[int]):
+def update_feature_flags(
+    db: Session, feature_flags_list: list[int]
+) -> Query[FeatureFlags]:
     modified_at = datetime.utcnow()
 
     feature_flags = db.query(FeatureFlags).order_by(FeatureFlags.flag)

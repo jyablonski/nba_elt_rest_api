@@ -1,5 +1,4 @@
 from datetime import datetime, timedelta
-from typing import List
 
 from fastapi import APIRouter, Depends, HTTPException, Form, Request
 from fastapi.responses import HTMLResponse, RedirectResponse
@@ -73,8 +72,8 @@ async def get_user_bets_page(
 def store_user_bets_predictions_from_ui(
     request: Request,
     creds: str = Depends(get_current_creds_from_token),
-    bet_predictions: List[str] = Form(...),
-    bet_amounts: List[int] = Form(...),
+    bet_predictions: list[str] = Form(...),
+    bet_amounts: list[int] = Form(...),
     db: Session = Depends(get_db),
 ):
     username = creds["username"]

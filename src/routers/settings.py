@@ -4,7 +4,6 @@ from sqlalchemy.orm import Session
 
 from src.dao.settings import set_user_timezone
 from src.database import get_db
-from src.models import Users
 from src.security import check_creds, get_current_creds_from_token
 from src.utils import templates
 
