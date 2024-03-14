@@ -1,6 +1,4 @@
 from datetime import date, datetime, timezone
-from typing import Optional
-
 
 from pydantic import BaseModel
 
@@ -30,7 +28,7 @@ class PlayerStatsBase(BaseModel):
     team: str
     full_team: str
     avg_ppg: float
-    avg_ts_percent: Optional[float]
+    avg_ts_percent: float | None
     avg_mvp_score: float
     avg_plus_minus: float
     games_played: int
@@ -82,7 +80,7 @@ class RedditBase(BaseModel):
     scrape_date: date
     author: str
     comment: str
-    flair: Optional[str]
+    flair: str | None
     score: int
     url: str
     compound: float
@@ -95,16 +93,16 @@ class RedditBase(BaseModel):
 
 
 class InjuriesBase(BaseModel):
-    player: Optional[str] = None
-    team_acronym: Optional[str] = None
-    team: Optional[str] = None
-    date: Optional[str] = None
-    status: Optional[str] = None
-    injury: Optional[str] = None
-    description: Optional[str] = None
-    total_injuries: Optional[int] = None
-    team_active_injuries: Optional[int] = None
-    team_active_protocols: Optional[int] = None
+    player: str | None
+    team_acronym: str | None = None
+    team: str | None = None
+    date: str | None = None
+    status: str | None = None
+    injury: str | None = None
+    description: str | None = None
+    total_injuries: int | None = None
+    team_active_injuries: int | None = None
+    team_active_protocols: int | None = None
 
     class Config:
         from_attributes = True
@@ -152,9 +150,9 @@ class ScheduleBase(BaseModel):
     start_time: str
     avg_team_rank: int
     home_team: str
-    home_moneyline_raw: Optional[int] = None
+    home_moneyline_raw: int | None = None
     away_team: str
-    away_moneyline_raw: Optional[int] = None
+    away_moneyline_raw: int | None = None
 
     class Config:
         from_attributes = True
@@ -200,7 +198,7 @@ class TransactionsBase(BaseModel):
 class UserBase(BaseModel):
     username: str
     password: str
-    email: Optional[str]
+    email: str | None = None
     created_at: datetime = datetime.now(timezone.utc)
 
     class Config:

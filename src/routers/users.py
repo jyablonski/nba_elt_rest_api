@@ -22,7 +22,7 @@ async def create_users(create_user_request: UserCreate, db: Session = Depends(ge
             detail="Username already exists!  Please select another username.",
         )
 
-    return create_user(db, create_user_request)
+    return create_user(db=db, user=create_user_request)
 
 
 @router.put("/users/{username}", response_model=UserBase)
@@ -47,7 +47,9 @@ async def update_users(
             detail="The new requested Username already exists!  Please select another username.",
         )
 
-    return update_user(db, existing_user_record, update_user_request)
+    return update_user(
+        db=db, user_record=existing_user_record, update_user_request=update_user_request
+    )
 
 
 @router.delete("/users/{username}")

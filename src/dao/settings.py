@@ -12,8 +12,9 @@ from src.models import Users
 
 
 def set_user_timezone(db: Session, username: str, selected_timezone: str) -> Users:
-    print(f"username {username} timezone {selected_timezone}")
     user = db.query(Users).filter(Users.username == username).first()
+    if user is None:
+        raise ValueError(f"Username {username} not found")
 
     user.timezone = selected_timezone
     user.modified_at = datetime.now(timezone.utc)

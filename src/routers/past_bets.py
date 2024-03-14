@@ -16,7 +16,7 @@ router = APIRouter()
 @router.get("/past_bets", response_class=HTMLResponse)
 def get_user_past_bets_page(
     request: Request,
-    creds: str = Depends(get_current_creds_from_token),
+    creds: dict[str, str] = Depends(get_current_creds_from_token),
     db: Session = Depends(get_db),
 ):
     username = creds["username"]
@@ -48,7 +48,7 @@ def get_user_past_bets_page(
     if user_past_predictions_count == 0:
         user_past_predictions_pct_count = 0
     else:
-        user_past_predictions_pct_count = round(
+        user_past_predictions_pct_count = round(  # type: ignore
             user_past_predictions_success_count / user_past_predictions_count, 3
         )
 
@@ -72,7 +72,7 @@ def get_user_past_bets_page(
 @router.post("/past_bets", response_class=StreamingResponse)
 def post_user_past_bets_page(
     request: Request,
-    creds: str = Depends(get_current_creds_from_token),
+    creds: dict[str, str] = Depends(get_current_creds_from_token),
     db: Session = Depends(get_db),
 ):
     username = creds["username"]

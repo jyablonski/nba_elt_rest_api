@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 
 from src.dao.settings import set_user_timezone
 from src.database import get_db
-from src.security import check_creds, get_current_creds_from_token
+from src.security import get_current_creds_from_token
 from src.utils import templates
 
 router = APIRouter()
@@ -13,7 +13,7 @@ router = APIRouter()
 @router.get("/settings", response_class=HTMLResponse)
 async def get_settings_page(
     request: Request,
-    creds: str = Depends(get_current_creds_from_token),
+    creds: dict[str, str] = Depends(get_current_creds_from_token),
     db: Session = Depends(get_db),
 ):
     username = creds["username"]
@@ -38,14 +38,12 @@ async def get_settings_page(
 def post_feature_flags(  # noqa: F811
     request: Request,
     timezone: str = Form(...),
-    creds: str = Depends(get_current_creds_from_token),
+    creds: dict[str, str] = Depends(get_current_creds_from_token),
     db: Session = Depends(get_db),
 ):
-    check_creds(creds=creds, check_type="Username")
-
     username = creds["username"]
-
     set_user_timezone(db=db, username=username, selected_timezone=timezone)
+
     return templates.TemplateResponse(
         "settings.html",
         {"request": request, "username": username, "msg": "Input Saved!"},

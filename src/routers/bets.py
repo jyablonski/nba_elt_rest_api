@@ -16,7 +16,7 @@ router = APIRouter()
 @router.get("/bets", response_class=HTMLResponse)
 async def get_user_bets_page(
     request: Request,
-    creds: str = Depends(get_current_creds_from_token),
+    creds: dict[str, str] = Depends(get_current_creds_from_token),
     db: Session = Depends(get_db),
 ):
     username = creds["username"]
@@ -71,7 +71,7 @@ async def get_user_bets_page(
 @router.post("/bets")
 def store_user_bets_predictions_from_ui(
     request: Request,
-    creds: str = Depends(get_current_creds_from_token),
+    creds: dict[str, str] = Depends(get_current_creds_from_token),
     bet_predictions: list[str] = Form(...),
     bet_amounts: list[int] = Form(...),
     db: Session = Depends(get_db),
