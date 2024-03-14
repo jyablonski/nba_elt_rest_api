@@ -88,5 +88,5 @@ def test_schedule_date_fail(client_fixture):
         "msg": "Input should be a valid date or datetime, invalid datetime "
         "separator, expected `T`, `t`, `_` or space",
         "type": "date_from_datetime_parsing",
-        "url": "https://errors.pydantic.dev/2.5/v/date_from_datetime_parsing",
+        "url": "https://errors.pydantic.dev/2.6/v/date_from_datetime_parsing",
     }
