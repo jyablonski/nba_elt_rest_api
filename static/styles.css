@@ -541,3 +541,16 @@ li {
 .settings-container .msg {
     text-align: center;
 }
+
+.form-input-table {
+    display: block;
+    height: 50px;
+    width: 100%;
+    color: #fff;
+    background-color: rgba(8, 3, 3, 0.07);
+    border-radius: 12px;
+    padding: 0px 0px 0px 5px;
+    margin-top: 8px;
+    font-size: 16px;
+    font-weight: 300;
+}
