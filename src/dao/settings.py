@@ -11,6 +11,14 @@ from src.models import Users
 # utc = datetime.now(tz=pytz.timezone('UTC'))
 
 
+def get_user_timezone(db: Session, username: str) -> str:
+    user = db.query(Users).filter(Users.username == username).first()
+    if user is None:
+        raise ValueError(f"Username {username} not found")
+
+    return user.timezone
+
+
 def set_user_timezone(db: Session, username: str, selected_timezone: str) -> Users:
     user = db.query(Users).filter(Users.username == username).first()
     if user is None:

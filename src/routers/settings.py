@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, Form, HTTPException, Request, status
 from fastapi.responses import HTMLResponse
 from sqlalchemy.orm import Session
 
-from src.dao.settings import set_user_timezone
+from src.dao.settings import get_user_timezone, set_user_timezone
 from src.database import get_db
 from src.security import get_current_creds_from_token
 from src.utils import templates
@@ -17,7 +17,7 @@ async def get_settings_page(
     db: Session = Depends(get_db),
 ):
     username = creds["username"]
-    print("hi")
+    timezone = get_user_timezone(db=db, username=username)
 
     if username is None:
         raise HTTPException(
@@ -29,6 +29,7 @@ async def get_settings_page(
         "settings.html",
         {
             "request": request,
+            "current_user_timezone": timezone,
             "username": username,
         },
     )
@@ -46,5 +47,10 @@ def post_feature_flags(  # noqa: F811
 
     return templates.TemplateResponse(
         "settings.html",
-        {"request": request, "username": username, "msg": "Input Saved!"},
+        {
+            "request": request,
+            "username": username,
+            "current_user_timezone": timezone,
+            "msg": "Input Saved!",
+        },
     )
