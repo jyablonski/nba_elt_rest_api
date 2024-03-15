@@ -26,6 +26,7 @@ COPY config.yaml ./config.yaml
 COPY src/ ./src/
 COPY static/ ./static/
 COPY templates/ ./templates/
+COPY pyproject.toml ./pyproject.toml
 
 EXPOSE 8080
 

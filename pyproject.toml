@@ -64,7 +64,11 @@ module = ["src/database.py", "secondmodule", "utils", "config"]
 ignore_missing_imports = true
 
 [tool.pytest.ini_options]
-filterwarnings = ["ignore::DeprecationWarning", "ignore::UserWarning"]
+filterwarnings = [
+    "ignore::DeprecationWarning",
+    "ignore::UserWarning",
+    'ignore:function ham\(\) is deprecated:DeprecationWarning',
+]
 testpaths = ["tests"]
 markers = [
     "wip: work in progress",

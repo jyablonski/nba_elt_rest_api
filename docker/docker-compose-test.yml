@@ -44,7 +44,7 @@ services:
       - ${PWD}/templates:/home/appuser/templates
       - ${PWD}/tests/:/home/appuser/tests
       - ${PWD}/config.yaml:/home/appuser/config.yaml
-      - ${PWD}/pytest.ini:/home/appuser/pytest.ini
+      - ${PWD}/pyproject.toml:/home/appuser/pyproject.toml
       # these are for fast local docker compose dev so changes will automatically make it into the app
     command: python3 -m pytest -vv
 

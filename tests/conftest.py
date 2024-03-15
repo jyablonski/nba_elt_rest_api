@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import logging
 import os
 
 from fastapi.testclient import TestClient
@@ -10,6 +11,11 @@ import pytest
 from src.database import load_yaml_with_env
 from src.security import OAuth2PasswordBearerWithCookie
 from src.server import app
+
+
+@pytest.fixture(autouse=True)
+def disable_logging():
+    logging.disable(logging.ERROR)
 
 
 @pytest.fixture(autouse=True)

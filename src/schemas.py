@@ -1,6 +1,6 @@
 from datetime import date, datetime, timezone
 
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 
 # Pydantic models use the normal name: str schema for data types
 
@@ -18,8 +18,7 @@ class StandingsBase(BaseModel):
     active_protocols: int
     last_10: str
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class PlayerStatsBase(BaseModel):
@@ -39,8 +38,7 @@ class PlayerStatsBase(BaseModel):
     is_mvp_candidate: str
     mvp_rank: int
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class TeamRatingsBase(BaseModel):
@@ -56,8 +54,7 @@ class TeamRatingsBase(BaseModel):
     drtg_rank: str
     ortg_rank: str
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class TwitterBase(BaseModel):
@@ -72,8 +69,7 @@ class TwitterBase(BaseModel):
     neu: float
     pos: float
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class RedditBase(BaseModel):
@@ -88,8 +84,7 @@ class RedditBase(BaseModel):
     neu: float
     pos: float
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class InjuriesBase(BaseModel):
@@ -104,8 +99,7 @@ class InjuriesBase(BaseModel):
     team_active_injuries: int | None = None
     team_active_protocols: int | None = None
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class GameTypesBase(BaseModel):
@@ -114,8 +108,7 @@ class GameTypesBase(BaseModel):
     n: int
     explanation: str
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class PlayerBase(BaseModel):
@@ -123,8 +116,7 @@ class PlayerBase(BaseModel):
     team: str
     ppg: float
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class TeamOriginalBase(BaseModel):
@@ -132,16 +124,14 @@ class TeamOriginalBase(BaseModel):
     color: str
     players: str
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class FeedbackBase(BaseModel):
     feedback: str
     time: datetime
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class ScheduleBase(BaseModel):
@@ -154,8 +144,7 @@ class ScheduleBase(BaseModel):
     away_team: str
     away_moneyline_raw: int | None = None
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class PredictionsBase(BaseModel):
@@ -167,8 +156,7 @@ class PredictionsBase(BaseModel):
     away_team_odds: int
     away_team_predicted_win_pct: float
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class UserPredictions(BaseModel):
@@ -183,16 +171,14 @@ class UserPredictions(BaseModel):
     selected_winner: str
     created_at: datetime = datetime.now(timezone.utc)
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class TransactionsBase(BaseModel):
     date: date
     transaction: str
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class UserBase(BaseModel):
@@ -201,8 +187,7 @@ class UserBase(BaseModel):
     email: str | None = None
     created_at: datetime = datetime.now(timezone.utc)
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class UserCreate(UserBase):
@@ -220,8 +205,7 @@ class HousingPredictionBase(BaseModel):
     num_stories: int
     qol_index: float
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class PasswordResetRequest(BaseModel):
