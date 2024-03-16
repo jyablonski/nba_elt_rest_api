@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import Optional
 
 from fastapi import APIRouter, Depends, Form, HTTPException, Request
 from fastapi.responses import HTMLResponse, RedirectResponse
@@ -22,7 +21,7 @@ router = APIRouter()
 @router.get("/login")
 def login(
     request: Request,
-    creds: str = Depends(get_current_creds_from_token),
+    creds: dict[str, str] = Depends(get_current_creds_from_token),
     db: Session = Depends(get_db),
 ):
     gmail_oauth_enabled = get_feature_flag(db, "gmail_oauth_login_form")
@@ -53,11 +52,11 @@ async def login_post(request: Request, db: Session = Depends(get_db)):  # noqa: 
         try:
             form.__dict__.update(msg="Login Successful")
             response = templates.TemplateResponse("login.html", form.__dict__)
-            login_for_access_token(response=response, form_data=form, db=db)
+            login_for_access_token(response=response, form_data=form, db=db)  # type: ignore
             return response
         except HTTPException:
             form.__dict__.update(msg="", gmail_oauth_enabled=gmail_oauth_enabled)
-            form.__dict__.get("errors").append("Incorrect Username or Password")
+            form.__dict__.get("errors").append("Incorrect Username or Password")  # type: ignore
             return templates.TemplateResponse("login.html", form.__dict__)
     return templates.TemplateResponse("login.html", form.__dict__)
 
@@ -72,7 +71,7 @@ def create_users_from_form(
     request: Request,
     username: str = Form(...),
     password: str = Form(...),
-    email: Optional[str] = Form(None),
+    email: str | None = Form(None),
     db: Session = Depends(get_db),
 ):
     record_check = db.query(Users).filter(Users.username == username).first()
@@ -90,7 +89,7 @@ def create_users_from_form(
         created_at=datetime.utcnow(),
     )
 
-    create_user(db, record)
+    create_user(db=db, user=record)
 
     return RedirectResponse(
         "/login",

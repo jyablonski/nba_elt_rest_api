@@ -198,6 +198,7 @@ class Users(Base):
     created_at = Column(TIMESTAMP, nullable=False, default=func.now())
     role = Column(String, nullable=False, default="Consumer")
     modified_at = Column(TIMESTAMP, nullable=False, default=func.now())
+    timezone = Column(String, nullable=False, default="UTC")
 
 
 class UserPastPredictions(Base):

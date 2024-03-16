@@ -3,6 +3,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: rest-api-deployment
+  labels:
+    app: nba-elt-rest-api
 spec:
   replicas: 1
   selector:
@@ -14,8 +16,10 @@ spec:
         app: nba-elt-rest-api
     spec:
       containers:
-      - name: rest-api-container
+      - name: nba-elt-rest-api
         image: 717791819289.dkr.ecr.us-east-1.amazonaws.com/jacobs_repo:nba_elt_rest_api
+        ports:
+        - containerPort: 8080
         env:
         - name: IP
           valueFrom:
@@ -67,17 +71,3 @@ spec:
       volumes:
       - name: app-data
         emptyDir: {}
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: rest-api-service
-spec:
-  selector:
-    app: nba-elt-rest-api
-  ports:
-  - protocol: TCP
-    port: 8080
-    targetPort: 8080
-  type: LoadBalancer

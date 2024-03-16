@@ -11,11 +11,11 @@ router = APIRouter()
 @router.get("/admin", response_class=HTMLResponse)
 def get_admin(
     request: Request,
-    creds: str = Depends(get_current_creds_from_token),
+    creds: dict[str, str] = Depends(get_current_creds_from_token),
 ):
     if creds["role"] != "Admin":
         raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
+            status_code=status.HTTP_403_FORBIDDEN,
             detail="You do not have the powa",
         )
 
@@ -25,11 +25,11 @@ def get_admin(
 @router.post("/invoke_dashboard_restart", response_class=HTMLResponse)
 def post_dashboard_restart(
     request: Request,
-    creds: str = Depends(get_current_creds_from_token),
+    creds: dict[str, str] = Depends(get_current_creds_from_token),
 ):
     if creds["role"] != "Admin":
         raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
+            status_code=status.HTTP_403_FORBIDDEN,
             detail="You do not have the powa",
         )
 

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="settings-container">
+    <h1>{{ username }} Settings</h1>
+    <h1><a href="/login">Back to Login</a></h1>
+    <p class="msg">{{ msg }} </p>
+</div>
+<form id="timezone-form" action="/settings" method="post">
+    <div class="settings-container">
+        <h1>Select Your Timezone</h1>
+        <select name="timezone" id="timezones">
+            <option value="America/Los_Angeles" {% if current_user_timezone=='America/Los_Angeles' %} selected {% endif
+                %}>Pacific Time{% if current_user_timezone=='America/Los_Angeles' %} (Current Timezone) {% endif %}
+            </option>
+            <option value="America/Denver" {% if current_user_timezone=='America/Denver' %} selected {% endif %}>
+                Mountain Time{% if current_user_timezone=='America/Denver' %} (Current Timezone) {% endif %}</option>
+            <option value="America/Chicago" {% if current_user_timezone=='America/Chicago' %} selected {% endif %}>
+                Central Time{% if current_user_timezone=='America/Chicago' %} (Current Timezone) {% endif %}</option>
+            <option value="America/New_York" {% if current_user_timezone=='America/New_York' %} selected {% endif %}>
+                Eastern Time{% if current_user_timezone=='America/New_York' %} (Current Timezone) {% endif %}</option>
+            <option value="UTC" {% if current_user_timezone=='UTC' %} selected {% endif %}>Coordinated Universal Time
+                (UTC){% if current_user_timezone=='UTC' %} (Current Timezone) {% endif %}</option>
+        </select>
+        <button class="settings-btn">Submit</button>
+    </div>
+</form>
+
+</div>
+
+
+</p>
+
+
+{% endblock %}

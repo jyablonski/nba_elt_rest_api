@@ -33,6 +33,7 @@ services:
       - GMAIL_OAUTH_ID=aaaa
       - GMAIL_OAUTH_CLIENT_SECRET=bbbb
       - GMAIL_OAUTH_REDIRECT_URL=http://localhost:8080/auth_google
+      - OS_ENDPOINT=http://opensearch:9200
     restart: on-failure
     ports:
       - 8080:8080
@@ -49,6 +50,34 @@ services:
       - ${PWD}/config.yaml:/home/appuser/config.yaml
       # these are for fast local docker compose dev so changes will automatically make it into the app
 
+  # 2024-03-13 update this shit fkn blows, so many fucking things to tweak for 0 reason
+  # https://opensearch.org/docs/latest/install-and-configure/install-opensearch/docker/
+  # opensearch:
+  #   image: opensearchproject/opensearch:latest
+  #   container_name: opensearch
+  #   environment:
+  #     - discovery.type=single-node
+  #     - plugins.security.disabled=true
+  #     - cluster.routing.allocation.disk.threshold_enabled=false
+  #     - OPENSEARCH_INITIAL_ADMIN_PASSWORD=bkmSqgcZMzR1JS3ek8gdNGyOrVefyVkK!
+  #   ports:
+  #     - 9200:9200 # Opensearch API
+  #     - 9600:9600 # Performance Analyzer
+  #   networks:
+  #     - api_network
+
+  # opensearch-dashboards:
+  #   image: opensearchproject/opensearch-dashboards:latest
+  #   container_name: opensearch-dashboards
+  #   ports:
+  #     - 5601:5601
+  #   expose:
+  #     - "5601"
+  #   environment:
+  #     OPENSEARCH_HOSTS: '["http://opensearch:9200"]' # Define the OpenSearch nodes that OpenSearch Dashboards will query
+  #     DISABLE_SECURITY_DASHBOARDS_PLUGIN: true
+  #   networks:
+  #     - api_network
   # prometheus:
   #   image: prom/prometheus
   #   container_name: prometheus

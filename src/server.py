@@ -1,4 +1,3 @@
-# import logging
 import os
 
 from fastapi import FastAPI, Request
@@ -15,7 +14,7 @@ from opentelemetry.sdk.trace import TracerProvider
 from opentelemetry.sdk.trace.export import BatchSpanProcessor
 from starlette.middleware.sessions import SessionMiddleware
 
-# from starlette.middleware.base import BaseHTTPMiddleware
+from starlette.middleware.base import BaseHTTPMiddleware
 
 # from prometheus_fastapi_instrumentator import Instrumentator
 # if i ever swap to ecs ;-)
@@ -23,8 +22,7 @@ from starlette.middleware.sessions import SessionMiddleware
 from src.models import Base
 from src.database import engine
 
-# from src.logger import logger
-# from src.middleware import log_middleware
+from src.middleware import log_middleware
 from src.routers.admin import router as admin_router
 from src.routers.auth import router as auth_router
 from src.routers.bets import router as bets_router
@@ -41,6 +39,7 @@ from src.routers.past_bets import router as past_bets_router
 from src.routers.player_stats import router as player_stats_router
 from src.routers.predictions import router as predictions_router
 from src.routers.reddit_comments import router as reddit_comments_router
+from src.routers.settings import router as settings_router
 from src.routers.schedule import router as schedule_router
 from src.routers.standings import router as standings_router
 from src.routers.team_ratings import router as team_ratings_router
@@ -48,7 +47,6 @@ from src.routers.transactions import router as transactions_router
 from src.routers.twitter_comments import router as twitter_comments_router
 from src.routers.users import router as users_router
 
-# from opennem.api.admin.router import router as admin_router
 from src.routers.ml.predict import router as housing_fake_router
 from src.utils import templates
 
@@ -61,7 +59,7 @@ tracer = trace.get_tracer(__name__)
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
-# app.add_middleware(BaseHTTPMiddleware, dispatch=log_middleware)
+app.add_middleware(BaseHTTPMiddleware, dispatch=log_middleware)
 app.add_middleware(
     SessionMiddleware,
     secret_key=os.environ.get("API_KEY"),
@@ -84,6 +82,7 @@ app.include_router(past_bets_router)
 app.include_router(player_stats_router)
 app.include_router(predictions_router)
 app.include_router(reddit_comments_router)
+app.include_router(settings_router)
 app.include_router(schedule_router)
 app.include_router(standings_router)
 app.include_router(team_ratings_router)

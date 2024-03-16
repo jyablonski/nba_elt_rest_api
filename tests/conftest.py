@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import logging
 import os
 
 from fastapi.testclient import TestClient
@@ -10,6 +11,11 @@ import pytest
 from src.database import load_yaml_with_env
 from src.security import OAuth2PasswordBearerWithCookie
 from src.server import app
+
+
+@pytest.fixture(autouse=True)
+def disable_logging():
+    logging.disable(logging.ERROR)
 
 
 @pytest.fixture(autouse=True)
@@ -42,3 +48,48 @@ def oauth2_password_bearer():
         tokenUrl="/token", scopes={"read": "Read access"}
     )
     return oauth2
+
+
+@pytest.fixture()
+def consumer_user(client_fixture):
+    username = "test"
+
+    login_response = client_fixture.post(  # noqa: F841
+        "/login",
+        data={
+            "username": username,
+            "password": "password",
+        },
+    )
+
+    return login_response
+
+
+@pytest.fixture()
+def admin_user(client_fixture):
+    username = "test1"
+
+    login_response = client_fixture.post(  # noqa: F841
+        "/login",
+        data={
+            "username": username,
+            "password": "password",
+        },
+    )
+
+    return login_response
+
+
+@pytest.fixture()
+def jyablonski_user(client_fixture):
+    username = "jyablonski"
+
+    login_response = client_fixture.post(  # noqa: F841
+        "/login",
+        data={
+            "username": username,
+            "password": "password",
+        },
+    )
+
+    return login_response

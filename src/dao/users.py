@@ -9,7 +9,7 @@ from src.schemas import UserBase, UserCreate
 from src.utils import generate_hash_password, generate_salt
 
 
-def create_user(db: Session, user: UserCreate):
+def create_user(db: Session, user: Users | UserCreate) -> Users:
     salt = generate_salt()
 
     password_hash = generate_hash_password(password=user.password, salt=salt)
@@ -31,7 +31,9 @@ def create_user(db: Session, user: UserCreate):
     return record
 
 
-def update_user(db: Session, user_record: UserBase, update_user_request: UserBase):
+def update_user(
+    db: Session, user_record: Users, update_user_request: UserBase
+) -> Users:
     update_user_encoded = jsonable_encoder(update_user_request)
     user_record.username = update_user_encoded["username"]
     user_record.password = update_user_encoded["password"]

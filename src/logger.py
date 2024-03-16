@@ -1,22 +1,43 @@
 import logging
 import sys
 
-# get logger
-logger = logging.getLogger()
+# from opensearch_logger import OpenSearchHandler
 
-# create formatters
-formatter = logging.Formatter(
-    fmt="[%(levelname)s] %(asctime)s %(message)s", datefmt="%Y-%m-%d %I:%M:%S %p"
-)
 
-# create handlers
-# file_handler = logging.FileHandler("app.log")
-stream_handler = logging.StreamHandler(sys.stdout)
+def create_logger() -> logging.Logger:
+    """
+    Logger which writes to both stdout as well as an Opensearch Endpoint
 
-# set formatters
-# file_handler.setFormatter(formatter)
-stream_handler.setFormatter(formatter)
+    Args:
+        None
 
-logger.handlers = [stream_handler]
+    Returns:
+        Logger
+    """
+    logger = logging.getLogger()
 
-logger.setLevel(logging.INFO)
+    # create formatters
+    formatter = logging.Formatter(
+        fmt="[%(levelname)s] %(asctime)s %(message)s", datefmt="%Y-%m-%d %I:%M:%S %p"
+    )
+    stream_handler = logging.StreamHandler(sys.stdout)
+    stream_handler.setFormatter(formatter)
+
+    # opensearch_handler = OpenSearchHandler(
+    #     index_name=opensearch_index,
+    #     hosts=[opensearch_endpoint],
+    #     # http_auth=("admin", "admin"),
+    #     http_compress=True,
+    #     use_ssl=False,
+    #     verify_certs=False,
+    #     ssl_assert_hostname=False,
+    #     ssl_show_warn=False,
+    #     flush_frequency=9,
+    # )
+    logger.handlers = [stream_handler]
+    logger.setLevel(logging.INFO)
+
+    return logger
+
+
+logger = create_logger()

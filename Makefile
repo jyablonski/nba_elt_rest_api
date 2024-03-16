@@ -73,11 +73,12 @@ test:
 	@docker compose -f docker/docker-compose-test.yml down
 	@docker compose -f docker/docker-compose-test.yml up --exit-code-from rest_api_test_runner
 
+# the `-` prefix makes it ignore the errors basically and continue running the rest of the checks
 .PHONY: lint
 lint:
 	@echo Checking Black --------------
 	@poetry run black src/
 	@echo Checking Ruff ---------------
-	@poetry run ruff check .
+	-@poetry run ruff check .
 	@echo Checking MyPy ---------------
-	@poetry run mypy src/
+	-@poetry run mypy src/

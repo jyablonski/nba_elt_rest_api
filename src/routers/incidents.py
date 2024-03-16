@@ -1,5 +1,3 @@
-from typing import List
-
 from fastapi import APIRouter, Depends, Form, HTTPException, Request, status
 from fastapi.responses import HTMLResponse
 from sqlalchemy.orm import Session
@@ -16,7 +14,7 @@ router = APIRouter()
 @router.get("/admin/incidents", response_class=HTMLResponse)
 def get_incidents(
     request: Request,
-    creds: str = Depends(get_current_creds_from_token),
+    creds: dict[str, str] = Depends(get_current_creds_from_token),
     db: Session = Depends(get_db),
 ) -> HTMLResponse:
     if creds["role"] != "Admin":
@@ -27,7 +25,7 @@ def get_incidents(
 
     incidents = db.query(Incidents).order_by(Incidents.incident_name)
 
-    return templates.TemplateResponse(
+    return templates.TemplateResponse(  # type: ignore
         "incidents.html", {"request": request, "incidents": incidents}
     )
 
@@ -35,8 +33,8 @@ def get_incidents(
 @router.post("/admin/incidents")
 def post_incidents(
     request: Request,
-    incident_list: List[str] = Form(...),
-    creds: str = Depends(get_current_creds_from_token),
+    incident_list: list[int] = Form(...),
+    creds: dict[str, str] = Depends(get_current_creds_from_token),
     db: Session = Depends(get_db),
 ):
     if creds["role"] != "Admin":
@@ -45,7 +43,7 @@ def post_incidents(
             detail="You do not have the powa",
         )
 
-    new_incident = update_incident(db, incident_list)
+    new_incident = update_incident(db=db, incidents_list=incident_list)
 
     return templates.TemplateResponse(
         "incidents.html", {"request": request, "incidents": new_incident}
@@ -58,7 +56,7 @@ def post_incidents_create(  # noqa: F811
     incident_name_form: str = Form(...),
     incident_description_form: str = Form(...),
     incident_is_active_form: int = Form(...),
-    creds: str = Depends(get_current_creds_from_token),
+    creds: dict[str, str] = Depends(get_current_creds_from_token),
     db: Session = Depends(get_db),
 ):
     if creds["role"] != "Admin":

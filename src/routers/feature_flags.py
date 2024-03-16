@@ -1,5 +1,3 @@
-from typing import List
-
 from fastapi import APIRouter, Depends, Form, HTTPException, Request, status
 from fastapi.responses import HTMLResponse
 from sqlalchemy.orm import Session
@@ -16,7 +14,7 @@ router = APIRouter()
 @router.get("/admin/feature_flags", response_class=HTMLResponse)
 def get_feature_flags(
     request: Request,
-    creds: str = Depends(get_current_creds_from_token),
+    creds: dict[str, str] = Depends(get_current_creds_from_token),
     db: Session = Depends(get_db),
 ):
     if creds["role"] != "Admin":
@@ -33,10 +31,10 @@ def get_feature_flags(
 
 
 @router.post("/admin/feature_flags")
-def post_feature_flags(
+def update_feature_flags_post(
     request: Request,
-    feature_flag_list: List[str] = Form(...),
-    creds: str = Depends(get_current_creds_from_token),
+    feature_flag_list: list[int] = Form(...),
+    creds: dict[str, str] = Depends(get_current_creds_from_token),
     db: Session = Depends(get_db),
 ):
     if creds["role"] != "Admin":
@@ -45,7 +43,9 @@ def post_feature_flags(
             detail="You do not have the powa",
         )
 
-    new_feature_flags = update_feature_flags(db, feature_flag_list)
+    new_feature_flags = update_feature_flags(
+        db=db, feature_flags_list=feature_flag_list
+    )
 
     return templates.TemplateResponse(
         "feature_flags.html", {"request": request, "feature_flags": new_feature_flags}
@@ -53,11 +53,11 @@ def post_feature_flags(
 
 
 @router.post("/admin/feature_flags/create")
-def post_feature_flags(  # noqa: F811
+def create_feature_flags_post(  # noqa: F811
     request: Request,
     feature_flag_name_form: str = Form(...),
     feature_flag_is_enabled_form: int = Form(...),
-    creds: str = Depends(get_current_creds_from_token),
+    creds: dict[str, str] = Depends(get_current_creds_from_token),
     db: Session = Depends(get_db),
 ):
     if creds["role"] != "Admin":

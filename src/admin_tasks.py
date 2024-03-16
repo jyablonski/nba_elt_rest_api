@@ -1,10 +1,10 @@
 import os
 import time
 
-import boto3
+import boto3  # type: ignore
 
 
-def invoke_restart_dashboard():
+def invoke_restart_dashboard() -> dict[str, str | int]:
     if os.environ.get("ENV_TYPE") != "prod":
         time.sleep(3)
         return {
