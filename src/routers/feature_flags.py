@@ -53,7 +53,7 @@ def update_feature_flags_post(
 
 
 @router.post("/admin/feature_flags/create")
-def crate_feature_flags_post(  # noqa: F811
+def create_feature_flags_post(  # noqa: F811
     request: Request,
     feature_flag_name_form: str = Form(...),
     feature_flag_is_enabled_form: int = Form(...),
