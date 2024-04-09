@@ -1,23 +1,30 @@
-version: '3'
 services:
+  redis:
+    image: redis:7.2-alpine
+    restart: always
+    ports:
+      - "6379:6379"
+    command: redis-server --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+    networks:
+      - api_network
   postgres:
     image: postgres:14-alpine
     container_name: postgres
     ports:
-     - 5432:5432
+      - 5432:5432
     environment:
-     - POSTGRES_USER=postgres
-     - POSTGRES_PASSWORD=postgres
-     - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
     volumes:
       - ${PWD}/docker/postgres_bootstrap.sql:/docker-entrypoint-initdb.d/z99_dump.sql
-    networks: 
+    networks:
       - api_network
 
   rest_api_test_runner:
     build:
-        context: ../
-        dockerfile: docker/Dockerfile.test
+      context: ../
+      dockerfile: docker/Dockerfile.test
     image: nba_elt_rest_api_local
     environment:
       - IP=postgres
@@ -30,11 +37,13 @@ services:
       - OTEL_EXPORTER_OTLP_ENDPOINT=https://api.honeycomb.io
       - OTEL_EXPORTER_OTLP_HEADERS=x-honeycomb-team=bababooiee
       - OTEL_SERVICE_NAME=rest-api-dev
+      - REDIS_HOST=redis
+      - REDIS_PW=eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
     ports:
       - 8080:8080
     depends_on:
       - postgres
-    networks: 
+    networks:
       - api_network
     links:
       - postgres:postgres
@@ -47,7 +56,6 @@ services:
       - ${PWD}/pyproject.toml:/home/appuser/pyproject.toml
       # these are for fast local docker compose dev so changes will automatically make it into the app
     command: python3 -m pytest -vv
-
 
 networks:
   api_network:

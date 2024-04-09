@@ -2107,3 +2107,24 @@ CREATE TABLE IF NOT EXISTS incidents
 INSERT INTO incidents(incident_name, incident_description, is_active)
 VALUES ('New Transactions Down', 'New Transactions have been unavailable as of July 5, 2023', 1),
        ('NBA Dashboard Lag', 'The NBA Dashboard has been experiencing latency issues since July 1, 2023', 1);
+
+CREATE TYPE schedule_type AS ENUM ('Daily', 'Weekly', 'Monthly');
+DROP TABLE IF EXISTS scheduled_reports;
+CREATE TABLE IF NOT EXISTS scheduled_reports
+(
+	id serial primary key,
+	username varchar(255) not null,
+	report_name varchar(40) not null,
+	schedule_frequency schedule_type not null,
+	schedule_interval integer not null,
+	start_date date not null,
+	last_execution timestamp,
+	next_execution timestamp not null,
+	is_active integer not null default 1,
+	created_at timestamp default current_timestamp,
+	modified_at timestamp default current_timestamp
+);
+
+INSERT INTO scheduled_reports(id, username, report_name, schedule_frequency, schedule_interval, start_date, last_execution, next_execution, is_active)
+VALUES 
+	(1, 'jyablonski', 'Past Bets', 'Daily', 1, '2024-02-01', current_timestamp, current_timestamp + interval '1 day', 1);

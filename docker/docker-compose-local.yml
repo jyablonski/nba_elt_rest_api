@@ -1,5 +1,12 @@
-version: "3"
 services:
+  redis:
+    image: redis:7.2-alpine
+    restart: always
+    ports:
+      - "6379:6379"
+    command: redis-server --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+    networks:
+      - api_network
   postgres:
     image: postgres:14-alpine
     container_name: postgres
@@ -34,6 +41,8 @@ services:
       - GMAIL_OAUTH_CLIENT_SECRET=bbbb
       - GMAIL_OAUTH_REDIRECT_URL=http://localhost:8080/auth_google
       - OS_ENDPOINT=http://opensearch:9200
+      - REDIS_HOST=redis
+      - REDIS_PW=eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
     restart: on-failure
     ports:
       - 8080:8080

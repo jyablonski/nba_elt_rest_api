@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Scheduled Report Configuration</h1>
+
+<div class="reporting-container">
+    <div class="current-scheduled-reports-div">
+        <h2>Left Div</h2>
+        <p>This is the content of the left div.</p>
+    </div>
+    <div class="create-scheduled-reports-div">
+        <h2>Create New Report</h2>
+        <form class="new-scheduled-reports-div" action="/reporting/submit_report_configuration" method="post">
+            <!-- Add form elements for creating new reports here -->
+            <label for="report_name">Report Name:</label>
+            <select id="report_name" name="report_name" required>
+                {% for report in available_scheduled_reports %}
+                <option value="{{ report }}">{{ report }}</option>
+                {% endfor %}
+            </select>
+            <label for="schedule_frequency">Schedule Frequency:</label>
+            <select id="schedule_frequency" name="schedule_frequency" required>
+                <option value="daily">Daily</option>
+                <option value="weekly">Weekly</option>
+                <option value="monthly">Monthly</option>
+            </select><br><br>
+
+            <label for="schedule_interval">Schedule Interval:</label>
+            <input type="number" id="schedule_interval" name="schedule_interval" min="1" required><br><br>
+
+            <label for="start_date">Start Date:</label>
+            <input type="date" id="start_date" name="start_date" required><br><br>
+
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</div>
+
+{% endblock content %}

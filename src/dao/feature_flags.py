@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 
 from sqlalchemy.orm import Query, Session
 
@@ -8,7 +8,7 @@ from src.models import FeatureFlags
 def create_feature_flags(
     db: Session, feature_flag_name_form: str, feature_flag_is_enabled_form: int
 ):
-    created_timestamp = datetime.utcnow()
+    created_timestamp = datetime.now(timezone.utc)
 
     record = FeatureFlags(
         flag=feature_flag_name_form,

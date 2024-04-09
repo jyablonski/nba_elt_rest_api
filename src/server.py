@@ -3,6 +3,7 @@ import os
 from fastapi import FastAPI, Request
 from fastapi_cache import FastAPICache
 from fastapi_cache.backends.inmemory import InMemoryBackend
+from fastapi_cache.backends.redis import RedisBackend
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from mangum import Mangum
@@ -12,6 +13,7 @@ from opentelemetry.instrumentation.requests import RequestsInstrumentor
 from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExporter
 from opentelemetry.sdk.trace import TracerProvider
 from opentelemetry.sdk.trace.export import BatchSpanProcessor
+from redis import asyncio as aioredis
 from starlette.middleware.sessions import SessionMiddleware
 
 from starlette.middleware.base import BaseHTTPMiddleware
@@ -39,6 +41,7 @@ from src.routers.past_bets import router as past_bets_router
 from src.routers.player_stats import router as player_stats_router
 from src.routers.predictions import router as predictions_router
 from src.routers.reddit_comments import router as reddit_comments_router
+from src.routers.reporting import router as reporting_router
 from src.routers.settings import router as settings_router
 from src.routers.schedule import router as schedule_router
 from src.routers.standings import router as standings_router
@@ -82,6 +85,7 @@ app.include_router(past_bets_router)
 app.include_router(player_stats_router)
 app.include_router(predictions_router)
 app.include_router(reddit_comments_router)
+app.include_router(reporting_router)
 app.include_router(settings_router)
 app.include_router(schedule_router)
 app.include_router(standings_router)
@@ -102,7 +106,10 @@ handler = Mangum(app)
 
 @app.on_event("startup")
 async def startup() -> None:
-    FastAPICache.init(InMemoryBackend())
+    redis = aioredis.from_url(
+        url=f"redis://:{os.environ.get('REDIS_PW')}@{os.environ.get('REDIS_HOST')}"
+    )
+    FastAPICache.init(RedisBackend(redis), prefix="fastapi-cache")
 
 
 @app.get("/", response_class=HTMLResponse)

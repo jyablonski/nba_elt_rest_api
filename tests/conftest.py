@@ -5,8 +5,9 @@ import os
 
 from fastapi.testclient import TestClient
 from fastapi_cache import FastAPICache
-from fastapi_cache.backends.inmemory import InMemoryBackend
+from fastapi_cache.backends.redis import RedisBackend
 import pytest
+from redis import asyncio as aioredis
 
 from src.database import load_yaml_with_env
 from src.security import OAuth2PasswordBearerWithCookie
@@ -20,7 +21,10 @@ def disable_logging():
 
 @pytest.fixture(autouse=True)
 def cache_setup():
-    FastAPICache.init(InMemoryBackend())
+    redis = aioredis.from_url(
+        url=f"redis://:{os.environ.get('REDIS_PW')}@{os.environ.get('REDIS_HOST')}"
+    )
+    FastAPICache.init(RedisBackend(redis), prefix="fastapi-cache")
 
 
 @pytest.fixture()
