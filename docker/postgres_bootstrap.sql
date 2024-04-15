@@ -1796,26 +1796,173 @@ This is mind-numbing incompetence from everyone involved from the 76ers... inclu
 
 DROP TABLE IF EXISTS injuries;
 CREATE TABLE injuries(
-    injury_pk text,
-    player text,
-    team_acronym text,
-    team text,
-    date text,
-    status text,
-    injury text,
-    description text,
-    total_injuries bigint,
-    team_active_injuries numeric,
-    team_active_protocols numeric,
-    scrape_date date
+	player text NULL,
+	team text NULL,
+	team_acronym text NULL,
+	injury text NULL,
+	injury_status text NULL,
+	injury_description text NULL,
+	scrape_date date NULL
 );
 
-INSERT INTO injuries (injury_pk, player, team_acronym, team, date, status, injury, description,
-                           total_injuries, team_active_injuries, team_active_protocols, scrape_date)
-VALUES ('09a97226ecd7b666dd516039ce752720', 'Myles Turner', 'IND', 'Indiana Pacers', 'Tues, Apr 4, 2023',
-        'Day to Day', 'Ankle/Back', 'Turner is questionable for Wednesdays (Apr.5) game against New York.', 4, 4, 0, current_date),
-       ('0e6fe518fdecea9c84ad54608810a528', 'Tyrese Haliburton', 'Haliburton is out for Wednesdays (Apr.5) game against New York.',
-        'IND', 'Indiana Pacers', 'Tues, Apr 4, 2023', 'Out', 'Ankle', 4, 4, 0, current_date);
+INSERT INTO injuries (player,team,team_acronym,injury,injury_status,injury_description,scrape_date) VALUES
+	 ('A.J. Green','Milwaukee Bucks','MIL','Ankle','Out','Green is OUT for Sunday''s (Apr. 14) game against Orlando.','2024-04-15'),
+	 ('Jaylin Galloway','Milwaukee Bucks','MIL','Ankle','Out','Galloway is OUT for Sunday''s (Apr. 14) game against Orlando.','2024-04-15'),
+	 ('Giannis Antetokounmpo','Milwaukee Bucks','MIL','Calf','Out','The Bucks announced that Antetokounmpo will miss the final three games of the regular season.','2024-04-15'),
+	 ('Jontay Porter','Toronto Raptors','TOR','Personal Reasons','Out','Porter is OUT for Monday''s (Mar. 25) game against Brooklyn.','2024-04-15'),
+	 ('Jakob Poeltl','Toronto Raptors','TOR','Finger','Out','The Raptors announced that Poeltl had surgery on his left pinkie finger and is out indefinitely.','2024-04-15'),
+	 ('Chris Boucher','Toronto Raptors','TOR','Knee','Out','Raptors head coach Darko Rajakovic said Boucher is dealing with MCL tear in his right knee and is likely out the next 6-8 weeks.','2024-04-15'),
+	 ('Scottie Barnes','Toronto Raptors','TOR','Hand','Out','The Toronto Raptors announced that F Scottie Barnes has sustained a fracture to the third metacarpal bone of his left hand and is out indefinitely.','2024-04-15'),
+	 ('Immanuel Quickley','Toronto Raptors','TOR','Adductor','Out','Quickley is OUT for Sunday''s (Apr. 14) game against Miami.','2024-04-15'),
+	 ('Mouhamadou Gueye','Toronto Raptors','TOR','Thumb','Out','Gueye is OUT for Sunday''s (Apr. 14) game against Miami.','2024-04-15'),
+	 ('D.J. Carton','Toronto Raptors','TOR','Ankle','Out','Carton is OUT for Sunday''s (Apr. 14) game against Miami.','2024-04-15');
+INSERT INTO injuries (player,team,team_acronym,injury,injury_status,injury_description,scrape_date) VALUES
+	 ('Derrick White','Boston Celtics','BOS','Ankle','Out','White is OUT for Sunday''s (Apr. 14) game against Washington.','2024-04-15'),
+	 ('Jayson Tatum','Boston Celtics','BOS','Rest','Out','Tatum is OUT for Sunday''s (Apr. 14) game against Washington.','2024-04-15'),
+	 ('Kristaps Porzingis','Boston Celtics','BOS','Rest','Out','Porzingis is OUT for Sunday''s (Apr. 14) game against Washington.','2024-04-15'),
+	 ('Al Horford','Boston Celtics','BOS','Rest','Out','Horford is OUT for Sunday''s (Apr. 14) game against Washington.','2024-04-15'),
+	 ('Jrue Holiday','Boston Celtics','BOS','Knee','Out','Holiday is OUT for Sunday''s (Apr. 14) game against Washington.','2024-04-15'),
+	 ('Jaylen Brown','Boston Celtics','BOS','Rest','Out','Brown is OUT for Sunday''s (Apr. 14) game against Washington.','2024-04-15'),
+	 ('Bennedict Mathurin','Indiana Pacers','IND','Shoulder','Out For Season','The Pacers announced that Mathurin will miss the rest of the season after undergoing shoulder surgery.','2024-04-15'),
+	 ('Josh Richardson','Miami Heat','MIA','Shoulder','Out For Season','The Heat announced that Richardson underwent right shoulder surgery and will miss the remainder of the season.','2024-04-15'),
+	 ('Terry Rozier','Miami Heat','MIA','Neck','Out','Rozier is OUT for Sunday''s (Apr. 14) game against Toronto.','2024-04-15'),
+	 ('Duncan Robinson','Miami Heat','MIA','Facet','Out','Robinson is OUT for Sunday''s (Apr. 14) game against Toronto.','2024-04-15');
+INSERT INTO injuries (player,team,team_acronym,injury,injury_status,injury_description,scrape_date) VALUES
+	 ('De''Anthony Melton','Philadelphia 76ers','PHI','Back','Out','Melton is OUT for Sunday''s (Apr. 14) game against Brooklyn.','2024-04-15'),
+	 ('KJ Martin','Philadelphia 76ers','PHI','Toe','Out','Martin is OUT for Sunday''s (Apr. 14) game against Brooklyn.','2024-04-15'),
+	 ('Joel Embiid','Philadelphia 76ers','PHI','Knee','Out','Embiid is OUT for Sunday''s (Apr. 14) game against Brooklyn.','2024-04-15'),
+	 ('Robert Covington','Philadelphia 76ers','PHI','Knee','Out','Covington last played (Dec. 30), and has no timetable on his return.','2024-04-15'),
+	 ('Keita Bates-Diop','Brooklyn Nets','BKN','Shin','Out For Season','The Nets announced Bates-Diop will miss the remainder of the season after under going a procedure to address a stress fracture.','2024-04-15'),
+	 ('Dennis Smith','Brooklyn Nets','BKN','Hip','Out','Smith Jr. is OUT for Sunday''s (Apr. 14) game against Philadelphia.','2024-04-15'),
+	 ('Day''Ron Sharpe','Brooklyn Nets','BKN','Wrist','Out','Sharpe is OUT for Sunday''s (Apr. 14) game against Philadelphia.','2024-04-15'),
+	 ('Jaylen Martin','Brooklyn Nets','BKN','Ankle','Out','Martin is OUT for Sunday''s (Apr. 14) game against Philadelphia.','2024-04-15'),
+	 ('Dorian Finney-Smith','Brooklyn Nets','BKN','Knee','Out','Finney-Smith is OUT for Sunday''s (Apr. 14) game against Philadelphia.','2024-04-15'),
+	 ('Cameron Johnson','Brooklyn Nets','BKN','Toe','Out','Johnson is OUT for Sunday''s (Apr. 14) game against Philadelphia.','2024-04-15');
+INSERT INTO injuries (player,team,team_acronym,injury,injury_status,injury_description,scrape_date) VALUES
+	 ('Ben Simmons','Brooklyn Nets','BKN','Back','Out For Season','The Nets announced that Simmons will miss the rest of the season with a nerve impingement in his lower back.','2024-04-15'),
+	 ('Dariq Whitehead','Brooklyn Nets','BKN','Shin','Out For Season','Nets coach Jacque Vaughn said Whitehead will undergo season-ending surgery.','2024-04-15'),
+	 ('LaMelo Ball','Charlotte Hornets','CHA','Ankle','Out For Season','Ball hasn''t played since Jan. 26 and will miss the remainder of the season as he continues rehab, per Senior lead NBA Insider Shams Charania.','2024-04-15'),
+	 ('Seth Curry','Charlotte Hornets','CHA','Ankle','Out','Curry is still OUT with an ankle injury with no update on a return.','2024-04-15'),
+	 ('Cody Martin','Charlotte Hornets','CHA','Ankle','Out','Martin is still OUT with an ankle injury and has no timetable on a return.','2024-04-15'),
+	 ('Grant Williams','Charlotte Hornets','CHA','Ankle','Out','Williams is OUT for Sunday''s (Apr. 14) game against Cleveland.','2024-04-15'),
+	 ('Nick Richards','Charlotte Hornets','CHA','Foot','Out','Richards is OUT for Sunday''s (Apr. 14) game against Cleveland.','2024-04-15'),
+	 ('Brandon Miller','Charlotte Hornets','CHA','Wrist','Out','Miller is OUT for Sunday''s (Apr. 14) game against Cleveland.','2024-04-15'),
+	 ('Miles Bridges','Charlotte Hornets','CHA','Wrist','Out','Bridges is OUT for Sunday''s (Apr. 14) game against Cleveland.','2024-04-15'),
+	 ('Davis Bertans','Charlotte Hornets','CHA','Achilles','Out','Bertans is OUT for Sunday''s (Apr. 14) game against Cleveland.','2024-04-15');
+INSERT INTO injuries (player,team,team_acronym,injury,injury_status,injury_description,scrape_date) VALUES
+	 ('Mark Williams','Charlotte Hornets','CHA','Back','Out','Williams hasn''t played since Dec. 8 against Toronto and remains without a timetable to return.','2024-04-15'),
+	 ('Bilal Coulibaly','Washington Wizards','WAS','Wrist','Out For Season','Wizard announced Coulibaly will miss the remainder of the regular season after being diagnosed with a right wrist fracture.','2024-04-15'),
+	 ('Tristan Vukcevic','Washington Wizards','WAS','Ankle','Out','Vukcevic is OUT for Sunday''s (Apr. 14) game against Boston.','2024-04-15'),
+	 ('Landry Shamet','Washington Wizards','WAS','Calf','Out','Shamet is out for Sunday''s (Apr. 14) game against Boston.','2024-04-15'),
+	 ('Jordan Poole','Washington Wizards','WAS','Illness','Out','Poole is OUT for Sunday''s (Apr. 14) game against Boston.','2024-04-15'),
+	 ('Kyle Kuzma','Washington Wizards','WAS','Ankle','Out','Kuzmai is out for Sunday''s (Apr. 14) game against Boston.','2024-04-15'),
+	 ('Richaun Holmes','Washington Wizards','WAS','Toe','Out','Holmes is OUT for Sunday''s (Apr. 14) game against Boston.','2024-04-15'),
+	 ('Marvin Bagley','Washington Wizards','WAS','Knee','Out','Bagley III is out for Sunday''s (Apr. 14) game against Boston.','2024-04-15'),
+	 ('Tyus Jones','Washington Wizards','WAS','Back','Out','Jones is out for Sunday''s (Apr. 14) game against Boston.','2024-04-15'),
+	 ('Ayo Dosunmu','Chicago Bulls','CHI','Quad','Out','Dosunmu is OUT for Sunday''s (Apr. 14) game against New York.','2024-04-15');
+INSERT INTO injuries (player,team,team_acronym,injury,injury_status,injury_description,scrape_date) VALUES
+	 ('Julian Phillips','Chicago Bulls','CHI','Foot','Out','Phillips is OUT for Sunday''s (Apr. 14) game against New York.','2024-04-15'),
+	 ('Andre Drummond','Chicago Bulls','CHI','Quadricep','Out','Drummond is OUT for Sunday''s (Apr. 14) game against New York.','2024-04-15'),
+	 ('Alex Caruso','Chicago Bulls','CHI','Ankle','Out','Caruso is OUT for Sunday''s (Apr. 13) game against New York.','2024-04-15'),
+	 ('Patrick Williams','Chicago Bulls','CHI','Foot','Out For Season','The Bulls announced that Williams will undergo season ending foot surgery.','2024-04-15'),
+	 ('Zach LaVine','Chicago Bulls','CHI','Ankle','Out For Season','The Chicago Bulls announced guard Zach LaVine will undergo surgery on right foot and be out the rest of the season. via @AdamSchefter on X.','2024-04-15'),
+	 ('Lonzo Ball','Chicago Bulls','CHI','Knee','Out For Season','Ball will miss the 2023-24 season while recovering from surgery.','2024-04-15'),
+	 ('Julius Randle','New York Knicks','NYK','Shoulder','Out For Season','The Knicks announced that Randle will undergo surgery on his right shoulder and will be re-evaluated in five months.','2024-04-15'),
+	 ('Quentin Grimes','Detroit Pistons','DET','Knee','Out For Season','Grimes will miss the rest of the season to rehab lingering muscle soreness related to his knee injury, according to Shams Charani.','2024-04-15'),
+	 ('Stanley Umude','Detroit Pistons','DET','Ankle','Out For Season','Umude is expected to miss the rest of the season with a hairline fracture to the right ankle.','2024-04-15'),
+	 ('Ausar Thompson','Detroit Pistons','DET','Illness','Out For Season','The Pistons announced that Thompson will miss the rest of the season while being treated for a blood clot.','2024-04-15');
+INSERT INTO injuries (player,team,team_acronym,injury,injury_status,injury_description,scrape_date) VALUES
+	 ('Isaiah Stewart','Detroit Pistons','DET','Hamstring','Out For Season','The Pistons announced that Stewart will miss the rest of the season with a right hamstring strain.','2024-04-15'),
+	 ('Simone Fontecchio','Detroit Pistons','DET','Toe','Out','Fontecchio is out for Sunday''s (Apr. 14) game against San Antonio.','2024-04-15'),
+	 ('Jalen Duren','Detroit Pistons','DET','Back','Out','Duren is OUT for Sunday''s (Apr. 14) game against San Antonio.','2024-04-15'),
+	 ('Cade Cunningham','Detroit Pistons','DET','Knee','Out','Cunningham is OUT for Sunday''s (Apr. 14) game against San Antonio.','2024-04-15'),
+	 ('Saddiq Bey','Atlanta Hawks','ATL','Knee','Out For Season','The Atlanta Hawks announced Saddiq Bey underwent successful surgery Wednesday (Mar. 27) to repair the torn left anterior cruciate ligament (ACL) in his left knee.','2024-04-15'),
+	 ('Onyeka Okongwu','Atlanta Hawks','ATL','Toe','Out','Okongwu (left big toe sprain) underwent a non-surgical procedure and will be re-evaluated in 4 weeks.','2024-04-15'),
+	 ('Wesley Matthews','Atlanta Hawks','ATL','Hamstring','Out','Matthews is OUT for Sunday''s (Apr. 14) game against Indiana.','2024-04-15'),
+	 ('Seth Lundy','Atlanta Hawks','ATL','Ankle','Out','Lundy is OUT for Sunday''s (Apr. 14) game against Indiana.','2024-04-15'),
+	 ('Jalen Johnson','Atlanta Hawks','ATL','Ankle','Out','Johnson suffered a level 2 ankle sprain and will be re-evaluated in 3 weeks.','2024-04-15'),
+	 ('Clint Capela','Atlanta Hawks','ATL','Rest','Out','Capela is OUT for Sunday''s (Apr. 14) game against Indiana.','2024-04-15');
+INSERT INTO injuries (player,team,team_acronym,injury,injury_status,injury_description,scrape_date) VALUES
+	 ('Ty Jerome','Cleveland Cavaliers','CLE','Ankle','Out','Jerome underwent surgery on his right ankle (Jan. 23) and remains out indefinitely.','2024-04-15'),
+	 ('Darius Garland','Cleveland Cavaliers','CLE','Back','Out','Garland is OUT for Sunday''s (Apr. 14) game against Charlotte.','2024-04-15'),
+	 ('Dean Wade','Cleveland Cavaliers','CLE','Knee','Out','Wade is OUT for Sunday''s (Apr. 14) game against Charlotte.','2024-04-15'),
+	 ('Donovan Mitchell','Cleveland Cavaliers','CLE','Knee','Out','Mitchell is OUT for Sunday''s (Apr. 14) game against Charlotte.','2024-04-15'),
+	 ('Sam Merrill','Cleveland Cavaliers','CLE','Neck','Out','Merrill is OUT for Sunday''s (Apr. 14) game against Charlotte.','2024-04-15'),
+	 ('Christian Wood','Los Angeles Lakers','LAL','Knee','Out','Wood will undergo an arthroscopic procedure on his left knee and is expected to be sidelined for several weeks. via @Woj','2024-04-15'),
+	 ('Jarred Vanderbilt','Los Angeles Lakers','LAL','Foot','Out','Vanderbilt (foot) is progressing in his rehab, but he has not been cleared for on-court activities as of Tuesday, Khobi Price of The Orange County Register reports.','2024-04-15'),
+	 ('Jalen Hood-Schifino','Los Angeles Lakers','LAL','Back','Out','Lakers say Jalen Hood-Schifino underwent a lumbar microdiscectomy back procedure today. No timetable on return.','2024-04-15'),
+	 ('Kawhi Leonard','Los Angeles Clippers','LAC','Knee','Out','Leonard is out for Sunday''s (Apr. 14) game against Houston.','2024-04-15'),
+	 ('James Harden','Los Angeles Clippers','LAC','Foot','Out','Harden is OUT for Sunday''s (Apr. 14) game against Houston.','2024-04-15');
+INSERT INTO injuries (player,team,team_acronym,injury,injury_status,injury_description,scrape_date) VALUES
+	 ('Collin Gillespie','Denver Nuggets','DEN','Knee','Out','Gillespie is OUT for Sunday''s (Apr. 14) game against Memphis.','2024-04-15'),
+	 ('Vlatko Cancar','Denver Nuggets','DEN','Knee','Out','The Nuggets announced that Cancar underwent surgery on his left knee and is out indefinitely.','2024-04-15'),
+	 ('Alperen Sengun','Houston Rockets','HOU','Ankle','Out','Sengun has been diagnosed with a Grade 3 sprain and will likely miss the rest of the season. via Shams Charania','2024-04-15'),
+	 ('Fred VanVleet','Houston Rockets','HOU','Hip','Out','VanVleet is out for Sunday''s (Apr. 14) game against the Clippers.','2024-04-15'),
+	 ('Jae''Sean Tate','Houston Rockets','HOU','Ankle','Out','Tate is out for Sunday''s (Apr. 14) game against the Clippers.','2024-04-15'),
+	 ('Tari Eason','Houston Rockets','HOU','Leg','Out For Season','Rockets coach Ime Udoka announced that Eason will undergo season-ending surgery.','2024-04-15'),
+	 ('Dillon Brooks','Houston Rockets','HOU','Abductor','Out','Brooks is out for Sunday''s (Apr. 14) game against the Clippers.','2024-04-15'),
+	 ('Steven Adams','Houston Rockets','HOU','Knee','Out For Season','The Grizzlies announced that Adams will undergo season-ending surgery on his right knee.','2024-04-15'),
+	 ('Lauri Markkanen','Utah Jazz','UTA','Shoulder','Out','The Jazz announced that Markkanen re-aggravated his shoulder impingement and will be re-evaluated in two weeks.','2024-04-15'),
+	 ('Collin Sexton','Utah Jazz','UTA','Illness','Out','Sexton is OUT for Sunday''s (Apr. 14) game against Golden State.','2024-04-15');
+INSERT INTO injuries (player,team,team_acronym,injury,injury_status,injury_description,scrape_date) VALUES
+	 ('Walker Kessler','Utah Jazz','UTA','Nose','Out','Kessler is out for Sunday''s (Apr. 14) game against Golden State.','2024-04-15'),
+	 ('Kris Dunn','Utah Jazz','UTA','Foot','Out','Dunn is out for Sunday''s (Apr. 14) game against Golden State.','2024-04-15'),
+	 ('John Collins','Utah Jazz','UTA','Back','Out','Collins is out for Sunday''s (Apr. 14) game against Golden State.','2024-04-15'),
+	 ('Jordan Clarkson','Utah Jazz','UTA','Back','Out','Clarkson is out for Sunday''s (Apr. 14) game against Golden State.','2024-04-15'),
+	 ('P.J. Washington','Dallas Mavericks','DAL','Ankle','Out','Washington Jr. is out for Sunday''s (Apr. 14) game against Oklahoma City.','2024-04-15'),
+	 ('Dereck Lively','Dallas Mavericks','DAL','Knee','Out','Lively II is out for Sunday''s (Apr. 14) game against Oklahoma City.','2024-04-15'),
+	 ('Maxi Kleber','Dallas Mavericks','DAL','Back','Out','Kleber is out for Sunday''s (Apr. 14) game against Oklahoma City.','2024-04-15'),
+	 ('Derrick Jones','Dallas Mavericks','DAL','Shoulder','Out','Jones Jr. is out for Sunday''s (Apr. 14) game against Oklahoma City.','2024-04-15'),
+	 ('Kyrie Irving','Dallas Mavericks','DAL','Hamstring','Out','Irving is out for Sunday''s (Apr. 14) game against Oklahoma City.','2024-04-15'),
+	 ('Daniel Gafford','Dallas Mavericks','DAL','Elbow','Out','Gafford is out for Sunday''s (Apr. 14) game against Oklahoma City.','2024-04-15');
+INSERT INTO injuries (player,team,team_acronym,injury,injury_status,injury_description,scrape_date) VALUES
+	 ('Dante Exum','Dallas Mavericks','DAL','Foot','Out','Exum is out for Sunday''s (Apr. 14) game against Oklahoma City.','2024-04-15'),
+	 ('Luka Doncic','Dallas Mavericks','DAL','Ankle','Out','Doncic is out for Sunday''s (Apr. 14) game against Oklahoma City.','2024-04-15'),
+	 ('Greg Brown','Dallas Mavericks','DAL','Personal','Out','Brown III is out for Sunday''s (Apr. 14) game against Oklahoma City.','2024-04-15'),
+	 ('Jabari Walker','Portland Trail Blazers','POR','Knee','Out','Walker is OUT for Sunday''s (Apr. 14) game against Sacramento.','2024-04-15'),
+	 ('Matisse Thybulle','Portland Trail Blazers','POR','Ankle','Out','Thybulle is out for Sunday''s (Apr. 14) game against Sacramento.','2024-04-15'),
+	 ('Anfernee Simons','Portland Trail Blazers','POR','Knee','Out','Simons is OUT for Sunday''s (Apr. 14) game against Sacramento.','2024-04-15'),
+	 ('Shaedon Sharpe','Portland Trail Blazers','POR','Abdomen','Out','Sharpe is out for Sunday''s (Apr. 14) game against Sacramento.','2024-04-15'),
+	 ('Scoot Henderson','Portland Trail Blazers','POR','Hip','Out','Henderson is OUT for Sunday''s (Apr. 14) game against Sacramento.','2024-04-15'),
+	 ('Jerami Grant','Portland Trail Blazers','POR','Hamstring','Out','Grant is out for Sunday''s (Apr. 14) game against Sacramento.','2024-04-15'),
+	 ('Deandre Ayton','Portland Trail Blazers','POR','Back','Out','Ayton is OUT for Sunday''s (Apr. 14) game against Sacramento.','2024-04-15');
+INSERT INTO injuries (player,team,team_acronym,injury,injury_status,injury_description,scrape_date) VALUES
+	 ('Toumani Camara','Portland Trail Blazers','POR','Rib','Out For Season','Camara is OUT for the rest of the season but will make a full recovery from his rib fracture.','2024-04-15'),
+	 ('Malcolm Brogdon','Portland Trail Blazers','POR','Elbow','Out','The Trail Blazers announced that Brogdon has increased his workload in workouts and is trending in the right direction, but there is no clear timetable on his return.','2024-04-15'),
+	 ('Robert Williams','Portland Trail Blazers','POR','Knee','Out For Season','Williams III will be required to undergo season-ending knee surgery, per Adrian Wojnarowski.','2024-04-15'),
+	 ('Ziaire Williams','Memphis Grizzlies','MEM','Hip','Out','The Memphis Grizzlies announced Williams is diagnosed with a grad2 strain of the hip and back and will be evaluated in four weeks.','2024-04-15'),
+	 ('Derrick Rose','Memphis Grizzlies','MEM','Back','Out','The Memphis Grizzlies announced Rose was diagnosed with osteitis pubis and will be re-evaluated in three weeks.','2024-04-15'),
+	 ('Vince Williams','Memphis Grizzlies','MEM','Knee','Out','Williams Jr. is out for Sunday''s (Apr. 14) game against Denver.','2024-04-15'),
+	 ('Yuta Watanabe','Memphis Grizzlies','MEM','Personal','Out','Watanabe is out for Sunday''s (Apr. 14) game against Denver.','2024-04-15'),
+	 ('Lamar Stevens','Memphis Grizzlies','MEM','Groin','Out','Stevens is out for Sunday''s (Apr. 14) game against Denver.','2024-04-15'),
+	 ('John Konchar','Memphis Grizzlies','MEM','Heel','Out','Konchar is out for Sunday''s (Apr. 14) game against Denver.','2024-04-15'),
+	 ('Luke Kennard','Memphis Grizzlies','MEM','Knee','Out','Kennard is out for Sunday''s (Apr. 14) game against Denver.','2024-04-15');
+INSERT INTO injuries (player,team,team_acronym,injury,injury_status,injury_description,scrape_date) VALUES
+	 ('Jaren Jackson','Memphis Grizzlies','MEM','Quad','Out','Jackson Jr. is out for Sunday''s (Apr. 14) game against Denver.','2024-04-15'),
+	 ('Brandon Clarke','Memphis Grizzlies','MEM','Hand','Out','Clarke is out for Sunday''s (Apr. 14) game against Denver.','2024-04-15'),
+	 ('Desmond Bane','Memphis Grizzlies','MEM','Back','Out','Bane is out for Sunday''s (Apr. 14) game against Denver.','2024-04-15'),
+	 ('Santi Aldama','Memphis Grizzlies','MEM','Foot','Out','Aldama is out for Sunday''s (Apr. 14) game against Denver.','2024-04-15'),
+	 ('Marcus Smart','Memphis Grizzlies','MEM','Finger','Out','The Grizzlies announced that Smart''s injury is healing properly and he will be re-evaluated in three weeks.','2024-04-15'),
+	 ('Ja Morant','Memphis Grizzlies','MEM','Shoulder','Out For Season','Grizzlies announced Ja Morant will undergo season-ending surgery on his shoulder.','2024-04-15'),
+	 ('Eric Gordon','Phoenix Suns','PHX','Migrane','Day To Day','Gordon is OUT for Sunday''s (Apr. 14) game against Minnesota.','2024-04-15'),
+	 ('Damion Lee','Phoenix Suns','PHX','Knee','Out','Head coach Frank Vogel said Monday that Lee (knee) has yet to resume on-court work, but the Suns remain hopeful that the 31-year-old will play before the end of the regular season, Duane Rankin of The Arizona Republic reports.','2024-04-15'),
+	 ('Devin Vassell','San Antonio Spurs','SAS','Foot','Out For Season','Spurs announced Vassell is out for the rest of the season with a foot injury.','2024-04-15'),
+	 ('Jeremy Sochan','San Antonio Spurs','SAS','Ankle','Out For Season','Spurs announced Sochan is out for the rest of the season with an ankle injury.','2024-04-15');
+INSERT INTO injuries (player,team,team_acronym,injury,injury_status,injury_description,scrape_date) VALUES
+	 ('Victor Wembanyama','San Antonio Spurs','SAS','Ankle','Out','Wembanyama is out for Sunday''s (Apr. 14) game against Detroit.','2024-04-15'),
+	 ('Cedi Osman','San Antonio Spurs','SAS','Ankle','Out','Osman is out for Sunday''s (Apr. 14) game against Detroit.','2024-04-15'),
+	 ('Keldon Johnson','San Antonio Spurs','SAS','Foot','Out','Johnson is out for Sunday''s (Apr. 14) game against Detroit.','2024-04-15'),
+	 ('Malaki Branham','San Antonio Spurs','SAS','Concussion','Out','Branham is out for Sunday''s (Apr. 14) game against Detroit.','2024-04-15'),
+	 ('Dominick Barlow','San Antonio Spurs','SAS','Knee','Out','Barlow is out for Sunday''s (Apr. 14) game against Detroit.','2024-04-15'),
+	 ('Charles Bassey','San Antonio Spurs','SAS','Knee','Out For Season','The San Antonio Spurs announced C Charles Bassey is out for the season with a torn ACL.','2024-04-15'),
+	 ('Malik Monk','Sacramento Kings','SAC','MCL Sprain','Out','Monk suffered a sprained right MCL and is expected to miss four-to-six weeks.','2024-04-15'),
+	 ('Kevin Huerter','Sacramento Kings','SAC','Shoulder','Out For Season','Huerter will have season-ending left shoulder surgery. Huerter is expected to be recovered for the start of the 2024-25 season.','2024-04-15'),
+	 ('Jaylen Clark','Minnesota Timberwolves','MIN','Achilles','Out','Clark still remains out due to an achilles injury, and has no timetable for return.','2024-04-15'),
+	 ('Gary Payton','Golden State Warriors','GSW','Calf','Out','Payton II is out for Sunday''s (Apr. 14) game against Utah.','2024-04-15');
+INSERT INTO injuries (player,team,team_acronym,injury,injury_status,injury_description,scrape_date) VALUES
+	 ('Draymond Green','Golden State Warriors','GSW','Knee','Out','Green is OUT for Sunday''s (Apr. 14) game against Utah.','2024-04-15'),
+	 ('Stephen Curry','Golden State Warriors','GSW','Ankle','Out','Curry is OUT for Sunday''s (Apr. 14) game against Utah.','2024-04-15');
+
 
 DROP TABLE IF EXISTS game_types;
 CREATE TABLE game_types(

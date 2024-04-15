@@ -3,19 +3,15 @@ def test_injuries(client_fixture):
     data = response.json()
 
     assert response.status_code == 200
-    assert len(data) == 2
-    assert data[0]["player"] == "Myles Turner"
+    assert len(data) == 142
+    assert data[0]["player"] == "A.J. Green"
     assert list(data[0].keys()) == [
         "player",
         "team_acronym",
-        "team",
-        "date",
-        "status",
+        "injury_status",
         "injury",
-        "description",
-        "total_injuries",
-        "team_active_injuries",
-        "team_active_protocols",
+        "injury_description",
+        "scrape_date",
     ]
 
 
@@ -26,18 +22,14 @@ def test_injuries_team(client_fixture):
     data = response.json()
 
     assert response.status_code == 200
-    assert data["player"] == "Myles Turner"
+    assert data["player"] == "Bennedict Mathurin"
     assert list(data.keys()) == [
         "player",
         "team_acronym",
-        "team",
-        "date",
-        "status",
+        "injury_status",
         "injury",
-        "description",
-        "total_injuries",
-        "team_active_injuries",
-        "team_active_protocols",
+        "injury_description",
+        "scrape_date",
     ]
 
 

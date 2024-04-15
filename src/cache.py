@@ -3,6 +3,8 @@ import hashlib
 
 from fastapi import Request, Response
 
+from src.logger import logger
+
 
 def key_builder_no_db(
     func: Callable[..., Any],
@@ -29,5 +31,6 @@ def key_builder_no_db(
     cache_key = hashlib.md5(
         f"{func.__module__}:{func.__name__}:{args}:{kwargs}".encode()
     ).hexdigest()
+    # logger.info("Cache Key: %s", cache_key)
 
     return f"{namespace}:{cache_key}"

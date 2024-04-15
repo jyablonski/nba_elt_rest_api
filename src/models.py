@@ -100,18 +100,15 @@ class RedditComments(Base):
 
 class Injuries(Base):
     __tablename__ = "injuries"
-    __table_args__ = (PrimaryKeyConstraint("player", "injury", "description"),)
+    __table_args__ = (PrimaryKeyConstraint("player", "injury", "injury_description"),)
 
     player = Column(String, nullable=True)
     team_acronym = Column(String, nullable=True)
     team = Column(String, nullable=True)
-    date = Column(String, nullable=True)
-    status = Column(String, nullable=True)
+    injury_status = Column(String, nullable=True)
     injury = Column(String, nullable=True)
-    description = Column(String, nullable=True)
-    total_injuries = Column(Integer, nullable=True)
-    team_active_injuries = Column(Integer, nullable=True)
-    team_active_protocols = Column(Integer, nullable=True)
+    injury_description = Column(String, nullable=True)
+    scrape_date = Column(Date, nullable=True)
 
 
 class GameTypes(Base):
