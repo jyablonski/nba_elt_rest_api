@@ -59,6 +59,15 @@ services:
       - ${PWD}/config.yaml:/home/appuser/config.yaml
       # these are for fast local docker compose dev so changes will automatically make it into the app
 
+  # Dashboard for Redis to view Keys + TTL etc
+  # :latest didnt work for some dumbass reason, so using 1.14
+  # redis_dashboard:
+  #   image: redislabs/redisinsight:1.14.0
+  #   ports:
+  #     - 8001:8001
+  #   networks:
+  #     - api_network
+
   # 2024-03-13 update this shit fkn blows, so many fucking things to tweak for 0 reason
   # https://opensearch.org/docs/latest/install-and-configure/install-opensearch/docker/
   # opensearch:
