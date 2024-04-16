@@ -54,7 +54,7 @@
     background-color: #FFCCBA;
 }
 
-/* form:not(#download-button) {
+form:not(#download-button) {
     position: fixed;
     top: 50%;
     left: 50%;
@@ -73,7 +73,7 @@ form input {
 
 form button {
     margin: 5px;
-} */
+}
 
 td,
 th {
