@@ -243,18 +243,12 @@ class Incidents(Base):
     modified_at = Column(TIMESTAMP, nullable=False)
 
 
-class ScheduledReports(Base):
-    __tablename__ = "scheduled_reports"
+class Reports(Base):
+    __tablename__ = "reports"
     __table_args__ = (PrimaryKeyConstraint("id"),)
 
     id = Column(Integer, nullable=False, autoincrement=True)
-    username = Column(String, nullable=False)
     report_name = Column(String, nullable=False)
-    schedule_frequency = Column(String, nullable=False)
-    schedule_interval = Column(Integer, nullable=False)
-    start_date = Column(Date, nullable=False)
-    last_execution = Column(TIMESTAMP, nullable=False)
-    next_execution = Column(TIMESTAMP, nullable=False)
     is_active = Column(Integer, nullable=False)
     created_at = Column(TIMESTAMP, nullable=False)
     modified_at = Column(TIMESTAMP, nullable=False)

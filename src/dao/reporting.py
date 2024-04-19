@@ -1,11 +1,7 @@
-from datetime import datetime, timedelta
-
 from sqlalchemy.orm import Session
 
-from src.models import ScheduledReports
+from src.models import Reports
 
 
-def get_user_scheduled_reports(db: Session, username: str) -> list[ScheduledReports]:
-    return (
-        db.query(ScheduledReports).filter(ScheduledReports.username == username).all()
-    )
+def get_reports(db: Session) -> list[Reports]:
+    return db.query(Reports.report_name).all()
