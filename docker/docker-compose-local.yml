@@ -41,8 +41,7 @@ services:
       - GMAIL_OAUTH_CLIENT_SECRET=bbbb
       - GMAIL_OAUTH_REDIRECT_URL=http://localhost:8080/auth_google
       - OS_ENDPOINT=http://opensearch:9200
-      - REDIS_HOST=redis
-      - REDIS_PW=eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+      - REDIS_URL=redis://:eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81@redis
     restart: on-failure
     ports:
       - 8080:8080

@@ -106,9 +106,7 @@ handler = Mangum(app)
 
 @app.on_event("startup")
 async def startup() -> None:
-    redis = aioredis.from_url(
-        url=f"redis://:{os.environ.get('REDIS_PW')}@{os.environ.get('REDIS_HOST')}"
-    )
+    redis = aioredis.from_url(url=os.environ.get("REDIS_URL"))
     FastAPICache.init(RedisBackend(redis), prefix="fastapi-cache")
 
 
