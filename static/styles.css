@@ -554,3 +554,63 @@ li {
     font-size: 16px;
     font-weight: 300;
 }
+
+.reporting-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    /* Set height to fill viewport */
+}
+
+/* Style for the left div */
+.current-scheduled-reports-div {
+    width: 45%;
+    /* Adjust width as needed */
+    padding: 20px;
+    background-color: rgb(40, 50, 53);
+    border-radius: 5px;
+}
+
+/* Style for the right div */
+.create-scheduled-reports-div {
+    width: 45%;
+    /* Adjust width as needed */
+    padding: 20px;
+    background-color: rgb(40, 50, 53);
+    border-radius: 5px;
+}
+
+/* Custom form styles */
+.create-scheduled-reports-div form {
+    display: flex;
+    flex-direction: column;
+}
+
+.create-scheduled-reports-div form label {
+    margin-bottom: 10px;
+}
+
+.create-scheduled-reports-div form input[type="text"],
+.create-scheduled-reports-div form input[type="number"],
+.create-scheduled-reports-div form select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.create-scheduled-reports-div form input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.create-scheduled-reports-div form input[type="submit"]:hover {
+    background-color: #45a049;
+}

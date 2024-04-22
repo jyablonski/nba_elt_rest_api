@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Reporting Page</h1>
+
+<div class="reporting-container">
+    <div class="current-scheduled-reports-div">
+        <h2>Left Div</h2>
+        <p>This is the content of the left div.</p>
+        <form class="new-scheduled-reports-div" action="/reporting/submit_report_configuration" method="post">
+            <!-- Add form elements for creating new reports here -->
+            <label for="report_name">Report Name:</label>
+            <select id="report_name" name="report_name" required>
+                {% for report in available_reports %}
+                <option value="{{ report }}">{{ report }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="start_date">Start Date:</label>
+            <input type="date" id="start_date" name="start_date" required><br><br>
+
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+    {% endblock content %}

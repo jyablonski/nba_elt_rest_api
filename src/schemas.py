@@ -90,14 +90,10 @@ class RedditBase(BaseModel):
 class InjuriesBase(BaseModel):
     player: str | None
     team_acronym: str | None = None
-    team: str | None = None
-    date: str | None = None
-    status: str | None = None
+    injury_status: str | None = None
     injury: str | None = None
-    description: str | None = None
-    total_injuries: int | None = None
-    team_active_injuries: int | None = None
-    team_active_protocols: int | None = None
+    injury_description: str | None = None
+    scrape_date: date | None = None
 
     model_config = ConfigDict(from_attributes=True)
 

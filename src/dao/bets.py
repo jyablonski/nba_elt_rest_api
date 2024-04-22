@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 
 from sqlalchemy.orm import Session
 from typing import Any
@@ -8,7 +8,7 @@ from src.models import UserPredictions
 
 def store_bet_predictions(db: Session, bet_predictions: list[dict[str, Any]]) -> str:
     # this is so all records in this batch get the same timestamp
-    created_at = datetime.utcnow()
+    created_at = datetime.now(timezone.utc)
 
     for prediction in bet_predictions:
         print(prediction)

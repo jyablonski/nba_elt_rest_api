@@ -1,5 +1,12 @@
-version: "3"
 services:
+  redis:
+    image: redis:7.2-alpine
+    restart: always
+    ports:
+      - "6379:6379"
+    command: redis-server --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+    networks:
+      - api_network
   postgres:
     image: postgres:14-alpine
     container_name: postgres
@@ -34,6 +41,7 @@ services:
       - GMAIL_OAUTH_CLIENT_SECRET=bbbb
       - GMAIL_OAUTH_REDIRECT_URL=http://localhost:8080/auth_google
       - OS_ENDPOINT=http://opensearch:9200
+      - REDIS_URL=redis://:eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81@redis
     restart: on-failure
     ports:
       - 8080:8080
@@ -49,6 +57,15 @@ services:
       - ${PWD}/templates:/home/appuser/templates
       - ${PWD}/config.yaml:/home/appuser/config.yaml
       # these are for fast local docker compose dev so changes will automatically make it into the app
+
+  # Dashboard for Redis to view Keys + TTL etc
+  # :latest didnt work for some dumbass reason, so using 1.14
+  # redis_dashboard:
+  #   image: redislabs/redisinsight:1.14.0
+  #   ports:
+  #     - 8001:8001
+  #   networks:
+  #     - api_network
 
   # 2024-03-13 update this shit fkn blows, so many fucking things to tweak for 0 reason
   # https://opensearch.org/docs/latest/install-and-configure/install-opensearch/docker/
