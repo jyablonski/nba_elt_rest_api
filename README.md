@@ -11,10 +11,12 @@ The REST API has the following functionalities:
 - Hosts an Internal Admin Site w/ the following Pages:
   -  Page to flip Feature Flags on / off that are used in various components throughout the Project.
   -  Page to create incidents which will automatically popup on the Web Dashboard to alert users of any missing or out-of-date data issues.
+- Most Endpoints are Cached via Redis
 
 ## Running The App
-Clone the Repo & run `make up` which spins up the App locally served [here](http://localhost:8080/) using 2 Docker Containers:
+Clone the Repo & run `make up` which spins up the App locally served [here](http://localhost:8080/) using 3 Docker Containers:
 - Postgres Database
+- Redis Database
 - FastAPI Server
 
 To Login to the App locally, a set of Credentials for an Admin User are listed below:
@@ -33,7 +35,7 @@ The same Test Suite is ran after every commit on a PR via GitHub Actions.
 
 1. Links to other Repos providing infrastructure for this Project
     * [Dash Server](https://github.com/jyablonski/nba_elt_dashboard)
-    * [Ingestion Script](https://github.com/jyablonski/python_docker)
+    * [Ingestion Script](https://github.com/jyablonski/nba_elt_ingestion)
     * [dbt](https://github.com/jyablonski/nba_elt_dbt)
     * [Terraform](https://github.com/jyablonski/aws_terraform)
     * [ML Pipeline](https://github.com/jyablonski/nba_elt_mlflow)
