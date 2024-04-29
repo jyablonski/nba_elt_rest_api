@@ -26,6 +26,7 @@ from src.database import engine
 
 from src.middleware import log_middleware
 from src.routers.admin import router as admin_router
+from src.routers.admin_feedback import router as admin_feedback_router
 from src.routers.auth import router as auth_router
 from src.routers.bets import router as bets_router
 from src.routers.feature_flags import router as feature_flags_router
@@ -69,6 +70,7 @@ app.add_middleware(
     https_only=True,
 )
 app.include_router(admin_router)
+app.include_router(admin_feedback_router)
 app.include_router(auth_router)
 app.include_router(bets_router)
 app.include_router(feature_flags_router)

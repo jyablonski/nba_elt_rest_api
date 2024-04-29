@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<center>
+    <br>
+    <h1 class="text-center my-3 pb-3">Admin Feedback Page</h1>
+    <br>
+
+    <h4>Current Feedback List</h4>
+    <br>
+    <table class="table feedback-table">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Feedback</th>
+                <th scope="col">Created</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for feedback in all_feedback %}
+            <tr>
+                <th scope="row">{{ feedback.id }}</th>
+                <td>{{ feedback.feedback }}</td>
+                <td>{{ feedback.time.strftime('%Y-%m-%d %H:%M:%S') }} UTC</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+
+{% endblock %}

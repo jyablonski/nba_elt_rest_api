@@ -1,3 +1,11 @@
+:root {
+    --table-text-primary-color: white;
+    --table-cell-primary-color: #2a3338;
+    --table-cell-secondary-color: rgb(61, 68, 73);
+    --table-cell-highlight-color: #456c86;
+}
+
+
 .text-danger {
     color: #dc3545
 }
@@ -613,4 +621,45 @@ li {
 
 .create-scheduled-reports-div form input[type="submit"]:hover {
     background-color: #45a049;
+}
+
+/* Style for the feedback table */
+.feedback-table {
+    width: 80%;
+    /* Adjust the width as needed */
+    margin: 0 auto;
+    /* Center the table */
+    border-collapse: collapse;
+    font-family: sans-serif;
+    background-color: var(--table-cell-primary-color);
+    color: var(--table-text-primary-color);
+    font-size: 12px;
+}
+
+/* Style for feedback table header */
+.feedback-table th {
+    background-color: var(--table-cell-secondary-color);
+    color: var(--table-text-primary-color);
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Style for feedback table rows */
+.feedback-table tr:nth-child(even) {
+    background-color: var(--table-cell-secondary-color);
+}
+
+.feedback-table tr:nth-child(odd) {
+    background-color: var(--table-cell-primary-color);
+}
+
+/* Style for feedback table cells */
+.feedback-table td {
+    /* padding: 12px 12px; */
+    border-bottom: solid 2px black;
+}
+
+/* Style for feedback table hover effect */
+.feedback-table tbody tr:hover {
+    background-color: var(--table-cell-highlight-color);
 }
