@@ -2269,3 +2269,19 @@ INSERT INTO reports(report_name, is_active)
 VALUES ('User Predictions History', 1),
 	   ('Most Profitable Bets', 1),
 	   ('Least Profitable Bets', 1);
+
+DROP TABLE IF EXISTS team_event_context;
+CREATE TABLE IF NOT EXISTS team_event_context
+(
+	id serial primary key,
+	team char(3) not null,
+	event varchar(300) not null,
+	event_date date not null,
+	created_at timestamp default current_timestamp,
+	modified_at timestamp default current_timestamp
+);
+
+INSERT INTO team_event_context(team, event, event_date)
+VALUES
+	('GSW', 'Lost the Play-In Game vs Sacramento Kings', '2024-04-16'),
+	('GSW', 'Statement Win vs Phoenix Suns', '2024-02-10');

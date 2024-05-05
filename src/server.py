@@ -46,6 +46,7 @@ from src.routers.reporting import router as reporting_router
 from src.routers.settings import router as settings_router
 from src.routers.schedule import router as schedule_router
 from src.routers.standings import router as standings_router
+from src.routers.team_events import router as team_events_router
 from src.routers.team_ratings import router as team_ratings_router
 from src.routers.transactions import router as transactions_router
 from src.routers.twitter_comments import router as twitter_comments_router
@@ -91,6 +92,7 @@ app.include_router(reporting_router)
 app.include_router(settings_router)
 app.include_router(schedule_router)
 app.include_router(standings_router)
+app.include_router(team_events_router)
 app.include_router(team_ratings_router)
 app.include_router(transactions_router)
 app.include_router(twitter_comments_router)

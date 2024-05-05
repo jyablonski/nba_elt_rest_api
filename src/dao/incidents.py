@@ -37,7 +37,7 @@ def create_incident(
 
 
 def update_incident(db: Session, incidents_list: list[int]) -> Query[Incidents]:
-    modified_at = datetime.utcnow()
+    modified_at = datetime.now(timezone.utc)
 
     incidents = db.query(Incidents).order_by(Incidents.incident_name)
 
