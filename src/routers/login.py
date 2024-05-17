@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from datetime import datetime
+from datetime import datetime, timezone
 
 from fastapi import APIRouter, Depends, Form, HTTPException, Request
 from fastapi.responses import HTMLResponse, RedirectResponse
@@ -86,7 +86,7 @@ def create_users_from_form(
         username=username,
         password=password,
         email=email,
-        created_at=datetime.utcnow(),
+        created_at=datetime.now(timezone.utc),
     )
 
     create_user(db=db, user=record)

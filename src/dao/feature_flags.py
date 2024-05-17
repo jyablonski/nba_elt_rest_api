@@ -27,7 +27,7 @@ def create_feature_flags(
 def update_feature_flags(
     db: Session, feature_flags_list: list[int]
 ) -> Query[FeatureFlags]:
-    modified_at = datetime.utcnow()
+    modified_at = datetime.now(timezone.utc)
 
     feature_flags = db.query(FeatureFlags).order_by(FeatureFlags.flag)
 

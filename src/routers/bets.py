@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 from fastapi import APIRouter, Depends, HTTPException, Form, Request
 from fastapi.responses import HTMLResponse, RedirectResponse
@@ -25,7 +25,7 @@ async def get_user_bets_page(
         # Redirect to the /login endpoint
         return RedirectResponse("/login")
 
-    local_datetime = (datetime.utcnow() - timedelta(hours=6)).date()
+    local_datetime = (datetime.now(timezone.utc) - timedelta(hours=6)).date()
 
     user_predictions = (
         db.query(UserPredictions)
@@ -84,7 +84,7 @@ def store_user_bets_predictions_from_ui(
     #         status_code=403,
     #         detail="This User does not exist.",
     #     )
-    local_datetime = (datetime.utcnow() - timedelta(hours=6)).date()
+    local_datetime = (datetime.now(timezone.utc) - timedelta(hours=6)).date()
 
     # this logic checks if every game from today has already been selected or not
     # by the user, and then stores it as a cte for use in a query later

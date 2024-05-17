@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 
 from fastapi import APIRouter, Depends, Request
 from fastapi.responses import HTMLResponse, StreamingResponse, Response
@@ -83,7 +83,7 @@ def post_user_past_bets_page(
         .order_by(UserPastPredictions.game_date.desc())
         .all()
     )
-    date = datetime.utcnow().date()
+    date = datetime.now(timezone.utc).date()
 
     past_bet_cols = UserPastPredictions.__table__.c.keys()
     past_bet_cols.remove("id")
