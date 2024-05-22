@@ -8,7 +8,7 @@
       <h1 class="text-center my-3 pb-3">NBA User Prediction Past Bets Page</h1>
    </div>
 
-   <table class="table">
+   <table class="general-table">
       <thead>
          <tr>
             <th scope="col">Total Correct Predictions</th>
@@ -20,7 +20,7 @@
       </thead>
       <tbody>
          <tr>
-            <th> {{ past_predictions_success_count }}
+            <td> {{ past_predictions_success_count }} </td>
             <td> {{ past_predictions_total_count }} </td>
             <td> {{ (past_predictions_pct_count * 100)|round(3) }}% </td>
             <td> $ {{ past_predictions_bet_profit }} </td>
@@ -34,7 +34,7 @@
    <br>
    <br>
 
-   <table class="bets-table">
+   <table class="general-table">
       <thead>
          <tr>
             <th scope="col">Game Date</th>
@@ -54,7 +54,7 @@
       <tbody>
          {% for game in past_predictions %}
          <tr>
-            <th scope="row">{{game.game_date }}</th>
+            <td>{{ game.game_date }}</td>
             <td>{{ game.home_team }}</td>
             <td>{{ game.home_team_odds }}</td>
             <td>{{ (game.home_team_predicted_win_pct * 100)|round(3) }}% </td>

@@ -11,10 +11,11 @@
         {{ feature_flag_error }}
     </div>
     <br>
-    <table class="table">
+    <table class="general-table">
         <form method="POST" action="/admin/feature_flags" enctype="multipart/form-data">
             <thead>
                 <tr>
+                    <th scope="col">ID</th>
                     <th scope="col">Flag</th>
                     <th scope="col">Enabled</th>
                     <th scope="col">Modified</th>
@@ -24,7 +25,8 @@
             <tbody>
                 {% for flag in feature_flags %}
                 <tr>
-                    <th scope="row">{{ flag.flag }}</th>
+                    <td>{{ flag.id }}</td>
+                    <td>{{ flag.flag }}</td>
                     <td>{{ flag.is_enabled }}</td>
                     <td>{{ flag.modified_at.strftime('%Y-%m-%d %H:%M:%S') }} UTC</td>
                     <td>
@@ -51,7 +53,7 @@
     <br>
 
     <h4> New Feature Flags </h4>
-    <table class="table">
+    <table class="general-table">
         <form method="POST" action="/admin/feature_flags/create" enctype="multipart/form-data">
             <thead>
                 <tr>
@@ -65,8 +67,10 @@
                         <input type="text" value="" class="form-input-table" name="feature_flag_name_form">
                     </td>
                     <td>
-                        <input type="number" min="0" max="1" value="1" class="form-control"
-                            name="feature_flag_is_enabled_form">
+                        <select name="feature_flag_is_enabled_form" class="form-control">
+                            <option value="1" selected>1</option>
+                            <option value="0">0</option>
+                        </select>
                     </td>
                 </tr>
             </tbody>

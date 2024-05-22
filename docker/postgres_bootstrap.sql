@@ -1982,8 +1982,18 @@ DROP TABLE IF EXISTS feedback;
 CREATE TABLE feedback(
     id serial primary key,
     feedback character varying,
-    time timestamp without time zone
+	created_at timestamp default now(),
+	modified_at timestamp default now()
 );
+
+INSERT INTO feedback (feedback)
+VALUES
+	('I love this site!'),
+	('This site is terrible!'),
+	('I have no opinion on this site.'),
+	('I have a suggestion for this site.'),
+	('I have a complaint about this site.'),
+	('I have a question about this site.');
 
 DROP TABLE IF EXISTS schedule;
 CREATE TABLE schedule(

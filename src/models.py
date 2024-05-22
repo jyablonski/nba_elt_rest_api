@@ -127,7 +127,8 @@ class Feedback(Base):
 
     id = Column(Integer, nullable=False, autoincrement=True)
     feedback = Column(String, nullable=False)
-    time = Column(TIMESTAMP, nullable=False)
+    created_at = Column(TIMESTAMP, nullable=False)
+    modified_at = Column(TIMESTAMP, nullable=False)
 
 
 class Schedule(Base):

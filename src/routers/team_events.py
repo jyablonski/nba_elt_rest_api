@@ -16,6 +16,7 @@ router = APIRouter()
 def get_team_events(
     request: Request,
     creds: dict[str, str] = Depends(get_current_creds_from_token),
+    db: Session = Depends(get_db),
 ) -> HTMLResponse:
     if creds["role"] != "Admin":
         raise HTTPException(
@@ -23,18 +24,19 @@ def get_team_events(
             detail="You do not have the powa",
         )
 
+    events = get_team_event_context(db=db, team="GSW")
     return templates.TemplateResponse(  # type: ignore
         "team_events.html",
-        {"request": request, "team_acronyms": team_acronyms},
+        {"request": request, "team_acronyms": team_acronyms, "events": events},
     )
 
 
 @router.post("/admin/team_events/create")
 def post_team_events_create(  # noqa: F811
     request: Request,
-    team_name_form: str = Form(...),
-    team_event_form: str = Form(...),
-    team_event_date_form: date = Form(...),
+    team_form: str = Form(...),
+    event_form: str = Form(...),
+    event_date_form: date = Form(...),
     creds: dict[str, str] = Depends(get_current_creds_from_token),
     db: Session = Depends(get_db),
 ):
@@ -46,12 +48,19 @@ def post_team_events_create(  # noqa: F811
 
     create_team_event_record(
         db=db,
-        team_name_form=team_name_form,
-        team_event_form=team_event_form,
-        team_event_date_form=team_event_date_form,
+        team_name_form=team_form,
+        team_event_form=event_form,
+        team_event_date_form=event_date_form,
     )
 
     success_message = "Team event created successfully."
+    events = get_team_event_context(db=db, team="GSW")
     return templates.TemplateResponse(
-        "team_events.html", {"request": request, "success_message": success_message}
+        "team_events.html",
+        {
+            "request": request,
+            "success_message": success_message,
+            "team_acronyms": team_acronyms,
+            "events": events,
+        },
     )

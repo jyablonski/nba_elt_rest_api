@@ -11,7 +11,7 @@
         {{ incident_error }}
     </div>
     <br>
-    <table class="table">
+    <table class="general-table">
         <form method="POST" action="/admin/incidents" enctype="multipart/form-data">
             <thead>
                 <tr>
@@ -24,7 +24,7 @@
             <tbody>
                 {% for incident in incidents %}
                 <tr>
-                    <th scope="row">{{ incident.incident_name }}</th>
+                    <td>{{ incident.incident_name }}</td>
                     <td>{{ incident.incident_description }}</td>
                     <td>{{ incident.modified_at.strftime('%Y-%m-%d %H:%M:%S') }} UTC</td>
                     <td>
@@ -51,7 +51,7 @@
     <br>
 
     <h4> New Incidents </h4>
-    <table class="table">
+    <table class="general-table">
         <form method="POST" action="/admin/incidents/create" enctype="multipart/form-data">
             <thead>
                 <tr>
@@ -69,8 +69,10 @@
                         <input type="text" value="" class="form-input-table" name="incident_description_form">
                     </td>
                     <td>
-                        <input type="number" min="0" max="1" value="1" class="form-control"
-                            name="incident_is_active_form">
+                        <select name="incident_is_active_form" class="form-control">
+                            <option value="1" selected>1</option>
+                            <option value="0">0</option>
+                        </select>
                     </td>
                 </tr>
             </tbody>

@@ -460,20 +460,16 @@ li {
     text-align: left !important;
     display: block !important;
     margin: 0 auto !important;
-    width: 200px !important;
+    width: 300px !important;
     padding: 0px !important;
-    border: 2px solid #ccc !important;
-    background-color: #f9f9f9 !important;
+    border: 2px solid #000000 !important;
+    background-color: rgb(61, 68, 73);
 }
 
 .admin-form button {
     width: 100%;
-    height: 50px;
-    margin: 10px auto;
+    margin: 0px auto;
     justify-content: center;
-    border-color: black;
-    color: #ffffffe3;
-    background: #573b8a33;
     font-size: 1em;
     font-weight: bold;
     outline: none;
@@ -482,6 +478,12 @@ li {
     transition: .2s ease-in;
     cursor: pointer;
     text-align: center;
+}
+
+.admin-form button:hover {
+    background: #573b8a77 !important;
+    border-color: #573b8a;
+    color: #ffffff;
 }
 
 .google-btn {
@@ -512,7 +514,7 @@ li {
 .settings-container {
     max-width: 600px;
     margin: 50px auto;
-    background-color: #fff;
+    background-color: #2a3338;
     border-radius: 8px;
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -540,7 +542,8 @@ li {
     width: 100%;
     padding: 10px;
     font-size: 16px;
-    border: 1px solid #ccc;
+    border: 1px solid rgb(0, 0, 0);
+    background-color: #58585833;
     border-radius: 5px;
     box-sizing: border-box;
     margin-top: 10px;
@@ -552,13 +555,12 @@ li {
 
 .form-input-table {
     display: block;
-    height: 50px;
-    width: 100%;
+    height: 34px;
+    width: calc(100% - 7px);
     color: #fff;
     background-color: rgba(8, 3, 3, 0.07);
-    border-radius: 12px;
-    padding: 0px 0px 0px 5px;
-    margin-top: 8px;
+    border-radius: 6px;
+    padding: 0px 2px;
     font-size: 16px;
     font-weight: 300;
 }
@@ -568,28 +570,22 @@ li {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    /* Set height to fill viewport */
 }
 
-/* Style for the left div */
 .current-scheduled-reports-div {
     width: 45%;
-    /* Adjust width as needed */
     padding: 20px;
     background-color: rgb(40, 50, 53);
     border-radius: 5px;
 }
 
-/* Style for the right div */
 .create-scheduled-reports-div {
     width: 45%;
-    /* Adjust width as needed */
     padding: 20px;
     background-color: rgb(40, 50, 53);
     border-radius: 5px;
 }
 
-/* Custom form styles */
 .create-scheduled-reports-div form {
     display: flex;
     flex-direction: column;
@@ -623,12 +619,9 @@ li {
     background-color: #45a049;
 }
 
-/* Style for the feedback table */
-.feedback-table {
+.general-table {
     width: 80%;
-    /* Adjust the width as needed */
     margin: 0 auto;
-    /* Center the table */
     border-collapse: collapse;
     font-family: sans-serif;
     background-color: var(--table-cell-primary-color);
@@ -636,30 +629,56 @@ li {
     font-size: 12px;
 }
 
-/* Style for feedback table header */
-.feedback-table th {
+.general-table th {
     background-color: var(--table-cell-secondary-color);
     color: var(--table-text-primary-color);
     font-weight: bold;
     text-align: center;
+    min-width: 60px;
 }
 
-/* Style for feedback table rows */
-.feedback-table tr:nth-child(even) {
+.general-table tr:nth-child(even) {
     background-color: var(--table-cell-secondary-color);
 }
 
-.feedback-table tr:nth-child(odd) {
+.general-table tr:nth-child(odd) {
     background-color: var(--table-cell-primary-color);
 }
 
-/* Style for feedback table cells */
-.feedback-table td {
-    /* padding: 12px 12px; */
+
+.general-table td {
     border-bottom: solid 2px black;
 }
 
-/* Style for feedback table hover effect */
-.feedback-table tbody tr:hover {
+.general-table tbody tr:hover {
     background-color: var(--table-cell-highlight-color);
+}
+
+.general-table select {
+    width: 200px;
+    text-align: center;
+}
+
+
+/* these are custom options for the bets page columns */
+.general-table th.selected-winner,
+.general-table td.selected-winner {
+    width: 20%;
+}
+
+.general-table th.bet-amount,
+.general-table td.bet-amount {
+    width: 10%;
+}
+
+.logout-button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }

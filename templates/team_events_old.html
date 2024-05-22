@@ -11,7 +11,7 @@
         {{ incident_error }}
     </div>
     <br>
-    <table class="general-table">
+    <table class="table">
         <form method="POST" action="/admin/team_events" enctype="multipart/form-data">
             <thead>
                 <tr>
@@ -25,11 +25,12 @@
             <tbody>
                 {% for event in events %}
                 <tr>
-                    <td>{{ event.id }}</td>
+                    <th scope="row">{{ event.id }}</th>
                     <td>{{ event.team }}</td>
                     <td>{{ event.event }}</td>
                     <td>{{ event.event_date }}</td>
                     <td>{{ event.modified_at.strftime('%Y-%m-%d %H:%M:%S') }} UTC</td>
+                    <td>
 
                     </td>
                 </tr>
@@ -40,18 +41,14 @@
     <button type="submit" class="btn btn-primary">Save</button>
     </form>
 
+
     <br>
     <br>
     <br>
     <br>
 
     <h4> New Event </h4>
-    {% if success_message %}
-        <div class="alert alert-success" role="alert">
-            {{ success_message }}
-        </div>
-    {% endif %}
-    <table class="general-table">
+    <table class="table">
         <form method="POST" action="/admin/team_events/create" enctype="multipart/form-data">
             <thead>
                 <tr>
@@ -63,17 +60,13 @@
             <tbody>
                 <tr>
                     <td>
-                        <select name="team_form" class="form-control">
-                            {% for team in team_acronyms %}
-                            <option value="{{ team }}">{{ team }}</option>
-                            {% endfor %}
-                        </select>
+                        <input type="text" value="" class="form-input-table" name="team_form">
                     </td>
                     <td>
-                        <input type="text" value="" class="form-input-table" name="event_form" required>
+                        <input type="text" value="" class="form-input-table" name="event_form">
                     </td>
                     <td>
-                        <input type="date" value="" class="form-control" name="event_date_form" required>
+                        <input type="date" value="" class="form-control" name="event_date_form">
                     </td>
                 </tr>
             </tbody>

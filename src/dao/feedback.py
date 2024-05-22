@@ -12,7 +12,7 @@ def get_feedback(db: Session) -> list[Feedback]:
 
 
 def send_feedback(db: Session, user_feedback: str) -> Feedback:
-    record = Feedback(feedback=user_feedback, time=datetime.now(timezone.utc))
+    record = Feedback(feedback=user_feedback)
     db.add(record)
     db.commit()
     db.refresh(record)

@@ -8,12 +8,12 @@
 
     <h4>Current Feedback List</h4>
     <br>
-    <table class="table feedback-table">
+    <table class="table general-table">
         <thead>
             <tr>
                 <th scope="col">ID</th>
                 <th scope="col">Feedback</th>
-                <th scope="col">Created</th>
+                <th scope="col">Modified</th>
             </tr>
         </thead>
         <tbody>
@@ -21,7 +21,7 @@
             <tr>
                 <th scope="row">{{ feedback.id }}</th>
                 <td>{{ feedback.feedback }}</td>
-                <td>{{ feedback.time.strftime('%Y-%m-%d %H:%M:%S') }} UTC</td>
+                <td>{{ feedback.modified_at.strftime('%Y-%m-%d %H:%M:%S') }} UTC</td>
             </tr>
             {% endfor %}
         </tbody>
