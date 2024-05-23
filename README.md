@@ -8,12 +8,7 @@ Version: 1.8.4
 The REST API has the following functionalities:
 - Serves Data built from the NBA ELT Pipeline through various GET endpoints
 - Allows Users to login & make NBA Game Win Predictions starting from the [Login Web Page](https://api.jyablonski.dev/login)
-- Hosts an Internal Admin Site w/ the following Pages:
-  -  Page to flip Feature Flags on / off that are used in various components throughout the Project.
-  -  Page to create incidents which will automatically popup on the Web Dashboard to alert users of any missing or out-of-date data issues.
-  -  Page to view Feedback Records
-  -  Page to create Team Event Context records for the Frontend Reddit Comment Sentiment Dashboard
-- Most Endpoints are Cached via Redis
+- Hosts an Internal Admin Site w/ various pages to manage things like Feature Flags and other functionality used throughout the project
 
 ## Running The App
 Clone the Repo & run `make up` which spins up the App locally served [here](http://localhost:8080/) using 3 Docker Containers:
