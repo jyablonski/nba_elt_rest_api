@@ -2,15 +2,15 @@
 
 {% block content %}
 <center>
-    <br>
-    <h1 class="text-center my-3 pb-3">Incidents Page</h1>
-    <br>
 
-    <h4>Current Incidents</h4>
-    <div class="text-danger font-weight-bold">
-        {{ incident_error }}
+    <div class="header-container">
+        <h1 class="text-center">Incidents Page</h1>
+        <h4>Current Incidents</h4>
+        <div class="text-danger font-weight-bold">
+            {{ incident_error }}
+        </div>
     </div>
-    <br>
+
     <table class="general-table">
         <form method="POST" action="/admin/incidents" enctype="multipart/form-data">
             <thead>
@@ -44,7 +44,8 @@
     <button type="submit" class="btn btn-primary">Save</button>
     </form>
 
-
+    <br>
+    <br>
     <h4> New Incidents </h4>
     <div class="table-container">
         <table class="general-table">
