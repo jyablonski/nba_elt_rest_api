@@ -22,3 +22,6 @@ auth:
 frontend:
 - any: ['static/*', 'templates/*']
   all: ['!templates/base.html']
+
+database:
+- src/models.py
