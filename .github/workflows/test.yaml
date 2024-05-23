@@ -18,6 +18,9 @@ jobs:
     name: Test Pipeline
     runs-on: ubuntu-latest
 
+    # running tests on bare metal rather than docker to enable
+    # caching of the poetry environment
+    # it's a mfer to do it the docker way
     steps:
       - name: Checkout the Repo
         uses: actions/checkout@v2

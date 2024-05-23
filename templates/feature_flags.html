@@ -11,69 +11,69 @@
         {{ feature_flag_error }}
     </div>
     <br>
-    <table class="table">
-        <form method="POST" action="/admin/feature_flags" enctype="multipart/form-data">
-            <thead>
-                <tr>
-                    <th scope="col">Flag</th>
-                    <th scope="col">Enabled</th>
-                    <th scope="col">Modified</th>
-                    <th scope="col">Update Flag</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for flag in feature_flags %}
-                <tr>
-                    <th scope="row">{{ flag.flag }}</th>
-                    <td>{{ flag.is_enabled }}</td>
-                    <td>{{ flag.modified_at.strftime('%Y-%m-%d %H:%M:%S') }} UTC</td>
-                    <td>
-                        <select name="feature_flag_list" id="feature_flag_list">
-                            {% for choice in [0, 1] %}
-                            <option value="{{ choice }}" {% if choice==flag.is_enabled %} selected {% endif %}>
-                                {{ choice }}
-                                {% endfor %}
-                            </option>
-                        </select>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-    </table>
-    <br>
-    <button type="submit" class="btn btn-primary">Save</button>
-    </form>
+        <table class="general-table">
+            <form method="POST" action="/admin/feature_flags" enctype="multipart/form-data">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Flag</th>
+                        <th scope="col">Enabled</th>
+                        <th scope="col">Modified</th>
+                        <th scope="col">Update Flag</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for flag in feature_flags %}
+                    <tr>
+                        <td>{{ flag.id }}</td>
+                        <td>{{ flag.flag }}</td>
+                        <td>{{ flag.is_enabled }}</td>
+                        <td>{{ flag.modified_at.strftime('%Y-%m-%d %H:%M:%S') }} UTC</td>
+                        <td>
+                            <select name="feature_flag_list" id="feature_flag_list">
+                                {% for choice in [0, 1] %}
+                                <option value="{{ choice }}" {% if choice==flag.is_enabled %} selected {% endif %}>
+                                    {{ choice }}
+                                    {% endfor %}
+                                </option>
+                            </select>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+        </table>
+        <br>
+        <button type="submit" class="btn btn-primary">Save</button>
+        </form>
 
-
-    <br>
-    <br>
-    <br>
-    <br>
-
-    <h4> New Feature Flags </h4>
-    <table class="table">
-        <form method="POST" action="/admin/feature_flags/create" enctype="multipart/form-data">
-            <thead>
-                <tr>
-                    <th scope="col">Flag</th>
-                    <th scope="col">Enabled</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        <input type="text" value="" class="form-input-table" name="feature_flag_name_form">
-                    </td>
-                    <td>
-                        <input type="number" min="0" max="1" value="1" class="form-control"
-                            name="feature_flag_is_enabled_form">
-                    </td>
-                </tr>
-            </tbody>
-    </table>
-    <br>
-    <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+    <h4> New Feature Flag </h4>
+    <div class="table-container">
+        <table class="general-table">
+            <form method="POST" action="/admin/feature_flags/create" enctype="multipart/form-data">
+                <thead>
+                    <tr>
+                        <th scope="col">Flag</th>
+                        <th scope="col">Enabled</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <input type="text" value="" class="form-input-table" name="feature_flag_name_form">
+                        </td>
+                        <td>
+                            <select name="feature_flag_is_enabled_form" class="form-control">
+                                <option value="1" selected>1</option>
+                                <option value="0">0</option>
+                            </select>
+                        </td>
+                    </tr>
+                </tbody>
+        </table>
+        <br>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
 </center>
 
 {% endblock content %}

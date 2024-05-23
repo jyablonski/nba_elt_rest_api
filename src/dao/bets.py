@@ -11,7 +11,7 @@ def store_bet_predictions(db: Session, bet_predictions: list[dict[str, Any]]) ->
     created_at = datetime.now(timezone.utc)
 
     for prediction in bet_predictions:
-        print(prediction)
+        # print(prediction)
         record = UserPredictions(
             username=prediction["username"],
             game_date=prediction["game_date"],

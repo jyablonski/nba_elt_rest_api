@@ -1982,8 +1982,18 @@ DROP TABLE IF EXISTS feedback;
 CREATE TABLE feedback(
     id serial primary key,
     feedback character varying,
-    time timestamp without time zone
+	created_at timestamp default now(),
+	modified_at timestamp default now()
 );
+
+INSERT INTO feedback (feedback)
+VALUES
+	('I love this site!'),
+	('This site is terrible!'),
+	('I have no opinion on this site.'),
+	('I have a suggestion for this site.'),
+	('I have a complaint about this site.'),
+	('I have a question about this site.');
 
 DROP TABLE IF EXISTS schedule;
 CREATE TABLE schedule(
@@ -2269,3 +2279,19 @@ INSERT INTO reports(report_name, is_active)
 VALUES ('User Predictions History', 1),
 	   ('Most Profitable Bets', 1),
 	   ('Least Profitable Bets', 1);
+
+DROP TABLE IF EXISTS team_event_context;
+CREATE TABLE IF NOT EXISTS team_event_context
+(
+	id serial primary key,
+	team char(3) not null,
+	event varchar(300) not null,
+	event_date date not null,
+	created_at timestamp default current_timestamp,
+	modified_at timestamp default current_timestamp
+);
+
+INSERT INTO team_event_context(team, event, event_date)
+VALUES
+	('GSW', 'Lost the Play-In Game vs Sacramento Kings', '2024-04-16'),
+	('GSW', 'Statement Win vs Phoenix Suns', '2024-02-10');

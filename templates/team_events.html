@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<center>
+    <br>
+    <h1 class="text-center my-3 pb-3">Team Events Page</h1>
+    <br>
+
+    <div id="events-form">
+        <form id="form" method="post">
+            <!-- i dunno how this works but fuck it baybee -->
+            <select name="selected_team" id="team-select" class="form-control" onchange="this.form.submit()">
+                {% for team in team_acronyms %}
+                <option value="{{ team }}" {% if team==selected_team %}selected{% endif %}>{{ team }}</option>
+                {% endfor %}
+            </select>
+        </form>
+    </div>
+
+    <h4>Team Events</h4>
+    <div class="text-danger font-weight-bold">
+        {{ incident_error }}
+    </div>
+    <br>
+    <table class="general-table">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Team</th>
+                <th scope="col">Event</th>
+                <th scope="col">Event Date</th>
+                <th scope="col">Modified</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for event in events %}
+            <tr>
+                <td>{{ event.id }}</td>
+                <td>{{ event.team }}</td>
+                <td>{{ event.event }}</td>
+                <td>{{ event.event_date }}</td>
+                <td>{{ event.modified_at.strftime('%Y-%m-%d %H:%M:%S') }} UTC</td>
+
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+
+
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <h4> New Event </h4>
+    {% if success_message %}
+    <div class="alert alert-success" role="alert">
+        {{ success_message }}
+    </div>
+    {% endif %}
+    <table class="general-table">
+        <form method="POST" action="/admin/team_events/create" enctype="multipart/form-data" id="event-form">
+            <thead>
+                <tr>
+                    <th scope="col">Selected Team</th>
+                    <th scope="col">Event</th>
+                    <th scope="col">Event Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <!-- this was some dumbass bullshit, if you think you want to remove this column no you do not -->
+                    <td>
+                        <input type="text" value="{{ selected_team }}" class="form-control" name="selected_team" readonly>
+                    </td>
+                    <td>
+                        <input type="text" value="" class="form-input-table" name="event_form" required>
+                    </td>
+                    <td>
+                        <input type="date" value="" class="form-control" name="event_date_form" required>
+                    </td>
+                </tr>
+            </tbody>
+    </table>
+    <br>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+</center>
+
+{% endblock content %}

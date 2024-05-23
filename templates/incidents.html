@@ -2,16 +2,16 @@
 
 {% block content %}
 <center>
-    <br>
-    <h1 class="text-center my-3 pb-3">Incidents Page</h1>
-    <br>
 
-    <h4>Current Incidents</h4>
-    <div class="text-danger font-weight-bold">
-        {{ incident_error }}
+    <div class="header-container">
+        <h1 class="text-center">Incidents Page</h1>
+        <h4>Current Incidents</h4>
+        <div class="text-danger font-weight-bold">
+            {{ incident_error }}
+        </div>
     </div>
-    <br>
-    <table class="table">
+
+    <table class="general-table">
         <form method="POST" action="/admin/incidents" enctype="multipart/form-data">
             <thead>
                 <tr>
@@ -24,7 +24,7 @@
             <tbody>
                 {% for incident in incidents %}
                 <tr>
-                    <th scope="row">{{ incident.incident_name }}</th>
+                    <td>{{ incident.incident_name }}</td>
                     <td>{{ incident.incident_description }}</td>
                     <td>{{ incident.modified_at.strftime('%Y-%m-%d %H:%M:%S') }} UTC</td>
                     <td>
@@ -44,40 +44,41 @@
     <button type="submit" class="btn btn-primary">Save</button>
     </form>
 
-
     <br>
     <br>
-    <br>
-    <br>
-
     <h4> New Incidents </h4>
-    <table class="table">
-        <form method="POST" action="/admin/incidents/create" enctype="multipart/form-data">
-            <thead>
-                <tr>
-                    <th scope="col">Incident</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Active</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        <input type="text" value="" class="form-input-table" name="incident_name_form">
-                    </td>
-                    <td>
-                        <input type="text" value="" class="form-input-table" name="incident_description_form">
-                    </td>
-                    <td>
-                        <input type="number" min="0" max="1" value="1" class="form-control"
-                            name="incident_is_active_form">
-                    </td>
-                </tr>
-            </tbody>
-    </table>
-    <br>
-    <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+    <div class="table-container">
+        <table class="general-table">
+            <form method="POST" action="/admin/incidents/create" enctype="multipart/form-data">
+                <thead>
+                    <tr>
+                        <th scope="col">Incident</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Active</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <input type="text" value="" class="form-input-table" required name="incident_name_form">
+                        </td>
+                        <td>
+                            <input type="text" value="" class="form-input-table" required
+                                name="incident_description_form">
+                        </td>
+                        <td>
+                            <select name="incident_is_active_form" class="form-control">
+                                <option value="1" selected>1</option>
+                                <option value="0">0</option>
+                            </select>
+                        </td>
+                    </tr>
+                </tbody>
+        </table>
+        <br>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
 </center>
 
 {% endblock content %}

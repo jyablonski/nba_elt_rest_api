@@ -1,17 +1,14 @@
 # REST API for NBA ELT Project
 ![Tests](https://github.com/jyablonski/nba_elt_rest_api/actions/workflows/test.yaml/badge.svg) ![Deployment](https://github.com/jyablonski/nba_elt_rest_api/actions/workflows/deploy.yaml/badge.svg) [![Coverage Status](https://coveralls.io/repos/github/jyablonski/nba_elt_rest_api/badge.svg?branch=master)](https://coveralls.io/github/jyablonski/nba_elt_rest_api?branch=master) ![Code Style](https://img.shields.io/badge/code%20style-black-000000.svg)
 
-Version: 1.8.4
+Version: 1.8.5
 
 ## [API](https://api.jyablonski.dev)
 
 The REST API has the following functionalities:
 - Serves Data built from the NBA ELT Pipeline through various GET endpoints
 - Allows Users to login & make NBA Game Win Predictions starting from the [Login Web Page](https://api.jyablonski.dev/login)
-- Hosts an Internal Admin Site w/ the following Pages:
-  -  Page to flip Feature Flags on / off that are used in various components throughout the Project.
-  -  Page to create incidents which will automatically popup on the Web Dashboard to alert users of any missing or out-of-date data issues.
-- Most Endpoints are Cached via Redis
+- Hosts an Internal Admin Site w/ various pages to manage things like Feature Flags and other functionality used throughout the project
 
 ## Running The App
 Clone the Repo & run `make up` which spins up the App locally served [here](http://localhost:8080/) using 3 Docker Containers:

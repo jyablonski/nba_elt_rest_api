@@ -127,7 +127,8 @@ class Feedback(Base):
 
     id = Column(Integer, nullable=False, autoincrement=True)
     feedback = Column(String, nullable=False)
-    time = Column(TIMESTAMP, nullable=False)
+    created_at = Column(TIMESTAMP, nullable=False)
+    modified_at = Column(TIMESTAMP, nullable=False)
 
 
 class Schedule(Base):
@@ -250,5 +251,17 @@ class Reports(Base):
     id = Column(Integer, nullable=False, autoincrement=True)
     report_name = Column(String, nullable=False)
     is_active = Column(Integer, nullable=False)
+    created_at = Column(TIMESTAMP, nullable=False)
+    modified_at = Column(TIMESTAMP, nullable=False)
+
+
+class TeamEventContext(Base):
+    __tablename__ = "team_event_context"
+    __table_args__ = (PrimaryKeyConstraint("id"),)
+
+    id = Column(Integer, nullable=False, autoincrement=True)
+    team = Column(String, nullable=False)
+    event = Column(String, nullable=False)
+    event_date = Column(Date, nullable=False)
     created_at = Column(TIMESTAMP, nullable=False)
     modified_at = Column(TIMESTAMP, nullable=False)

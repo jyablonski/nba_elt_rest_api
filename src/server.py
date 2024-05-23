@@ -2,7 +2,6 @@ import os
 
 from fastapi import FastAPI, Request
 from fastapi_cache import FastAPICache
-from fastapi_cache.backends.inmemory import InMemoryBackend
 from fastapi_cache.backends.redis import RedisBackend
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
@@ -26,6 +25,7 @@ from src.database import engine
 
 from src.middleware import log_middleware
 from src.routers.admin import router as admin_router
+from src.routers.admin_feedback import router as admin_feedback_router
 from src.routers.auth import router as auth_router
 from src.routers.bets import router as bets_router
 from src.routers.feature_flags import router as feature_flags_router
@@ -45,6 +45,7 @@ from src.routers.reporting import router as reporting_router
 from src.routers.settings import router as settings_router
 from src.routers.schedule import router as schedule_router
 from src.routers.standings import router as standings_router
+from src.routers.team_events import router as team_events_router
 from src.routers.team_ratings import router as team_ratings_router
 from src.routers.transactions import router as transactions_router
 from src.routers.twitter_comments import router as twitter_comments_router
@@ -69,6 +70,7 @@ app.add_middleware(
     https_only=True,
 )
 app.include_router(admin_router)
+app.include_router(admin_feedback_router)
 app.include_router(auth_router)
 app.include_router(bets_router)
 app.include_router(feature_flags_router)
@@ -89,6 +91,7 @@ app.include_router(reporting_router)
 app.include_router(settings_router)
 app.include_router(schedule_router)
 app.include_router(standings_router)
+app.include_router(team_events_router)
 app.include_router(team_ratings_router)
 app.include_router(transactions_router)
 app.include_router(twitter_comments_router)

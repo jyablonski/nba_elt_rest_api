@@ -3,8 +3,6 @@ import hashlib
 
 from fastapi import Request, Response
 
-from src.logger import logger
-
 
 def key_builder_no_db(
     func: Callable[..., Any],

@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import TYPE_CHECKING
 
 from sqlalchemy.orm import Session
@@ -19,7 +19,7 @@ def create_incident(
     incident_description_form: str,
     incident_is_active_form: int,
 ):
-    created_timestamp = datetime.utcnow()
+    created_timestamp = datetime.now(timezone.utc)
 
     record = Incidents(
         incident_name=incident_name_form,
@@ -37,7 +37,7 @@ def create_incident(
 
 
 def update_incident(db: Session, incidents_list: list[int]) -> Query[Incidents]:
-    modified_at = datetime.utcnow()
+    modified_at = datetime.now(timezone.utc)
 
     incidents = db.query(Incidents).order_by(Incidents.incident_name)
 
