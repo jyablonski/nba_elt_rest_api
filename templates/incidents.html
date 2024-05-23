@@ -45,41 +45,39 @@
     </form>
 
 
-    <br>
-    <br>
-    <br>
-    <br>
-
     <h4> New Incidents </h4>
-    <table class="general-table">
-        <form method="POST" action="/admin/incidents/create" enctype="multipart/form-data">
-            <thead>
-                <tr>
-                    <th scope="col">Incident</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Active</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        <input type="text" value="" class="form-input-table" name="incident_name_form">
-                    </td>
-                    <td>
-                        <input type="text" value="" class="form-input-table" name="incident_description_form">
-                    </td>
-                    <td>
-                        <select name="incident_is_active_form" class="form-control">
-                            <option value="1" selected>1</option>
-                            <option value="0">0</option>
-                        </select>
-                    </td>
-                </tr>
-            </tbody>
-    </table>
-    <br>
-    <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+    <div class="table-container">
+        <table class="general-table">
+            <form method="POST" action="/admin/incidents/create" enctype="multipart/form-data">
+                <thead>
+                    <tr>
+                        <th scope="col">Incident</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Active</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <input type="text" value="" class="form-input-table" required name="incident_name_form">
+                        </td>
+                        <td>
+                            <input type="text" value="" class="form-input-table" required
+                                name="incident_description_form">
+                        </td>
+                        <td>
+                            <select name="incident_is_active_form" class="form-control">
+                                <option value="1" selected>1</option>
+                                <option value="0">0</option>
+                            </select>
+                        </td>
+                    </tr>
+                </tbody>
+        </table>
+        <br>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
 </center>
 
 {% endblock content %}
