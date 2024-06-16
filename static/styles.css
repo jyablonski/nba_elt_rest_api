@@ -157,23 +157,16 @@ caption {
     background-color: #b65656 !important;
 }
 
-/* Style the select element */
 select[name="bet_predictions"] {
     background-color: #727272;
-    /* Background color */
     color: #fff;
-    /* Text color */
     border: 1px solid #202020;
-    /* Border color */
     padding: 8px;
 }
 
-/* Style the options within the select element */
 select[name="bet_predictions"] option {
     background-color: #383b3d;
-    /* Background color */
     color: #fff;
-    /* Text color */
     padding: 8px;
     text-align: center;
 }
@@ -248,6 +241,31 @@ button:hover {
     box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
     padding: 0px 20px;
 }
+
+.feedback-form h1 {
+    text-align: center;
+}
+
+.feedback-form form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.feedback-form button {
+    align-self: center;
+}
+
+.feedback-form p {
+    text-align: center;
+}
+
+.feedback-form input {
+    text-align: left;
+    padding-left: 10px;
+    color: #ccc;
+}
+
 
 .login-form {
     height: 520px;
@@ -447,7 +465,6 @@ li {
     text-align: center;
 }
 
-/* Add styles for the links container */
 .links-container {
     display: flex;
     flex-direction: column;
@@ -455,10 +472,8 @@ li {
     margin-top: 20px;
 }
 
-/* Center the content within the links container */
 .links-container>* {
     margin: 10px;
-    /* Adjust the margin as needed */
 }
 
 #logoutForm input[type="submit"] {
@@ -474,7 +489,6 @@ li {
 
 #logoutForm input[type="submit"]:hover {
     background-color: #6d44b8;
-    /* Change the hover color as desired */
 }
 
 .admin-section {
@@ -527,7 +541,6 @@ li {
     text-decoration: none;
     text-align: center;
     margin: 0 auto;
-    /* Center the button */
 }
 
 .google-icon {

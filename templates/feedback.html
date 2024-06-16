@@ -1,19 +1,21 @@
 {% extends "base.html" %}
 
 {% block content %}
-<form id="feedback-form" method="post">
-    <h1> Anonymous Feedback Form </h1>
-    <input class="feedback-form" type="text" required placeholder="Enter your feedback ..." value=""
-        name="user_feedback">
-    <button type="submit" class="btn btn-primary">Submit</button>
-    <br>
-    <br>
 
-    <div class="badge bg-success text-wrap font-weight-bold" style="font-size: large;">
-        {% if feedback_response %}
-        <p>{{ feedback_response }}</p>
-        {% endif %}
-    </div>
-</form>
+<div class="feedback-form">
+    <form id="feedback-form" method="post">
+        <h1> Anonymous Feedback Form </h1>
+        <input class="feedback-form" type="text" required placeholder="Enter your feedback ..." value=""
+            name="user_feedback">
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <br>
+        <br>
 
+        <div class="badge bg-success text-wrap font-weight-bold" style="font-size: large;">
+            {% if feedback_response %}
+            <p>{{ feedback_response }}</p>
+            {% endif %}
+        </div>
+    </form>
+</div>
 {% endblock content %}
