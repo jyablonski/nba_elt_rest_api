@@ -2,6 +2,7 @@
 
 {% block content %}
 
+<div class="login-form">
 <form id="login-form" name="create_user_form" action="/login/create_user" method="post" enctype="multipart/form-data">
     <h1> Create a User </h1>
     <label>Username</label>
@@ -18,4 +19,5 @@
 
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+</div>
 {% endblock %}
