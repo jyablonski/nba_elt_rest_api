@@ -49,3 +49,41 @@ kubectl get pod --show-labels
 
 kubectl logs rest-api-deployment-7c58458667-92wcv
 ```
+
+## Kind
+
+``` sh
+export NAMESPACE=restapi
+
+kind create cluster
+kubectl create namespace restapi
+
+kubectl apply -f k8s/deployment.yaml --namespace $NAMESPACE
+
+kubectl apply -f k8s/secrets.yaml --namespace $NAMESPACE
+
+kubectl apply -f k8s/service.yaml --namespace $NAMESPACE
+
+kubectl apply -f k8s/deployment-hpa.yml --namespace $NAMESPACE
+
+kind load docker-image nba_elt_rest_api_local:latest --name kind
+
+docker exec -it 64328b37ce14 crictl images
+
+kubectl port-forward rest-api-deployment-56f998677c-6987s 8080:8080 --namespace $NAMESPACE
+
+kubectl logs rest-api-deployment-56f998677c-ppl9c --namespace $NAMESPACE
+
+echo -n 'prod' | base64
+
+kubectl get pods --namespace $NAMESPACE
+
+# install kubernetes metrics api
+kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+
+kubectl describe hpa rest-api-deployment-hpa --namespace $NAMESPACE
+
+# for this to work, have to --kubelet-insecure-tls to remove security
+
+kubectl apply -f k8s/metrics-server-deployment.yaml
+```
