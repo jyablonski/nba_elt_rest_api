@@ -86,4 +86,62 @@ kubectl describe hpa rest-api-deployment-hpa --namespace $NAMESPACE
 # for this to work, have to --kubelet-insecure-tls to remove security
 
 kubectl apply -f k8s/metrics-server-deployment.yaml
+
+# to use secrets from secrets manager instead of base64 encoded bs, do this
+helm repo add external-secrets https://charts.external-secrets.io
+helm install external-secrets external-secrets/external-secrets
 ```
+
+`secrets_store.yml`
+
+``` yaml
+apiVersion: external-secrets.io/v1beta1
+kind: SecretStore
+metadata:
+  name: aws-secrets-manager
+  namespace: restapi
+spec:
+  provider:
+    aws:
+      service: SecretsManager
+      region: your-aws-region
+      auth:
+        secretRef:
+          accessKeyIDSecretRef:
+            name: aws-credentials
+            key: aws_access_key_id
+          secretAccessKeySecretRef:
+            name: aws-credentials
+            key: aws_secret_access_key
+
+```
+
+`secrets.yml`
+
+``` yml
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: rest-api-secrets
+  namespace: restapi
+spec:
+  refreshInterval: "1h"
+  secretStoreRef:
+    name: aws-secrets-manager
+    kind: SecretStore
+  target:
+    name: rest-api-secrets
+    creationPolicy: Owner
+  data:
+  - secretKey: RDS_HOST
+    remoteRef:
+      key: your-aws-secrets-manager-key
+      property: RDS_HOST
+  - secretKey: RDS_USER
+    remoteRef:
+      key: your-aws-secrets-manager-key
+      property: RDS_USER
+
+```
+
+- this file pulls from secrets manager using the provided creds to give the secrets to the pods running your deployment

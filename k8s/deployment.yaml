@@ -15,6 +15,7 @@ spec:
       labels:
         app: nba-elt-rest-api
     spec:
+      # serviceAccountName: rest-api-sa
       containers:
       - name: nba-elt-rest-api
         image: nba_elt_rest_api_local:latest
