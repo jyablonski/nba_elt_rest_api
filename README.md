@@ -3,12 +3,19 @@
 
 Version: 1.8.8
 
-## [API](https://api.jyablonski.dev)
+## About the Project
 
 The REST API has the following functionalities:
 - Serves Data built from the NBA ELT Pipeline through various GET endpoints
-- Allows Users to login & make NBA Game Win Predictions starting from the [Login Web Page](https://api.jyablonski.dev/login)
-- Hosts an Internal Admin Site w/ various pages to manage things like Feature Flags and other functionality used throughout the project
+- Hosts a user-facing Frontend that Allows people to login & make NBA Game Win Predictions and Betting
+- Hosts an Internal Admin Frontend w/ various pages to manage things like Feature Flags and other functionality used throughout the project
+
+The Project uses:
+- A Postgres Database for the backend
+- A Redis Database to enable caching across various endpoints to improve performance
+- JWT for Authentication and Authorization
+
+It's currently hosted on an AWS Lambda Function URL for cost-saving purposes, but ideally would be hosted on ECS or EKS.
 
 ## Running The App
 Clone the Repo & run `make up` which spins up the App locally served [here](http://localhost:8080/) using 3 Docker Containers:
@@ -20,7 +27,7 @@ To Login to the App locally, a set of Credentials for an Admin User are listed b
 - Username: `test1`
 - Password: `password`
 
-When finished run `make down`.
+When finished run `make down` to spin resources down.
 
 ## Tests
 To run tests locally, run `make test`.
