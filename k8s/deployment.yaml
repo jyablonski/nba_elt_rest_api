@@ -6,7 +6,7 @@ metadata:
   labels:
     app: nba-elt-rest-api
 spec:
-  replicas: 1
+  replicas: 2  # This will be managed by HPA
   selector:
     matchLabels:
       app: nba-elt-rest-api
@@ -15,9 +15,16 @@ spec:
       labels:
         app: nba-elt-rest-api
     spec:
+      # serviceAccountName: rest-api-sa
       containers:
       - name: nba-elt-rest-api
-        image: 717791819289.dkr.ecr.us-east-1.amazonaws.com/jacobs_repo:nba_elt_rest_api
+        image: nba_elt_rest_api_local:latest
+        resources:
+          requests:
+            cpu: "100m"  # Adjust this value as needed
+          limits:
+            cpu: "500m"  # Adjust this value as needed
+        imagePullPolicy: Never  # or IfNotPresent
         ports:
         - containerPort: 8080
         env:
@@ -68,6 +75,11 @@ spec:
             secretKeyRef:
               name: rest-api-secrets
               key: OTEL_SERVICE_NAME
+        - name: REDIS_URL
+          valueFrom:
+            secretKeyRef:
+              name: rest-api-secrets
+              key: REDIS_URL
       volumes:
       - name: app-data
         emptyDir: {}
