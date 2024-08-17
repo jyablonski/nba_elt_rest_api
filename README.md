@@ -15,7 +15,7 @@ The Project uses:
 - A Redis Database to enable caching across various endpoints to improve performance
 - JWT for Authentication and Authorization
 
-It's currently hosted on an AWS Lambda Function URL for cost-saving purposes, but ideally would be hosted on ECS or EKS.
+The Project was hosted on an AWS Lambda Function URL for cost-savings compared to ECS or EKS, but is no longer running on AWS as of August 2024.
 
 ## Running The App
 Clone the Repo & run `make up` which spins up the App locally served [here](http://localhost:8080/) using 3 Docker Containers:
