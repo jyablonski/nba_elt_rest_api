@@ -1,14 +1,21 @@
 # REST API for NBA ELT Project
 ![Tests](https://github.com/jyablonski/nba_elt_rest_api/actions/workflows/test.yaml/badge.svg) ![Deployment](https://github.com/jyablonski/nba_elt_rest_api/actions/workflows/deploy.yaml/badge.svg) [![Coverage Status](https://coveralls.io/repos/github/jyablonski/nba_elt_rest_api/badge.svg?branch=master)](https://coveralls.io/github/jyablonski/nba_elt_rest_api?branch=master) ![Code Style](https://img.shields.io/badge/code%20style-black-000000.svg)
 
-Version: 1.8.8
+Version: 1.8.9
 
-## [API](https://api.jyablonski.dev)
+## About the Project
 
 The REST API has the following functionalities:
 - Serves Data built from the NBA ELT Pipeline through various GET endpoints
-- Allows Users to login & make NBA Game Win Predictions starting from the [Login Web Page](https://api.jyablonski.dev/login)
-- Hosts an Internal Admin Site w/ various pages to manage things like Feature Flags and other functionality used throughout the project
+- Hosts a user-facing Frontend that Allows people to login & make NBA Game Win Predictions and Betting
+- Hosts an Internal Admin Frontend w/ various pages to manage things like Feature Flags and other functionality used throughout the project
+
+The Project uses:
+- A Postgres Database for the backend
+- A Redis Database to enable caching across various endpoints to improve performance
+- JWT for Authentication and Authorization
+
+The Project was hosted on an AWS Lambda Function URL for cost-savings compared to ECS or EKS, but is no longer running on AWS as of August 2024.
 
 ## Running The App
 Clone the Repo & run `make up` which spins up the App locally served [here](http://localhost:8080/) using 3 Docker Containers:
@@ -20,7 +27,7 @@ To Login to the App locally, a set of Credentials for an Admin User are listed b
 - Username: `test1`
 - Password: `password`
 
-When finished run `make down`.
+When finished run `make down` to spin resources down.
 
 ## Tests
 To run tests locally, run `make test`.
