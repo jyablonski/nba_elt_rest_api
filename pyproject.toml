@@ -8,7 +8,7 @@ repository = "https://github.com/jyablonski/nba_elt_rest_api"
 package-mode = false
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.12"
 fastapi = { extras = ["all"], version = "^0.103.2" }
 sqlalchemy = "^2.0.21"
 pydantic = "^2.4.2"
