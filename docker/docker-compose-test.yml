@@ -55,7 +55,7 @@ services:
       - ${PWD}/config.yaml:/home/appuser/config.yaml
       - ${PWD}/pyproject.toml:/home/appuser/pyproject.toml
       # these are for fast local docker compose dev so changes will automatically make it into the app
-    command: python3 -m pytest -vv --cov-report term --cov-report xml:coverage.xml --cov=src
+    command: python3 -m pytest -vv --cov-report term --cov-report xml:coverage.xml --cov=src --color=yes
 
 networks:
   api_network:
