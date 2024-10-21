@@ -61,7 +61,7 @@ ci-test:
 	@make stop-postgres
 	@make start-postgres
 	@sleep 1
-	@poetry run pytest --cov-report term --cov-report xml:coverage.xml --cov=src
+	@poetry run pytest --cov-report term --cov-report xml:coverage.xml --cov=src --color=yes
 	@make stop-postgres
 
 .PHONY: follow-logs
