@@ -8,7 +8,7 @@ from sqlalchemy.orm import Session
 
 from src.dao.feature_flags import get_feature_flag
 from src.dao.users import create_user
-from src.database import get_db
+from src.dependencies import get_db
 from src.models import Users
 from src.schemas import UserCreate
 from src.security import get_current_creds_from_token, LoginForm

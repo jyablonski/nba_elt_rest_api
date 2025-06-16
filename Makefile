@@ -61,7 +61,7 @@ ci-test:
 	@make stop-postgres
 	@make start-postgres
 	@sleep 1
-	@poetry run pytest --cov-report term --cov-report xml:coverage.xml --cov=src --color=yes
+	@uv run pytest --cov-report term --cov-report xml:coverage.xml --cov=src --color=yes
 	@make stop-postgres
 
 .PHONY: follow-logs
@@ -77,8 +77,8 @@ test:
 .PHONY: lint
 lint:
 	@echo Checking Black --------------
-	@poetry run black src/
+	@uv run black src/
 	@echo Checking Ruff ---------------
-	-@poetry run ruff check .
+	-@uv run ruff check .
 	@echo Checking MyPy ---------------
-	-@poetry run mypy src/
+	-@uv run mypy src/

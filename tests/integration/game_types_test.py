@@ -1,5 +1,5 @@
-def test_game_types(client_fixture):
-    response = client_fixture.get("/game_types")
+def test_league_game_types(client_fixture):
+    response = client_fixture.get("/league/game_types")
     data = response.json()
 
     assert response.status_code == 200
@@ -11,3 +11,28 @@ def test_game_types(client_fixture):
         "n",
         "explanation",
     ]
+
+
+def test_team_game_types(client_fixture):
+    team = "IND"
+
+    response = client_fixture.get(f"/teams/{team}/game_types")
+    data = response.json()
+
+    assert response.status_code == 200
+    assert isinstance(data, list)
+    assert len(data) == 4
+
+    expected_game_types = {"20 pt Game", "Blowout Game", "10 pt Game", "Clutch Game"}
+    actual_game_types = {item["game_type"] for item in data}
+    assert expected_game_types == actual_game_types
+
+    for item in data:
+        assert item["team"] == "IND"
+        assert set(item.keys()) == {
+            "team",
+            "game_type",
+            "season_type",
+            "n",
+            "explanation",
+        }

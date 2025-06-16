@@ -121,6 +121,17 @@ class GameTypes(Base):
     explanation = Column(String, nullable=False)
 
 
+class TeamGameTypes(Base):
+    __tablename__ = "team_game_types"
+    __table_args__ = (PrimaryKeyConstraint("team", "game_type", "season_type"),)
+
+    team = Column(String, nullable=False)
+    game_type = Column(String, nullable=False)
+    season_type = Column(String, nullable=False)
+    n = Column(Integer, nullable=False)
+    explanation = Column(String, nullable=False)
+
+
 class Feedback(Base):
     __tablename__ = "feedback"
     __table_args__ = (PrimaryKeyConstraint("id"),)

@@ -11,7 +11,7 @@ env:
   RDS_SCHEMA: marts
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   PYTHON_VERSION: "3.12"
-  POETRY_VERSION: "1.8.3"
+  UV_VERSION: "0.6.12"
 
 jobs:
   test:
@@ -23,24 +23,13 @@ jobs:
     # it's a mfer to do it the docker way
     steps:
       - name: Checkout the Repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
-      - name: Install Poetry
-        run: |
-          python -m pip install --upgrade pip
-          pip install poetry==${{ env.POETRY_VERSION }}
-
-      - name: Install Python
-        uses: actions/setup-python@v4
-        id: setup_python
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
         with:
-          python-version: ${{ env.PYTHON_VERSION }}
-          cache: poetry
-          cache-dependency-path: poetry.lock
-
-      - name: Install dependencies
-        run: |
-          poetry install --with dev
+          version: ${{ env.UV_VERSION }}
+          enable-cache: true
 
       - name: Run Tests
         env:
@@ -50,4 +39,4 @@ jobs:
 
       - name: Coveralls
         run: |
-          poetry run coveralls
+          uv run coveralls

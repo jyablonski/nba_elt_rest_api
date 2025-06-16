@@ -1,5 +1,5 @@
-def test_reddit_comments(client_fixture):
-    response = client_fixture.get("/reddit_comments")
+def test_social_reddit_comments(client_fixture):
+    response = client_fixture.get("social/reddit/comments")
     data = response.json()
 
     assert response.status_code == 200
@@ -19,8 +19,8 @@ def test_reddit_comments(client_fixture):
     ]
 
 
-def test_reddit_comments_limit(client_fixture):
-    response = client_fixture.get("/reddit_comments?limit=1")
+def test_social_reddit_comments_limit(client_fixture):
+    response = client_fixture.get("social/reddit/comments?limit=1")
     data = response.json()
 
     assert response.status_code == 200
@@ -28,8 +28,8 @@ def test_reddit_comments_limit(client_fixture):
     assert data[0]["author"] == "rattatatouille"
 
 
-def test_reddit_comments_filter(client_fixture):
-    response = client_fixture.get("/reddit_comments?filter=jokic")
+def test_social_reddit_comments_filter(client_fixture):
+    response = client_fixture.get("social/reddit/comments?filter=jokic")
     data = response.json()
 
     assert response.status_code == 200
@@ -37,8 +37,8 @@ def test_reddit_comments_filter(client_fixture):
     assert data[0]["author"] == "BowlWinHoosiers"
 
 
-def test_reddit_comments_filter_case_insensitive(client_fixture):
-    response = client_fixture.get("/reddit_comments?filter=nba")
+def test_social_reddit_comments_filter_case_insensitive(client_fixture):
+    response = client_fixture.get("social/reddit/comments?filter=nba")
     data = response.json()
 
     assert response.status_code == 200
@@ -47,8 +47,8 @@ def test_reddit_comments_filter_case_insensitive(client_fixture):
     assert data[0]["comment"] == "I fine the NBA $50k for lying on the L2M, checkmate"
 
 
-def test_reddit_comments_multiple_conditions(client_fixture):
-    response = client_fixture.get("/reddit_comments?filter=nba&limit=2")
+def test_social_reddit_comments_multiple_conditions(client_fixture):
+    response = client_fixture.get("social/reddit/comments?filter=nba&limit=2")
     data = response.json()
 
     assert response.status_code == 200
@@ -57,11 +57,11 @@ def test_reddit_comments_multiple_conditions(client_fixture):
     assert data[0]["comment"] == "I fine the NBA $50k for lying on the L2M, checkmate"
 
 
-def test_reddit_comments_pagination(client_fixture):
-    response1 = client_fixture.get("/reddit_comments?page=1&filter=as&limit=10")
+def test_social_reddit_comments_pagination(client_fixture):
+    response1 = client_fixture.get("social/reddit/comments?page=1&filter=as&limit=10")
     data1 = response1.json()
 
-    response2 = client_fixture.get("/reddit_comments?page=2&filter=as&limit=10")
+    response2 = client_fixture.get("social/reddit/comments?page=2&filter=as&limit=10")
     data2 = response2.json()
 
     assert response1.status_code == 200

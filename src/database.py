@@ -10,7 +10,6 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
 if TYPE_CHECKING:
-    from typing import Generator
     from sqlalchemy.engine import Engine
     from sqlalchemy.orm import Session
 
@@ -79,14 +78,6 @@ def run_query(query: str, session: Session) -> list[tuple]:
     """
     result = session.execute(text(query))
     return result
-
-
-def get_db() -> Generator[Session, None, None]:
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
 
 
 env = load_yaml_with_env("config.yaml")[os.environ.get("ENV_TYPE")]

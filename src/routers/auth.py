@@ -5,7 +5,7 @@ from fastapi.responses import RedirectResponse
 from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 
-from src.database import get_db
+from src.dependencies import get_db
 from src.schemas import Token
 from src.security import (
     authenticate_user,

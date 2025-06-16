@@ -2,7 +2,7 @@
 # from sqlalchemy.orm import Session
 
 # from src.dao.users import create_user, delete_user, update_user
-# from src.database import get_db
+# from src.dependencies import get_db
 # from src.models import Users
 # from src.schemas import PasswordResetRequest, PasswordReset
 # from src.utils import generate_salt, generate_hash_password

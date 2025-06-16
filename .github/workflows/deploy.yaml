@@ -9,29 +9,29 @@ env:
   BUCKET_NAME : ${{ secrets.AWS_BUCKET }}
   IAM_ROLE: ${{ secrets.IAM_ROLE }}
   AWS_REGION : "us-east-1"
-  PYTHON_VERSION: "3.11"
+  PYTHON_VERSION: "3.12"
 
-# permission can be added at job level or workflow level    
+# permission can be added at job level or workflow level
 permissions:
       id-token: write
       contents: read    # This is required for actions/checkout
 
 jobs:
-  deploy:
+  cd_pipeline:
     runs-on: ubuntu-latest
     steps:
       - name: Git clone the repository
         uses: actions/checkout@v3
-    
+
       - name: configure aws credentials
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: ${{ env.IAM_ROLE }}
-          role-session-name: samplerolesession
+          role-session-name: rest-api-cicd
           aws-region: ${{ env.AWS_REGION }}
-    
-      - name: Install Python 3.11
-        uses: actions/setup-python@v1
+
+      - name: Install Python
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ env.PYTHON_VERSION }}
 
@@ -52,16 +52,18 @@ jobs:
         run: |
           aws lambda update-function-code --function-name jacobs_rest_api_lambda --s3-bucket $aws_bucket --s3-key rest-api/lambda_function.zip
 
+
   deploy-alert:
-    needs: deploy
+    needs: cd_pipeline
     runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
     steps:
-      - uses: actions/checkout@v2
-      - name: Slack Notification
-        uses: rtCamp/action-slack-notify@v2
-        env:
-          SLACK_COLOR: ${{ job.status }}
-          SLACK_MESSAGE: 'REST API Deployed to Production'
-          SLACK_TITLE: Deploy Pipeline
-          SLACK_USERNAME: GitHub Actions
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+      - uses: actions/checkout@v4
+
+      - name: Slack Deploy Notification
+        uses: jyablonski/actions/slack_alert@v1
+        with:
+          message: ${{ job.status == 'success' && 'REST API Deployed to Production' || 'REST API Failed to deploy properly' }}
+          title: ${{ job.status == 'success' && 'REST API Deploy Pipeline' || 'REST API Deploy Failure' }}
+          color: ${{ job.status == 'success' && 'good' || 'danger' }}
+          webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}

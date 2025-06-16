@@ -102,7 +102,7 @@ CREATE TABLE reddit_comments(
 );
 
 INSERT INTO reddit_comments (scrape_date, author, comment, flair, score, url, compound, pos, neu, neg)
-VALUES (current_date, 'rattatatouille', 'Jokic putting up a dismal effort', 'Spurs', 5875, 
+VALUES (current_date, 'rattatatouille', 'Jokic putting up a dismal effort', 'Spurs', 5875,
         'https://www.reddit.com/r/nba/comments/12c4y8y/nikola_jokic_disasterclass_against_houston_14/',
         -0.6124, 0, 0.846, 0.154),
        (current_date, 'KaiserKaiba', 'NBA scriptwriters working overtime right now', null, 2829,
@@ -140,7 +140,7 @@ INSERT INTO reddit_comments (scrape_date,author,"comment",flair,score,url,compou
 INSERT INTO reddit_comments (scrape_date,author,"comment",flair,score,url,compound,pos,neu,neg) VALUES
 	 ('2024-02-01','kemar7856','The rule has to be in place and 65 games is pretty lenient imo',NULL,1297,'https://www.reddit.com/r/nba/comments/1aflznu/stephen_a_lists_guys_like_kawhi_paul_george_kevin/',0.6486,0.306,0.694,0),
 	 ('2024-02-01','Certain-Letterhead-2','As much as ppl clown him for his “weak knees” and crap, the fact he’s able to bounce back from serious injuries time and time again is ridiculous. Terrific scorer and leading a legit title contender','Thunder',1279,'https://www.reddit.com/r/nba/comments/1afzjbb/azarly_kawhi_leonard_is_shooting_575090_over_his/',-0.2023,0.112,0.732,0.156),
-	 ('2024-02-01','Galdi-br','Learning to silence other people and focus on yourself is a hard thing to do. Get well soon. 
+	 ('2024-02-01','Galdi-br','Learning to silence other people and focus on yourself is a hard thing to do. Get well soon.
 
 As Sartre said “Hell is other people”','BRA',1203,'https://www.reddit.com/r/nba/comments/1afl0wp/amick_people_within_the_sixers_organization/',0.1779,0.082,0.863,0.055),
 	 ('2024-02-01','JilJungJukk','Doc Rivers got randomly boo''d at the end too lol: https://streamable.com/on5nxi','Lakers',1156,'https://www.reddit.com/r/nba/comments/1ag0yzr/highlight_lillard_is_welcomed_to_moda_center_to_a/',0.4215,0.219,0.781,0),
@@ -176,7 +176,7 @@ INSERT INTO reddit_comments (scrape_date,author,"comment",flair,score,url,compou
 	 ('2024-02-01','FlyingScissor','Dray was fined 25k for choking Gobert.',NULL,627,'https://www.reddit.com/r/nba/comments/1afnqa2/nba_pr_anthony_edwards_has_been_fined_40000_for/',-0.4588,0,0.667,0.333),
 	 ('2024-02-01','Common_Feedback_3986','Yeah fr people have been complaining for years about this shit, and now suddenly they''re cool with it?','Raptors',594,'https://www.reddit.com/r/nba/comments/1aflznu/stephen_a_lists_guys_like_kawhi_paul_george_kevin/',-0.3716,0.183,0.57,0.246);
 INSERT INTO reddit_comments (scrape_date,author,"comment",flair,score,url,compound,pos,neu,neg) VALUES
-	 ('2024-02-01','Naweezy','More motivational speaker than coach. 
+	 ('2024-02-01','Naweezy','More motivational speaker than coach.
 
 Fizdale was the absolute worst.','Knicks',590,'https://www.reddit.com/r/nba/comments/1afrgit/elfrid_payton_on_former_coach_david_fizdale_we_go/',-0.6249,0,0.687,0.313),
 	 ('2024-02-01','nibbinoo8','had me like "i swore he was a laker when he did this" lmao','Celtics',586,'https://www.reddit.com/r/nba/comments/1afrsm0/krawczynski_karlanthony_towns_has_issued_a/',0.7978,0.393,0.607,0),
@@ -196,7 +196,7 @@ FIBA forever!',NULL,573,'https://www.reddit.com/r/nba/comments/1aft64o/ryen_russ
 	 ('2024-02-01','FlyLikeMcFly','Cuban fumbled so Mavs can’t get that roster for Luka',NULL,539,'https://www.reddit.com/r/nba/comments/1afpq4r/luka_is_only_06_ppg_behind_embiid_for_the_scoring/',0,0,1,0);
 INSERT INTO reddit_comments (scrape_date,author,"comment",flair,score,url,compound,pos,neu,neg) VALUES
 	 ('2024-02-01','retrohan7','He was such a snake oil salesman of a coach. I remember grizzlies fan saying it but I still had hope as a knick fan at the time. He did corny motivational things like this on the regular because he didn''t have the xs and os',NULL,535,'https://www.reddit.com/r/nba/comments/1afrgit/elfrid_payton_on_former_coach_david_fizdale_we_go/',0.8934,0.24,0.76,0),
-	 ('2024-02-01','HorsefacePakusa','This actually got called correctly at the end of the UNC game last night. Dude launched himself into the defender and snapped his head back, great no call. Everyone went crazy demanding a foul, but that’s the way to call it. 
+	 ('2024-02-01','HorsefacePakusa','This actually got called correctly at the end of the UNC game last night. Dude launched himself into the defender and snapped his head back, great no call. Everyone went crazy demanding a foul, but that’s the way to call it.
 
 You don’t get a free foul cuz you torpedoed yourself into the defender. The rule has all that “defender is responsible” bullshit, well the offensive player is responsible for making an actual basketball play.','Warriors',526,'https://www.reddit.com/r/nba/comments/1aft64o/ryen_russillo_tells_the_official_nba_referee/',0.5859,0.211,0.64,0.149),
 	 ('2024-02-01','salcedoge','AD literally gets called Day to Davis, gets called street clothes and everything but the Lakers would never play him if he was hurt.
@@ -243,10 +243,10 @@ But I guess, now that the threshold is known, the players in question feel the p
 	 ('2024-02-01','KevinSorboFan','I agree this wasn''t a great example since Curry does move a little bit into PatBev''s path... but this is a good discussion on how the rule is stupid. Even if Steph did take a direct line towards the hoop (or even further to the far side of the rim... just completely conceding the lane to PatBev), the driver would still be allowed to create this contact because Steph is turned sideways.
 
 This type of call has got to go away. The defense should be allowed a straight line to the basket when they are moving side by side with the driver. If the driving player wants to veer into the offensive player to make it harder for them to time a block, fine... but we don''t need to reward them with FTs. If the contact is egregious, even call an offensive foul.','Bucks',406,'https://www.reddit.com/r/nba/comments/1aft64o/ryen_russillo_tells_the_official_nba_referee/',-0.9223,0.077,0.782,0.141),
-	 ('2024-02-01','bewarethegap','Yeah. I mean, I get it. Those guys that are in contention to lose money because of the 65 game rule are going to be upset, but there’s always been a minimum game threshold where people are going to ask “did x player really player enough to win x award?” There’s just an explicit number assigned to it now. 
+	 ('2024-02-01','bewarethegap','Yeah. I mean, I get it. Those guys that are in contention to lose money because of the 65 game rule are going to be upset, but there’s always been a minimum game threshold where people are going to ask “did x player really player enough to win x award?” There’s just an explicit number assigned to it now.
 
 
-If you get hurt and miss a bunch of games, it’s natural that you’re not gonna get selected over another person who was able to stay on the court. 
+If you get hurt and miss a bunch of games, it’s natural that you’re not gonna get selected over another person who was able to stay on the court.
 
 
 It’s not like the guys who maybe make All-NBA because Embiid or Halliburton missed too many games are putting up 12/4, they’re hooping too. Do you value that extra bag more or do you want to be at 100% when it matters? That’s what the real question becomes.
@@ -316,7 +316,7 @@ INSERT INTO reddit_comments (scrape_date,author,"comment",flair,score,url,compou
 	 ('2024-02-01','SurpriseDonovanMcnab','A man played basketball while injured. We''re the worst.','Pistons',274,'https://www.reddit.com/r/nba/comments/1afl0wp/amick_people_within_the_sixers_organization/',-0.6597,0.169,0.352,0.479),
 	 ('2024-02-01','FultonHomes','Brothers','Suns',272,'https://www.reddit.com/r/nba/comments/1ag1yvu/highlight_booker_hits_mikal_with_his_own_3point/',0,0,1,0),
 	 ('2024-02-01','augustus624','I doubt Embiid cares about 15 year old edgelords on Twitter/Reddit. The issue was legit reporters and talking heads with influence were also pushing the narrative that he was faking his injury and being soft for not playing. Still think Embiid should’ve ignored the noise and continued to rest but understandable that it got to him',NULL,261,'https://www.reddit.com/r/nba/comments/1afl0wp/amick_people_within_the_sixers_organization/',-0.5417,0.034,0.824,0.143),
-	 ('2024-02-01','BayesBestFriend','Still insane. 
+	 ('2024-02-01','BayesBestFriend','Still insane.
 
 You literally have a medical team whose job is to prevent players from playing if they''re injured.','Raptors',259,'https://www.reddit.com/r/nba/comments/1afl0wp/amick_people_within_the_sixers_organization/',-0.5423,0.13,0.628,0.242),
 	 ('2024-02-01','taititans','What the fuck','Bulls',257,'https://www.reddit.com/r/nba/comments/1afzjbb/azarly_kawhi_leonard_is_shooting_575090_over_his/',-0.5423,0,0.364,0.636);
@@ -334,7 +334,7 @@ INSERT INTO reddit_comments (scrape_date,author,"comment",flair,score,url,compou
 INSERT INTO reddit_comments (scrape_date,author,"comment",flair,score,url,compound,pos,neu,neg) VALUES
 	 ('2024-02-01','The12thman94','I just can''t get past it.   I''m having the hardest time reconciling my Blazers fandom with losing Dame ',NULL,243,'https://www.reddit.com/r/nba/comments/1ag0yzr/highlight_lillard_is_welcomed_to_moda_center_to_a/',-0.3818,0,0.86,0.14),
 	 ('2024-02-01','MrBuckBuck','When you press on all your buttons in 2k.','Wizards',241,'https://www.reddit.com/r/nba/comments/1afz9za/highlight_russell_westbrook_hits_kawhi_with_the/',0,0,1,0),
-	 ('2024-02-01','meowhatissodamnfunny','It''s really whack how obviously OP tries to spin the title to make Ryen look like an asshole when he''s bitching about the same stuff /r/nba bitches about ALL. THE. TIME. 
+	 ('2024-02-01','meowhatissodamnfunny','It''s really whack how obviously OP tries to spin the title to make Ryen look like an asshole when he''s bitching about the same stuff /r/nba bitches about ALL. THE. TIME.
 
 Maybe his phrasing wasn''t great but I think it''s clear for anyone that listens to Ryen he wasn''t doing it from some like elitist position or something. He''s just mad his favorite sport is being turned into refball',NULL,235,'https://www.reddit.com/r/nba/comments/1aft64o/ryen_russillo_tells_the_official_nba_referee/',0.4503,0.15,0.724,0.126),
 	 ('2024-02-01','zmegadeth','> also it’s fine for refs to make mistakes
@@ -397,10 +397,10 @@ Love you Dame, Doc sucks why the fuck you don''t get Dame multiple looks there.'
 	 ('2024-02-01','LoWE11053211','i bet he waited way more than one game','Clippers',186,'https://www.reddit.com/r/nba/comments/1ag1yvu/highlight_booker_hits_mikal_with_his_own_3point/',0,0,1,0),
 	 ('2024-02-01','-Schweini31-','Mini 🤏','Suns',186,'https://www.reddit.com/r/nba/comments/1ag192x/kd_with_some_friendly_trash_talk_to_his_friend/',0,0,1,0),
 	 ('2024-02-01','defiantcross','i saw him do some kind of monocle thing earlier in the game after a 3.  is that his thing now?','Suns',184,'https://www.reddit.com/r/nba/comments/1ag1yvu/highlight_booker_hits_mikal_with_his_own_3point/',0,0,1,0),
-	 ('2024-02-01','ChipsyKingFisher','The NBA is, despite being the highest level, completely different than all other basketball. We all were taught rules. The NBA has the same ones, they just don’t follow them.  
-   
-Try playing like an NBA player in a pickup game. Carry and travel ever play, set a ridiculous moving screen every time you set a pick. Throw yourself into your defender when you have the ball and flail.  
-   
+	 ('2024-02-01','ChipsyKingFisher','The NBA is, despite being the highest level, completely different than all other basketball. We all were taught rules. The NBA has the same ones, they just don’t follow them.
+
+Try playing like an NBA player in a pickup game. Carry and travel ever play, set a ridiculous moving screen every time you set a pick. Throw yourself into your defender when you have the ball and flail.
+
 In the NBA that’s the way the game works, on any basketball court anywhere else you’d piss everybody off and nobody would want to play with you.',NULL,182,'https://www.reddit.com/r/nba/comments/1aft64o/ryen_russillo_tells_the_official_nba_referee/',0.5574,0.117,0.832,0.051);
 INSERT INTO reddit_comments (scrape_date,author,"comment",flair,score,url,compound,pos,neu,neg) VALUES
 	 ('2024-02-01','ItsN0tTheB0at','maybe they can fire Adrian Griffin again','Celtics',181,'https://www.reddit.com/r/nba/comments/1ag3sda/post_game_thread_the_portland_trail_blazers_1533/',-0.34,0,0.714,0.286),
@@ -423,15 +423,15 @@ INSERT INTO reddit_comments (scrape_date,author,"comment",flair,score,url,compou
 Doc is a proven idiot. How you win one chip'' with recently arrested Rondo, Ray Allen, Paul Pierce, and Kevin Garnet is a head scratcher. Blew so many playoff leads with favored rosters. Budenholzer is building his resume for his next job by the day....All he has to say is look at these bozos without me.',NULL,171,'https://www.reddit.com/r/nba/comments/1ag3qrn/highlight_giannis_misses_both_fts_to_close_the/',-0.7506,0.094,0.749,0.158),
 	 ('2024-02-01','Several_Nature_9593','Doctor Rivers would blame Tobias Harris.',NULL,170,'https://www.reddit.com/r/nba/comments/1afl0wp/amick_people_within_the_sixers_organization/',-0.34,0,0.676,0.324),
 	 ('2024-02-01','Colorado_designer','I guarantee he wouldn’t be getting this level of scrutiny if he didn’t campaign for MVP all last year including that “interview” at the end throwing shade at Jokic. Also, playing through it clearly shows the MVP IS more important to him than being healthy for the playoffs.','Nuggets',170,'https://www.reddit.com/r/nba/comments/1afl0wp/amick_people_within_the_sixers_organization/',0.8516,0.212,0.788,0),
-	 ('2024-02-01','Long_Chance3583','I was just listening to the newest Lowe Post and Chiney Ogwumike was talking about how frustrating the current rules are for defenders. She said that as a defender you cannot defend yourself from an offensive player launching in to you. 
+	 ('2024-02-01','Long_Chance3583','I was just listening to the newest Lowe Post and Chiney Ogwumike was talking about how frustrating the current rules are for defenders. She said that as a defender you cannot defend yourself from an offensive player launching in to you.
 
-This is a sentiment I feel all the time, and as she was taking the words directly out of my soul, it suddenly hit me that people who don’t feel this way must simply not care about playing defense. I mean actually give a shit about playing defense. 
+This is a sentiment I feel all the time, and as she was taking the words directly out of my soul, it suddenly hit me that people who don’t feel this way must simply not care about playing defense. I mean actually give a shit about playing defense.
 
-This is the only logical answer to me. One, because as a coach, I know that many players don’t actually take pride in defense. And two, because I fail to see how anyone whom does take pride in defense sees the current landscape of basketball and thinks it’s okay. 
+This is the only logical answer to me. One, because as a coach, I know that many players don’t actually take pride in defense. And two, because I fail to see how anyone whom does take pride in defense sees the current landscape of basketball and thinks it’s okay.
 
-Just yesterday I saw a player bowling ball backwards and take out my centers legs while screaming and 1 and putting up a horrible shot that had no chance. This isn’t just stupid, it’s dangerous. A modern defensive player is tasked with staying near the ball handler, but if the ball handler suddenly decides to bowling ball into your body, you are now called for a foul. 
+Just yesterday I saw a player bowling ball backwards and take out my centers legs while screaming and 1 and putting up a horrible shot that had no chance. This isn’t just stupid, it’s dangerous. A modern defensive player is tasked with staying near the ball handler, but if the ball handler suddenly decides to bowling ball into your body, you are now called for a foul.
 
-It is an oxymoron that should break the brain of basketball fans. But the reality is most fans only see the offensive side of the ball. While many players only care about their box score, and their highlights, which rarely show defense. 
+It is an oxymoron that should break the brain of basketball fans. But the reality is most fans only see the offensive side of the ball. While many players only care about their box score, and their highlights, which rarely show defense.
 
 And then our best American players go overseas, on star studded rosters, and get embarrassed on a global stage as they flail for fouls and endlessly travel into turnovers.','Heat',169,'https://www.reddit.com/r/nba/comments/1aft64o/ryen_russillo_tells_the_official_nba_referee/',-0.9287,0.082,0.796,0.122),
 	 ('2024-02-01','MerkDoctor','Ant Edwards and Tatum both the future faces of the league and both saying the same good shit, gotta love it.',NULL,168,'https://www.reddit.com/r/nba/comments/1aflznu/stephen_a_lists_guys_like_kawhi_paul_george_kevin/',0.5423,0.247,0.627,0.125),
@@ -474,7 +474,7 @@ INSERT INTO reddit_comments (scrape_date,author,"comment",flair,score,url,compou
 	 ('2024-02-01','Avant-Garde-A-Clue','MJ really doesn’t get the credit for this he deserves. People make jokes about Wizards Jordan but the man played all 82 games at 37mpg and averaged 20ppg at 40 years old.
 
 That is one “achievement” that will never be duplicated.','NBA',154,'https://www.reddit.com/r/nba/comments/1aflznu/stephen_a_lists_guys_like_kawhi_paul_george_kevin/',0.6597,0.144,0.856,0),
-	 ('2024-02-01','Smekledorf1996','People mix up usage rate and time of possessions with each other tbf 
+	 ('2024-02-01','Smekledorf1996','People mix up usage rate and time of possessions with each other tbf
 
 Like CP3 was very ball dominant for years, but his usage rate % fluctuated between low to mid 20s',NULL,154,'https://www.reddit.com/r/nba/comments/1afpq4r/luka_is_only_06_ppg_behind_embiid_for_the_scoring/',-0.2263,0.052,0.868,0.079),
 	 ('2024-02-01','this_good_boy','Wolves game against the hornets.',NULL,153,'https://www.reddit.com/r/nba/comments/1afnqa2/nba_pr_anthony_edwards_has_been_fined_40000_for/',0,0,1,0),
@@ -504,7 +504,7 @@ INSERT INTO reddit_comments (scrape_date,author,"comment",flair,score,url,compou
 	 ('2024-02-01','No_Progress_278','Very classy Portland fans. Ngl that was pretty cool of y’all',NULL,144,'https://www.reddit.com/r/nba/comments/1ag0yzr/highlight_lillard_is_welcomed_to_moda_center_to_a/',0.8268,0.521,0.479,0),
 	 ('2024-02-01','LegendOfSoccer','Luka should be top 3 in MVP list. I don’t understand how he is 7th','Mavs',144,'https://www.reddit.com/r/nba/comments/1afpq4r/luka_is_only_06_ppg_behind_embiid_for_the_scoring/',0.2023,0.13,0.87,0),
 	 ('2024-02-01','MattAU05','I don''t know man, anyone saying that Kevin Durant was intentionally not playing basketball when he could otherwise be playing basketball is a little crazy. I don''t think anyone likes basketball more than KD.','Suns',143,'https://www.reddit.com/r/nba/comments/1aflznu/stephen_a_lists_guys_like_kawhi_paul_george_kevin/',-0.6831,0,0.78,0.22),
-	 ('2024-02-01','Several_Nature_9593','Steph and Seth have 4 rings to their 3 rings. 
+	 ('2024-02-01','Several_Nature_9593','Steph and Seth have 4 rings to their 3 rings.
 
 Both brothers have a combined 9 all star appearances.',NULL,143,'https://www.reddit.com/r/nba/comments/1afn9sg/cole_marc_gasol_has_officially_announced_his/',0,0,1,0);
 INSERT INTO reddit_comments (scrape_date,author,"comment",flair,score,url,compound,pos,neu,neg) VALUES
@@ -533,7 +533,7 @@ Pop makes his players go to museums and shit and phil jackson is a straight up h
 	 ('2024-02-01','Numerous-Cicada3841','It’s funny because this demonstrates voters *clearly* think games played matters when it comes to MVP. But then when it comes to things like All-NBA it shouldn’t? If it’s good for the goose it’s good for the gander.','Kings',132,'https://www.reddit.com/r/nba/comments/1afup4o/marks_my_thoughts_on_the_65game_policy_last/',0.928,0.328,0.672,0),
 	 ('2024-02-01','Wazflame','Yeah, he was actually cooking on this segment lol, he did his research',NULL,131,'https://www.reddit.com/r/nba/comments/1aflznu/stephen_a_lists_guys_like_kawhi_paul_george_kevin/',0.6124,0.312,0.688,0),
 	 ('2024-02-01','twotonkatrucks','Trying to do his best Pop impression.','Spurs',130,'https://www.reddit.com/r/nba/comments/1afrgit/elfrid_payton_on_former_coach_david_fizdale_we_go/',0.7269,0.55,0.45,0),
-	 ('2024-02-01','Conn3er','He obviously missed the 2nd on purpose 
+	 ('2024-02-01','Conn3er','He obviously missed the 2nd on purpose
 
 Hopefully at least','Spurs',130,'https://www.reddit.com/r/nba/comments/1ag3qrn/highlight_giannis_misses_both_fts_to_close_the/',0.128,0.209,0.62,0.171),
 	 ('2024-02-01','pjtheMillwrong','It’s for All NBA as well','Raptors',130,'https://www.reddit.com/r/nba/comments/1aflznu/stephen_a_lists_guys_like_kawhi_paul_george_kevin/',0.2732,0.296,0.704,0);
@@ -555,13 +555,13 @@ INSERT INTO reddit_comments (scrape_date,author,"comment",flair,score,url,compou
 	 ('2024-02-01','senor_zanjeer','I love Mikal Bridges','Suns',123,'https://www.reddit.com/r/nba/comments/1ag1yvu/highlight_booker_hits_mikal_with_his_own_3point/',0.6369,0.677,0.323,0),
 	 ('2024-02-01','Apollo611','Dame gonna request a trade back','Lakers',121,'https://www.reddit.com/r/nba/comments/1ag3pwx/damian_lillard_loses_in_his_return_to_portland/',0,0,1,0),
 	 ('2024-02-01','Daconvix','Feel bad Mikal stuck on this shit Nets team','Warriors',121,'https://www.reddit.com/r/nba/comments/1ag1yvu/highlight_booker_hits_mikal_with_his_own_3point/',-0.8442,0,0.397,0.603),
-	 ('2024-02-01','tapk69','The problem with this call is that Pat will hound Curry all game without being called for fouls because he is a dawg. 
+	 ('2024-02-01','tapk69','The problem with this call is that Pat will hound Curry all game without being called for fouls because he is a dawg.
 Curry moves a bit to the path of the attacker but the contact is initiated by the attacker. They will call this same play differently depending on the game and players involved, you can bet.','Cavaliers',120,'https://www.reddit.com/r/nba/comments/1aft64o/ryen_russillo_tells_the_official_nba_referee/',-0.7311,0.048,0.808,0.144),
 	 ('2024-02-01','AnotherStatsGuy','I don’t know. Those 2 series winners by Dame and the wins against the Nuggets in 2019 are still higher than anything I’ve seen the Pelicans do.','Pelicans',120,'https://www.reddit.com/r/nba/comments/1ag0yzr/highlight_lillard_is_welcomed_to_moda_center_to_a/',0.7783,0.228,0.772,0),
 	 ('2024-02-01','TheseWalls_','He better get one before the media gets all over Wemby in a couple of years.','bwLakers',118,'https://www.reddit.com/r/nba/comments/1afpq4r/luka_is_only_06_ppg_behind_embiid_for_the_scoring/',0.4404,0.172,0.828,0),
 	 ('2024-02-01','0dias_Chrysalis','League really thinks this shit more fun to watch if like 9 guys are averaging 30ppg. Same with them only caring about 6 teams in the media. They really think the league grows by doing all this shit','Bucks',118,'https://www.reddit.com/r/nba/comments/1aft64o/ryen_russillo_tells_the_official_nba_referee/',-0.2183,0.188,0.627,0.185),
 	 ('2024-02-01','IEatPussyLikeAPro','They totally did this as a troll. Got out jerked by the NBA team',NULL,117,'https://www.reddit.com/r/nba/comments/1afz16t/highlight_kevin_durant_doesnt_look_too_amused_as/',-0.2023,0,0.87,0.13),
-	 ('2024-02-01','Losalou52','Luka is the MVP. He is doing the most with the least.  Kyrie has missed 20+ games. Several other starters have missed extended periods. Sometimes he doesn’t play well, but nobody stops him. 
+	 ('2024-02-01','Losalou52','Luka is the MVP. He is doing the most with the least.  Kyrie has missed 20+ games. Several other starters have missed extended periods. Sometimes he doesn’t play well, but nobody stops him.
 
 He is also 3rd in assists per game, 9th in steals per game, and 23rd in rebounds per game.','TrailBlazers',117,'https://www.reddit.com/r/nba/comments/1afpq4r/luka_is_only_06_ppg_behind_embiid_for_the_scoring/',-0.743,0.055,0.782,0.162);
 INSERT INTO reddit_comments (scrape_date,author,"comment",flair,score,url,compound,pos,neu,neg) VALUES
@@ -599,7 +599,7 @@ INSERT INTO reddit_comments (scrape_date,author,"comment",flair,score,url,compou
 
 4. Dame-Giannis Bucks <----- YOU ARE HERE','USA',112,'https://www.reddit.com/r/nba/comments/1ag3sda/post_game_thread_the_portland_trail_blazers_1533/',0,0,1,0),
 	 ('2024-02-01','ghost_mv','Miss the twins. I still go back and watch the Cam Johnson 3Pt buzzer beater. Al’s voice is so joyous.','Suns',112,'https://www.reddit.com/r/nba/comments/1ag1yvu/highlight_booker_hits_mikal_with_his_own_3point/',0.685,0.22,0.713,0.067),
-	 ('2024-02-01','DyslexicAutronomer','Its a meme, pat bev isn''t the important part. (even tho he was an ex-wolf) 
+	 ('2024-02-01','DyslexicAutronomer','Its a meme, pat bev isn''t the important part. (even tho he was an ex-wolf)
 
 The important part is they have proof of the foul caught on camera which the refs/nba is still ignoring - similar to what happened to the lakers in the original pic.','West',112,'https://www.reddit.com/r/nba/comments/1afrsm0/krawczynski_karlanthony_towns_has_issued_a/',-0.3786,0.048,0.83,0.122),
 	 ('2024-02-01','Nyentzen','This game had some awesome moments for the Subs:
@@ -611,10 +611,10 @@ A lot of meme potential',NULL,112,'https://www.reddit.com/r/nba/comments/1ag1yvu
 	 ('2024-02-01','KazaamFan','This foul call is horseshit.  It sucks to watch.  Curry did nothing wrong. Can you call this a foul in a pick up game?  Hell no.  ',NULL,112,'https://www.reddit.com/r/nba/comments/1aft64o/ryen_russillo_tells_the_official_nba_referee/',-0.7748,0.08,0.628,0.292),
 	 ('2024-02-01','minneapolisboy','Really hope "Marginal Contact" because a rallying cry of some sort lol','Timberwolves',111,'https://www.reddit.com/r/nba/comments/1afnqa2/nba_pr_anthony_edwards_has_been_fined_40000_for/',0.4391,0.351,0.468,0.181),
 	 ('2024-02-01','JAhoops','Better than Tatum',NULL,111,'https://www.reddit.com/r/nba/comments/1afzjbb/azarly_kawhi_leonard_is_shooting_575090_over_his/',0.4404,0.592,0.408,0),
-	 ('2024-02-01','LiveVirus2','The Jan schedule was tough. High quality opponents, 11 road games, 5 b2b’s. 
+	 ('2024-02-01','LiveVirus2','The Jan schedule was tough. High quality opponents, 11 road games, 5 b2b’s.
 
 Fuck you and goodbye January.','Thunder',111,'https://www.reddit.com/r/nba/comments/1ag1911/post_game_thread_the_oklahoma_city_thunder_3315/',-0.6124,0,0.75,0.25),
-	 ('2024-02-01','deemerritt','I think the worst thing about the nba is the benefit of the doubt the offense gets if they are a superstar. In college lots of refs suck, but you never get the feeling that a specific player is getting calls they otherwise wouldnt.  The easiest thing for them to do would just be to not call shit where the offensive player very obviously is the one initiating contact. 
+	 ('2024-02-01','deemerritt','I think the worst thing about the nba is the benefit of the doubt the offense gets if they are a superstar. In college lots of refs suck, but you never get the feeling that a specific player is getting calls they otherwise wouldnt.  The easiest thing for them to do would just be to not call shit where the offensive player very obviously is the one initiating contact.
 
 Like i used to love getting tickets to see all the good teams but now ive seen Miami and Philly and i have very little interest watching Butler and Embiid bowl into people and get the call. Like i used to see the lakers as a kid and sure it was frustrating watching shaq shoot all those free throws, but you never got the feeling he was trying to be fouled.','ChaHornets',111,'https://www.reddit.com/r/nba/comments/1aft64o/ryen_russillo_tells_the_official_nba_referee/',0.9275,0.194,0.662,0.144);
 INSERT INTO reddit_comments (scrape_date,author,"comment",flair,score,url,compound,pos,neu,neg) VALUES
@@ -696,7 +696,7 @@ If he was a toe away from beating the world champs for the knicks, he’d be suc
 
 If you don''t always play even when it seems like you could have, it uses up all your credibility and then when you actually *have* to take a game off for legit reasons you don''t get that automatic pass that more consistent players do.',NULL,93,'https://www.reddit.com/r/nba/comments/1afl0wp/amick_people_within_the_sixers_organization/',-0.1308,0.094,0.795,0.11),
 	 ('2024-02-01','CockBronson','Go look at this in their sub and this quite literally might as well be one of their takes on the matter.','Nuggets',92,'https://www.reddit.com/r/nba/comments/1afl0wp/amick_people_within_the_sixers_organization/',0.296,0.138,0.862,0),
-	 ('2024-02-01','floatinginside','The original shitstorm was caused by them not putting Embiid on the injury report in Denver. If he''d been listed as questionable going into that game, and they communicated he was a game-time decision, I don''t think the blowback would have been nearly as bad. 
+	 ('2024-02-01','floatinginside','The original shitstorm was caused by them not putting Embiid on the injury report in Denver. If he''d been listed as questionable going into that game, and they communicated he was a game-time decision, I don''t think the blowback would have been nearly as bad.
 
 Let me make this clear: this is an awful look for the 76ers org way more than it is for Embiid. No one wants him to play when he''s truly hurt - which is clearly the case here. Had he been listed on the injury report ahead of the Denver game, this would have been avoided. I''m sure some would still say he was ducking Jokic, but it would not have been nearly as bad.','Cavaliers',92,'https://www.reddit.com/r/nba/comments/1afl0wp/amick_people_within_the_sixers_organization/',-0.8442,0.081,0.769,0.15),
 	 ('2024-02-01','mMounirM','why is Giannis even in the game with 5 seconds left. What does he bring at that time down 3?','Raptors',91,'https://www.reddit.com/r/nba/comments/1ag3qrn/highlight_giannis_misses_both_fts_to_close_the/',0,0,1,0);
@@ -723,7 +723,7 @@ Embiid slander always does great for engagement, so the national media is of cou
 	 ('2024-02-01','Dusty_Negatives','Bullshit. We matched up w docs clips multiple times. Terry Stotts hated doc and they barbed one another over the years.  It’s not out of nowhere lol.','TrailBlazers',88,'https://www.reddit.com/r/nba/comments/1ag0yzr/highlight_lillard_is_welcomed_to_moda_center_to_a/',-0.8842,0,0.69,0.31),
 	 ('2024-02-01','Amoeba_mangrove','I get what you mean, but he’s on a guaranteed contract. And likely some form of career health insurance.
 
-You don’t get guarantees for your NEXT contract, before you’ve even done the work for it. 
+You don’t get guarantees for your NEXT contract, before you’ve even done the work for it.
 
 Especially not if you’re injured while other people do the same work.','VanGrizzlies',88,'https://www.reddit.com/r/nba/comments/1aflznu/stephen_a_lists_guys_like_kawhi_paul_george_kevin/',0.438,0.062,0.938,0),
 	 ('2024-02-01','SirDiego','Yeah that''s my biggest problem. I can live with them missing things in the moment, they''re human. But to review that play and then say that''s not a foul really feels like I''m being gaslighted.','Timberwolves',87,'https://www.reddit.com/r/nba/comments/1afnqa2/nba_pr_anthony_edwards_has_been_fined_40000_for/',0.7111,0.21,0.703,0.087),
@@ -749,7 +749,7 @@ INSERT INTO reddit_comments (scrape_date,author,"comment",flair,score,url,compou
 	 ('2024-02-01','urfaselol','thats hilarious','NBA',82,'https://www.reddit.com/r/nba/comments/1afrsm0/krawczynski_karlanthony_towns_has_issued_a/',0.4019,0.73,0.27,0),
 	 ('2024-02-01','girlscoutcookies05','50 shots on his last game like Kobe','ChaHornets',82,'https://www.reddit.com/r/nba/comments/1afy0gl/nehm_damian_lillard_on_walking_into_the_visitors/',0.3612,0.263,0.737,0),
 	 ('2024-02-01','SweaterMeatMyInbox','The important thing here is that people in Philly managed to find a way to be the victims.',NULL,82,'https://www.reddit.com/r/nba/comments/1afl0wp/amick_people_within_the_sixers_organization/',-0.128,0.094,0.785,0.12),
-	 ('2024-02-01','Basketball_Reference','Most seasons by a center with a VORP of 2 or higher: 
+	 ('2024-02-01','Basketball_Reference','Most seasons by a center with a VORP of 2 or higher:
 
 |Rk|Player|Count|
 |-:|:-|-:|
@@ -876,14 +876,14 @@ It’s now a standard that needs to be hit. And that is the best way to level th
 
 This tweet said basketball. So he’s done done',NULL,72,'https://www.reddit.com/r/nba/comments/1afn9sg/cole_marc_gasol_has_officially_announced_his/',0,0,1,0),
 	 ('2024-02-01','ftghb','50%, it''s what superstars default to in crunch time, and it''s up to whether the league likes them enough to honor it','Warriors',72,'https://www.reddit.com/r/nba/comments/1aft64o/ryen_russillo_tells_the_official_nba_referee/',0.7184,0.231,0.769,0),
-	 ('2024-02-01','Betaateb','I think his point is, if you are getting your hardcore fans that watch the NBA literally daily to turn off games, then they are likely losing far more casual fans. 
+	 ('2024-02-01','Betaateb','I think his point is, if you are getting your hardcore fans that watch the NBA literally daily to turn off games, then they are likely losing far more casual fans.
 
 If Russillo can''t stomach it, tons of people probably can''t.  You can see his point around here.  Of course refs have always been criticized but it is getting to a crazy level now where we are watching terrible fouls called and defended by the NBA basically daily.','Nuggets',71,'https://www.reddit.com/r/nba/comments/1aft64o/ryen_russillo_tells_the_official_nba_referee/',-0.8502,0.019,0.852,0.13),
 	 ('2024-02-01','Drag0nborn1234','It''s always been a "yeah he averaged 45/10/10 but he only played 3 games so we give it to someone else who played 4 and averaged 29/6/5".','Mavs',71,'https://www.reddit.com/r/nba/comments/1afpq4r/luka_is_only_06_ppg_behind_embiid_for_the_scoring/',0.7783,0.271,0.729,0),
 	 ('2024-02-01','zmegadeth','gaslighting doesn''t exist that''s just something you made up','Grizzlies',71,'https://www.reddit.com/r/nba/comments/1afnqa2/nba_pr_anthony_edwards_has_been_fined_40000_for/',0,0,1,0),
 	 ('2024-02-01','DarthNightnaricus','It''s come to my attention that Scoot Henderson is actually good
 
-  
+
 WHY DID THEY BENCH HIM IN THE SECOND HALF?','Thunder',71,'https://www.reddit.com/r/nba/comments/1ag3sda/post_game_thread_the_portland_trail_blazers_1533/',0.4404,0.132,0.868,0);
 INSERT INTO reddit_comments (scrape_date,author,"comment",flair,score,url,compound,pos,neu,neg) VALUES
 	 ('2024-02-01','JsonWaterfalls','Having watched my fair share of Mavs game this year just because I love watching Luka, I honestly don''t know how he averages so many assists when his teammates continue to brick wide open shots.
@@ -904,7 +904,7 @@ INSERT INTO reddit_comments (scrape_date,author,"comment",flair,score,url,compou
 
 I know, different strokes for different folks, etc etc. But still. It can be just as glamorous and satisfying (particularly in bball when you can reject people at the rim) as attacking play.','Bucks',68,'https://www.reddit.com/r/nba/comments/1aft64o/ryen_russillo_tells_the_official_nba_referee/',0.7347,0.206,0.672,0.122),
 	 ('2024-02-01','FERFreak731','He''s saying facts.','Jazz',68,'https://www.reddit.com/r/nba/comments/1afup4o/marks_my_thoughts_on_the_65game_policy_last/',0,0,1,0),
-	 ('2024-02-01','Mediocre-Example7947','And that’s how it has always been. When guys like KD and LeBron were younger they were iron men. It wasn’t until the Achilles injury that KD started playing less games and being more careful about soft tissue injuries. 
+	 ('2024-02-01','Mediocre-Example7947','And that’s how it has always been. When guys like KD and LeBron were younger they were iron men. It wasn’t until the Achilles injury that KD started playing less games and being more careful about soft tissue injuries.
 
 The main culprit is Kawhi who has been load managed his entire career. And you can probably blame that on Pop. And the other culprit is AD who hasn’t been able to play through a paper cut.',NULL,68,'https://www.reddit.com/r/nba/comments/1aflznu/stephen_a_lists_guys_like_kawhi_paul_george_kevin/',0.0754,0.102,0.811,0.087),
 	 ('2024-02-01','jackaholicus','Well that''s the top player vs top 15 players. It''s possible that Haliburton could be the 15th most valuable player in the league even if he only played 60 games. Especially if he were to be "replaced" by someone playing 65','Mavs',68,'https://www.reddit.com/r/nba/comments/1afup4o/marks_my_thoughts_on_the_65game_policy_last/',0.8832,0.275,0.725,0),
@@ -922,7 +922,7 @@ INSERT INTO reddit_comments (scrape_date,author,"comment",flair,score,url,compou
 	 ('2024-02-01','KiryuXGoro','Lakers please trade for Pat Bev before your next game.','Clippers',66,'https://www.reddit.com/r/nba/comments/1afrsm0/krawczynski_karlanthony_towns_has_issued_a/',0.3182,0.204,0.796,0),
 	 ('2024-02-01','PaulGeorgeFan1','harden basically sacrificed his hamstring for the team so','Clippers',66,'https://www.reddit.com/r/nba/comments/1afz16t/highlight_kevin_durant_doesnt_look_too_amused_as/',0,0,1,0),
 	 ('2024-02-01','LeBremsstrahlung','He left a party at Matt Leinart''s house because nobody was watching the college football game lol','Mavs',66,'https://www.reddit.com/r/nba/comments/1aft64o/ryen_russillo_tells_the_official_nba_referee/',0.6705,0.282,0.718,0),
-	 ('2024-02-01','jocro','Yeah he averaged 43.6/8.7/7.6/2.1 over 14 games in January, one of the most unstoppable scoring stretches in history. 
+	 ('2024-02-01','jocro','Yeah he averaged 43.6/8.7/7.6/2.1 over 14 games in January, one of the most unstoppable scoring stretches in history.
 
 Over 40 games from December through February he was at 39.3/7.2/7.0/2.1
 
@@ -969,7 +969,7 @@ INSERT INTO reddit_comments (scrape_date,author,"comment",flair,score,url,compou
 	 ('2024-02-01','Expensive_Bass_6979','Seriously, I don’t know how anyone who is a fan of the NBA wouldn’t like this rule.  I’m all for player empowerment and people getting their money but just seems like the last 5 years guys stopped giving a shit as much about the fans who are responsible for their paychecks.  Just glad that it’s starting to shift back and we have guys like Tatum and Edwards who are voicing how important it is to play every game regardless of who the opposition is',NULL,63,'https://www.reddit.com/r/nba/comments/1aflznu/stephen_a_lists_guys_like_kawhi_paul_george_kevin/',0.9398,0.248,0.668,0.084),
 	 ('2024-02-01','jkure2','My Jim boylen senses are tingling','Bulls',63,'https://www.reddit.com/r/nba/comments/1afrgit/elfrid_payton_on_former_coach_david_fizdale_we_go/',0,0,1,0),
 	 ('2024-02-01','512fm','The irony is sitting out a few more games to properly get right makes it look far less like he was ducking Jokic.','Pistons',63,'https://www.reddit.com/r/nba/comments/1afl0wp/amick_people_within_the_sixers_organization/',0.2516,0.094,0.854,0.051),
-	 ('2024-02-01','deemerritt','People went crazy because UNC had a player pick up 5 fouls in 8 minutes who isnt exactly known for aggressive defense and then they swallowed their whistles at the end of the game. 
+	 ('2024-02-01','deemerritt','People went crazy because UNC had a player pick up 5 fouls in 8 minutes who isnt exactly known for aggressive defense and then they swallowed their whistles at the end of the game.
 
 Also because Teddy Valentine does shit like this https://twitter.com/KeepingItHeel/status/1752518731966677352/photo/1
 
@@ -994,7 +994,7 @@ Their opinions should have no bearing on whether he risks his health or not','Ne
 	 ('2024-02-01','TJHookor','I remember watching that live.  I''m not a Min or NYC fan but I think I shouted at the TV because of how stupid that call was.  KAT never even made contact with Brunson.  How can it possibly be a charge if you literally do not touch the person?','Mavs',62,'https://www.reddit.com/r/nba/comments/1afnqa2/nba_pr_anthony_edwards_has_been_fined_40000_for/',-0.6059,0.034,0.87,0.095),
 	 ('2024-02-01','KaleAdditional776','They are taking advantage of their schedule. They don’t play till Saturday so by taking this game to rest Luka and company will have 5 days of rest. Plus he’s been overworked by a ton the past few weeks.','Mavs',61,'https://www.reddit.com/r/nba/comments/1afpq4r/luka_is_only_06_ppg_behind_embiid_for_the_scoring/',0.5267,0.112,0.888,0),
 	 ('2024-02-01','IAmReborn11111','I think he''s referring to die hard fans who watch as much as him when he says "me", not specially himself',NULL,61,'https://www.reddit.com/r/nba/comments/1aft64o/ryen_russillo_tells_the_official_nba_referee/',-0.6486,0,0.773,0.227),
-	 ('2024-02-01','lord_kupaloidz','I especially remember Mikal''s interview after being traded. 
+	 ('2024-02-01','lord_kupaloidz','I especially remember Mikal''s interview after being traded.
 
 "That''s Kevin Durant."','bwPhx',61,'https://www.reddit.com/r/nba/comments/1ag1yvu/highlight_booker_hits_mikal_with_his_own_3point/',0,0,1,0);
 INSERT INTO reddit_comments (scrape_date,author,"comment",flair,score,url,compound,pos,neu,neg) VALUES
@@ -1003,9 +1003,9 @@ INSERT INTO reddit_comments (scrape_date,author,"comment",flair,score,url,compou
 Voters aren’t going to support a candidate who’s on a play in team no matter what because that would mean at the time of voting(after game 82) they could still potentially miss the playoffs',NULL,61,'https://www.reddit.com/r/nba/comments/1afpq4r/luka_is_only_06_ppg_behind_embiid_for_the_scoring/',0.9377,0.249,0.69,0.061),
 	 ('2024-02-01','SpeclorTheGreat','Comparing Tatum to Kawhi is so disrespectful to Kawhi.','Knicks',61,'https://www.reddit.com/r/nba/comments/1afzjbb/azarly_kawhi_leonard_is_shooting_575090_over_his/',0,0,1,0),
 	 ('2024-02-01','xzadetechnoHD','First time he’s been given more than about 8 minutes playing time career high 12 points','Thunder',61,'https://www.reddit.com/r/nba/comments/1ag1911/post_game_thread_the_oklahoma_city_thunder_3315/',0.2023,0.114,0.886,0),
-	 ('2024-02-01','iPlowedUrMom','You joke, but that is my dream birthday. 
+	 ('2024-02-01','iPlowedUrMom','You joke, but that is my dream birthday.
 
-Acknowledge it, gift me something small or meaningful, buy me a coffee, and then honestly just let me fuck off by myself for a while. 
+Acknowledge it, gift me something small or meaningful, buy me a coffee, and then honestly just let me fuck off by myself for a while.
 
 I say this though as a very fortunate son, dad, and husband, who has a very full life and schedule. So quiet time is just lovely.',NULL,61,'https://www.reddit.com/r/nba/comments/1afz16t/highlight_kevin_durant_doesnt_look_too_amused_as/',0.962,0.325,0.612,0.063),
 	 ('2024-02-01','SixGunChimp','AD has played more games than all of them over the past year...','Lakers',61,'https://www.reddit.com/r/nba/comments/1aflznu/stephen_a_lists_guys_like_kawhi_paul_george_kevin/',0.34,0.167,0.833,0),
@@ -1014,16 +1014,16 @@ I say this though as a very fortunate son, dad, and husband, who has a very full
 Because refs actually called offensive fouls in those days.',NULL,61,'https://www.reddit.com/r/nba/comments/1aft64o/ryen_russillo_tells_the_official_nba_referee/',-0.2023,0.091,0.801,0.108),
 	 ('2024-02-01','PensiveinNJ','Been saying it for a while but "marginal contact" is the NBA''s new way of excusing shit officiating when they don''t want to be called out on it.','76ers',60,'https://www.reddit.com/r/nba/comments/1afnqa2/nba_pr_anthony_edwards_has_been_fined_40000_for/',-0.7378,0,0.8,0.2),
 	 ('2024-02-01','SometimesIComplain','Pleeeease do well in the playoffs this year Wolves, I need my man Rudy to crush those narratives','Jazz',60,'https://www.reddit.com/r/nba/comments/1afzqhm/highlight_rudy_gobert_makes_it_difficult_for/',0.128,0.112,0.802,0.086),
-	 ('2024-02-01','Thunder-ten-tronckh','Watching Marc, Mike, Tony and Zbo gut out wins in the GNG era were some of my favorite sports memories man. Sad how it all flies by :( 
+	 ('2024-02-01','Thunder-ten-tronckh','Watching Marc, Mike, Tony and Zbo gut out wins in the GNG era were some of my favorite sports memories man. Sad how it all flies by :(
 
 We were lucky to enjoy his prime in Memphis.','Grizzlies',60,'https://www.reddit.com/r/nba/comments/1afn9sg/cole_marc_gasol_has_officially_announced_his/',0.7717,0.256,0.624,0.121),
 	 ('2024-02-01','CumAssault','But their own internal metrics show they''re so good!','Spurs',60,'https://www.reddit.com/r/nba/comments/1afnqa2/nba_pr_anthony_edwards_has_been_fined_40000_for/',0.7509,0.403,0.597,0);
 INSERT INTO reddit_comments (scrape_date,author,"comment",flair,score,url,compound,pos,neu,neg) VALUES
 	 ('2024-02-01','kalebglover','Scoot had 15 points on 6/9 fg in 13 minutes in the first half and only got 9 minutes in the second half','TrailBlazers',60,'https://www.reddit.com/r/nba/comments/1ag3sda/post_game_thread_the_portland_trail_blazers_1533/',0,0,1,0),
-	 ('2024-02-01','whythehellknot','Don''t a lot of them vote for awards that have an impact on players contracts. It''s also not as if the general narrative surrounding a guy hasn''t played a role in trades/contracts/legacy.  
+	 ('2024-02-01','whythehellknot','Don''t a lot of them vote for awards that have an impact on players contracts. It''s also not as if the general narrative surrounding a guy hasn''t played a role in trades/contracts/legacy.
 
 They are far more than the nobodies like you and me.','Heat',60,'https://www.reddit.com/r/nba/comments/1afl0wp/amick_people_within_the_sixers_organization/',0.5368,0.123,0.831,0.046),
-	 ('2024-02-01','stoodis-','This is literally the "Boy Who Cried Wolf" fable. It is *exactly* the same moral lesson of that story. 
+	 ('2024-02-01','stoodis-','This is literally the "Boy Who Cried Wolf" fable. It is *exactly* the same moral lesson of that story.
 
 Instead of a boy crying "WOLF! WOLF!" for attention and the town ignoring his cry when the wolf actually appears, it''s crying "INJURY! INJURY!" to avoid tough games, but when he has a legit injury people ignore it.
 
@@ -1031,13 +1031,13 @@ This is a lesson you learn as a literal child: when you make yourself known as a
 	 ('2024-02-01','ashkpa','No. There were 12 missed or wrong calls made in the final 2 minutes of one of our games. People have been misrepresenting that number because at face value it could look like that means they called an incorrect foul every 12 seconds, without realizing the number also includes fouls they didn''t call.
 
 The league is unseriousness and refs are certainly on the take, but facts matter when calling out their bullshit.','Timberwolves',59,'https://www.reddit.com/r/nba/comments/1afnqa2/nba_pr_anthony_edwards_has_been_fined_40000_for/',-0.705,0.107,0.762,0.131),
-	 ('2024-02-01','Im__Ron__Burgundy','Doc not doing anything to change the narrative by having the inbound go to Giannis there  
-  
+	 ('2024-02-01','Im__Ron__Burgundy','Doc not doing anything to change the narrative by having the inbound go to Giannis there
+
 (Is this the thread that stays up?)','Celtics',59,'https://www.reddit.com/r/nba/comments/1ag3sda/post_game_thread_the_portland_trail_blazers_1533/',0,0,1,0),
 	 ('2024-02-01','F-ck_spez','Jfc. Why did i choose this year to return to nba fandom
 
 Edit: for reference, I''m a Vikings fan, so i didn''t want to re-hitch my bandwagon to another stressful home team. This MN championship drought got me hornier than a Mormon teenager.','Timberwolves',59,'https://www.reddit.com/r/nba/comments/1afnqa2/nba_pr_anthony_edwards_has_been_fined_40000_for/',0.1026,0.116,0.778,0.107),
-	 ('2024-02-01','sad_and_small','It is hard, but also there have been a lot of unforced errors, bad signings, bad trades, and the catastrophic loss of Jalen Brunson. 
+	 ('2024-02-01','sad_and_small','It is hard, but also there have been a lot of unforced errors, bad signings, bad trades, and the catastrophic loss of Jalen Brunson.
 
 The Mavs have definitely done a bad job building around Luka.',NULL,59,'https://www.reddit.com/r/nba/comments/1afpq4r/luka_is_only_06_ppg_behind_embiid_for_the_scoring/',-0.9728,0.065,0.46,0.475),
 	 ('2024-02-01','512fm','Most people on this sub will tell you just how great a state the game is in but I really don’t know if you’d agree if you were watching 10 years ago. There’s multiple things with the product that are just off.','Pistons',59,'https://www.reddit.com/r/nba/comments/1aft64o/ryen_russillo_tells_the_official_nba_referee/',0.7003,0.132,0.868,0),
@@ -1051,7 +1051,7 @@ INSERT INTO reddit_comments (scrape_date,author,"comment",flair,score,url,compou
 	 ('2024-02-01','EliteSoccerNinja','This is lit','Grizzlies',58,'https://www.reddit.com/r/nba/comments/1ag0yzr/highlight_lillard_is_welcomed_to_moda_center_to_a/',0,0,1,0),
 	 ('2024-02-01','HashCollector','Jokic with 9 in 9 seasons is wild',NULL,58,'https://www.reddit.com/r/nba/comments/1afn9sg/cole_marc_gasol_has_officially_announced_his/',0,0,1,0),
 	 ('2024-02-01','collinCOYS','The whole premise behind fining players for being critical of refs doesn''t make any sense to begin with','Timberwolves',57,'https://www.reddit.com/r/nba/comments/1afnqa2/nba_pr_anthony_edwards_has_been_fined_40000_for/',-0.3182,0,0.881,0.119),
-	 ('2024-02-01','knowtoriusMAC','The season was only 72 games that year(20-21) and there was a 75 day offseason. 
+	 ('2024-02-01','knowtoriusMAC','The season was only 72 games that year(20-21) and there was a 75 day offseason.
 
 I like the rule but using that year as a baseline is ridiculous.','Knicks',57,'https://www.reddit.com/r/nba/comments/1aflznu/stephen_a_lists_guys_like_kawhi_paul_george_kevin/',-0.3612,0.062,0.821,0.116),
 	 ('2024-02-01','Goducks91','That was all Brogdon','TrailBlazers',57,'https://www.reddit.com/r/nba/comments/1ag3sda/post_game_thread_the_portland_trail_blazers_1533/',0,0,1,0),
@@ -1060,16 +1060,16 @@ INSERT INTO reddit_comments (scrape_date,author,"comment",flair,score,url,compou
 	 ('2024-02-01','KingJoe7-123','You act like most players just call out for no reason lmao. The majority of the time it’s WORK RELATED INJURY as to why they don’t play all 82 games. If you were going to your job and risked breaking or tearing ligaments everytime you clocked in and then were restricted from getting a pay raise if you got hurt, then you wouldn’t like it very much either.',NULL,57,'https://www.reddit.com/r/nba/comments/1aflznu/stephen_a_lists_guys_like_kawhi_paul_george_kevin/',-0.4084,0.136,0.684,0.18),
 	 ('2024-02-01','SandyMandy17','Idk if he would’ve tbh
 
-He’s low key always been an assist fiend 
+He’s low key always been an assist fiend
 
 He gets off to getting other guys involved','Thunder',57,'https://www.reddit.com/r/nba/comments/1afz9za/highlight_russell_westbrook_hits_kawhi_with_the/',-0.3612,0,0.844,0.156),
 	 ('2024-02-01','MetroExodus2033','They bring up Pop''s responsibility in all of this, and they''re right about that. He was the first person to initiate load management in the league. And I remember the exact game he did that and the circumstances. They brought that up on First Take too, and how the decision to load manage the Spurs'' stars cost Pop the Olympics'' coaching job while Stern was the commissioner.
 
-Stern did not like where all of this load management was going. He knew it was antithetical to the fan experience. 
+Stern did not like where all of this load management was going. He knew it was antithetical to the fan experience.
 
 Silver doesn''t give a fuck. That dude gets such a pass and yet I think he''s at least as bad as Goodell as a commissioner. Probably worse.
 
-This is a player driven league. The player''s association has a lot of power.  
+This is a player driven league. The player''s association has a lot of power.
 
 These load managment issues are 90% driven by the players now. And on top of that, we''ve had more than one player just outright refuse to play (Kyrie and Ben Simmons).  Those dudes weren''t even hurt. Kyrie just decided not to play for literally half of a season...and he was rewarded for it!  Ben Simmons quit. He literally quit.  And he was rewareded for it!
 
@@ -1099,10 +1099,10 @@ Edit: just because a few role players you like get tribute videos doesn’t nega
 Pat Bev did this last year
 
 Ant just got fined $40,000 for saying the refs weren''t calling fouls for us in the Wolves/Thunder post game after SGA blatantly held Ant''s arm on a dunk late in the game. There were a few other missed calls too','Timberwolves',55,'https://www.reddit.com/r/nba/comments/1afrsm0/krawczynski_karlanthony_towns_has_issued_a/',-0.296,0,0.952,0.048),
-	 ('2024-02-01','bsanchey','Remember when Fraudsdales friends in the media were blasting the Knicks for firing him. Bruh a no name coach from the backwaters of basketball was out coaching him with the same talent. 
+	 ('2024-02-01','bsanchey','Remember when Fraudsdales friends in the media were blasting the Knicks for firing him. Bruh a no name coach from the backwaters of basketball was out coaching him with the same talent.
 
 Pepperidge farm sure remembers.','Knicks',55,'https://www.reddit.com/r/nba/comments/1afrgit/elfrid_payton_on_former_coach_david_fizdale_we_go/',0.5574,0.192,0.701,0.107),
-	 ('2024-02-01','Jjohn269','As opposed the it being a horrible look when he was sitting out. 
+	 ('2024-02-01','Jjohn269','As opposed the it being a horrible look when he was sitting out.
 
 Lose-lose situation unless these clowns make up their minds',NULL,55,'https://www.reddit.com/r/nba/comments/1afl0wp/amick_people_within_the_sixers_organization/',-0.5423,0,0.851,0.149),
 	 ('2024-02-01','IAP-23I','Bullshit comments like this getting upvotes is crazy','Knicks',55,'https://www.reddit.com/r/nba/comments/1aflznu/stephen_a_lists_guys_like_kawhi_paul_george_kevin/',-0.5719,0.182,0.365,0.453),
@@ -1113,9 +1113,9 @@ Stuck behind Shai!?! Like, be serious.','NBA',55,'https://www.reddit.com/r/nba/c
 INSERT INTO reddit_comments (scrape_date,author,"comment",flair,score,url,compound,pos,neu,neg) VALUES
 	 ('2024-02-01','alpacamegafan','Sochan: "NBA can suck my dick for all I care"','Pelicans',54,'https://www.reddit.com/r/nba/comments/1afym20/highlight_jeremy_sochan_pulls_out_the_reverse/',-0.4588,0.208,0.39,0.403),
 	 ('2024-02-01','jackattack_99','The West is STACKED man. Luka, Jokic, Shai playing out of this world. And you just casually have Lebron, KD, Kawhi, and Curry there too.','Celtics',54,'https://www.reddit.com/r/nba/comments/1afpq4r/luka_is_only_06_ppg_behind_embiid_for_the_scoring/',0.3612,0.132,0.868,0),
-	 ('2024-02-01','pf1234321','College rules are much more favorable to the defense, but the problem is that college players aren''t very good so it can lead to lots of ugly games. 
+	 ('2024-02-01','pf1234321','College rules are much more favorable to the defense, but the problem is that college players aren''t very good so it can lead to lots of ugly games.
 
-NBA should probably be treated more like college games because the players are good enough to overcome the defense even if you give the defense a slight advantage. 
+NBA should probably be treated more like college games because the players are good enough to overcome the defense even if you give the defense a slight advantage.
 
 College should have more freedom of movement to help the guys put the ball in the hoop',NULL,54,'https://www.reddit.com/r/nba/comments/1aft64o/ryen_russillo_tells_the_official_nba_referee/',0.7233,0.234,0.614,0.152),
 	 ('2024-02-01','National_Sand_9650','A rat''s anus?',NULL,54,'https://www.reddit.com/r/nba/comments/1afl0wp/amick_people_within_the_sixers_organization/',0,0,1,0),
@@ -1150,7 +1150,7 @@ Refs: We were sleeping','Raptors',52,'https://www.reddit.com/r/nba/comments/1afn
 	 ('2024-02-01','Ok_Pineapple_5700','True but that''s what your salary is for.',NULL,52,'https://www.reddit.com/r/nba/comments/1aflznu/stephen_a_lists_guys_like_kawhi_paul_george_kevin/',0.2263,0.213,0.787,0),
 	 ('2024-02-01','Bipedal-Moose','There is substantial overlap between r/nba subscribers and SAS viewers, how else do you think his takes get upvoted to the front page all the time?',NULL,52,'https://www.reddit.com/r/nba/comments/1afzjbb/azarly_kawhi_leonard_is_shooting_575090_over_his/',0.2023,0.067,0.933,0),
 	 ('2024-02-01','TrickiestToast','I can’t believe we made them not do any of that','Celtics',52,'https://www.reddit.com/r/nba/comments/1afl0wp/amick_people_within_the_sixers_organization/',0,0,1,0),
-	 ('2024-02-01','jocro','Yeah I think the underlying issue here is that Steph''s alternative is to run straight line to the hoop, which effectively concedes a driving lane to Beverly. The inability to make any impeding contact whatsoever coupled with the defensive three seconds rule means that structurally the game is built to give Bev points here, because you can''t rely on having a rim protector at all times in this era of spaced out ball. 
+	 ('2024-02-01','jocro','Yeah I think the underlying issue here is that Steph''s alternative is to run straight line to the hoop, which effectively concedes a driving lane to Beverly. The inability to make any impeding contact whatsoever coupled with the defensive three seconds rule means that structurally the game is built to give Bev points here, because you can''t rely on having a rim protector at all times in this era of spaced out ball.
 
 On top of the difficulties this presents defensively, the easy whistle to go from driving to "shooting" and the generally increasing lean towards allowing continuation makes for nasty work, and a lot of ugly possessions.','Thunder',51,'https://www.reddit.com/r/nba/comments/1aft64o/ryen_russillo_tells_the_official_nba_referee/',-0.3818,0.107,0.78,0.112),
 	 ('2024-02-01','dittonetic','He shot it in 30% quicker than any other free throw on the night','TrailBlazers',51,'https://www.reddit.com/r/nba/comments/1ag3qrn/highlight_giannis_misses_both_fts_to_close_the/',0.5106,0.202,0.798,0);
@@ -1165,19 +1165,19 @@ INSERT INTO reddit_comments (scrape_date,author,"comment",flair,score,url,compou
 	 ('2024-02-01','Peatedcask','KD looks soooo happy lol','Thunder',51,'https://www.reddit.com/r/nba/comments/1ag1yvu/highlight_booker_hits_mikal_with_his_own_3point/',0.7579,0.684,0.316,0),
 	 ('2024-02-01','Next-Firefighter-753','Thunder, Wolves and Nuggets are going to have some bloodbaths in the playoffs for the next few years. ','Thunder',51,'https://www.reddit.com/r/nba/comments/1ag1911/post_game_thread_the_oklahoma_city_thunder_3315/',0,0,1,0),
 	 ('2024-02-01','KillingTime_ForNow','And he got fired for being inept. Do you really want the new guy coming in & making the same mistakes?','TrailBlazers',51,'https://www.reddit.com/r/nba/comments/1ag3sda/post_game_thread_the_portland_trail_blazers_1533/',-0.6712,0.065,0.688,0.247),
-	 ('2024-02-01','Alex_Sander077','National media be like: 
+	 ('2024-02-01','Alex_Sander077','National media be like:
 
-Embiid 35 ppg: unspoken rizz. 
+Embiid 35 ppg: unspoken rizz.
 
 Luka 35 ppg: sexual harassment.','Mavs',51,'https://www.reddit.com/r/nba/comments/1afpq4r/luka_is_only_06_ppg_behind_embiid_for_the_scoring/',-0.25,0.139,0.667,0.194),
 	 ('2024-02-01','ohlookanotherhottake','Booker? He dropped 62 in a loss on the same night Luka drops the most efficient 60+ night in NBA history and with 73 points. Plus averaging a 50 point triple double over the weekend. I mean I get that winning contributes but at some point you gotta see someone playing miles better than anyone else on earth and throw them a bone.','Cavaliers',51,'https://www.reddit.com/r/nba/comments/1afpq4r/luka_is_only_06_ppg_behind_embiid_for_the_scoring/',0.8247,0.159,0.816,0.025),
 	 ('2024-02-01','RookieAndTheVet','That aspect of his game also didn’t develop until after the championship season. The people who say he became a worse player after Kawhi left don’t know what they’re talking about.','Raptors',50,'https://www.reddit.com/r/nba/comments/1afn9sg/cole_marc_gasol_has_officially_announced_his/',-0.0516,0.085,0.824,0.091);
 INSERT INTO reddit_comments (scrape_date,author,"comment",flair,score,url,compound,pos,neu,neg) VALUES
-	 ('2024-02-01','everyoneneedsaherro','Kawhi said earlier this season it’s the first time he feels healthy since 2017. Not a coincidence that’s the last time he played back to backs. 
+	 ('2024-02-01','everyoneneedsaherro','Kawhi said earlier this season it’s the first time he feels healthy since 2017. Not a coincidence that’s the last time he played back to backs.
 
 He’s not load managing cause he doesn’t wanna play. He’s been load managing because he’s been injured/recovering.','NBA',50,'https://www.reddit.com/r/nba/comments/1aflznu/stephen_a_lists_guys_like_kawhi_paul_george_kevin/',0.743,0.161,0.814,0.026),
 	 ('2024-02-01','OblivionNA','It’s not the reason but you imagine Portland wants to see Lillard win a ring. Doc isn’t so good at that lately.',NULL,50,'https://www.reddit.com/r/nba/comments/1ag0yzr/highlight_lillard_is_welcomed_to_moda_center_to_a/',0.9064,0.352,0.648,0),
-	 ('2024-02-01','Basketball_Reference','Marc Gasol is the Grizzlies'' all-time leader in win shares: 
+	 ('2024-02-01','Basketball_Reference','Marc Gasol is the Grizzlies'' all-time leader in win shares:
 
 |Rk|Player|WS|
 |-:|:-|-:|
@@ -1205,7 +1205,7 @@ What a career for the one of the all-time great centers.','bbref',50,'https://ww
 	 ('2024-02-01','rattatatouille','"They picked Dyson Daniels over me" energy','Spurs',50,'https://www.reddit.com/r/nba/comments/1afym20/highlight_jeremy_sochan_pulls_out_the_reverse/',0.2732,0.259,0.741,0);
 INSERT INTO reddit_comments (scrape_date,author,"comment",flair,score,url,compound,pos,neu,neg) VALUES
 	 ('2024-02-01','AFonziScheme','I really can''t think of anything worse as a symbol than a skull...','Mavs',50,'https://www.reddit.com/r/nba/comments/1afl0wp/amick_people_within_the_sixers_organization/',-0.4767,0,0.744,0.256),
-	 ('2024-02-01','DocTheYounger','My fantasy scenario is that the benefiting player calls them out. 
+	 ('2024-02-01','DocTheYounger','My fantasy scenario is that the benefiting player calls them out.
 
 Like now SGA tweets backing up Ant saying he did in fact foul the shit out of him','Celtics',49,'https://www.reddit.com/r/nba/comments/1afnqa2/nba_pr_anthony_edwards_has_been_fined_40000_for/',0.765,0.226,0.774,0),
 	 ('2024-02-01','Biglundtry','Lol Portland puttin in work lately','NBA',49,'https://www.reddit.com/r/nba/comments/1ag3sda/post_game_thread_the_portland_trail_blazers_1533/',0.4215,0.359,0.641,0),
@@ -1263,9 +1263,9 @@ The second level is way rowdier. ','TrailBlazers',47,'https://www.reddit.com/r/
 	 ('2024-02-01','helix400','These kinds of plays were my favorite part of those Utah Jazz teams.','Jazz',46,'https://www.reddit.com/r/nba/comments/1afzqhm/highlight_rudy_gobert_makes_it_difficult_for/',0.6124,0.312,0.688,0),
 	 ('2024-02-01','Micome','"The world was screaming in his ear" lmaoooooooo','TrailBlazers',46,'https://www.reddit.com/r/nba/comments/1afl0wp/amick_people_within_the_sixers_organization/',-0.3818,0,0.729,0.271),
 	 ('2024-02-01','Sim888','https://i.imgur.com/kKyViQ1.jpg','Bulls',46,'https://www.reddit.com/r/nba/comments/1ag192x/kd_with_some_friendly_trash_talk_to_his_friend/',0,0,1,0),
-	 ('2024-02-01','raftguide','Yeah, there are plans to have all four of those names in our rafters.  
+	 ('2024-02-01','raftguide','Yeah, there are plans to have all four of those names in our rafters.
 
-... well, actually a [framed vinyl record](https://www.commercialappeal.com/gcdn/presto/2021/12/12/PMCA/f100cf06-0f72-45a3-bacb-50fd3c9e2905-Rockets_30.jpg).  
+... well, actually a [framed vinyl record](https://www.commercialappeal.com/gcdn/presto/2021/12/12/PMCA/f100cf06-0f72-45a3-bacb-50fd3c9e2905-Rockets_30.jpg).
 *shame we felt the need to be so different about this detail.*','Grizzlies',46,'https://www.reddit.com/r/nba/comments/1afn9sg/cole_marc_gasol_has_officially_announced_his/',0.5106,0.125,0.875,0),
 	 ('2024-02-01','gaycommunistnbamod','Doc working miracles over there already',NULL,46,'https://www.reddit.com/r/nba/comments/1ag3pwx/damian_lillard_loses_in_his_return_to_portland/',0,0,1,0),
 	 ('2024-02-01','Dudewheresmyescoot','Besides football',NULL,46,'https://www.reddit.com/r/nba/comments/1aft64o/ryen_russillo_tells_the_official_nba_referee/',0,0,1,0),
@@ -1317,9 +1317,9 @@ INSERT INTO reddit_comments (scrape_date,author,"comment",flair,score,url,compou
 	 ('2024-02-01','floatermuse','I mean didn’t the Mavs have like only 2 or 3 starters playing lol 
 
  Now if you want to say that Kyrie was too risky a bet because he ALWAYS misses a ton of time I get it but at the same time his baggage was the only reason they didn’t have to give up more for him in the first place ',NULL,44,'https://www.reddit.com/r/nba/comments/1afpq4r/luka_is_only_06_ppg_behind_embiid_for_the_scoring/',0.3291,0.105,0.847,0.048),
-	 ('2024-02-01','LeakyBrainMatter','As the current sufferer of a torn pcl that doesn''t have the time or money for surgery I wish this was the case. I''m fine most of the time until I step wrong and my knee gives out or I sit too long with my leg in the wrong position and I''m in excruciating pain. Or worst of all, because I hoop on a regular, I make a cut and my knee completely gives and I can''t walk without assistance for a week and can''t get comfortable because I''m in pain. Last part happened to me a couple months ago and I just got back in the gym this last weekend. It fucking sucks even though it can''t be seen. 
+	 ('2024-02-01','LeakyBrainMatter','As the current sufferer of a torn pcl that doesn''t have the time or money for surgery I wish this was the case. I''m fine most of the time until I step wrong and my knee gives out or I sit too long with my leg in the wrong position and I''m in excruciating pain. Or worst of all, because I hoop on a regular, I make a cut and my knee completely gives and I can''t walk without assistance for a week and can''t get comfortable because I''m in pain. Last part happened to me a couple months ago and I just got back in the gym this last weekend. It fucking sucks even though it can''t be seen.
 
-Now amplify all that shit for a professional athlete who has to compete with other professional athletes at that level. I played in college so I''m normally one of the most skilled players in the gym. Aside from the pain I can afford to be a step slow or just shoot jumpers because I can''t drive right now. I can take plays off on D. I''m not playing against hyper athletic best in the world players where I have to go all out all the time. Also I''m not getting paid for it and they are. 
+Now amplify all that shit for a professional athlete who has to compete with other professional athletes at that level. I played in college so I''m normally one of the most skilled players in the gym. Aside from the pain I can afford to be a step slow or just shoot jumpers because I can''t drive right now. I can take plays off on D. I''m not playing against hyper athletic best in the world players where I have to go all out all the time. Also I''m not getting paid for it and they are.
 
 I feel for Kawhi, AD, and all the other guys that deal with this shit. For Kawhi to come back and play at this level is amazing. People seem to think you''re back to 100% after injuries and surgeries but the facts are you''ll never be 100% after that. The parts that were originally there are compromised and sometimes not even there anymore.','Bulls',43,'https://www.reddit.com/r/nba/comments/1afzjbb/azarly_kawhi_leonard_is_shooting_575090_over_his/',-0.9324,0.047,0.839,0.114),
 	 ('2024-02-01','Vallerie_09','Got 2 coaches fired in 6 months','Warriors',43,'https://www.reddit.com/r/nba/comments/1ag3qrn/highlight_giannis_misses_both_fts_to_close_the/',-0.5574,0,0.526,0.474),
@@ -1362,7 +1362,7 @@ INSERT INTO reddit_comments (scrape_date,author,"comment",flair,score,url,compou
 
 Similar to the Golden Boot for most goals scored in top leagues of Europe.','Pistons',41,'https://www.reddit.com/r/nba/comments/1afpq4r/luka_is_only_06_ppg_behind_embiid_for_the_scoring/',0.4588,0.129,0.871,0),
 	 ('2024-02-01','Basketball_Reference','That definitely stood out, too. He''s about to turn 29 ...','bbref',41,'https://www.reddit.com/r/nba/comments/1afn9sg/cole_marc_gasol_has_officially_announced_his/',0.4019,0.213,0.787,0),
-	 ('2024-02-01','TheRealFakeDoors503','Brogdon really is the glue guy that allows the Blazers to look semi-competent, without him we fall apart. 
+	 ('2024-02-01','TheRealFakeDoors503','Brogdon really is the glue guy that allows the Blazers to look semi-competent, without him we fall apart.
 
 Hopefully his fantastic play attracts some serious bidders at the trade deadline.','TrailBlazers',41,'https://www.reddit.com/r/nba/comments/1ag3sda/post_game_thread_the_portland_trail_blazers_1533/',0.8779,0.302,0.663,0.034),
 	 ('2024-02-01','NBAccount','That would remove one of the Ref''s primary means to make money: shaving points.','Warriors',41,'https://www.reddit.com/r/nba/comments/1aft64o/ryen_russillo_tells_the_official_nba_referee/',0,0,1,0),
@@ -1383,11 +1383,11 @@ Maybe it''s not a surprise the league''s integrity is in question.',NULL,41,'htt
 	 ('2024-02-01','Tackis','Holy fuck','Spurs',40,'https://www.reddit.com/r/nba/comments/1afym20/highlight_jeremy_sochan_pulls_out_the_reverse/',-0.5423,0,0.222,0.778),
 	 ('2024-02-01','SmokeyBare','The opposite of fair weather fans is Portland fans','Spurs',40,'https://www.reddit.com/r/nba/comments/1ag0yzr/highlight_lillard_is_welcomed_to_moda_center_to_a/',0.3182,0.223,0.777,0),
 	 ('2024-02-01','VeniceRapture','What if we remove the 65 game limit rule, but for every game you don''t play you get zeroes across the board','Spurs',40,'https://www.reddit.com/r/nba/comments/1afup4o/marks_my_thoughts_on_the_65game_policy_last/',-0.3724,0,0.892,0.108),
-	 ('2024-02-01','driatic','Stephen A is also known for bringing sports discussions into the toilet. 
+	 ('2024-02-01','driatic','Stephen A is also known for bringing sports discussions into the toilet.
 
-Yes, he used to be and can sometimes be a good journalist who has well thought out takes. 
+Yes, he used to be and can sometimes be a good journalist who has well thought out takes.
 
-But most of his takes are meant to draw attention, anger. 
+But most of his takes are meant to draw attention, anger.
 
 All this to say even a broken clock is right twice a day.','Wizards',40,'https://www.reddit.com/r/nba/comments/1aflznu/stephen_a_lists_guys_like_kawhi_paul_george_kevin/',-0.7814,0.09,0.756,0.154),
 	 ('2024-02-01','jaytee158','Even if he doesn''t, he isn''t entirely wrong about this',NULL,40,'https://www.reddit.com/r/nba/comments/1aflznu/stephen_a_lists_guys_like_kawhi_paul_george_kevin/',0.4158,0.235,0.765,0),
@@ -1425,11 +1425,11 @@ INSERT INTO reddit_comments (scrape_date,author,"comment",flair,score,url,compou
 	 ('2024-02-01','wintermelonsilk','Part of the complaint was that he was pulled for an injury 10 minutes before the game without being listed as injured.','Wizards',38,'https://www.reddit.com/r/nba/comments/1afl0wp/amick_people_within_the_sixers_organization/',-0.7717,0,0.712,0.288),
 	 ('2024-02-01','Csalbertcs','How could you forget NBA champion Jeremy Lin!',NULL,38,'https://www.reddit.com/r/nba/comments/1afn9sg/cole_marc_gasol_has_officially_announced_his/',0.5093,0.347,0.496,0.157),
 	 ('2024-02-01','iamtheshadowking','It is.','TrailBlazers',38,'https://www.reddit.com/r/nba/comments/1afy0gl/nehm_damian_lillard_on_walking_into_the_visitors/',0,0,1,0),
-	 ('2024-02-01','po2gdHaeKaYk','There is. You’re right. But I don’t think most people care about the distinction. Russillo is criticising the ref for defending an obviously flawed rule. 
+	 ('2024-02-01','po2gdHaeKaYk','There is. You’re right. But I don’t think most people care about the distinction. Russillo is criticising the ref for defending an obviously flawed rule.
 
-It’s not super well argued, but I think it achieves the point that most people agree with. 
+It’s not super well argued, but I think it achieves the point that most people agree with.
 
-He’s also criticising the vacuousness of the response, which I also agree. The referee is saying that the call is correct given the rule. But the discussion is implicitly about the correctness of the rule itself. 
+He’s also criticising the vacuousness of the response, which I also agree. The referee is saying that the call is correct given the rule. But the discussion is implicitly about the correctness of the rule itself.
 
 Either the rule needs to be changed or codified, and/or the refs need to re-interpret the rule. Viewers don’t really care which one it is, as long as it is done consistently.',NULL,38,'https://www.reddit.com/r/nba/comments/1aft64o/ryen_russillo_tells_the_official_nba_referee/',0.7842,0.148,0.748,0.103),
 	 ('2024-02-01','imianha','As a fellow spaniard it hurts seeing both Gasol brothers retiring, and Ricky as well... We only have Santi Aldama now','Mavs',38,'https://www.reddit.com/r/nba/comments/1afn9sg/cole_marc_gasol_has_officially_announced_his/',-0.4767,0,0.86,0.14),
@@ -1446,7 +1446,7 @@ Proceeds to name 4 of the most injury-prone players in the league','Warriors',38
 	 ('2024-02-01','OKCBaller035913','No it should be seven the Detroit game counts twice','Thunder',38,'https://www.reddit.com/r/nba/comments/1ag1911/post_game_thread_the_oklahoma_city_thunder_3315/',-0.296,0,0.804,0.196),
 	 ('2024-02-01','ListenToWhatImSayin','NBA players have an entire off-season where they aren''t required to play or practice, which is all of July, August and September before returning to preseason camp. That doesn''t account for most teams not playing at all in June and May, or half of April. The NBA regular season is officially 5 months and 22 days (not including roughly 3 weeks of training camp).
 
-I''m pretty sure players get like 20 off-days per season, so that means like 1 day per week of the season, so roughly working 6 day weeks for half the year for a non playoff team. So what''s that? 150 days per year worked? 
+I''m pretty sure players get like 20 off-days per season, so that means like 1 day per week of the season, so roughly working 6 day weeks for half the year for a non playoff team. So what''s that? 150 days per year worked?
 
 Your example of a european office worker is what 5 days a week x 52 - 30days = 230 days. That''s still 80 fewer days worked by a non-playoff player than a european office worker.
 
@@ -1473,7 +1473,7 @@ Exactly the point. How they won only a single title is a headscratcher. 3 minimu
 	 ('2024-02-01','Hardcover','[Link ](https://youtu.be/mejFtEY5faU?si=qeXtkCxOKy_idXFL) for the uninitiated.',NULL,36,'https://www.reddit.com/r/nba/comments/1ag0yzr/highlight_lillard_is_welcomed_to_moda_center_to_a/',0,0,1,0);
 INSERT INTO reddit_comments (scrape_date,author,"comment",flair,score,url,compound,pos,neu,neg) VALUES
 	 ('2024-02-01','Colorado_designer','Good point. Plus, last year WAS a duck, he played the games before and after the missed DEN matchup. And he missed it when people were saying that a good Jokic performance would make him the favorite again, so it was all for narrative manipulation. Played with fire','Nuggets',36,'https://www.reddit.com/r/nba/comments/1afl0wp/amick_people_within_the_sixers_organization/',0.6808,0.228,0.621,0.151),
-	 ('2024-02-01','C4242','Except you were only down two then, a foul would be stupid in that scenario. 
+	 ('2024-02-01','C4242','Except you were only down two then, a foul would be stupid in that scenario.
 
 
 The blazers were going to foul whoever got the ball, so why give it to Giannis.','Timberwolves',36,'https://www.reddit.com/r/nba/comments/1ag3sda/post_game_thread_the_portland_trail_blazers_1533/',-0.5267,0,0.895,0.105),
@@ -1512,18 +1512,18 @@ Right now, only the player/team that got screwed is saying anything.  The team t
 	 ('2024-02-01','RuneLite23','Because the “problem” makes them lots and lots of money *cough* gambling *cough*',NULL,36,'https://www.reddit.com/r/nba/comments/1afnqa2/nba_pr_anthony_edwards_has_been_fined_40000_for/',0,0,1,0),
 	 ('2024-02-01','cuttino_mowgli','Yes that happened.','Thunder',36,'https://www.reddit.com/r/nba/comments/1ag3sda/post_game_thread_the_portland_trail_blazers_1533/',0.4019,0.574,0.426,0),
 	 ('2024-02-01','nam67','Absolutely.  They were planning to retire TA''s #9 but the fraud charges started circulating.  I think they are still planning to do it once everything with that situation has resolved.  Mike will definitely be in the rafters too when he retires.','Grizzlies',36,'https://www.reddit.com/r/nba/comments/1afn9sg/cole_marc_gasol_has_officially_announced_his/',-0.5023,0.113,0.728,0.159),
-	 ('2024-02-01','panchettaz','3rd last game of the season for both teams, coming off a b2b for both with Nuggets playing in Utah and TWolves playing against the Wizards 
+	 ('2024-02-01','panchettaz','3rd last game of the season for both teams, coming off a b2b for both with Nuggets playing in Utah and TWolves playing against the Wizards
 
 ESPN and NBA''s genius schedulers are about to see 22 mins of the most mid bball by the starters, then a full showcase of what Hunter Tyson and Jalen Pickett are all about',NULL,36,'https://www.reddit.com/r/nba/comments/1ag1911/post_game_thread_the_oklahoma_city_thunder_3315/',0.3818,0.061,0.939,0),
 	 ('2024-02-01','CrastersSons','If only we had a guy who was an incredible rebounder','Nuggets',36,'https://www.reddit.com/r/nba/comments/1ag14vv/highlight_holmgren_hits_daggers_triple_with_vs/',0,0,1,0),
-	 ('2024-02-01','rexter2k5','It''s nuts because I loved playing defense when I was a kid in rec ball. Not even from a blocking standpoint. I just loved getting into an opponent''s body and then deflecting, poking and stealing the ball. I was happiest turning the game into a track meet. 
+	 ('2024-02-01','rexter2k5','It''s nuts because I loved playing defense when I was a kid in rec ball. Not even from a blocking standpoint. I just loved getting into an opponent''s body and then deflecting, poking and stealing the ball. I was happiest turning the game into a track meet.
 
 But I also could not develop a consistent jumper, so I just found joy in other things.
 
 Edit: mini stroke','TrailBlazers',36,'https://www.reddit.com/r/nba/comments/1aft64o/ryen_russillo_tells_the_official_nba_referee/',0.9069,0.25,0.692,0.058),
 	 ('2024-02-01','stfuUzifloating','this has been a strange thing all season, he has good first half then gets benched pretty much for the rest of the game','TrailBlazers',36,'https://www.reddit.com/r/nba/comments/1ag3sda/post_game_thread_the_portland_trail_blazers_1533/',0.6486,0.219,0.717,0.065);
 INSERT INTO reddit_comments (scrape_date,author,"comment",flair,score,url,compound,pos,neu,neg) VALUES
-	 ('2024-02-01','Hesi-Timbo','Ignore my flair, this opinion is based on my love of math and sports analytics: Scoring title is MUCH different than Golden Boot or Home Run title or total touchdowns like NFL. To be clear, scoring title doesn''t mean MVP in my eyes, availability is important for measuring that. 
+	 ('2024-02-01','Hesi-Timbo','Ignore my flair, this opinion is based on my love of math and sports analytics: Scoring title is MUCH different than Golden Boot or Home Run title or total touchdowns like NFL. To be clear, scoring title doesn''t mean MVP in my eyes, availability is important for measuring that.
 
 Let''s say you miss about 10% of the season of each. Bad luck. You''ll have to score 11.1111% more per game than the next guy to equal his total output. Let''s see what that actually equates to
 
@@ -1552,7 +1552,7 @@ INSERT INTO reddit_comments (scrape_date,author,"comment",flair,score,url,compou
 	 ('2024-02-01','Briggity_Brak','Exactly. We need to stop looking at per game averages and start caring more about season totals like every other sport in the world.','TampaRaptors',35,'https://www.reddit.com/r/nba/comments/1afup4o/marks_my_thoughts_on_the_65game_policy_last/',0.5423,0.197,0.727,0.076),
 	 ('2024-02-01','sylvestersquad','You’d assume but [people hate everything he does](https://x.com/thehoopcentral/status/1752905173838774434?s=46&t=yiqopw60-vigqyq-yeqL2A) just read some of the comments','Suns',35,'https://www.reddit.com/r/nba/comments/1ag1yvu/highlight_booker_hits_mikal_with_his_own_3point/',-0.7227,0,0.72,0.28),
 	 ('2024-02-01','JewBronJames','Nobody cares about the truth it’s all a narrative game with AD',NULL,35,'https://www.reddit.com/r/nba/comments/1aflznu/stephen_a_lists_guys_like_kawhi_paul_george_kevin/',0.6486,0.371,0.629,0),
-	 ('2024-02-01','DubsFanAccount','The main problem with that argument is 1) they’re not. Football is obviously the big counter example. NFL and college. 2) they’re declining faster than average and the important one 3) NBA depends on TV revenue more than other sports. 
+	 ('2024-02-01','DubsFanAccount','The main problem with that argument is 1) they’re not. Football is obviously the big counter example. NFL and college. 2) they’re declining faster than average and the important one 3) NBA depends on TV revenue more than other sports.
 
 For example, NBA used to kill MLB in TV ratings. Now they’re really close. But the MLB doesn’t care as much bc so much of their revenue comes from attendance. NBA meanwhile depends a lot on TV ratings and now they draw less than an episode of Chicago Fire or Law and Order. The Lakers Warriors double OT game isn’t going to crack the top ten for the week. It would have ten years ago.','Warriors',35,'https://www.reddit.com/r/nba/comments/1aft64o/ryen_russillo_tells_the_official_nba_referee/',-0.1655,0.063,0.86,0.077),
 	 ('2024-02-01','Thermicthermos','I think its specifically the hardcore fans and analysts that watch 6 games in a night like Russillo not the hot takes and highlights crowd.','Mavs',35,'https://www.reddit.com/r/nba/comments/1aft64o/ryen_russillo_tells_the_official_nba_referee/',0.3612,0.106,0.894,0),
@@ -1579,7 +1579,7 @@ Stop acting like you are the CCP!','Grizzlies',34,'https://www.reddit.com/r/nba/
 Hate to tell you bro, but sounds like you’re close to needing to retire from playing basketball','NBA',34,'https://www.reddit.com/r/nba/comments/1afzjbb/azarly_kawhi_leonard_is_shooting_575090_over_his/',-0.459,0.074,0.785,0.141);
 INSERT INTO reddit_comments (scrape_date,author,"comment",flair,score,url,compound,pos,neu,neg) VALUES
 	 ('2024-02-01','Mosh00Rider','You realize how much more petty people are with their family? Same shit','Suns',34,'https://www.reddit.com/r/nba/comments/1ag1yvu/highlight_booker_hits_mikal_with_his_own_3point/',-0.6901,0,0.659,0.341),
-	 ('2024-02-01','ColdNyQuiiL','I thought KP to Boston was amazing as soon at it happened. He was relatively healthy with the Wizards, and showed how good he was before the injuries. Seemed like a risk worth taking. 7 foot versatile 3 point shooters are exactly falling out of the sky, and Boston takes a lot of damn 3’s anyway. 
+	 ('2024-02-01','ColdNyQuiiL','I thought KP to Boston was amazing as soon at it happened. He was relatively healthy with the Wizards, and showed how good he was before the injuries. Seemed like a risk worth taking. 7 foot versatile 3 point shooters are exactly falling out of the sky, and Boston takes a lot of damn 3’s anyway.
 
 Seemed like a nightmare for opponents, and I’ve been rooting for KP since his time in Dallas was injury ridden.',NULL,34,'https://www.reddit.com/r/nba/comments/1afpq4r/luka_is_only_06_ppg_behind_embiid_for_the_scoring/',0.7964,0.191,0.702,0.108),
 	 ('2024-02-01','KaleAdditional776','Sail the high seas brother! It’s pretty easy to do!','Mavs',33,'https://www.reddit.com/r/nba/comments/1afpq4r/luka_is_only_06_ppg_behind_embiid_for_the_scoring/',0.7707,0.455,0.545,0),
@@ -1595,11 +1595,11 @@ there''s always going to be a minimum, can you give MVP to someone who plays 50%
 INSERT INTO reddit_comments (scrape_date,author,"comment",flair,score,url,compound,pos,neu,neg) VALUES
 	 ('2024-02-01','RansomGoddard','Usually the move there is for the inbounder to get the ball back instantly while on a sprint downhill so defenders can’t just foul him right when he gets the ball.
 
-The ball just didn’t get back to Dame like it was supposed to. 
+The ball just didn’t get back to Dame like it was supposed to.
 
 That said the dumb part is that they shouldn’t be inbounding the ball to a bad FT shooter.','Heat',33,'https://www.reddit.com/r/nba/comments/1ag3qrn/highlight_giannis_misses_both_fts_to_close_the/',-0.5512,0.063,0.835,0.101),
 	 ('2024-02-01','jorgelongo2','He was perfectly fine vs Spurs, its almost as if injuries happen at a specific point in time ( middle of the game vs Pacers)',NULL,33,'https://www.reddit.com/r/nba/comments/1afl0wp/amick_people_within_the_sixers_organization/',0.7184,0.222,0.778,0),
-	 ('2024-02-01','Miamime','>I wouldn''t wish it on anyone. 
+	 ('2024-02-01','Miamime','>I wouldn''t wish it on anyone.
 
 Lol wtf. Wish it on me. Dude is getting $10M a year to coach Dame and Giannis.','76ers',33,'https://www.reddit.com/r/nba/comments/1ag3sda/post_game_thread_the_portland_trail_blazers_1533/',-0.1426,0.186,0.609,0.205),
 	 ('2024-02-01','Mediocre_Peanut7615','Mavs didn''t fuck up terribly, they didn''t do an amazing job either, but this is far from the worst team build. They have a perfect setup for Luka to run a spread pick and roll, they have good shooters. The problem is they don''t have much else when Kyrie is out, but they are doing a good job of maximizing the Luka part, we''ve seen worse.','Thunder',33,'https://www.reddit.com/r/nba/comments/1afpq4r/luka_is_only_06_ppg_behind_embiid_for_the_scoring/',0.0647,0.193,0.628,0.179),
@@ -1639,7 +1639,7 @@ Why would the Wizards want to play Beal, who has a lingering injury, when they''
 Similarly, for LAC, Kawhi and PG both want to play.  You literally see it whenever any guy has a minutes restriction.  They get pulled off the court in a close game, and then are pissed off because they want to play.  But the organization believes (even if incorrectly) that load management helped their health in the long term, which these teams will then abide by because these guys are long term investments.
 
 The question of "Could this player force themselves to play through injury?" is drastically different than, " Are these guys sitting out because they don''t want to play?"','Clippers',32,'https://www.reddit.com/r/nba/comments/1aflznu/stephen_a_lists_guys_like_kawhi_paul_george_kevin/',0.829,0.154,0.764,0.082),
-	 ('2024-02-01','augustus624','Yeah, I already said, the Sixers medical staff are the most to blame and Embiid should''ve ignored the noise. 
+	 ('2024-02-01','augustus624','Yeah, I already said, the Sixers medical staff are the most to blame and Embiid should''ve ignored the noise.
 
 Doesn''t mean the discourse from the media after the Nuggets game wasn''t stupid as hell however. And the Day to Day Davis/street clothes stuff from the media is stupid as hell as well',NULL,32,'https://www.reddit.com/r/nba/comments/1afl0wp/amick_people_within_the_sixers_organization/',0.9042,0.264,0.66,0.076),
 	 ('2024-02-01','IDKaboutthatone','One of the best shot makers in the league. Hold dat.','TrailBlazers',32,'https://www.reddit.com/r/nba/comments/1ag3nvh/highlight_anfernee_simons_with_the_tough_runner/',0.6369,0.296,0.704,0),
@@ -1677,9 +1677,9 @@ INSERT INTO reddit_comments (scrape_date,author,"comment",flair,score,url,compou
 I can see him getting traded if he doesn’t take a discount this offseason. Presti doesn’t let players hit RFA and he’s not playing like a big money guy right now. Not even close. ','Thunder',31,'https://www.reddit.com/r/nba/comments/1ag1911/post_game_thread_the_oklahoma_city_thunder_3315/',-0.4218,0.05,0.833,0.116),
 	 ('2024-02-01','applep00','the same reason kidd didnt do it when hardaway was stuck vs orlando…just spectating the game like the rest of us','Celtics',31,'https://www.reddit.com/r/nba/comments/1ag3pwx/damian_lillard_loses_in_his_return_to_portland/',0.128,0.106,0.809,0.085),
 	 ('2024-02-01','GetQuakedOnIsABITCH','sub wont like this one',NULL,31,'https://www.reddit.com/r/nba/comments/1ag1yvu/highlight_booker_hits_mikal_with_his_own_3point/',-0.2755,0,0.655,0.345),
-	 ('2024-02-01','HisExcellency20','I''m so sick of the discourse around Joel Embiid. Everyone *always* assumes the worst in him. 
+	 ('2024-02-01','HisExcellency20','I''m so sick of the discourse around Joel Embiid. Everyone *always* assumes the worst in him.
 
-He didn''t play in Denver. You could assume he was hurt, but it''s Joel so you assume he''s ducking. He plays and looks hobbled in GS. You could assume he wants to help his team win games, but no it''s Joel so it must be the 65 games minimum. 
+He didn''t play in Denver. You could assume he was hurt, but it''s Joel so you assume he''s ducking. He plays and looks hobbled in GS. You could assume he wants to help his team win games, but no it''s Joel so it must be the 65 games minimum.
 
 Just fuck the entire NBA discourse as a whole. There''s a reason why they have to beg fans to watch regular season games with a gimmick like the IST.','76ers',31,'https://www.reddit.com/r/nba/comments/1afl0wp/amick_people_within_the_sixers_organization/',0.099,0.13,0.726,0.144),
 	 ('2024-02-01','littledoopcoup','Also like the coaches and front office aren’t on board with it. Guys like Kawhi sit because their coaches and GMs think it’s a good idea to rest them. Pop and the Spurs did it explicitly because Duncan needed rest. We know this already. If my boss told me to stay home and I was on the schedule, I’d still expect to be paid.','76ers',31,'https://www.reddit.com/r/nba/comments/1aflznu/stephen_a_lists_guys_like_kawhi_paul_george_kevin/',0.7845,0.118,0.882,0),
@@ -1691,14 +1691,14 @@ INSERT INTO reddit_comments (scrape_date,author,"comment",flair,score,url,compou
 	 ('2024-02-01','Checkmynewsong','Paul Westhead vibes.','Lakers',30,'https://www.reddit.com/r/nba/comments/1afrgit/elfrid_payton_on_former_coach_david_fizdale_we_go/',0,0,1,0),
 	 ('2024-02-01','Babushka5','What was Chauncey''s reason for not calling time out when the Bucks trapped Simons?','Celtics',30,'https://www.reddit.com/r/nba/comments/1ag3pwx/damian_lillard_loses_in_his_return_to_portland/',-0.5267,0,0.793,0.207),
 	 ('2024-02-01','DA_ReasoN','Wait... Where''s the tribute video? Kevin Durant got a short one from The Nets, Don''t tell me Portland didn''t have one ready for Dame''s return.','Knicks',30,'https://www.reddit.com/r/nba/comments/1ag0yzr/highlight_lillard_is_welcomed_to_moda_center_to_a/',-0.2755,0,0.916,0.084),
-	 ('2024-02-01','hydroknightking','I think my first comment got deleted cause I didn’t link the post as no participation. 
+	 ('2024-02-01','hydroknightking','I think my first comment got deleted cause I didn’t link the post as no participation.
 
 https://www.np.reddit.com/r/nfl/s/LxHsPViNp9
 
 But no, Belichick was pissed off at reporters questioning if Brady was avoiding the injury list cause he was icing his shoulder after practice','Celtics',30,'https://www.reddit.com/r/nba/comments/1afl0wp/amick_people_within_the_sixers_organization/',-0.9559,0,0.64,0.36),
 	 ('2024-02-01','ArjunBanerji27','This is a pathetic spin to get attention off the fact that the Sixers organization and medical staff cleared him to play in Denver, took him off 15 minutes before the game, and then allowed him to play yesterday when he clearly hadn''t recovered.
 
-Trying to push the narrative that Embiid got bullied into playing by social media pressure is the least believable explanation they could have come up with. 
+Trying to push the narrative that Embiid got bullied into playing by social media pressure is the least believable explanation they could have come up with.
 
 And even if that was true, it wouldn''t reflect well upon the Sixers medical staff. You just let your injury prone superstar rush out to play, and re-injure himself, because he got tilted by twitter trolls?',NULL,30,'https://www.reddit.com/r/nba/comments/1afl0wp/amick_people_within_the_sixers_organization/',-0.1813,0.129,0.753,0.118),
 	 ('2024-02-01','Aggressive_Slice4620','Production wise, yes, mostly because he barely gets any playing time. He was slow to adjust to the speed of the NBA and the coach barely used him until this brutal January stretch. Since getting a bit more playing time this month he just keeps getting better and better. There were times wherein the 5-man rotation with him and Jdub are better than SGA plus shooters.','Thunder',30,'https://www.reddit.com/r/nba/comments/1ag1911/post_game_thread_the_oklahoma_city_thunder_3315/',0.8657,0.221,0.717,0.061),
@@ -1719,7 +1719,7 @@ Tatum had to score 50 to win a play in game vs the Wizards that year with Jaylen
 	 ('2024-02-01','Absol61','He''s also lowkey been the one the best defenders in the NBA, and honestly should be the DPOY.','Nuggets',30,'https://www.reddit.com/r/nba/comments/1afzjbb/azarly_kawhi_leonard_is_shooting_575090_over_his/',0.8176,0.362,0.638,0),
 	 ('2024-02-01','TheFestusEzeli','I do wonder if there is any action that Embiid can do that people would not spin into “he is only doing it for the MVP!”
 
-Sits out, oh it’s because he is scared and doesn’t want to lose MVP. Plays, oh it’s because he is scared and doesn’t want to win MVP. 
+Sits out, oh it’s because he is scared and doesn’t want to lose MVP. Plays, oh it’s because he is scared and doesn’t want to win MVP.
 
 Of course the Sixers medical staff is at fault too, that doesn’t make any of the brain dead takes by this sub any less stupid. I fucking hate the Sixers but have defended Embiid over the years here because this sub’s views and takes on him are insane.','Raptors',30,'https://www.reddit.com/r/nba/comments/1afl0wp/amick_people_within_the_sixers_organization/',-0.9064,0.056,0.779,0.166),
 	 ('2024-02-01','KARSbenicillin','Think of it this way. When you''re at work you sometimes get put into a different department to help widen your capabilities even if you aren''t gonna be working in that position. You''re basically deadweight there for that time but once you get back to your main job you might be able to contribute in broader ways. Same thing with Sochan.',NULL,30,'https://www.reddit.com/r/nba/comments/1afym20/highlight_jeremy_sochan_pulls_out_the_reverse/',0.2144,0.03,0.97,0),
@@ -1740,9 +1740,9 @@ INSERT INTO reddit_comments (scrape_date,author,"comment",flair,score,url,compou
 	 ('2024-02-01','mickelboy182','I saw a Wizards fan say, without even a hint of irony, ''I hope you''re happy now, Nuggets fans''.
 
 We shot Bambi.','Nuggets',29,'https://www.reddit.com/r/nba/comments/1afl0wp/amick_people_within_the_sixers_organization/',0.8271,0.355,0.598,0.048),
-	 ('2024-02-01','Domin0x','So you think his knee condition was fake? Then why he was visibly limping in 2019 playoffs, was he faking it? 
+	 ('2024-02-01','Domin0x','So you think his knee condition was fake? Then why he was visibly limping in 2019 playoffs, was he faking it?
 
-2021 he teared his ACL which prevented him from playing the next year. 
+2021 he teared his ACL which prevented him from playing the next year.
 
 2023 he was sat out some games especially in the 1 st half of the season because he was still not 100% after that injury. If you watched him play in the 2nd half of the season it was like night and day.
 
@@ -1789,7 +1789,7 @@ This is mind-numbing incompetence from everyone involved from the 76ers... inclu
 	 ('2024-02-01','j_cruise','Definitely would. The Nets give tribute videos to even bench players who didn''t get many minutes. It''s just that they are usually only seen in the arena and don''t get much press. People just like getting outraged about shit.','Nets',28,'https://www.reddit.com/r/nba/comments/1afz16t/highlight_kevin_durant_doesnt_look_too_amused_as/',-0.4404,0.11,0.74,0.15),
 	 ('2024-02-01','thenicezen','hey at least we got rid of Griffin, they say…','Bucks',28,'https://www.reddit.com/r/nba/comments/1ag3sda/post_game_thread_the_portland_trail_blazers_1533/',0,0,1,0),
 	 ('2024-02-01','Confident_Berry7271','He shat on kawhi for tearing his meniscus. What do you mean? ',NULL,28,'https://www.reddit.com/r/nba/comments/1aflznu/stephen_a_lists_guys_like_kawhi_paul_george_kevin/',0,0,1,0),
-	 ('2024-02-01','horse_renoir13','POH-LICE PRESENCE 
+	 ('2024-02-01','horse_renoir13','POH-LICE PRESENCE
 
 *throws papers*','Timberwolves',28,'https://www.reddit.com/r/nba/comments/1afy0gl/nehm_damian_lillard_on_walking_into_the_visitors/',0,0,1,0),
 	 ('2024-02-01','XzibitABC','I''m not typically a "man that ref specifically sucks" guy, but Ted Valentine needs to be shot into the sun.','Pacers',28,'https://www.reddit.com/r/nba/comments/1aft64o/ryen_russillo_tells_the_official_nba_referee/',-0.1901,0,0.911,0.089);
@@ -1977,6 +1977,22 @@ VALUES ('20 pt Game', 'Regular Season', 356, 'between 11 and 20 points'),
        ('Blowout Game', 'Regular Season', 154, 'more than 20 points'),
        ('10 pt Game', 'Regular Season', 351, 'between 6 and 10 points'),
        ('Clutch Game', 'Regular Season', 327, '5 points or less');
+
+DROP TABLE IF EXISTS team_game_types;
+CREATE TABLE team_game_types(
+	team varchar,
+    game_type text,
+    season_type text,
+    n bigint,
+    explanation text
+);
+
+INSERT INTO team_game_types (team, game_type, season_type, n, explanation)
+VALUES ('IND', '20 pt Game', 'Regular Season', 30, 'between 11 and 20 points'),
+       ('IND', 'Blowout Game', 'Regular Season', 30, 'more than 20 points'),
+       ('IND', '10 pt Game', 'Regular Season', 10, 'between 6 and 10 points'),
+       ('IND', 'Clutch Game', 'Regular Season', 12, '5 points or less');
+
 
 DROP TABLE IF EXISTS feedback;
 CREATE TABLE feedback(
@@ -2168,7 +2184,7 @@ INSERT INTO user_predictions (username,game_date,home_team,home_team_odds,home_t
 INSERT INTO user_predictions (username,game_date,home_team,home_team_odds,home_team_predicted_win_pct,away_team,away_team_odds,away_team_predicted_win_pct,selected_winner,bet_amount,created_at) VALUES
 	 ('test1',current_date - INTERVAL '2 DAY','Dallas Mavericks',-210,0.798,'Chicago Bulls',175,0.202,'Chicago Bulls',10,current_timestamp - INTERVAL '2 DAY');
 
--- 2023-05-28 update: this table is made from dbt in prod.  for testing im just making a blank table to test 
+-- 2023-05-28 update: this table is made from dbt in prod.  for testing im just making a blank table to test
 -- past bets functionality.
 DROP TABLE IF EXISTS mov;
 CREATE TABLE IF NOT EXISTS mov
@@ -2202,14 +2218,14 @@ VALUES ('season', 1),
 
 create view user_past_predictions as
 WITH home_wins AS (
-    SELECT 
+    SELECT
         mov.full_team AS home_team,
         mov.game_date,
         mov.outcome
     FROM marts.mov
     ),
     combo AS (
-    SELECT 
+    SELECT
         user_predictions.id,
         user_predictions.username,
         user_predictions.game_date,
@@ -2232,7 +2248,7 @@ WITH home_wins AS (
     ),
 
     final as (
-        select 
+        select
             *,
             case
                 when away_team = selected_winner then away_team_odds
@@ -2245,7 +2261,7 @@ WITH home_wins AS (
 
     select
         *,
-        case 
+        case
             when is_correct_prediction = 1 then bet_amount / abs(selected_winner_odds / 100)
             else bet_amount * -1
         end as bet_profit

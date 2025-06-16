@@ -5,7 +5,7 @@ from fastapi.responses import HTMLResponse, StreamingResponse, Response
 from sqlalchemy import func
 from sqlalchemy.orm import Session
 
-from src.database import get_db
+from src.dependencies import get_db
 from src.models import UserPastPredictions
 from src.security import get_current_creds_from_token
 from src.utils import generate_csv, templates

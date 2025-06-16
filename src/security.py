@@ -19,7 +19,7 @@ from jose import JWTError
 
 from sqlalchemy.orm import Session
 
-from src.database import get_db
+from src.dependencies import get_db
 from src.models import Users
 from src.utils import generate_hash_password
 
@@ -149,7 +149,7 @@ def get_current_creds_from_token(
 
 # this is the programmatic version to authenticate
 async def get_current_user_from_api_token(
-    token: Annotated[str | bytes, Depends(oauth2_scheme_og)]
+    token: Annotated[str | bytes, Depends(oauth2_scheme_og)],
 ) -> str:
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,

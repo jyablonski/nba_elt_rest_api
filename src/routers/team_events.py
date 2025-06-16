@@ -5,7 +5,7 @@ from fastapi.responses import HTMLResponse, RedirectResponse
 from sqlalchemy.orm import Session
 
 from src.dao.team_event_context import create_team_event_record, get_team_event_context
-from src.database import get_db
+from src.dependencies import get_db
 from src.security import get_current_creds_from_token
 from src.utils import team_acronyms, templates
 
