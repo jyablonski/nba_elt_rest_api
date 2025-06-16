@@ -80,14 +80,6 @@ def run_query(query: str, session: Session) -> list[tuple]:
     return result
 
 
-# def get_db() -> Generator[Session, None, None]:
-#     db = SessionLocal()
-#     try:
-#         yield db
-#     finally:
-#         db.close()
-
-
 env = load_yaml_with_env("config.yaml")[os.environ.get("ENV_TYPE")]
 
 engine = sql_connection(
