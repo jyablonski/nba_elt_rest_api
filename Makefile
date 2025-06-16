@@ -77,8 +77,8 @@ test:
 .PHONY: lint
 lint:
 	@echo Checking Black --------------
-	@poetry run black src/
+	@uv run black src/
 	@echo Checking Ruff ---------------
-	-@poetry run ruff check .
+	-@uv run ruff check .
 	@echo Checking MyPy ---------------
-	-@poetry run mypy src/
+	-@uv run mypy src/
