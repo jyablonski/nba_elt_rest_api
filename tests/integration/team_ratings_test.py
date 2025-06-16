@@ -1,5 +1,5 @@
-def test_team_ratings(client_fixture):
-    response = client_fixture.get("/team_ratings")
+def test_league_ratings(client_fixture):
+    response = client_fixture.get("/league/ratings")
     data = response.json()
 
     assert response.status_code == 200
@@ -20,10 +20,10 @@ def test_team_ratings(client_fixture):
     ]
 
 
-def test_team_ratings_individual(client_fixture):
+def test_team_ratings(client_fixture):
     team = "BOS"
 
-    response = client_fixture.get(f"/team_ratings/{team}")
+    response = client_fixture.get(f"/teams/{team}/ratings")
     data = response.json()
 
     assert response.status_code == 200
@@ -43,10 +43,10 @@ def test_team_ratings_individual(client_fixture):
     ]
 
 
-def test_team_ratings_individual_fail(client_fixture):
+def test_team_ratings_fail(client_fixture):
     team = "JACOBS_FAKE_TEAM"
 
-    response = client_fixture.get(f"/team_ratings/{team}")
+    response = client_fixture.get(f"/teams/{team}/ratings")
 
     assert response.status_code == 404
 

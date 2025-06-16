@@ -4,7 +4,7 @@ from fastapi import APIRouter, Depends, Request, Response
 from fastapi.responses import RedirectResponse
 from sqlalchemy.orm import Session
 
-from src.database import get_db
+from src.dependencies import get_db
 from src.security import create_access_token, gmail_oauth
 from src.dao.users import check_oauth_user, create_oauth_user
 

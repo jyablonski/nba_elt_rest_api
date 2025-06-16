@@ -3,7 +3,7 @@ from fastapi.responses import HTMLResponse
 from sqlalchemy.orm import Session
 
 from src.dao.settings import get_user_timezone, set_user_timezone
-from src.database import get_db
+from src.dependencies import get_db
 from src.security import get_current_creds_from_token
 from src.utils import templates
 

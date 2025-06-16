@@ -5,7 +5,7 @@ from fastapi.responses import HTMLResponse, RedirectResponse
 from sqlalchemy.orm import Session
 
 from src.dao.bets import store_bet_predictions
-from src.database import get_db
+from src.dependencies import get_db
 from src.models import Predictions, UserPredictions
 from src.security import get_current_creds_from_token
 from src.utils import templates

@@ -1,7 +1,7 @@
 from fastapi import Request, Response
 import pytest
 
-from src.cache import key_builder_no_db
+from src.dependencies import key_builder_no_db
 
 
 # putting it into `namespace:<md5 cornbeefhash>`

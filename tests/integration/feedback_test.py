@@ -1,24 +1,26 @@
 import random
 
 
-def test_feedback_get(client_fixture):
-    response = client_fixture.get("/feedback")
+def test_internal_feedback_get(client_fixture):
+    response = client_fixture.get("/internal/feedback")
 
     assert response.status_code == 200
     assert "Enter your feedback ..." in response.text
 
 
-def test_feedback_fail(client_fixture):
-    response = client_fixture.post("/feedback", data='{"user_feedback": "hello world"}')
+def test_internal_feedback_fail(client_fixture):
+    response = client_fixture.post(
+        "/internal/feedback", data='{"user_feedback": "hello world"}'
+    )
 
     assert response.status_code == 422
 
 
-def test_feedback_success(client_fixture):
+def test_internal_feedback_success(client_fixture):
     number = random.random()
 
     response = client_fixture.post(
-        "/feedback",
+        "/internal/feedback",
         data={"user_feedback": f"hello world {number}"},
         headers={"content-type": "application/x-www-form-urlencoded"},
     )
@@ -27,9 +29,9 @@ def test_feedback_success(client_fixture):
     assert "Your feedback has been stored!" in response.text
 
 
-def test_feedback_missing_value(client_fixture):
+def test_internal_feedback_missing_value(client_fixture):
     response = client_fixture.post(
-        "/feedback",
+        "/internal/feedback",
         data={"user_feedback": ""},
         headers={"content-type": "application/x-www-form-urlencoded"},
     )

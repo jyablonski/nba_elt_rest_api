@@ -15,7 +15,7 @@ def create_team_event_record(
     team_name_form: str,
     team_event_form: str,
     team_event_date_form: date,
-):
+) -> TeamEventContext:
     created_timestamp = datetime.now(timezone.utc)
 
     record = TeamEventContext(

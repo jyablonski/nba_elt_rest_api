@@ -25,7 +25,6 @@ services:
     build:
       context: ../
       dockerfile: docker/Dockerfile
-    image: nba_elt_rest_api_local
     environment:
       - IP=postgres
       - RDS_USER=postgres

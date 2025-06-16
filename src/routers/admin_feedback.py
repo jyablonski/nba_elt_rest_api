@@ -3,7 +3,7 @@ from fastapi.responses import HTMLResponse
 from sqlalchemy.orm import Session
 
 from src.dao.feedback import get_feedback
-from src.database import get_db
+from src.dependencies import get_db
 from src.security import get_current_creds_from_token
 from src.utils import templates
 

@@ -107,6 +107,16 @@ class GameTypesBase(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
 
+class TeamGameTypesBase(BaseModel):
+    team: str
+    game_type: str
+    season_type: str
+    n: int
+    explanation: str
+
+    model_config = ConfigDict(from_attributes=True)
+
+
 class PlayerBase(BaseModel):
     name: str
     team: str

@@ -2,13 +2,13 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
 from src.dao.twitter_comments import get_twitter_comments
-from src.database import get_db
+from src.dependencies import get_db
 from src.schemas import TwitterBase
 
 router = APIRouter()
 
 
-@router.get("/twitter_comments", response_model=list[TwitterBase])
+@router.get("/social/twitter/comments", response_model=list[TwitterBase])
 def read_twitter_comments(
     skip: int = 0, limit: int = 250, db: Session = Depends(get_db)
 ) -> list[TwitterBase]:
