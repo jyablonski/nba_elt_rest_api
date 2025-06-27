@@ -15,8 +15,6 @@ The Project uses:
 - A Redis Database to enable caching across various endpoints to improve performance
 - JWT for Authentication and Authorization
 
-The Project was hosted on an AWS Lambda Function URL for cost-savings compared to ECS or EKS, but is no longer running on AWS as of August 2024.
-
 ## Running The App
 Clone the Repo & run `make up` which spins up the App locally served [here](http://localhost:8080/) using 3 Docker Containers:
 - Postgres Database
@@ -43,3 +41,4 @@ The same Test Suite is ran after every commit on a PR via GitHub Actions.
     * [dbt](https://github.com/jyablonski/nba_elt_dbt)
     * [Terraform](https://github.com/jyablonski/aws_terraform)
     * [ML Pipeline](https://github.com/jyablonski/nba_elt_mlflow)
+    * [Interal Documentation](https://github.com/jyablonski/doqs)
