@@ -1,6 +1,6 @@
 [project]
 name = "nba-elt-rest-api"
-version = "1.10.0"
+version = "1.10.1"
 description = "REST API Project"
 authors = [{ name = "jyablonski9", email = "jyablonski9@gmail.com" }]
 requires-python = "~=3.12"
