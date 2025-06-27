@@ -1,7 +1,7 @@
 # REST API for NBA ELT Project
 ![Tests](https://github.com/jyablonski/nba_elt_rest_api/actions/workflows/test.yaml/badge.svg) ![Deployment](https://github.com/jyablonski/nba_elt_rest_api/actions/workflows/deploy.yaml/badge.svg) [![Coverage Status](https://coveralls.io/repos/github/jyablonski/nba_elt_rest_api/badge.svg?branch=master)](https://coveralls.io/github/jyablonski/nba_elt_rest_api?branch=master) ![Code Style](https://img.shields.io/badge/code%20style-black-000000.svg)
 
-Version: 1.10.0
+Version: 1.10.1
 
 ## About the Project
 
@@ -14,8 +14,6 @@ The Project uses:
 - A Postgres Database for the backend
 - A Redis Database to enable caching across various endpoints to improve performance
 - JWT for Authentication and Authorization
-
-The Project was hosted on an AWS Lambda Function URL for cost-savings compared to ECS or EKS, but is no longer running on AWS as of August 2024.
 
 ## Running The App
 Clone the Repo & run `make up` which spins up the App locally served [here](http://localhost:8080/) using 3 Docker Containers:
@@ -43,3 +41,4 @@ The same Test Suite is ran after every commit on a PR via GitHub Actions.
     * [dbt](https://github.com/jyablonski/nba_elt_dbt)
     * [Terraform](https://github.com/jyablonski/aws_terraform)
     * [ML Pipeline](https://github.com/jyablonski/nba_elt_mlflow)
+    * [Interal Documentation](https://github.com/jyablonski/doqs)
