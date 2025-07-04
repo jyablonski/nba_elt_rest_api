@@ -1,5 +1,5 @@
 def test_social_twitter_comments(client_fixture):
-    response = client_fixture.get("/social/twitter/comments")
+    response = client_fixture.get("/v1/social/twitter/comments")
     data = response.json()
 
     assert response.status_code == 200

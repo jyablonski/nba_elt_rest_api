@@ -20,7 +20,7 @@ from jose import JWTError
 from sqlalchemy.orm import Session
 
 from src.dependencies import get_db
-from src.models import Users
+from src.models.users import Users
 from src.utils import generate_hash_password
 
 security = HTTPBasic()

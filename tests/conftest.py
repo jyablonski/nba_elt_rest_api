@@ -56,7 +56,7 @@ def oauth2_password_bearer():
 
 def login_user(client_fixture: TestClient, username: str, password: str = "password"):
     login_response = client_fixture.post(
-        "/login",
+        "/v1/login",
         data={
             "username": username,
             "password": password,

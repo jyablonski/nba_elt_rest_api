@@ -29,7 +29,7 @@ def test_feature_flags_create_wrong_auth(client_fixture, consumer_user):
     username = "test"
 
     response = client_fixture.post(
-        "/admin/feature_flags/create",
+        "/v1/admin/feature_flags/create",
         data={
             "username": username,
             "feature_flag_name_form": [
@@ -49,7 +49,7 @@ def test_feature_flags_create_success(client_fixture, admin_user):
     username = "test"
 
     response = client_fixture.post(
-        "/admin/feature_flags/create",
+        "/v1/admin/feature_flags/create",
         data={
             "username": username,
             "feature_flag_name_form": [
@@ -68,7 +68,7 @@ def test_feature_flags_create_failure_unique_contraint(client_fixture, admin_use
     username = "test"
 
     response = client_fixture.post(
-        "/admin/feature_flags/create",
+        "/v1/admin/feature_flags/create",
         data={
             "username": username,
             "feature_flag_name_form": [
@@ -87,7 +87,7 @@ def test_feature_flags_update_success(client_fixture, admin_user):
     username = "test"
 
     response = client_fixture.post(
-        "/admin/feature_flags",
+        "/v1/admin/feature_flags",
         data={
             "username": username,
             "feature_flag_list": [

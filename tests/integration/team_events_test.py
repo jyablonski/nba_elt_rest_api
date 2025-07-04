@@ -27,7 +27,7 @@ def test_team_events_get_success(client_fixture, admin_user):
 
 def test_team_events_create_wrong_auth(client_fixture, consumer_user):
     response = client_fixture.post(
-        "/admin/team_events/create",
+        "/v1/admin/team_events/create",
         data={
             "selected_team": [
                 "GSW",
@@ -47,7 +47,7 @@ def test_team_events_create_wrong_auth(client_fixture, consumer_user):
 # i've just begun
 def test_team_events_post_success(client_fixture, admin_user):
     response = client_fixture.post(
-        "/admin/team_events/create",
+        "/v1/admin/team_events/create",
         data={
             "selected_team": [
                 "GSW",

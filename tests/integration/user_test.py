@@ -7,7 +7,7 @@ def test_create_user(client_fixture):
     username = f"my_fake_user_{number}"
 
     response = client_fixture.post(
-        "/users",
+        "/v1/users",
         json={
             "username": username,
             "password": "password",
@@ -23,7 +23,7 @@ def test_create_user_from_api(client_fixture):
     username = "test_api_user"
 
     response = client_fixture.post(
-        "/users",
+        "/v1/users",
         json={
             "username": username,
             "password": "bababooiee",
@@ -38,7 +38,7 @@ def test_create_user_from_form(client_fixture):
     username = "test_form_user"
 
     response = client_fixture.post(
-        "/login/create_user",
+        "/v1/login/create_user",
         data={
             "username": username,
             "password": "password",
@@ -52,7 +52,8 @@ def test_create_user_from_form(client_fixture):
 
 def test_create_user_bad_request(client_fixture):
     response = client_fixture.post(
-        "/users", json={"username_fake": "jyablonski", "email": "jacob@yablonski.net"}
+        "/v1/users",
+        json={"username_fake": "jyablonski", "email": "jacob@yablonski.net"},
     )
 
     assert response.status_code == 422
@@ -66,7 +67,7 @@ def test_update_user(client_fixture):
     new_username = "test_form_user_v2"
 
     response = client_fixture.put(
-        "/users/test_form_user",
+        "/v1/users/test_form_user",
         json={
             "username": new_username,
             "password": "bababooiee",
@@ -83,7 +84,7 @@ def test_update_user_doesnt_exist(client_fixture):
     existing_username = "test55"
 
     response = client_fixture.put(
-        f"/users/{existing_username}",
+        f"/v1/users/{existing_username}",
         json={
             "username": new_username,
             "password": "bababooiee",
@@ -100,7 +101,7 @@ def test_update_user_username_taken(client_fixture):
     existing_username = "test1"
 
     response = client_fixture.put(
-        f"/users/{existing_username}",
+        f"/v1/users/{existing_username}",
         json={
             "username": new_username,
             "password": "bababooiee",
@@ -116,7 +117,7 @@ def test_update_user_username_taken(client_fixture):
 
 
 def test_delete_user_no_token(client_fixture):
-    response = client_fixture.delete("/users/jacobs_fake_user")
+    response = client_fixture.delete("/v1/users/jacobs_fake_user")
 
     assert response.json()["detail"] == "Not authenticated"
     assert response.status_code == 401
@@ -130,7 +131,7 @@ def test_delete_user_bad_token(client_fixture):
     }
 
     response = client_fixture.delete(
-        f"/users/{username}",
+        f"/v1/users/{username}",
         headers=headers,
     )
 
@@ -146,7 +147,7 @@ def test_delete_user_no_username(client_fixture):
     }
 
     response = client_fixture.delete(
-        f"/users/{username}",
+        f"/v1/users/{username}",
         headers=headers,
     )
 
@@ -159,7 +160,7 @@ def test_delete_user(client_fixture):
     password = "password"
 
     response = client_fixture.post(
-        "/users",
+        "/v1/users",
         json={
             "username": username,
             "password": password,
@@ -168,7 +169,7 @@ def test_delete_user(client_fixture):
     )
 
     df = client_fixture.post(
-        "/token", data={"username": username, "password": password}
+        "/v1/token", data={"username": username, "password": password}
     )
 
     token = df.json()["access_token"]
@@ -177,7 +178,7 @@ def test_delete_user(client_fixture):
         "Content-Type": "application/json",
         "Authorization": f"Bearer {token}",
     }
-    response = client_fixture.delete(f"/users/{username}", headers=headers)
+    response = client_fixture.delete(f"/v1/users/{username}", headers=headers)
     assert response.json() == f"Username {username} Successfully deleted!"
     assert response.status_code == 200
 
@@ -188,7 +189,7 @@ def test_delete_user_no_permissions(client_fixture):
     password = "password"
 
     response = client_fixture.post(
-        "/users",
+        "/v1/users",
         json={
             "username": username,
             "password": password,
@@ -197,7 +198,7 @@ def test_delete_user_no_permissions(client_fixture):
     )
 
     df = client_fixture.post(
-        "/token", data={"username": username, "password": password}
+        "/v1/token", data={"username": username, "password": password}
     )
     token = df.json()["access_token"]
 
@@ -205,7 +206,7 @@ def test_delete_user_no_permissions(client_fixture):
         "Content-Type": "application/json",
         "Authorization": f"Bearer {token}",
     }
-    response = client_fixture.delete(f"/users/{real_username}", headers=headers)
+    response = client_fixture.delete(f"/v1/users/{real_username}", headers=headers)
 
     assert response.status_code == 401
     assert (

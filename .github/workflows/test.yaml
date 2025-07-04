@@ -11,7 +11,7 @@ env:
   RDS_SCHEMA: marts
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   PYTHON_VERSION: "3.12"
-  UV_VERSION: "0.6.12"
+  UV_VERSION: "0.7.18"
 
 jobs:
   test:
@@ -19,8 +19,7 @@ jobs:
     runs-on: ubuntu-latest
 
     # running tests on bare metal rather than docker to enable
-    # caching of the poetry environment
-    # it's a mfer to do it the docker way
+    # caching of the uv environment
     steps:
       - name: Checkout the Repo
         uses: actions/checkout@v4

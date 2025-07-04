@@ -24,7 +24,7 @@ import pytest
 )
 def test_ml_housing_prediction(client_fixture, test_input, expected_output):
     df = client_fixture.post(
-        "/ml/predict",
+        "/v1/ml/predict",
         json=test_input,
     )
     assert df.status_code == 200
@@ -35,7 +35,7 @@ def test_ml_housing_prediction_bad_request(client_fixture):
     bad_parameter = "num_stories"
 
     df = client_fixture.post(
-        "/ml/predict",
+        "/v1/ml/predict",
         json={"state": "IL", "square_ft": 1750, bad_parameter: 1.2, "qol_index": 2.5},
     )
 

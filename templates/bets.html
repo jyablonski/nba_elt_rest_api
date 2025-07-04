@@ -21,7 +21,7 @@
                <th scope="col" class="bet-amount">Bet Amount</th>
             </tr>
          </thead>
-         <form name="selected_team_winner" action="/bets" method="post" enctype="multipart/form-data">
+         <form name="selected_team_winner" action="/v1/bets" method="post" enctype="multipart/form-data">
          <tbody>
             {% for game in games_today %}
             <tr>

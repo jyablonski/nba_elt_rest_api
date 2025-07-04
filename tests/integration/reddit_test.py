@@ -1,5 +1,5 @@
 def test_social_reddit_comments(client_fixture):
-    response = client_fixture.get("social/reddit/comments")
+    response = client_fixture.get("/v1/social/reddit/comments")
     data = response.json()
 
     assert response.status_code == 200
@@ -20,7 +20,7 @@ def test_social_reddit_comments(client_fixture):
 
 
 def test_social_reddit_comments_limit(client_fixture):
-    response = client_fixture.get("social/reddit/comments?limit=1")
+    response = client_fixture.get("/v1/social/reddit/comments?limit=1")
     data = response.json()
 
     assert response.status_code == 200
@@ -29,7 +29,7 @@ def test_social_reddit_comments_limit(client_fixture):
 
 
 def test_social_reddit_comments_filter(client_fixture):
-    response = client_fixture.get("social/reddit/comments?filter=jokic")
+    response = client_fixture.get("/v1/social/reddit/comments?filter=jokic")
     data = response.json()
 
     assert response.status_code == 200
@@ -38,7 +38,7 @@ def test_social_reddit_comments_filter(client_fixture):
 
 
 def test_social_reddit_comments_filter_case_insensitive(client_fixture):
-    response = client_fixture.get("social/reddit/comments?filter=nba")
+    response = client_fixture.get("/v1/social/reddit/comments?filter=nba")
     data = response.json()
 
     assert response.status_code == 200
@@ -48,7 +48,7 @@ def test_social_reddit_comments_filter_case_insensitive(client_fixture):
 
 
 def test_social_reddit_comments_multiple_conditions(client_fixture):
-    response = client_fixture.get("social/reddit/comments?filter=nba&limit=2")
+    response = client_fixture.get("/v1/social/reddit/comments?filter=nba&limit=2")
     data = response.json()
 
     assert response.status_code == 200
@@ -58,10 +58,14 @@ def test_social_reddit_comments_multiple_conditions(client_fixture):
 
 
 def test_social_reddit_comments_pagination(client_fixture):
-    response1 = client_fixture.get("social/reddit/comments?page=1&filter=as&limit=10")
+    response1 = client_fixture.get(
+        "/v1/social/reddit/comments?page=1&filter=as&limit=10"
+    )
     data1 = response1.json()
 
-    response2 = client_fixture.get("social/reddit/comments?page=2&filter=as&limit=10")
+    response2 = client_fixture.get(
+        "/v1/social/reddit/comments?page=2&filter=as&limit=10"
+    )
     data2 = response2.json()
 
     assert response1.status_code == 200

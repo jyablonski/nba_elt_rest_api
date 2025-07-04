@@ -1,5 +1,5 @@
 def test_league_game_types(client_fixture):
-    response = client_fixture.get("/league/game_types")
+    response = client_fixture.get("/v1/league/game_types")
     data = response.json()
 
     assert response.status_code == 200
@@ -16,7 +16,7 @@ def test_league_game_types(client_fixture):
 def test_team_game_types(client_fixture):
     team = "IND"
 
-    response = client_fixture.get(f"/teams/{team}/game_types")
+    response = client_fixture.get(f"/v1/teams/{team}/game_types")
     data = response.json()
 
     assert response.status_code == 200

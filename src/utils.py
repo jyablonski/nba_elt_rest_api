@@ -7,7 +7,7 @@ import string
 
 from fastapi.templating import Jinja2Templates
 
-from src.models import UserPastPredictions
+from src.models.predictions import UserPastPredictions
 
 templates = Jinja2Templates(directory="templates")
 

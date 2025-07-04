@@ -15,7 +15,7 @@ def test_post_bets_form_incorrect_permissions(client_fixture):
     username = "jyablonski"
 
     response = client_fixture.post(
-        "/bets",
+        "/v1/bets",
         data={
             "username": username,
             "bet_predictions": ["Indiana Pacers", "Houston Rockets"],
@@ -44,7 +44,7 @@ def test_bets_form_post(client_fixture, jyablonski_user):
     username = "jyablonski"
 
     first_bets_response = client_fixture.post(
-        "/bets",
+        "/v1/bets",
         data={
             "username": username,
             "bet_predictions": [
@@ -62,7 +62,7 @@ def test_bets_form_post(client_fixture, jyablonski_user):
     )
 
     second_bets_response = client_fixture.post(
-        "/bets",
+        "/v1/bets",
         data={
             "username": username,
             "bet_predictions": ["Indiana Pacers", "Houston Rockets"],

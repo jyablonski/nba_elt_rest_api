@@ -11,52 +11,25 @@ def test_incidents_get_no_auth(client_fixture):
         assert response.json()["detail"] == "Not authenticated"
 
 
-def test_incidents_get_wrong_auth(client_fixture):
-    username = "test"
-
-    login_response = client_fixture.post(  # noqa: F841
-        "/login",
-        data={
-            "username": username,
-            "password": "password",
-        },
-    )
-
+def test_incidents_get_wrong_auth(client_fixture, consumer_user):
     response = client_fixture.get("/admin/incidents")
 
     assert response.status_code == 403
     assert response.json()["detail"] == "You do not have the powa"
 
 
-def test_incidents_get_success(client_fixture):
-    username = "jyablonski"
-
-    login_response = client_fixture.post(  # noqa: F841
-        "/login",
-        data={
-            "username": username,
-            "password": "password",
-        },
-    )
-
+def test_incidents_get_success(client_fixture, admin_user):
     response = client_fixture.get("/admin/incidents")
 
     assert response.status_code == 200
     assert "Incidents Page" in response.text
 
 
-def test_incidents_create_wrong_auth(client_fixture):
+def test_incidents_create_wrong_auth(client_fixture, consumer_user):
     username = "test"
 
-    login_response = client_fixture.post(  # noqa: F841
-        "/login",
-        data={
-            "username": username,
-            "password": "password",
-        },
-    )
     response = client_fixture.post(
-        "/admin/incidents/create",
+        "/v1/admin/incidents/create",
         data={
             "username": username,
             "incident_name_form": [
@@ -74,20 +47,12 @@ def test_incidents_create_wrong_auth(client_fixture):
     assert response.json()["detail"] == "You do not have the powa"
 
 
-def test_incidents_create_success(client_fixture):
+def test_incidents_create_success(client_fixture, admin_user):
     username = "jyablonski"
     incident_name = "jacobs_fake_test"
 
-    login_response = client_fixture.post(  # noqa: F841
-        "/login",
-        data={
-            "username": username,
-            "password": "password",
-        },
-    )
-
     response = client_fixture.post(
-        "/admin/incidents/create",
+        "/v1/admin/incidents/create",
         data={
             "username": username,
             "incident_name_form": [incident_name],
@@ -101,19 +66,11 @@ def test_incidents_create_success(client_fixture):
     assert incident_name in response.text
 
 
-def test_incidents_update_success(client_fixture):
+def test_incidents_update_success(client_fixture, admin_user):
     username = "jyablonski"
 
-    login_response = client_fixture.post(  # noqa: F841
-        "/login",
-        data={
-            "username": username,
-            "password": "password",
-        },
-    )
-
     response = client_fixture.post(
-        "/admin/incidents",
+        "/v1/admin/incidents",
         data={
             "username": username,
             "incident_list": [1, 1, 1],

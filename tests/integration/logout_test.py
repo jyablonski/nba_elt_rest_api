@@ -2,7 +2,7 @@ def test_logout(client_fixture):
     username = "jyablonski"
 
     response = client_fixture.post(
-        "/login",
+        "/v1/login",
         data={
             "username": username,
             "password": "password",
@@ -14,7 +14,7 @@ def test_logout(client_fixture):
     assert "access_token" in client_fixture.cookies
 
     logout_response = client_fixture.post(
-        "/logout",
+        "/v1/logout",
         follow_redirects=False,
     )
     assert logout_response.status_code == 302
@@ -23,7 +23,7 @@ def test_logout(client_fixture):
 
 def test_logout_no_user(client_fixture):
     response = client_fixture.post(
-        "/logout",
+        "/v1/logout",
     )
     assert response.status_code == 200
     assert "User Login" in response.text
