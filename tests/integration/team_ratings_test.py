@@ -27,8 +27,8 @@ def test_team_ratings(client_fixture):
     data = response.json()
 
     assert response.status_code == 200
-    assert data["team"] == "Boston Celtics"
-    assert list(data.keys()) == [
+    assert data[0]["team"] == "Boston Celtics"
+    assert list(data[0].keys()) == [
         "team",
         "team_acronym",
         "wins",

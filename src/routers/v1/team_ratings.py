@@ -1,5 +1,3 @@
-from typing import List
-
 from fastapi import APIRouter, Depends
 from fastapi_cache.decorator import cache
 from sqlalchemy.orm import Session
@@ -12,18 +10,18 @@ router = APIRouter()
 
 
 # return all league team ratings
-@router.get("/league/ratings", response_model=List[TeamRatingsBase])
+@router.get("/league/ratings", response_model=list[TeamRatingsBase])
 @cache(expire=900, key_builder=key_builder_no_db)
 async def read_team_ratings(db: Session = Depends(get_db)):
-    team_ratings = get_team_ratings(db)
+    team_ratings = get_team_ratings(db=db)
     return team_ratings
 
 
 # return team ratings by team acronym
-@router.get("/teams/{team}/ratings", response_model=TeamRatingsBase)
+@router.get("/teams/{team}/ratings", response_model=list[TeamRatingsBase])
 @cache(expire=900, key_builder=key_builder_no_db)
 async def read_team_ratings_team(
     team: str = Depends(validate_team_acronym), db: Session = Depends(get_db)
 ):
-    team_ratings_team = get_team_ratings_by_team(db, team=team)
+    team_ratings_team = get_team_ratings_by_team(db=db, team=team)
     return team_ratings_team
