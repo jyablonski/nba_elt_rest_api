@@ -1,5 +1,5 @@
 def test_league_injuries(client_fixture):
-    response = client_fixture.get("/league/injuries")
+    response = client_fixture.get("/v1/league/injuries")
     data = response.json()
 
     assert response.status_code == 200
@@ -18,7 +18,7 @@ def test_league_injuries(client_fixture):
 def test_team_injuries(client_fixture):
     team = "IND"
 
-    response = client_fixture.get(f"/teams/{team}/injuries")
+    response = client_fixture.get(f"/v1/teams/{team}/injuries")
     data = response.json()
 
     assert response.status_code == 200

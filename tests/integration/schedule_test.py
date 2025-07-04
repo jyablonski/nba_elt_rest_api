@@ -2,7 +2,7 @@ from datetime import datetime, timezone
 
 
 def test_league_schedule(client_fixture):
-    response = client_fixture.get("/league/schedule")
+    response = client_fixture.get("/v1/league/schedule")
     data = response.json()
 
     assert response.status_code == 200
@@ -23,7 +23,7 @@ def test_league_schedule(client_fixture):
 
 def test_league_schedule_date_param(client_fixture):
     date = "2023-01-01"
-    response = client_fixture.get(f"/league/schedule?date={date}")
+    response = client_fixture.get(f"/v1/league/schedule?date={date}")
     data = response.json()
 
     assert response.status_code == 200
@@ -44,7 +44,7 @@ def test_league_schedule_date_param(client_fixture):
 
 def test_league_schedule_date_no_data(client_fixture):
     date = "2024-01-01"
-    response = client_fixture.get(f"/league/schedule?date={date}")
+    response = client_fixture.get(f"/v1/league/schedule?date={date}")
     data = response.json()
 
     assert response.status_code == 200
@@ -54,7 +54,7 @@ def test_league_schedule_date_no_data(client_fixture):
 
 def test_league_schedule_date_fail(client_fixture):
     bad_date = "2023-01-01x"
-    response = client_fixture.get(f"/league/schedule?date={bad_date}")
+    response = client_fixture.get(f"/v1/league/schedule?date={bad_date}")
 
     assert response.status_code == 422
     assert response.json()["detail"][0] == {

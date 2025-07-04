@@ -3,7 +3,7 @@
 {% block content %}
 
 <div class="feedback-form">
-    <form id="feedback-form" method="post">
+    <form id="feedback-form" method="post" action="/v1/internal/feedback">
         <h1> Anonymous Feedback Form </h1>
         <input class="feedback-form" type="text" required placeholder="Enter your feedback ..." value=""
             name="user_feedback">

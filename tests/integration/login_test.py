@@ -2,7 +2,7 @@ def test_login_get(client_fixture):
     username = "jyablonski"
 
     response = client_fixture.post(
-        "/login",
+        "/v1/login",
         data={
             "username": username,
             "password": "password",
@@ -18,7 +18,7 @@ def test_login_fail(client_fixture):
     username = "jyablonski"
 
     response = client_fixture.post(
-        "/login",
+        "/v1/login",
         data={
             "username": username,
             "password": "fake_fkn_password",
@@ -41,7 +41,7 @@ def test_login_get_with_token(client_fixture):
     username = "jyablonski"
 
     response = client_fixture.post(
-        "/login",
+        "/v1/login",
         data={
             "username": username,
             "password": "password",

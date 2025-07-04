@@ -1,5 +1,5 @@
 def test_league_predictions(client_fixture):
-    response = client_fixture.get("/league/predictions")
+    response = client_fixture.get("/v1/league/predictions")
     data = response.json()
 
     assert response.status_code == 200

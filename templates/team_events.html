@@ -7,7 +7,7 @@
     <br>
 
     <div id="events-form">
-        <form id="form" method="post">
+        <form id="form" method="post" action="/v1/admin/team_events">
             <!-- i dunno how this works but fuck it baybee -->
             <select name="selected_team" id="team-select" class="form-control" onchange="this.form.submit()">
                 {% for team in team_acronyms %}
@@ -61,7 +61,7 @@
     </div>
     {% endif %}
     <table class="general-table">
-        <form method="POST" action="/admin/team_events/create" enctype="multipart/form-data" id="event-form">
+        <form method="POST" action="/v1/admin/team_events/create" enctype="multipart/form-data" id="event-form">
             <thead>
                 <tr>
                     <th scope="col">Selected Team</th>

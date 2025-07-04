@@ -1,5 +1,5 @@
 def test_league_transactions(client_fixture):
-    response = client_fixture.get("/league/transactions")
+    response = client_fixture.get("/v1/league/transactions")
     data = response.json()
 
     assert response.status_code == 200

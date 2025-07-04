@@ -10,7 +10,7 @@ def test_internal_feedback_get(client_fixture):
 
 def test_internal_feedback_fail(client_fixture):
     response = client_fixture.post(
-        "/internal/feedback", data='{"user_feedback": "hello world"}'
+        "/v1/internal/feedback", data='{"user_feedback": "hello world"}'
     )
 
     assert response.status_code == 422
@@ -20,7 +20,7 @@ def test_internal_feedback_success(client_fixture):
     number = random.random()
 
     response = client_fixture.post(
-        "/internal/feedback",
+        "/v1/internal/feedback",
         data={"user_feedback": f"hello world {number}"},
         headers={"content-type": "application/x-www-form-urlencoded"},
     )
@@ -31,7 +31,7 @@ def test_internal_feedback_success(client_fixture):
 
 def test_internal_feedback_missing_value(client_fixture):
     response = client_fixture.post(
-        "/internal/feedback",
+        "/v1/internal/feedback",
         data={"user_feedback": ""},
         headers={"content-type": "application/x-www-form-urlencoded"},
     )
