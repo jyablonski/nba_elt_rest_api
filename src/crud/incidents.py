@@ -1,24 +1,24 @@
-from __future__ import annotations
-
-
-from datetime import datetime, timezone
-from typing import TYPE_CHECKING
-
 from sqlalchemy.orm import Session
-
+from datetime import datetime, timezone
 from src.models.incidents import Incidents
 
-if TYPE_CHECKING:
-    from sqlalchemy.orm import Query
+
+def get_all_incidents(db: Session) -> list[Incidents]:
+    return db.query(Incidents).order_by(Incidents.incident_name).all()
 
 
-# incidents
+def incident_exists(db: Session, incident_name: str) -> bool:
+    return (
+        db.query(Incidents).filter(Incidents.incident_name == incident_name).count() > 0
+    )
+
+
 def create_incident(
     db: Session,
     incident_name_form: str,
     incident_description_form: str,
     incident_is_active_form: int,
-):
+) -> Incidents:
     created_timestamp = datetime.now(timezone.utc)
 
     record = Incidents(
@@ -36,21 +36,16 @@ def create_incident(
     return record
 
 
-def update_incident(db: Session, incidents_list: list[int]) -> Query[Incidents]:
+def update_incident(db: Session, incidents_list: list[int]) -> list[Incidents]:
     modified_at = datetime.now(timezone.utc)
-
-    incidents = db.query(Incidents).order_by(Incidents.incident_name)
+    incidents = db.query(Incidents).order_by(Incidents.incident_name).all()
 
     for incident, incident_update in zip(incidents, incidents_list):
         incident_update = int(incident_update)
+        if incident.is_active != incident_update:
+            incident.is_active = incident_update
+            incident.modified_at = modified_at
+            db.merge(incident)
 
-        if incident.is_active == incident_update:
-            continue
-
-        incident.is_active = incident_update
-        incident.modified_at = modified_at
-
-        db.merge(incident)
-        db.commit()
-
+    db.commit()
     return incidents

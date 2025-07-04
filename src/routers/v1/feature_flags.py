@@ -1,9 +1,14 @@
 from fastapi import APIRouter, Depends, Form, HTTPException, Request, status
 from sqlalchemy.orm import Session
+from typing import List
 
-from src.crud.feature_flags import create_feature_flags, update_feature_flags
+from src.crud.feature_flags import (
+    create_feature_flags,
+    update_feature_flags,
+    get_all_feature_flags,
+    feature_flag_exists,
+)
 from src.dependencies import get_db
-from src.models.feature_flags import FeatureFlags
 from src.security import get_current_creds_from_token
 from src.utils import templates
 
@@ -13,7 +18,7 @@ router = APIRouter()
 @router.post("/admin/feature_flags")
 def update_feature_flags_post(
     request: Request,
-    feature_flag_list: list[int] = Form(...),
+    feature_flag_list: List[int] = Form(...),
     creds: dict[str, str] = Depends(get_current_creds_from_token),
     db: Session = Depends(get_db),
 ):
@@ -33,7 +38,7 @@ def update_feature_flags_post(
 
 
 @router.post("/admin/feature_flags/create")
-def create_feature_flags_post(  # noqa: F811
+def create_feature_flags_post(
     request: Request,
     feature_flag_name_form: str = Form(...),
     feature_flag_is_enabled_form: int = Form(...),
@@ -46,13 +51,8 @@ def create_feature_flags_post(  # noqa: F811
             detail="You do not have the powa",
         )
 
-    existing_feature_flags = db.query(FeatureFlags).order_by(FeatureFlags.flag)
-
-    existing_feature_flags_check = existing_feature_flags.filter(
-        FeatureFlags.flag == feature_flag_name_form
-    ).count()
-
-    if existing_feature_flags_check > 0:
+    if feature_flag_exists(db=db, flag_name=feature_flag_name_form):
+        existing_feature_flags = get_all_feature_flags(db=db)
         return templates.TemplateResponse(
             "feature_flags.html",
             {
@@ -62,9 +62,12 @@ def create_feature_flags_post(  # noqa: F811
             },
         )
 
-    create_feature_flags(db, feature_flag_name_form, feature_flag_is_enabled_form)
-
-    feature_flags = db.query(FeatureFlags).order_by(FeatureFlags.flag)
+    create_feature_flags(
+        db=db,
+        feature_flag_name_form=feature_flag_name_form,
+        feature_flag_is_enabled_form=feature_flag_is_enabled_form,
+    )
+    feature_flags = get_all_feature_flags(db=db)
 
     return templates.TemplateResponse(
         "feature_flags.html", {"request": request, "feature_flags": feature_flags}

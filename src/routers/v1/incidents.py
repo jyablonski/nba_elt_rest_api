@@ -1,9 +1,14 @@
 from fastapi import APIRouter, Depends, Form, HTTPException, Request, status
+from typing import List
 from sqlalchemy.orm import Session
 
-from src.crud.incidents import create_incident, update_incident
+from src.crud.incidents import (
+    create_incident,
+    update_incident,
+    get_all_incidents,
+    incident_exists,
+)
 from src.dependencies import get_db
-from src.models.incidents import Incidents
 from src.security import get_current_creds_from_token
 from src.utils import templates
 
@@ -13,7 +18,7 @@ router = APIRouter()
 @router.post("/admin/incidents")
 def post_incidents(
     request: Request,
-    incident_list: list[int] = Form(...),
+    incident_list: List[int] = Form(...),
     creds: dict[str, str] = Depends(get_current_creds_from_token),
     db: Session = Depends(get_db),
 ):
@@ -23,15 +28,15 @@ def post_incidents(
             detail="You do not have the powa",
         )
 
-    new_incident = update_incident(db=db, incidents_list=incident_list)
+    new_incidents = update_incident(db=db, incidents_list=incident_list)
 
     return templates.TemplateResponse(
-        "incidents.html", {"request": request, "incidents": new_incident}
+        "incidents.html", {"request": request, "incidents": new_incidents}
     )
 
 
 @router.post("/admin/incidents/create")
-def post_incidents_create(  # noqa: F811
+def post_incidents_create(
     request: Request,
     incident_name_form: str = Form(...),
     incident_description_form: str = Form(...),
@@ -45,28 +50,25 @@ def post_incidents_create(  # noqa: F811
             detail="You do not have the powa",
         )
 
-    existing_incident = db.query(Incidents).order_by(Incidents.incident_name)
-
-    existing_incident_check = existing_incident.filter(
-        Incidents.incident_name == incident_name_form
-    ).count()
-
-    if existing_incident_check > 0:
+    if incident_exists(db=db, incident_name=incident_name_form):
+        existing_incidents = get_all_incidents(db=db)
         return templates.TemplateResponse(
             "incidents.html",
             {
                 "request": request,
-                "incidents": existing_incident,
+                "incidents": existing_incidents,
                 "incident_error": "You cannot store an Incident with that name!",
             },
         )
 
     create_incident(
-        db, incident_name_form, incident_description_form, incident_is_active_form
+        db=db,
+        incident_name_form=incident_name_form,
+        incident_description_form=incident_description_form,
+        incident_is_active_form=incident_is_active_form,
     )
-
-    incident = db.query(Incidents).order_by(Incidents.incident_name)
+    incidents = get_all_incidents(db=db)
 
     return templates.TemplateResponse(
-        "incidents.html", {"request": request, "incidents": incident}
+        "incidents.html", {"request": request, "incidents": incidents}
     )

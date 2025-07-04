@@ -1,8 +1,16 @@
 from datetime import datetime, timezone
 
-from sqlalchemy.orm import Query, Session
+from sqlalchemy.orm import Session
 
 from src.models.feature_flags import FeatureFlags
+
+
+def get_all_feature_flags(db: Session) -> list[FeatureFlags]:
+    return db.query(FeatureFlags).order_by(FeatureFlags.flag).all()
+
+
+def feature_flag_exists(db: Session, flag_name: str) -> bool:
+    return db.query(FeatureFlags).filter(FeatureFlags.flag == flag_name).count() > 0
 
 
 def create_feature_flags(
@@ -26,23 +34,18 @@ def create_feature_flags(
 
 def update_feature_flags(
     db: Session, feature_flags_list: list[int]
-) -> Query[FeatureFlags]:
+) -> list[FeatureFlags]:
     modified_at = datetime.now(timezone.utc)
-
-    feature_flags = db.query(FeatureFlags).order_by(FeatureFlags.flag)
+    feature_flags = db.query(FeatureFlags).order_by(FeatureFlags.flag).all()
 
     for feature_flag, feature_flag_update in zip(feature_flags, feature_flags_list):
         feature_flag_update = int(feature_flag_update)
+        if feature_flag.is_enabled != feature_flag_update:
+            feature_flag.is_enabled = feature_flag_update
+            feature_flag.modified_at = modified_at
+            db.merge(feature_flag)
 
-        if feature_flag.is_enabled == feature_flag_update:
-            continue
-
-        feature_flag.is_enabled = feature_flag_update
-        feature_flag.modified_at = modified_at
-
-        db.merge(feature_flag)
-        db.commit()
-
+    db.commit()
     return feature_flags
 
 
