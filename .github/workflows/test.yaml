@@ -11,7 +11,7 @@ env:
   RDS_SCHEMA: marts
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   PYTHON_VERSION: "3.12"
-  UV_VERSION: "0.7.18"
+  UV_VERSION: "0.8.10"
 
 jobs:
   test:
