@@ -1,4 +1,9 @@
-# EKS
+# K8s
+
+This is a manually built directory of files to host the API Application on K8s.
+
+## notes
+
 ![image](https://github.com/jyablonski/nba_elt_rest_api/assets/16946556/54299b0e-f971-4cc0-a8ad-6a9450c819c5)
 ![image](https://github.com/jyablonski/nba_elt_rest_api/assets/16946556/f9fdc20c-5a45-4fd9-baa7-366be8817b4d)
 
@@ -7,10 +12,10 @@ Got a working POC working after deploying an EKS Cluster via Terraform.  Just ha
 Couple things:
 - The App was hosted on HTTP with the port 8080 crap hanging out at the end http://a837a831b7ac848a3b139bcb9a84f26d-1964314560.us-east-1.elb.amazonaws.com:8080
 - Creds were stored in `secrets.yaml` by running `echo -n "prod" | base64` on the Secrets.  I removed this prior to committing to version control.
-- The actual App worked fine.  Every endpoint worked, login / JWT worked, bets page worked.  
+- The actual App worked fine.  Every endpoint worked, login / JWT worked, bets page worked.
 - Secrets shouldn't be stored in their Base64 encoded values in version control.  Should use AWS Secrets Manager, but that looked like a bit of a lift to setup for a 1 time POC.
 - Actual Networking is typically much more difficult than this.  My RDS Database is public and I didn't have to adjust any of the Node Group Security Groups to actually make it work.
-- To Dos are probably get HTTPS working, get it served over a custom endpoint `https://eksapi.jyablonski.dev` or something, 
+- To Dos are probably get HTTPS working, get it served over a custom endpoint `https://eksapi.jyablonski.dev` or something,
 - My creds run out end of March 2024 so I won't be able to continue this until the next account
 
 ## EKS Commands

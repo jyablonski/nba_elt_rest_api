@@ -1,0 +1,10 @@
+{{- if .Values.configMap.data }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "nba-elt-rest-api.fullname" . }}-config
+  labels:
+    {{- include "nba-elt-rest-api.labels" . | nindent 4 }}
+data:
+  {{- toYaml .Values.configMap.data | nindent 2 }}
+{{- end }}

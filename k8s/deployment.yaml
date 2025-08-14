@@ -6,7 +6,7 @@ metadata:
   labels:
     app: nba-elt-rest-api
 spec:
-  replicas: 2  # This will be managed by HPA
+  replicas: 3 # This will be managed by HPA
   selector:
     matchLabels:
       app: nba-elt-rest-api
@@ -17,69 +17,71 @@ spec:
     spec:
       # serviceAccountName: rest-api-sa
       containers:
-      - name: nba-elt-rest-api
-        image: nba_elt_rest_api_local:latest
-        resources:
-          requests:
-            cpu: "100m"  # Adjust this value as needed
-          limits:
-            cpu: "500m"  # Adjust this value as needed
-        imagePullPolicy: Never  # or IfNotPresent
-        ports:
-        - containerPort: 8080
-        env:
-        - name: IP
-          valueFrom:
-            secretKeyRef:
-              name: rest-api-secrets
-              key: RDS_HOST
-        - name: RDS_USER
-          valueFrom:
-            secretKeyRef:
-              name: rest-api-secrets
-              key: RDS_USER
-        - name: RDS_PW
-          valueFrom:
-            secretKeyRef:
-              name: rest-api-secrets
-              key: RDS_PW
-        - name: RDS_DB
-          valueFrom:
-            secretKeyRef:
-              name: rest-api-secrets
-              key: RDS_DB
-        - name: RDS_SCHEMA
-          valueFrom:
-            secretKeyRef:
-              name: rest-api-secrets
-              key: RDS_SCHEMA
-        - name: ENV_TYPE
-          valueFrom:
-            secretKeyRef:
-              name: rest-api-secrets
-              key: ENV_TYPE
-        - name: API_KEY
-          valueFrom:
-            secretKeyRef:
-              name: rest-api-secrets
-              key: API_KEY
-        - name: OTEL_EXPORTER_OTLP_ENDPOINT
-          value: "https://api.honeycomb.io"
-        - name: OTEL_EXPORTER_OTLP_HEADERS
-          valueFrom:
-            secretKeyRef:
-              name: rest-api-secrets
-              key: OTEL_EXPORTER_OTLP_HEADERS
-        - name: OTEL_SERVICE_NAME
-          valueFrom:
-            secretKeyRef:
-              name: rest-api-secrets
-              key: OTEL_SERVICE_NAME
-        - name: REDIS_URL
-          valueFrom:
-            secretKeyRef:
-              name: rest-api-secrets
-              key: REDIS_URL
+        - name: nba-elt-rest-api
+          image: nba_elt_rest_api_local:latest
+          resources:
+            requests:
+              cpu: "1000m" # 1 core minimum
+              memory: "2Gi" # 2 GB memory minimum
+            limits:
+              cpu: "2000m" # 2 core max
+              memory: "4Gi" # 4 GB memory max
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8080
+          env:
+            - name: IP
+              valueFrom:
+                secretKeyRef:
+                  name: rest-api-secrets
+                  key: RDS_HOST
+            - name: RDS_USER
+              valueFrom:
+                secretKeyRef:
+                  name: rest-api-secrets
+                  key: RDS_USER
+            - name: RDS_PW
+              valueFrom:
+                secretKeyRef:
+                  name: rest-api-secrets
+                  key: RDS_PW
+            - name: RDS_DB
+              valueFrom:
+                secretKeyRef:
+                  name: rest-api-secrets
+                  key: RDS_DB
+            - name: RDS_SCHEMA
+              valueFrom:
+                secretKeyRef:
+                  name: rest-api-secrets
+                  key: RDS_SCHEMA
+            - name: ENV_TYPE
+              valueFrom:
+                secretKeyRef:
+                  name: rest-api-secrets
+                  key: ENV_TYPE
+            - name: API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: rest-api-secrets
+                  key: API_KEY
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: "https://api.honeycomb.io"
+            - name: OTEL_EXPORTER_OTLP_HEADERS
+              valueFrom:
+                secretKeyRef:
+                  name: rest-api-secrets
+                  key: OTEL_EXPORTER_OTLP_HEADERS
+            - name: OTEL_SERVICE_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: rest-api-secrets
+                  key: OTEL_SERVICE_NAME
+            - name: REDIS_URL
+              valueFrom:
+                secretKeyRef:
+                  name: rest-api-secrets
+                  key: REDIS_URL
       volumes:
-      - name: app-data
-        emptyDir: {}
+        - name: app-data
+          emptyDir: {}
