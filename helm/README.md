@@ -2,11 +2,12 @@
 
 This Helm chart deploys the NBA ELT REST API application to a Kubernetes cluster.
 
-- `examples/` includes read-only rendered K8s Manifest Files for both dev & prod
-- `templates/` includes the actual Helm templates that render into K8s Manifests
-- `Chart.yaml` stores chart metadata about the chart name, version, appVersion, maintainer etc
-- `values-dev.yaml` includes the config settings for deploying the chart to a dev environment (lower resources, no autoscaling, debug on etc)
-- `values-prod.yaml` includeds the config settings for deploying the chart to a prod environment (more resources, autoscaling etc)
+- `examples/` contains read-only rendered K8s Manifest Files for both dev & prod
+- `manual/` contains K8s Manifest Files created manually in July 2024
+- `templates/` contains the actual Helm templates that render into K8s Manifests
+- `Chart.yaml` contains chart metadata about the chart name, version, appVersion, maintainer etc
+- `values-dev.yaml` contains the config settings for deploying the chart to a dev environment (lower resources, no autoscaling, debug on etc)
+- `values-prod.yaml` contains the config settings for deploying the chart to a prod environment (more resources, autoscaling etc)
 
 ## Manual Commands
 
