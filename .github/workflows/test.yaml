@@ -31,31 +31,12 @@ jobs:
           enable-cache: true
           prune-cache: false
 
-      - name: Start Postgres
-        run: make start-postgres
-
       - name: Run Tests
         env:
           ENV_TYPE: dev
         run: |
-          uv run pytest \
-            --cov=src \
-            --cov-report=term \
-            --cov-report=xml:coverage.xml \
-            --color=yes
-
-      - name: Run Locust Swarm
-        env:
-          ENV_TYPE: dev
-        run: |
-          uv run locust \
-            -f .github/scripts/locust_load_test.py \
-            --headless \
-            --host=http://localhost:8080 \
-            --run-time 60s
+          make ci-test
 
       - name: Coveralls
-        run: uv run coveralls
-
-      - name: Stop Postgres
-        run: make stop-postgres
+        run: |
+          uv run coveralls

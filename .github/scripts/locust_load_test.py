@@ -1,3 +1,4 @@
+# haven't implemented ci workflow for this yet
 from locust import HttpUser, task, between, events, LoadTestShape
 import os
 from random import randint
