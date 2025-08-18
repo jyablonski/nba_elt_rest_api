@@ -34,9 +34,7 @@ jobs:
       - name: Run Tests
         env:
           ENV_TYPE: dev
-        run: |
-          make ci-test
+        run: make ci-test
 
       - name: Coveralls
-        run: |
-          uv run coveralls
+        run: uv run coveralls
