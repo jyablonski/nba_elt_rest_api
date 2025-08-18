@@ -1,0 +1,158 @@
+---
+# Source: nba-elt-rest-api/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: nba-elt-rest-api-dev
+  labels:
+    helm.sh/chart: nba-elt-rest-api-0.0.1
+    app.kubernetes.io/name: nba-elt-rest-api
+    app.kubernetes.io/instance: nba-elt-rest-api-dev
+    app.kubernetes.io/version: "1.0.0"
+    app.kubernetes.io/managed-by: Helm
+---
+# Source: nba-elt-rest-api/templates/secret.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: nba-elt-rest-api-dev-secrets
+  labels:
+    helm.sh/chart: nba-elt-rest-api-0.0.1
+    app.kubernetes.io/name: nba-elt-rest-api
+    app.kubernetes.io/instance: nba-elt-rest-api-dev
+    app.kubernetes.io/version: "1.0.0"
+    app.kubernetes.io/managed-by: Helm
+type: Opaque
+data:
+  API_KEY: "ZGV2LWFwaS1rZXk="
+  ENV_TYPE: "ZGV2ZWxvcG1lbnQ="
+  OTEL_EXPORTER_OTLP_HEADERS: "YXBpLWtleT1kZXYtaG9uZXljb21iLWtleQ=="
+  OTEL_SERVICE_NAME: "bmJhLWVsdC1yZXN0LWFwaS1kZXY="
+  RDS_HOST: "bG9jYWxob3N0"
+  RDS_USER: "ZGV2X3VzZXI="
+  RDS_PW: "ZGV2X3Bhc3N3b3Jk"
+  RDS_DB: "bmJhX2Rldg=="
+  RDS_SCHEMA: "ZGV2X3NjaGVtYQ=="
+  REDIS_URL: "cmVkaXM6Ly9sb2NhbGhvc3Q6NjM3OQ=="
+---
+# Source: nba-elt-rest-api/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: nba-elt-rest-api-dev
+  labels:
+    helm.sh/chart: nba-elt-rest-api-0.0.1
+    app.kubernetes.io/name: nba-elt-rest-api
+    app.kubernetes.io/instance: nba-elt-rest-api-dev
+    app.kubernetes.io/version: "1.0.0"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8080
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: nba-elt-rest-api
+    app.kubernetes.io/instance: nba-elt-rest-api-dev
+---
+# Source: nba-elt-rest-api/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nba-elt-rest-api-dev
+  labels:
+    helm.sh/chart: nba-elt-rest-api-0.0.1
+    app.kubernetes.io/name: nba-elt-rest-api
+    app.kubernetes.io/instance: nba-elt-rest-api-dev
+    app.kubernetes.io/version: "1.0.0"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: nba-elt-rest-api
+      app.kubernetes.io/instance: nba-elt-rest-api-dev
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: nba-elt-rest-api
+        app.kubernetes.io/instance: nba-elt-rest-api-dev
+    spec:
+      serviceAccountName: nba-elt-rest-api-dev
+      securityContext:
+        {}
+      containers:
+        - name: nba-elt-rest-api
+          securityContext:
+            {}
+          image: "nba_elt_rest_api_local:latest"
+          imagePullPolicy: Never
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          resources:
+            limits:
+              cpu: 500m
+              memory: 1Gi
+            requests:
+              cpu: 1000m
+              memory: 2Gi
+          env:
+            - name: IP
+              valueFrom:
+                secretKeyRef:
+                  name: nba-elt-rest-api-dev-secrets
+                  key: RDS_HOST
+            - name: RDS_USER
+              valueFrom:
+                secretKeyRef:
+                  name: nba-elt-rest-api-dev-secrets
+                  key: RDS_USER
+            - name: RDS_PW
+              valueFrom:
+                secretKeyRef:
+                  name: nba-elt-rest-api-dev-secrets
+                  key: RDS_PW
+            - name: RDS_DB
+              valueFrom:
+                secretKeyRef:
+                  name: nba-elt-rest-api-dev-secrets
+                  key: RDS_DB
+            - name: RDS_SCHEMA
+              valueFrom:
+                secretKeyRef:
+                  name: nba-elt-rest-api-dev-secrets
+                  key: RDS_SCHEMA
+            - name: ENV_TYPE
+              valueFrom:
+                secretKeyRef:
+                  name: nba-elt-rest-api-dev-secrets
+                  key: ENV_TYPE
+            - name: API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: nba-elt-rest-api-dev-secrets
+                  key: API_KEY
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: "https://api.honeycomb.io"
+            - name: OTEL_EXPORTER_OTLP_HEADERS
+              valueFrom:
+                secretKeyRef:
+                  name: nba-elt-rest-api-dev-secrets
+                  key: OTEL_EXPORTER_OTLP_HEADERS
+            - name: OTEL_SERVICE_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: nba-elt-rest-api-dev-secrets
+                  key: OTEL_SERVICE_NAME
+            - name: REDIS_URL
+              valueFrom:
+                secretKeyRef:
+                  name: nba-elt-rest-api-dev-secrets
+                  key: REDIS_URL
+          volumes:
+            - name: app-data
+              emptyDir: {}

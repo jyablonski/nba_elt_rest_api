@@ -1,0 +1,15 @@
+apiVersion: v2
+name: nba-elt-rest-api
+description: A Helm chart for NBA ELT REST API application
+type: application
+version: 0.0.1
+appVersion: "1.0.0"
+maintainers:
+  - name: jacob
+    email: jyablonski9@gmail.com
+keywords:
+  - nba-elt-project
+  - rest-api
+home: https://github.com/jyablonski/nba_elt_rest_api
+sources:
+  - https://github.com/jyablonski/nba_elt_rest_api

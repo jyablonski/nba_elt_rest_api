@@ -1,0 +1,33 @@
+replicaCount: 1
+
+image:
+  repository: nba_elt_rest_api_local
+  pullPolicy: Never
+  tag: "latest"
+
+service:
+  type: ClusterIP
+  port: 8080
+
+autoscaling:
+  enabled: false
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 1Gi
+  requests:
+    cpu: 1000m
+    memory: 2Gi
+
+secrets:
+  apiKey: "dev-api-key"
+  envType: "development"
+  otelHeaders: "api-key=dev-honeycomb-key"
+  otelServiceName: "nba-elt-rest-api-dev"
+  rdsHost: "localhost"
+  rdsUser: "dev_user"
+  rdsPassword: "dev_password"
+  rdsDb: "nba_dev"
+  rdsSchema: "dev_schema"
+  redisUrl: "redis://localhost:6379"
