@@ -1,5 +1,5 @@
-CREATE SCHEMA marts;
-SET search_path TO marts;
+CREATE SCHEMA gold;
+SET search_path TO gold;
 
 -- boostrap script boiiiiiiiii
 DROP TABLE IF EXISTS standings;
@@ -2222,7 +2222,7 @@ WITH home_wins AS (
         mov.full_team AS home_team,
         mov.game_date,
         mov.outcome
-    FROM marts.mov
+    FROM gold.mov
     ),
     combo AS (
     SELECT
@@ -2243,7 +2243,7 @@ WITH home_wins AS (
             WHEN home_wins.outcome = 'L'::text THEN user_predictions.away_team
             ELSE 'TBD'::text
         END AS actual_winner
-    FROM marts.user_predictions
+    FROM gold.user_predictions
     LEFT JOIN home_wins USING (home_team, game_date)
     ),
 

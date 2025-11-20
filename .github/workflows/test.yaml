@@ -8,10 +8,10 @@ env:
   RDS_USER: postgres
   RDS_PW: postgres
   RDS_DB: postgres
-  RDS_SCHEMA: marts
+  RDS_SCHEMA: gold
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   PYTHON_VERSION: "3.12"
-  UV_VERSION: "0.8.10"
+  UV_VERSION: "0.9.10"
 
 jobs:
   test:

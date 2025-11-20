@@ -3,18 +3,18 @@ name: Jacob's REST API Deployment
 on:
   push:
     branches:
-    - master
+      - master
 
 env:
-  BUCKET_NAME : ${{ secrets.AWS_BUCKET }}
+  BUCKET_NAME: ${{ secrets.AWS_BUCKET }}
   IAM_ROLE: ${{ secrets.IAM_ROLE }}
-  AWS_REGION : "us-east-1"
+  AWS_REGION: "us-east-1"
   PYTHON_VERSION: "3.12"
 
 # permission can be added at job level or workflow level
 permissions:
-      id-token: write
-      contents: read    # This is required for actions/checkout
+  id-token: write
+  contents: read # This is required for actions/checkout
 
 jobs:
   cd_pipeline:
@@ -52,18 +52,13 @@ jobs:
         run: |
           aws lambda update-function-code --function-name jacobs_rest_api_lambda --s3-bucket $aws_bucket --s3-key rest-api/lambda_function.zip
 
-
-  deploy-alert:
-    needs: cd_pipeline
+  notify:
+    needs: [cd_pipeline]
+    if: always() && github.event_name == 'push' && github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Slack Deploy Notification
-        uses: jyablonski/actions/slack_alert@v1
+      - name: Slack Alert
+        uses: jyablonski/actions/alert@v1
         with:
-          message: ${{ job.status == 'success' && 'REST API Deployed to Production' || 'REST API Failed to deploy properly' }}
-          title: ${{ job.status == 'success' && 'REST API Deploy Pipeline' || 'REST API Deploy Failure' }}
-          color: ${{ job.status == 'success' && 'good' || 'danger' }}
+          status: ${{ contains(needs.*.result, 'failure') && 'failure' || 'success' }}
           webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
