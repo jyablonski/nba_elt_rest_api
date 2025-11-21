@@ -52,11 +52,11 @@ jobs:
 
   cd_pipeline:
     needs: [ci_pipeline]
-    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master' && success()
     runs-on: ubuntu-latest
     steps:
       - name: Git clone the repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v5
 
       - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@v4
