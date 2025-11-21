@@ -1,27 +1,24 @@
 backend:
-- src/*
-- tests/*
+  - src/*
+  - tests/*
 
-cd:
-- .github/workflows/deploy.yml
-
-ci:
-- .github/workflows/test.yml
+ci_cd:
+  - .github/workflows/deploy.yml
 
 dependencies:
-- poetry.lock
-- requirements.txt
+  - poetry.lock
+  - requirements.txt
 
 auth:
-- src/security.py
-- src/routers/auth.py
-- src/routers/gmail_auth.py
+  - src/security.py
+  - src/routers/auth.py
+  - src/routers/gmail_auth.py
 
 # any file in static or templates
 # but if the only change is in base.html, then no label
 frontend:
-- any: ['static/*', 'templates/*']
-  all: ['!templates/base.html']
+  - any: ["static/*", "templates/*"]
+    all: ["!templates/base.html"]
 
 database:
-- src/models.py
+  - src/models.py
