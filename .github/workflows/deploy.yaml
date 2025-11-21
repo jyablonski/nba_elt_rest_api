@@ -1,6 +1,7 @@
 name: Jacob's REST API Deployment
 
 on:
+  pull_request:
   push:
     branches:
       - master
@@ -10,6 +11,13 @@ env:
   IAM_ROLE: ${{ secrets.IAM_ROLE }}
   AWS_REGION: "us-east-1"
   PYTHON_VERSION: "3.12"
+  IP: localhost
+  RDS_USER: postgres
+  RDS_PW: postgres
+  RDS_DB: postgres
+  RDS_SCHEMA: gold
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  UV_VERSION: "0.9.10"
 
 # permission can be added at job level or workflow level
 permissions:
@@ -17,7 +25,34 @@ permissions:
   contents: read # This is required for actions/checkout
 
 jobs:
+  ci_pipeline:
+    name: Test Pipeline
+    runs-on: ubuntu-latest
+
+    # running tests on bare metal rather than docker to enable
+    # caching of the uv environment
+    steps:
+      - name: Checkout the Repo
+        uses: actions/checkout@v5
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          version: ${{ env.UV_VERSION }}
+          enable-cache: true
+          prune-cache: false
+
+      - name: Run Tests
+        env:
+          ENV_TYPE: dev
+        run: make ci-test
+
+      - name: Coveralls
+        run: uv run coveralls
+
   cd_pipeline:
+    needs: [ci_pipeline]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     steps:
       - name: Git clone the repository
