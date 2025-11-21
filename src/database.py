@@ -35,7 +35,7 @@ def sql_connection(
 ) -> Engine:
     """
     SQL Connection function connecting to my postgres db with a specific schema
-    For REST API Project use `marts` for schema
+    For REST API Project use `gold` for schema
 
     Args:
         user (str): Database User

@@ -32,7 +32,7 @@ services:
       - RDS_USER=postgres
       - RDS_PW=postgres
       - RDS_DB=postgres
-      - RDS_SCHEMA=marts
+      - RDS_SCHEMA=gold
       - ENV_TYPE=docker_dev
       - API_KEY=bkmSqgcZMzR1JS3ek8gdNGyOrVefyVkK!
       - OTEL_EXPORTER_OTLP_ENDPOINT=https://api.honeycomb.io

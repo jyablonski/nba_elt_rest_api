@@ -1,0 +1,99 @@
+name: CI / CD Pipeline
+
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+
+env:
+  BUCKET_NAME: ${{ secrets.AWS_BUCKET }}
+  IAM_ROLE: ${{ secrets.IAM_ROLE }}
+  AWS_REGION: "us-east-1"
+  PYTHON_VERSION: "3.12"
+  IP: localhost
+  RDS_USER: postgres
+  RDS_PW: postgres
+  RDS_DB: postgres
+  RDS_SCHEMA: gold
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  UV_VERSION: "0.9.10"
+
+# permission can be added at job level or workflow level
+permissions:
+  id-token: write
+  contents: read # This is required for actions/checkout
+
+jobs:
+  ci_pipeline:
+    name: Test Pipeline
+    runs-on: ubuntu-latest
+
+    # running tests on bare metal rather than docker to enable
+    # caching of the uv environment
+    steps:
+      - name: Checkout the Repo
+        uses: actions/checkout@v5
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          version: ${{ env.UV_VERSION }}
+          enable-cache: true
+          prune-cache: false
+
+      - name: Run Tests
+        env:
+          ENV_TYPE: dev
+        run: make ci-test
+
+      - name: Coveralls
+        run: uv run coveralls
+
+  cd_pipeline:
+    needs: [ci_pipeline]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master' && success()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Git clone the repository
+        uses: actions/checkout@v5
+
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ env.IAM_ROLE }}
+          role-session-name: rest-api-cicd
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Install Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Zip Files
+        run: |
+          make install-packages-r
+          make zip
+
+      - name: Deploy to S3
+        env:
+          aws_bucket: ${{ secrets.AWS_BUCKET }}
+        run: |
+          aws s3 cp lambda_function.zip s3://$aws_bucket/rest-api/
+
+      - name: Update Lambda Function from S3
+        env:
+          aws_bucket: ${{ secrets.AWS_BUCKET }}
+        run: |
+          aws lambda update-function-code --function-name jacobs_rest_api_lambda --s3-bucket $aws_bucket --s3-key rest-api/lambda_function.zip
+
+  notify:
+    needs: [cd_pipeline]
+    if: always() && github.event_name == 'push' && github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Slack Alert
+        uses: jyablonski/actions/alert@v1
+        with:
+          status: ${{ contains(needs.*.result, 'failure') && 'failure' || 'success' }}
+          webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
